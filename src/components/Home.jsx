@@ -91,7 +91,7 @@ const HomePage = () => {
     <>
       <Navbar isHomePage={true} />
       <div className="app">
-        <h1>MovieBreak.wtf</h1>
+        <h1>MovieBreak</h1>
         <form
           className="search"
           onSubmit={async (e) => {
