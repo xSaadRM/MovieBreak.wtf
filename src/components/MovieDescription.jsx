@@ -5,6 +5,7 @@ import ScaleLoader from "react-spinners/ScaleLoader";
 import Playerjs from "../Player"; // Import Playerjs library
 import DisableDevtool from "disable-devtool";
 import "../styles/MovieDescription.css";
+import Navbar from "./navbar";
 
 const MovieDescription = () => {
   const navigate = useNavigate();
@@ -89,7 +90,6 @@ const MovieDescription = () => {
         console.error("Error fetching stream URL:", error.message);
         failedAttempts++;
       }
-
     }
 
     if (failedAttempts === urlArray.length) {
@@ -211,95 +211,98 @@ const MovieDescription = () => {
   }, [streamVideo, subtitles]);
 
   return (
-    <div className="movie-desc-container">
-      <div className="backdrop">
-        {/* Background image */}
-        <img
-          src={`https://image.tmdb.org/t/p/original/${movieInfos.backdrop_path}`}
-          alt="Backdrop"
-        />
+    <>
+      <Navbar />
+      <div className="movie-desc-container">
+        <div className="backdrop">
+          {/* Background image */}
+          <img
+            src={`https://image.tmdb.org/t/p/original/${movieInfos.backdrop_path}`}
+            alt="Backdrop"
+          />
 
-        {/* Movie information */}
-        <div className="movie-infos">
-          <h3>{movieInfos.first_air_date || movieInfos.release_date}</h3>
-          <div className="movie-ids">
-            <p>{movieInfos.original_title || movieInfos.original_name}</p>
-            {mediaType === "tv" &&
-              movieInfos.created_by &&
-              movieInfos.created_by.length > 0 && (
-                <span>by {movieInfos.created_by[0].name}</span>
-              )}
-          </div>
-        </div>
-      </div>
-
-      {/* Select season */}
-      {mediaType === "tv" && (
-        <div className="select-season">
-          <select value={selectedSeason} onChange={handleSeasonChange}>
-            <option value="">Select Season</option>
-            {seasons.map((season) => (
-              <option key={season} value={season}>
-                Season {season}
-              </option>
-            ))}
-          </select>
-        </div>
-      )}
-      <>
-        {loading ? (
-          <div className="loading-animation">
-            <ScaleLoader
-              color="blue"
-              loading={loading}
-              size={150}
-              aria-label="Loading Spinner"
-              data-testid="loader"
-            />
-          </div>
-        ) : (
-          allServersFailed && (
-            <div>
-              <p>this ressource is not found on any server</p>
+          {/* Movie information */}
+          <div className="movie-infos">
+            <h3>{movieInfos.first_air_date || movieInfos.release_date}</h3>
+            <div className="movie-ids">
+              <p>{movieInfos.original_title || movieInfos.original_name}</p>
+              {mediaType === "tv" &&
+                movieInfos.created_by &&
+                movieInfos.created_by.length > 0 && (
+                  <span>by {movieInfos.created_by[0].name}</span>
+                )}
             </div>
-          )
-        )}
-      </>
-      <div id="player"></div>
-      {/* Season details */}
-      {seasonDetails && (
-        <div className="season-details">
-          <h2>{seasonDetails.name}</h2>
-          <p>{seasonDetails.overview}</p>
-          <div className="episodes-list">
-            {seasonDetails.episodes.map((episode) => (
-              <div
-                key={episode.id}
-                className="episode"
-                onClick={() => handleEpisodeClick(episode.episode_number)}
-              >
-                {/* Episode image */}
-                <img
-                  src={`https://image.tmdb.org/t/p/w400/${episode.still_path}`}
-                  alt={`Episode ${episode.episode_number} Still`}
-                  className="episode-image"
-                />
-
-                {/* Episode details */}
-                <div className="episode-details">
-                  <h3>
-                    Episode {episode.episode_number} - {episode.name}
-                  </h3>
-                  <p className="overview">{episode.overview}</p>
-                  <p className="airdate">Air Date: {episode.air_date}</p>
-                  {/* Add more details if needed */}
-                </div>
-              </div>
-            ))}
           </div>
         </div>
-      )}
-    </div>
+
+        {/* Select season */}
+        {mediaType === "tv" && (
+          <div className="select-season">
+            <select value={selectedSeason} onChange={handleSeasonChange}>
+              <option value="">Select Season</option>
+              {seasons.map((season) => (
+                <option key={season} value={season}>
+                  Season {season}
+                </option>
+              ))}
+            </select>
+          </div>
+        )}
+        <>
+          {loading ? (
+            <div className="loading-animation">
+              <ScaleLoader
+                color="blue"
+                loading={loading}
+                size={150}
+                aria-label="Loading Spinner"
+                data-testid="loader"
+              />
+            </div>
+          ) : (
+            allServersFailed && (
+              <div>
+                <p>this ressource is not found on any server</p>
+              </div>
+            )
+          )}
+        </>
+        <div id="player"></div>
+        {/* Season details */}
+        {seasonDetails && (
+          <div className="season-details">
+            <h2>{seasonDetails.name}</h2>
+            <p>{seasonDetails.overview}</p>
+            <div className="episodes-list">
+              {seasonDetails.episodes.map((episode) => (
+                <div
+                  key={episode.id}
+                  className="episode"
+                  onClick={() => handleEpisodeClick(episode.episode_number)}
+                >
+                  {/* Episode image */}
+                  <img
+                    src={`https://image.tmdb.org/t/p/w400/${episode.still_path}`}
+                    alt={`Episode ${episode.episode_number} Still`}
+                    className="episode-image"
+                  />
+
+                  {/* Episode details */}
+                  <div className="episode-details">
+                    <h3>
+                      Episode {episode.episode_number} - {episode.name}
+                    </h3>
+                    <p className="overview">{episode.overview}</p>
+                    <p className="airdate">Air Date: {episode.air_date}</p>
+                    {/* Add more details if needed */}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+      </div>
+    </>
   );
 };
 

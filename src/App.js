@@ -19,7 +19,7 @@ function App() {
     <Router>
       <Routes>
         <Route path="/" element={<HomePage />} />
-        <Route path="/search" element={<SearchPage />} />
+        <Route path="/search" element={<HomePage />} />
         <Route
           path="/:mediaType/:movieID/:season?/:ep?"
           element={<MovieDescription />}

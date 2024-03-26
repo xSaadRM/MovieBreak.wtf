@@ -1,0 +1,24 @@
+.navbar {
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
+}
+.main-navbar {
+  border-radius: 0 18px 18px 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  background-color: black;
+  height: 50%;
+  width: 50px;
+}
+
+.main-navbar img {
+    width: 2rem;
+}
+.main-navbar img:hover {
+  transform: scale(1.25, 1.25);
+}
