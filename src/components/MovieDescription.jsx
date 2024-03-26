@@ -23,7 +23,7 @@ const MovieDescription = () => {
   useEffect(() => {
     DisableDevtool({
       ondevtoolopen: () => {
-        window.location.href = "/sonic";
+        window.location.href = "/sonic.html";
       },
     });
   }, []);

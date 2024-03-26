@@ -4,12 +4,13 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import MovieDescription from "./components/MovieDescription.jsx";
 import HomePage from "./components/Home.jsx";
 import "./styles/App.css";
+import SearchPage from "./components/SearchPage.jsx";
 
 function App() {
   useEffect(() => {
     DisableDevtool({
       ondevtoolopen: () => {
-        window.location.href = "/sonic";
+        window.location.href = "/sonic.html";
       },
     });
   }, []);
@@ -18,8 +19,9 @@ function App() {
     <Router>
       <Routes>
         <Route path="/" element={<HomePage />} />
+        <Route path="/search" element={<SearchPage />} />
         <Route
-          path="/:mediaType(tv|movie)/:movieID/:season?/:ep?"
+          path="/:mediaType/:movieID/:season?/:ep?"
           element={<MovieDescription />}
         />
       </Routes>

@@ -51,7 +51,16 @@ const MovieCard = ({ movie, isCategorized, media_type }) => {
       </div>
       <div>
         <span>{movie.original_title || movie.original_name}</span>
-        {isCategorized === false ? <h3>{movie.media_type}</h3> : null}
+        {isCategorized === false ? (
+          <h3>
+            {movie.media_type}
+            {movie.first_air_date
+              ? " - " + movie.first_air_date
+              : movie.release_date
+              ? " - " + movie.release_date
+              : ""}
+          </h3>
+        ) : null}
       </div>
     </div>
   );

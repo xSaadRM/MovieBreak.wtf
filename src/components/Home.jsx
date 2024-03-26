@@ -1,24 +1,16 @@
 import Carousel from "./Carousel";
 import SearchIcon from "../assets/search.svg";
 import { useEffect, useState } from "react";
+import  { useNavigate } from "react-router-dom";
 import DisableDevtool from "disable-devtool";
-import MovieCard from "./MovieCard";
 
 const HomePage = () => {
-  const [movies, setmovies] = useState([]);
+  const navigate = useNavigate();
   const [seachTerm, setSearchTerm] = useState("");
   const [trendingTV, setTrendingTV] = useState("");
   const [trendingMovie, setTrendingMovie] = useState("");
   const [topTV, setTopTV] = useState("");
   const [topMovie, setTopMovie] = useState("");
-
-  const searchMovie = async (title) => {
-    const response = await fetch(
-      `https://api.themoviedb.org/3/search/multi?query=${title}&include_adult=false&api_key=d0e6107be30f2a3cb0a34ad2a90ceb6f`
-    );
-    const data = await response.json();
-    setmovies(data.results);
-  };
 
   const getTrending = async (type) => {
     try {
@@ -69,7 +61,7 @@ const HomePage = () => {
   useEffect(() => {
     DisableDevtool({
       ondevtoolopen: () => {
-        window.location.href = "/sonic";
+        window.location.href = "/sonic.html";
       },
     });
   }, []);
@@ -81,12 +73,12 @@ const HomePage = () => {
   return (
     <>
       <div className="app">
-        <h1>MovieBreak.wtf</h1>
+        <h1>MovieBreak</h1>
         <form
           className="search"
           onSubmit={(e) => {
             e.preventDefault();
-            searchMovie(seachTerm);
+            navigate(`/search?title=${seachTerm}`);
           }}
         >
           <input
@@ -98,11 +90,6 @@ const HomePage = () => {
             <img src={SearchIcon} alt="seach" />
           </button>
         </form>
-        <div className="container">
-          {movies.map((movie) => (
-            <MovieCard movie={movie} key={movie.id} isCategorized={false} />
-          ))}
-        </div>
         <Carousel
           movies={trendingTV}
           media_type={"tv"}
