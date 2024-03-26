@@ -89,7 +89,7 @@ const HomePage = () => {
 
   return (
     <>
-      <Navbar />
+      <Navbar isHomePage={true} />
       <div className="app">
         <h1>MovieBreak.wtf</h1>
         <form
