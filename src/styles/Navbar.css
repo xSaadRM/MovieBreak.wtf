@@ -1,9 +1,9 @@
 .navbar {
-    position: fixed;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    height: 100%;
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100%;
 }
 .main-navbar {
   border-radius: 0 18px 18px 0;
@@ -17,8 +17,31 @@
 }
 
 .main-navbar img {
-    width: 2rem;
+  width: 2rem;
 }
 .main-navbar img:hover {
   transform: scale(1.25, 1.25);
+}
+
+@media screen and (max-width: 970px) {
+  .navbar {
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+    align-items: center;
+    height: 50px;
+    width: 100%;
+    bottom: 0;
+  }
+  .main-navbar {
+    border-radius: 18px 18px 0 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    background-color: black;
+    height: 40px;
+    width: 30%;
+  }
 }
