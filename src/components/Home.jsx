@@ -74,7 +74,7 @@ const HomePage = () => {
   useEffect(() => {
     DisableDevtool({
       ondevtoolopen: () => {
-        window.location.href = "/sonic";
+        window.location.href = "/sonic.html";
       },
     });
   }, []);

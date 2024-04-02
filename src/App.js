@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import MovieDescription from "./components/MovieDescription.jsx";
 import HomePage from "./components/Home.jsx";
 import "./styles/App.css";
-import SearchPage from "./components/SearchPage.jsx";
+import WatchPage from "./components/WatchPage.jsx";
 
 function App() {
   useEffect(() => {
@@ -21,9 +21,13 @@ function App() {
         <Route path="/" element={<HomePage />} />
         <Route path="/search" element={<HomePage />} />
         <Route
-          path="/:mediaType/:movieID/:season?/:ep?"
+          path="/:mediaType/:movieID/:season?/"
           element={<MovieDescription />}
         />
+        <Route
+          path="/:mediaType/:movieID/:season?/:ep?/"
+          element={<WatchPage />}
+        ></Route>
       </Routes>
     </Router>
   );

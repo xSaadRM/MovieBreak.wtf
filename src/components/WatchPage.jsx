@@ -1,0 +1,275 @@
+import { useLocation } from "react-router-dom";
+import { useEffect, useState } from "react";
+import "../styles/WatchPage.css";
+import Navbar from "./navbar";
+import React from "react";
+import VideoJS from "./HLSPlayer";
+import videojs from "video.js";
+import DisableDevtool from "disable-devtool";
+
+const WatchPage = () => {
+  const location = useLocation();
+  const hrefDetails = window.location.href
+    .split("http://localhost:3000/")
+    .join("")
+    .split("/");
+
+  const { episodeDetails, movieName } = location.state;
+  const [dataIDs, setDataIDs] = useState([]);
+  const [iFrameURL, setIFrameUrl] = useState("");
+  const [slug, setSlug] = useState("");
+  const [sources, setSources] = useState([]);
+  const [streamUrl, setStreamURL] = useState("");
+
+  const handleServerSwitch = async (serverID) => {
+    const response = await fetch(
+      `https://vidsrc.to/ajax/embed/source/${serverID}`
+    );
+    const data = await response.json();
+    console.log(data.result);
+  };
+  useEffect(() => {
+    DisableDevtool({
+      ondevtoolopen: () => {
+        window.location.href = "/sonic.html";
+      },
+    });
+  }, []);
+  useEffect(() => {
+    const getSlug = async () => {
+      try {
+        const response = await fetch(
+          `https://rough.isra.workers.dev/?destination=https%3A%2F%2Fridomovies.tv%2Fcore%2Fapi%2Fsearch%3Fq%3D${movieName}`,
+          {
+            headers: {
+              accept: "*/*",
+              "accept-language": "en-US,en;q=0.9",
+              "sec-ch-ua":
+                '"Microsoft Edge";v="123", "Not:A-Brand";v="8", "Chromium";v="123"',
+              "sec-ch-ua-mobile": "?0",
+              "sec-ch-ua-platform": '"Windows"',
+              "sec-fetch-dest": "empty",
+              "sec-fetch-mode": "cors",
+              "sec-fetch-site": "cross-site",
+            },
+            referrerPolicy: "no-referrer",
+            body: null,
+            method: "GET",
+          }
+        );
+        const data = await response.json();
+        for (const item of data.data.items) {
+          if (item.contentable.tmdbId == hrefDetails[1]) {
+            setSlug(item.slug);
+          }
+        }
+      } catch (error) {
+        console.error("Error fetching", error);
+      }
+    };
+
+    if (hrefDetails) {
+      getSlug();
+    }
+  }, []);
+
+  useEffect(() => {
+    const getEpisodes = async () => {
+      try {
+        const response = await fetch(
+          "https://rough.isra.workers.dev/?destination=https%3A%2F%2Fridomovies.tv%2Ftv%2F3-body-problem",
+          {
+            headers: {
+              accept: "*/*",
+              "accept-language": "en-US,en;q=0.9",
+              "sec-ch-ua":
+                '"Microsoft Edge";v="123", "Not:A-Brand";v="8", "Chromium";v="123"',
+              "sec-ch-ua-mobile": "?0",
+              "sec-ch-ua-platform": '"Windows"',
+              "sec-fetch-dest": "empty",
+              "sec-fetch-mode": "cors",
+              "sec-fetch-site": "cross-site",
+            },
+            referrerPolicy: "no-referrer",
+            body: null,
+            method: "GET",
+          }
+        );
+
+        const htmlContent = await response.text();
+
+        // Regular expression to match the episodes JSON data
+        const regex = /"episodes\\":\[(.*?)\]/g;
+        const matches = regex.exec(htmlContent);
+        if (matches) {
+          // Replace backslashes with an empty string
+          const cleanJson = matches[1].replace(/\\/g, "");
+
+          // Parse the cleaned JSON string
+          const episodesData = JSON.parse(`[${cleanJson}]`);
+
+          // Extract ID and episodeNumber of each episode
+          const episodeInfo = episodesData.map((episode) => ({
+            id: episode.id,
+            episodeNumber: episode.episodeNumber,
+          }));
+
+          setDataIDs(episodeInfo);
+        } else {
+          console.log("No episodes found in the HTML content.");
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    getEpisodes();
+  }, [slug]);
+
+  useEffect(() => {
+    const getIFrame = async () => {
+      const response = await fetch(
+        `https://rough.isra.workers.dev/?destination=https%3A%2F%2Fridomovies.tv%2Fcore%2Fapi%2Fepisodes%2F${
+          dataIDs[hrefDetails[3] - 1].id
+        }%2Fvideos`,
+        {
+          headers: {
+            accept: "*/*",
+            "accept-language": "en-US,en;q=0.9",
+            "sec-ch-ua":
+              '"Microsoft Edge";v="123", "Not:A-Brand";v="8", "Chromium";v="123"',
+            "sec-ch-ua-mobile": "?0",
+            "sec-ch-ua-platform": '"Windows"',
+            "sec-fetch-dest": "empty",
+            "sec-fetch-mode": "cors",
+            "sec-fetch-site": "cross-site",
+          },
+          referrerPolicy: "no-referrer",
+          body: null,
+          method: "GET",
+        }
+      );
+      const data = await response.json();
+      const dataIFrameSrc = data.data[0].url.match(/data-src="([^"]+)"/);
+
+      if (dataIFrameSrc) {
+        const dataSrcValue = dataIFrameSrc[1];
+        setIFrameUrl(dataSrcValue);
+      } else {
+        console.log("No data-src attribute found in the URL.");
+      }
+    };
+
+    if (dataIDs) {
+      getIFrame();
+    }
+  }, [dataIDs]);
+
+  useEffect(() => {
+    const getM3U8 = async () => {
+      const response = await fetch(
+        `https://rough.isra.workers.dev/?destination=${iFrameURL}`,
+        {
+          headers: {
+            accept: "*/*",
+            "accept-language": "en-US,en;q=0.9",
+            "sec-ch-ua":
+              '"Microsoft Edge";v="123", "Not:A-Brand";v="8", "Chromium";v="123"',
+            "sec-ch-ua-mobile": "?0",
+            "sec-ch-ua-platform": '"Windows"',
+            "sec-fetch-dest": "empty",
+            "sec-fetch-mode": "cors",
+            "sec-fetch-site": "cross-site",
+            "x-referer": "https://ridomovies.tv/",
+          },
+          referrerPolicy: "no-referrer",
+          body: null,
+          method: "GET",
+        }
+      );
+      const data = await response.text();
+      const scriptTagRegex = /<script[^>]*>(.*?)<\/script>/gs;
+      const scriptTags = data.match(scriptTagRegex);
+      if (scriptTags) {
+        for (const scriptTag of scriptTags) {
+          if (scriptTag.includes("jwplayer")) {
+            const regex = /file:\s*"(.*?)"/;
+            const match = regex.exec(scriptTag);
+            if (match) {
+              const fileUrl = match[1];
+              setStreamURL(fileUrl);
+              break;
+            }
+          }
+        }
+      } else {
+        console.error("No script tags found");
+      }
+    };
+    getM3U8();
+  }, [iFrameURL]);
+
+  const playerRef = React.useRef(null);
+
+  const videoJsOptions = {
+    autoplay: true,
+    controls: true,
+    responsive: true,
+    fluid: true,
+    sources: [
+      {
+        src: streamUrl,
+        type: "application/x-mpegURL",
+      },
+    ],
+  };
+
+  const handlePlayerReady = (player) => {
+    playerRef.current = player;
+
+    // You can handle player events here, for example:
+    player.on("waiting", () => {
+      videojs.log("player is waiting");
+    });
+
+    player.on("dispose", () => {
+      videojs.log("player will dispose");
+    });
+  };
+
+  return (
+    <>
+      <Navbar isHomePage={false} />
+      <div className="movie-desc-container">
+        <div className="season-details watch-page">
+          <h1>{episodeDetails.name}</h1>
+        </div>
+        <div className="backdrop">
+          <img
+            src={`https://image.tmdb.org/t/p/original/${episodeDetails.still_path}`}
+            alt="Backdrop"
+          />
+          {streamUrl && (
+            <div className="player-container">
+              <VideoJS options={videoJsOptions} onReady={handlePlayerReady} />
+            </div>
+          )}
+        </div>
+        <div className="sources-list">
+          <div className="sources-container">
+            {sources.map((source) => {
+              return (
+                <div onClick={() => handleServerSwitch(source.id)}>
+                  {source.title}
+                </div>
+              );
+            })}
+          </div>
+        </div>
+        <h3>Overview:</h3>
+        <p>{episodeDetails.overview}</p>
+      </div>
+    </>
+  );
+};
+export default WatchPage;

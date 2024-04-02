@@ -48,13 +48,15 @@ const MovieDescription = () => {
     }
   };
   // Handle episode click
-  const handleEpisodeClick = (episodeNumber) => {
+  const handleEpisodeClick = (episodeDetails, movieName) => {
     setLoading(true);
-    const newUrl = `/${mediaType}/${movieID}/${selectedSeason}/${episodeNumber}`;
-    // Push the new URL to the history stack
-    navigate(newUrl);
-    fetchStreamURL(episodeNumber);
+      const newUrl = `/${mediaType}/${movieID}/${selectedSeason}/${episodeDetails.episode_number}`;
+      navigate(newUrl, {
+        state: { episodeDetails, movieName },
+      });
+    // fetchStreamURL(episodeNumber);
   };
+
 
   const fetchFromServers = async (urlArray) => {
     let failedAttempts = 0;
@@ -278,7 +280,12 @@ const MovieDescription = () => {
                 <div
                   key={episode.id}
                   className="episode"
-                  onClick={() => handleEpisodeClick(episode.episode_number)}
+                  onClick={() =>
+                    handleEpisodeClick(
+                      episode,
+                      movieInfos.original_title || movieInfos.original_name
+                    )
+                  }
                 >
                   {/* Episode image */}
                   <img
@@ -292,7 +299,7 @@ const MovieDescription = () => {
                     <h3>
                       Episode {episode.episode_number} - {episode.name}
                     </h3>
-                    <p className="overview">{episode.overview}</p>
+                    {/* <p className="overview">{episode.overview}</p> */}
                     <p className="airdate">Air Date: {episode.air_date}</p>
                     {/* Add more details if needed */}
                   </div>

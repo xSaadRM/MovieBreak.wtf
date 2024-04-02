@@ -1,0 +1,31 @@
+.season-details.watch-page h1 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.sources-list {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+.sources-container {
+  display: flex;
+  flex-direction: row;
+  background-color: rgba(27, 27, 29, 0.582);
+  border-radius: 30px;
+}
+.sources-list .sources-container div {
+  color: aliceblue;
+  padding: 10px;
+  border-radius: 30px;
+}
+.sources-list .sources-container div:hover {
+  background-color: rgba(26, 1, 73, 0.705);
+}
+
+.sources-list .sources-container div.active {
+  background-color: rgba(26, 1, 73, 0.705);
+}
