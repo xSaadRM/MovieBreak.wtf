@@ -10,10 +10,9 @@ import ScaleLoader from "react-spinners/ScaleLoader";
 
 const WatchPage = () => {
   const location = useLocation();
-  const hrefDetails = window.location.href
-    .split("http://localhost:3000/")
-    .join("")
-    .split("/");
+  const hrefDetails =
+    window.location.href.split("http://localhost:3000/").join("").split("/") ||
+    window.location.href.split("https://moviebreak.us.to/").join("").split("/");
 
   const { episodeDetails, movieName } = location.state;
   const [dataIDs, setDataIDs] = useState([]);
