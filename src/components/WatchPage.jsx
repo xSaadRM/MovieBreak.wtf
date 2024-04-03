@@ -28,13 +28,13 @@ const WatchPage = () => {
     const data = await response.json();
     console.log(data.result);
   };
-  // useEffect(() => {
-  //   DisableDevtool({
-  //     ondevtoolopen: () => {
-  //       window.location.href = "/sonic.html";
-  //     },
-  //   });
-  // }, []);
+  useEffect(() => {
+    DisableDevtool({
+      ondevtoolopen: () => {
+        window.location.href = "/sonic.html";
+      },
+    });
+  }, []);
   useEffect(() => {
     const getSlug = async () => {
 
