@@ -10,9 +10,7 @@ import ScaleLoader from "react-spinners/ScaleLoader";
 
 const WatchPage = () => {
   const location = useLocation();
-  const hrefDetails =
-    window.location.href.split("http://localhost:3000/").join("").split("/") ||
-    window.location.href.split("https://moviebreak.us.to/").join("").split("/");
+  const hrefDetails = window.location.pathname.split("/");
 
   const { episodeDetails, movieName } = location.state;
   const [dataIDs, setDataIDs] = useState([]);
@@ -21,7 +19,6 @@ const WatchPage = () => {
   const [sources, setSources] = useState([]);
   const [streamUrl, setStreamURL] = useState("");
   const [movieNotFound, setMovieNotFound] = useState(false);
-  const [loading, setLoading] = useState(false);
 
   const handleServerSwitch = async (serverID) => {
     const response = await fetch(
@@ -92,7 +89,7 @@ const WatchPage = () => {
         const data = await response.json();
         let found = false;
         for (const item of data.data.items) {
-          if (item.contentable.tmdbId == hrefDetails[1]) {
+          if (item.contentable.tmdbId == hrefDetails[2]) {
             setSlug(item.slug);
             found = true;
           }
@@ -167,8 +164,8 @@ const WatchPage = () => {
 
   useEffect(() => {
     const getIFrame = async () => {
-      if (dataIDs.length > 0 && hrefDetails[3] && dataIDs[hrefDetails[3] - 1]) {
-        const episodeId = dataIDs[hrefDetails[3] - 1].id;
+      if (dataIDs.length > 0 && hrefDetails[4] && dataIDs[hrefDetails[3] - 1]) {
+        const episodeId = dataIDs[hrefDetails[4] - 1].id;
         const response = await fetch(
           `https://rough.isra.workers.dev/?destination=https%3A%2F%2Fridomovies.tv%2Fcore%2Fapi%2Fepisodes%2F${episodeId}%2Fvideos`,
           {
