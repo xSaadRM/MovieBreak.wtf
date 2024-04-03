@@ -1,0 +1,24 @@
+.double-click-tracker {
+  z-index: 0;
+  left: 0;
+  top: 0;
+  transform: translateY(50%);
+  position: absolute;
+  display: flex;
+  width: 100%;
+  height: 50%;
+  flex-direction: row;
+  align-items: center;
+}
+
+.tracker-child {
+  width: 100%;
+  height: 100%;
+}
+
+.player-container {
+  margin-top: 10px;
+}
+.vjs-menu-content {
+  z-index: 1;
+}

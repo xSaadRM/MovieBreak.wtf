@@ -2,6 +2,7 @@ import React from "react";
 import videojs from "video.js";
 import "video.js/dist/video-js.css";
 import "videojs-hls-quality-selector";
+import "../styles/VideoJS.css"; // Import CSS file for custom styles
 
 export const VideoJS = (props) => {
   const videoRef = React.useRef(null);
@@ -21,17 +22,64 @@ export const VideoJS = (props) => {
         videojs.log("player is ready");
         onReady && onReady(player);
       }));
+
+      // Add double-click event listeners to track double clicks
+      const vdjsVid = document.getElementsByTagName("video-js")[0];
+      const trackerContainer = document.createElement("div");
+      trackerContainer.classList.add("double-click-tracker");
+      vdjsVid.appendChild(trackerContainer);
+
+      const child1 = document.createElement("div");
+      const child2 = document.createElement("div");
+      const child3 = document.createElement("div");
+      child1.classList.add("tracker-child", "seek-backward");
+      child2.classList.add("tracker-child", "middle-child");
+      child3.classList.add("tracker-child", "seek-forward");
+      trackerContainer.appendChild(child1);
+      trackerContainer.appendChild(child2);
+      trackerContainer.appendChild(child3);
+
+      // Double click event handlers for each child
+      child1.addEventListener("dblclick", () => {
+        player.currentTime(player.currentTime() - 30);
+      });
+      child1.addEventListener("click", () => {
+        if (player.paused()) {
+          player.play();
+        } else {
+          player.pause();
+        }
+      });
+      child2.addEventListener("dblclick", () => {
+        if (player.isFullscreen()) {
+          player.exitFullscreen();
+        } else {
+          player.requestFullscreen();
+        }
+      });
+      child2.addEventListener("click", () => {
+        if (player.paused()) {
+          player.play();
+        } else {
+          player.pause();
+        }
+      });
+      child3.addEventListener("dblclick", () => {
+        player.currentTime(player.currentTime() + 30);
+      });
+      child3.addEventListener("click", () => {
+        if (player.paused()) {
+          player.play();
+        } else {
+          player.pause();
+        }
+      });
       player.hlsQualitySelector({
         displayCurrentQuality: true,
       });
 
-      // Log the file that is playing
       player.on("loadstart", () => {
-        console.log("loading")
-        // const currentSource = player.currentSource();
-        // if (currentSource) {
-        //   console.log("Playing file:", currentSource.src);
-        // }
+        console.log("loading");
       });
     } else {
       const player = playerRef.current;

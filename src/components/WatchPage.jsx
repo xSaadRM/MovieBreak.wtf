@@ -290,26 +290,26 @@ const WatchPage = () => {
             src={`https://image.tmdb.org/t/p/original/${episodeDetails.still_path}`}
             alt="Backdrop"
           />
-          {streamUrl ? (
-            <div className="player-container">
-              <VideoJS options={videoJsOptions} onReady={handlePlayerReady} />
-            </div>
-          ) : movieNotFound === true ? (
-            <div className="movie-not-found">
-              <p>this ressource is not found on any server</p>
-            </div>
-          ) : (
-            <div className="loading-animation">
-              <ScaleLoader
-                color="blue"
-                loading={!movieNotFound || !streamUrl}
-                size={150}
-                aria-label="Loading Spinner"
-                data-testid="loader"
-              />
-            </div>
-          )}
         </div>
+        {streamUrl ? (
+          <div className="player-container">
+            <VideoJS options={videoJsOptions} onReady={handlePlayerReady} />
+          </div>
+        ) : movieNotFound === true ? (
+          <div className="movie-not-found">
+            <p>this ressource is not found on any server</p>
+          </div>
+        ) : (
+          <div className="loading-animation">
+            <ScaleLoader
+              color="blue"
+              loading={!movieNotFound || !streamUrl}
+              size={150}
+              aria-label="Loading Spinner"
+              data-testid="loader"
+            />
+          </div>
+        )}
         <div className="sources-list">
           <div className="sources-container">
             {sources.map((source) => {
