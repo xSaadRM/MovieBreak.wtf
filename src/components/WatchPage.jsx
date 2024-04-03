@@ -20,7 +20,7 @@ const WatchPage = () => {
   const [slug, setSlug] = useState("");
   const [sources, setSources] = useState([]);
   const [streamUrl, setStreamURL] = useState("");
-
+  const [movieNotFound, setMovieNotFound] = useState(false);
   const handleServerSwitch = async (serverID) => {
     const response = await fetch(
       `https://vidsrc.to/ajax/embed/source/${serverID}`
@@ -28,18 +28,49 @@ const WatchPage = () => {
     const data = await response.json();
     console.log(data.result);
   };
-  useEffect(() => {
-    DisableDevtool({
-      ondevtoolopen: () => {
-        window.location.href = "/sonic.html";
-      },
-    });
-  }, []);
+  // useEffect(() => {
+  //   DisableDevtool({
+  //     ondevtoolopen: () => {
+  //       window.location.href = "/sonic.html";
+  //     },
+  //   });
+  // }, []);
   useEffect(() => {
     const getSlug = async () => {
+
+      // Manual encoding for characters that aren't encoded in the standard encodeURIComponent function
+      const manualEncode = (str) => {
+        return Array.from(str)
+          .map((char) => {
+            const charCode = char.charCodeAt(0);
+            // If the character is not alphanumeric or one of these: - _ . ! ~ * ' ( )
+            if (
+              (charCode >= 0x30 && charCode <= 0x39) || // 0-9
+              (charCode >= 0x41 && charCode <= 0x5a) || // A-Z
+              (charCode >= 0x61 && charCode <= 0x7a) || // a-z
+              char === "-" ||
+              char === "_" ||
+              char === "." ||
+              char === "!" ||
+              char === "~" ||
+              char === "*" ||
+              char === "'" ||
+              char === "(" ||
+              char === ")"
+            ) {
+              return char;
+            } else {
+              return encodeURIComponent(char).replace(/%/g, "%25");
+            }
+          })
+          .join("");
+      };
+
+      const encodedMovieName = manualEncode(movieName);
+
       try {
         const response = await fetch(
-          `https://rough.isra.workers.dev/?destination=https%3A%2F%2Fridomovies.tv%2Fcore%2Fapi%2Fsearch%3Fq%3D${movieName}`,
+          `https://rough.isra.workers.dev/?destination=https%3A%2F%2Fridomovies.tv%2Fcore%2Fapi%2Fsearch%3Fq%3D${encodedMovieName}`,
           {
             headers: {
               accept: "*/*",
@@ -61,6 +92,8 @@ const WatchPage = () => {
         for (const item of data.data.items) {
           if (item.contentable.tmdbId == hrefDetails[1]) {
             setSlug(item.slug);
+          } else {
+            setMovieNotFound(true);
           }
         }
       } catch (error) {
@@ -74,10 +107,11 @@ const WatchPage = () => {
   }, []);
 
   useEffect(() => {
+    console.log(slug);
     const getEpisodes = async () => {
       try {
         const response = await fetch(
-          "https://rough.isra.workers.dev/?destination=https%3A%2F%2Fridomovies.tv%2Ftv%2F3-body-problem",
+          `https://rough.isra.workers.dev/?destination=https%3A%2F%2Fridomovies.tv%2Ftv%2F${slug}`,
           {
             headers: {
               accept: "*/*",
@@ -122,8 +156,9 @@ const WatchPage = () => {
         console.log(error);
       }
     };
-
-    getEpisodes();
+    if (slug) {
+      getEpisodes();
+    }
   }, [slug]);
 
   useEffect(() => {
@@ -206,7 +241,9 @@ const WatchPage = () => {
         console.error("No script tags found");
       }
     };
-    getM3U8();
+    if (iFrameURL) {
+      getM3U8();
+    }
   }, [iFrameURL]);
 
   const playerRef = React.useRef(null);
@@ -249,9 +286,13 @@ const WatchPage = () => {
             src={`https://image.tmdb.org/t/p/original/${episodeDetails.still_path}`}
             alt="Backdrop"
           />
-          {streamUrl && (
+          {streamUrl ? (
             <div className="player-container">
               <VideoJS options={videoJsOptions} onReady={handlePlayerReady} />
+            </div>
+          ) : (
+            <div className="movie-not-found">
+              <p>this ressource is not found on any server</p>
             </div>
           )}
         </div>
