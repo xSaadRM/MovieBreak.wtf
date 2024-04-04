@@ -32,7 +32,7 @@ const SearchPage = () => {
   return (
     <>
       <Navbar />
-      <div className="search-container">
+      <div className="container">
         {" "}
         <form
           className="search"
