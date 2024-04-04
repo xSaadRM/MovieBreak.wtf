@@ -1,9 +1,16 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import MovieCard from "./MovieCard";
+import Navbar from "./navbar";
+import "../styles/SearchPage.css";
+import SearchIcon from "../assets/search.svg";
 
 const SearchPage = () => {
+  const navigate = useNavigate();
+  const [searchTerm, setSearchTerm] = useState(
+    localStorage.getItem("searchTerm") || ""
+  );
   const [movies, setmovies] = useState([]);
-  const [query, setQuery] = useState("");
 
   const searchMovie = async (title) => {
     const response = await fetch(
@@ -14,27 +21,49 @@ const SearchPage = () => {
   };
 
   useEffect(() => {
-    // Get the query parameters from the URL
-    const queryParams = new URLSearchParams(window.location.search);
-
-    // Get the value of the 'query' parameter
-    const queryValue = queryParams.get("title");
-
-    // Set the query state with the value from the URL
-    if (queryValue) {
-      setQuery(queryValue);
+    localStorage.setItem("searchTerm", searchTerm);
+    if (document.location.pathname == "/search") {
+      if (searchTerm) {
+        searchMovie(searchTerm);
+      }
     }
-  }, []);
-  useEffect(() => {
-    searchMovie(query);
-  }, [query]);
+  }, [searchTerm]);
 
   return (
-    <div className="container">
-      {movies.map((movie) => (
-        <MovieCard movie={movie} key={movie.id} isCategorized={false} />
-      ))}
-    </div>
+    <>
+      <Navbar />
+      <div className="search-container">
+        {" "}
+        <form
+          className="search"
+          onSubmit={async (e) => {
+            e.preventDefault();
+            navigate("/search");
+          }}
+        >
+          <input
+            placeholder="Seach for movies"
+            value={searchTerm}
+            onChange={(e) => {
+              setSearchTerm(e.target.value);
+            }}
+          />
+          <button>
+            <img src={SearchIcon} alt="search" />
+          </button>
+        </form>
+      </div>
+
+      <div className="container">
+        {movies ? (
+          movies.map((movie) => (
+            <MovieCard movie={movie} key={movie.id} isCategorized={false} />
+          ))
+        ) : (
+          <p>No movie found</p>
+        )}
+      </div>
+    </>
   );
 };
 

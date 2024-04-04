@@ -1,29 +1,14 @@
 import Carousel from "./Carousel";
-import SearchIcon from "../assets/search.svg";
 import { useEffect, useState } from "react";
 import DisableDevtool from "disable-devtool";
-import MovieCard from "./MovieCard";
-import Navbar from "./navbar";
-import { useNavigate, useSearchParams } from "react-router-dom";
+import SearchPage from "./SearchPage";
 
 const HomePage = () => {
-  const [searchParams, setSearchParams] = useSearchParams();
 
-  const navigate = useNavigate();
-  const [movies, setmovies] = useState([]);
-  const [seachTerm, setSearchTerm] = useState("");
   const [trendingTV, setTrendingTV] = useState("");
   const [trendingMovie, setTrendingMovie] = useState("");
   const [topTV, setTopTV] = useState("");
   const [topMovie, setTopMovie] = useState("");
-
-  const searchMovie = async (title) => {
-    const response = await fetch(
-      `https://api.themoviedb.org/3/search/multi?query=${title}&include_adult=false&api_key=d0e6107be30f2a3cb0a34ad2a90ceb6f`
-    );
-    const data = await response.json();
-    setmovies(data.results);
-  };
 
   const getTrending = async (type) => {
     try {
@@ -81,39 +66,13 @@ const HomePage = () => {
 
   useEffect(() => {
     fetchTrendingData();
-
-    if (searchParams.get("title")) {
-      searchMovie(searchParams.get("title"))
-    } else {setSearchTerm("")}
   }, []);
 
   return (
     <>
-      <Navbar isHomePage={true} />
       <div className="app">
         <h1>MovieBreak</h1>
-        <form
-          className="search"
-          onSubmit={async (e) => {
-            e.preventDefault();
-            await searchMovie(seachTerm);
-            navigate(`/search?title=${seachTerm}`);
-          }}
-        >
-          <input
-            placeholder="Seach for movies"
-            value={seachTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-          />
-          <button>
-            <img src={SearchIcon} alt="seach" />
-          </button>
-        </form>
-        <div className="container">
-          {movies.map((movie) => (
-            <MovieCard movie={movie} key={movie.id} isCategorized={false} />
-          ))}
-        </div>
+        <SearchPage />
         <Carousel
           movies={trendingTV}
           media_type={"tv"}
