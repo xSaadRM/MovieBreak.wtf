@@ -7,21 +7,31 @@
 .sources-list {
   margin-top: 10px;
   display: flex;
+  flex-wrap: wrap;
   flex-direction: row;
   justify-content: center;
   align-items: center;
 }
 .sources-container {
+  max-width: 90%; /* Adjusted */
+  width: auto; /* Adjusted */
   display: flex;
   flex-direction: row;
-  background-color: rgba(27, 27, 29, 0.582);
+  background-color: rgba(77, 44, 168, 0.801);
   border-radius: 30px;
+  flex-wrap: wrap;
+  justify-content: center; /* Added */
 }
 .sources-list .sources-container div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   color: aliceblue;
   padding: 10px;
   border-radius: 30px;
+  width: 50%;
 }
+
 .sources-list .sources-container div:hover {
   background-color: rgba(26, 1, 73, 0.705);
 }

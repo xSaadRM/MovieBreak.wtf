@@ -20,15 +20,25 @@ const MovieDescription = () => {
   const [loading, setLoading] = useState(false);
   const [allServersFailed, setAllServersFailed] = useState(false);
   const [PlaybackError, setPlaybackError] = useState(false);
+  const [sources, setSources] = useState([]);
+  const [activeServer, setActiveServer] = useState(null);
 
   useEffect(() => {
-    DisableDevtool({
-      ondevtoolopen: () => {
-        window.location.href = "/sonic.html";
-      },
-    });
+    // DisableDevtool({
+    //   ondevtoolopen: () => {
+    //     window.location.href = "/sonic.html";
+    //   },
+    // });
   }, []);
-
+  const handleServerSwitch = async (serverURl) => {
+    setActiveServer(serverURl)
+    setLoading(true);
+    const response = await fetch(serverURl);
+    const data = await response.json();
+    setStreamVideo(data.sourceUrls);
+    setSubtitles(data.subtitles);
+    setLoading(false);
+  };
   const fetchStreamURL = async (episodeNumber) => {
     try {
       const response = await fetch(
@@ -41,7 +51,8 @@ const MovieDescription = () => {
       }
       const data = await response.json();
       const streamURLArray = data.url_array; // Assuming the response directly provides the stream URL
-      fetchFromServers(streamURLArray);
+      setSources(streamURLArray);
+      setLoading(false);
     } catch (error) {
       console.error("Error fetching stream URL:", error.message);
       // Handle error gracefully, e.g., show a message to the user
@@ -55,47 +66,6 @@ const MovieDescription = () => {
       state: { episodeDetails, movieName },
     });
     // fetchStreamURL(episodeNumber);
-  };
-
-  const fetchFromServers = async (urlArray) => {
-    let failedAttempts = 0;
-    let videoSet = false;
-    let subtitlesSet = false;
-
-    for (let i = 0; i < urlArray.length; i++) {
-      try {
-        const streamResponse = await fetch(urlArray[i].url);
-
-        if (streamResponse.ok) {
-          const streamData = await streamResponse.json();
-          const sourceUrls = streamData.sourceUrls;
-          const subtitleUrls = streamData.subtitleUrls;
-
-          if (sourceUrls && sourceUrls.length > 0 && !videoSet) {
-            const streamURL = sourceUrls[0];
-            setStreamVideo(streamURL);
-            videoSet = true; // Mark video as set
-          }
-
-          if (subtitleUrls && subtitleUrls.length > 0 && !subtitlesSet) {
-            setSubtitles(subtitleUrls);
-            subtitlesSet = true; // Mark subtitles as set
-          }
-
-          // If both video and subtitles are set, break the loop
-          if (videoSet && subtitlesSet) {
-            break;
-          }
-        }
-      } catch (error) {
-        console.error("Error fetching stream URL:", error.message);
-        failedAttempts++;
-      }
-    }
-
-    if (failedAttempts === urlArray.length) {
-      setAllServersFailed(true);
-    }
   };
 
   const fetchSeasonDetails = async () => {
@@ -269,6 +239,24 @@ const MovieDescription = () => {
           )}
         </>
         <div id="player"></div>
+        <div className="sources-list">
+          <h3>Servers List</h3>
+          <div className="sources-container">
+            {sources &&
+              sources.map((source, index) => {
+                const isActive = source.url == activeServer;
+                return (
+                  <div
+                  className={isActive ? "active" : ""}
+                    key={source.name}
+                    onClick={() => handleServerSwitch(source.url)}
+                  >
+                    {source.name.replace(/Player/g, `${index + 1} -`)}
+                  </div>
+                );
+              })}
+          </div>
+        </div>
         {/* Season details */}
         {seasonDetails && (
           <div className="season-details">

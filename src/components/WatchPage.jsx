@@ -16,17 +16,10 @@ const WatchPage = () => {
   const [dataIDs, setDataIDs] = useState([]);
   const [iFrameURL, setIFrameUrl] = useState("");
   const [slug, setSlug] = useState("");
-  const [sources, setSources] = useState([]);
   const [streamUrl, setStreamURL] = useState("");
   const [movieNotFound, setMovieNotFound] = useState(false);
 
-  const handleServerSwitch = async (serverID) => {
-    const response = await fetch(
-      `https://vidsrc.to/ajax/embed/source/${serverID}`
-    );
-    const data = await response.json();
-    console.log(data.result);
-  };
+
   useEffect(() => {
     // DisableDevtool({
     //   ondevtoolopen: () => {
@@ -309,17 +302,6 @@ const WatchPage = () => {
             />
           </div>
         )}
-        <div className="sources-list">
-          <div className="sources-container">
-            {sources.map((source) => {
-              return (
-                <div onClick={() => handleServerSwitch(source.id)}>
-                  {source.title}
-                </div>
-              );
-            })}
-          </div>
-        </div>
         <h3>Overview:</h3>
         <p>{episodeDetails.overview}</p>
       </div>

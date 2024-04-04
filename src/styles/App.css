@@ -14,7 +14,7 @@
 
 body {
   font-family: var(--font-roboto);
-  background-color: #212426;
+  background-color: rgba(10 10 18);
 }
 
 .app {
@@ -31,8 +31,8 @@ body {
   letter-spacing: 0.9px;
   background: linear-gradient(
     90deg,
-    rgba(249, 211, 180, 1) 0%,
-    rgba(249, 211, 180, 0) 100%
+    rgba(99, 87, 212, 0.836) 0%,
+    rgba(228, 50, 50, 0.733) 100%
   );
   background-clip: text;
   -webkit-background-clip: text;
