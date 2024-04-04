@@ -28,11 +28,11 @@ const WatchPage = () => {
     console.log(data.result);
   };
   useEffect(() => {
-    DisableDevtool({
-      ondevtoolopen: () => {
-        window.location.href = "/sonic.html";
-      },
-    });
+    // DisableDevtool({
+    //   ondevtoolopen: () => {
+    //     window.location.href = "/sonic.html";
+    //   },
+    // });
   }, []);
   useEffect(() => {
     const getSlug = async () => {
@@ -108,7 +108,6 @@ const WatchPage = () => {
   }, []);
 
   useEffect(() => {
-    console.log(slug);
     const getEpisodes = async () => {
       try {
         const response = await fetch(
@@ -138,8 +137,7 @@ const WatchPage = () => {
         const matches = regex.exec(htmlContent);
         if (matches) {
           // Replace backslashes with an empty string
-          const cleanJson = matches[1].replace(/\\/g, "");
-
+          const cleanJson = matches[1].replace(/\\"/g, `"`).replace(/\\\\"/g, "`");
           // Parse the cleaned JSON string
           const episodesData = JSON.parse(`[${cleanJson}]`);
 
@@ -154,6 +152,7 @@ const WatchPage = () => {
           console.log("No episodes found in the HTML content.");
         }
       } catch (error) {
+        setMovieNotFound(true);
         console.log(error);
       }
     };
