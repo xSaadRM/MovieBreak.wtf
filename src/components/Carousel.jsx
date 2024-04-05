@@ -5,7 +5,7 @@ import "slick-carousel/slick/slick-theme.css";
 import MovieCard from "./MovieCard";
 const Carousel = ({ movies, type, category, media_type }) => {
   const settings = {
-    draggable: false,
+    draggable: true,
     touchMove: true,
     lazyLoad: "progressive",
     focusOnSelect: false,
@@ -14,7 +14,7 @@ const Carousel = ({ movies, type, category, media_type }) => {
     infinite: false,
     speed: 500,
     slidesToShow: 5.5, // Number of slides to show at once
-    slidesToScroll: 3, // Number of slides to scroll
+    slidesToScroll: 4, // Number of slides to scroll
     responsive: [
       {
         breakpoint: 900,

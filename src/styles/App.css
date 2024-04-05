@@ -249,7 +249,6 @@ body {
 /* Apply scrollbar styles only for screens without touch support */
 @media (hover: hover) and (pointer: fine) {
   .slick-list {
-    overflow: auto;
     scrollbar-width: none;
   }
 }

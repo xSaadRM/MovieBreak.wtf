@@ -35,18 +35,29 @@ const MovieCard = ({ movie, isCategorized, media_type }) => {
       onClick={() => handleClick(movie)}
     >
       <div>
-        <p>{`Rating: ${
-          movie.vote_average ? movie.vote_average.toFixed(1) : "N/A"
-        }`}</p>
+        {movie && (
+          <p>
+            {movie.vote_average
+              ? `Rating: ${movie.vote_average.toFixed(1)}`
+              : movie.popularity
+              ? `Popularity: ${movie.popularity.toFixed(1)}`
+              : "N/A"}
+          </p>
+        )}
       </div>
       <div>
-        {movie.poster_path ? (
+        {(movie && movie.poster_path) || movie.profile_path ? (
           <img
-            src={`https://image.tmdb.org/t/p/w370_and_h556_bestv2${movie.poster_path}`}
+            src={`https://image.tmdb.org/t/p/w370_and_h556_bestv2${
+              movie.poster_path || movie.profile_path
+            }`}
             alt={movie.original_title || movie.original_name} // Add alt attribute for accessibility
           />
         ) : (
-          <div className="placeholder-content">No Poster Available</div>
+          <>
+            <img src="https://www.themoviedb.org/assets/2/v4/glyphicons/basic/glyphicons-basic-4-user-grey-d8fe957375e70239d6abdd549fd7568c89281b2179b5f4470e2e12895792dfa5.svg"></img>
+            <div className="placeholder-content">No Poster Available</div>
+          </>
         )}
       </div>
       <div>

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import MovieCard from "./MovieCard";
-import Navbar from "./navbar";
+import Navbar from "./Navbar";
 import "../styles/SearchPage.css";
 import SearchIcon from "../assets/search.svg";
 
@@ -31,7 +31,7 @@ const SearchPage = () => {
 
   return (
     <>
-      <Navbar />
+      {document.location.pathname == "/search" && <Navbar />}
       <div className="container">
         {" "}
         <form

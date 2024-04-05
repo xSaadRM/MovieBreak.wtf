@@ -1,7 +1,7 @@
 import { useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
 import "../styles/WatchPage.css";
-import Navbar from "./navbar";
+import Navbar from "./Navbar";
 import React from "react";
 import VideoJS from "./HLSPlayer";
 import videojs from "video.js";
@@ -21,11 +21,11 @@ const WatchPage = () => {
 
 
   useEffect(() => {
-    // DisableDevtool({
-    //   ondevtoolopen: () => {
-    //     window.location.href = "/sonic.html";
-    //   },
-    // });
+    DisableDevtool({
+      ondevtoolopen: () => {
+        window.location.href = "/sonic.html";
+      },
+    });
   }, []);
   useEffect(() => {
     const getSlug = async () => {
@@ -273,10 +273,16 @@ const WatchPage = () => {
   return (
     <>
       <Navbar isHomePage={false} />
-      <div className="movie-desc-container">
+      <div className="movie-description-container">
         <div className="season-details watch-page">
           <h1>{episodeDetails.name}</h1>
         </div>
+        <div
+          className="blured-backdrop"
+          style={{
+            backgroundImage: `url(https://image.tmdb.org/t/p/original/${episodeDetails.still_path})`,
+          }}
+        ></div>
         <div className="backdrop">
           <img
             src={`https://image.tmdb.org/t/p/original/${episodeDetails.still_path}`}
