@@ -6,6 +6,7 @@ import HomePage from "./components/Home.jsx";
 import "./styles/App.css";
 import WatchPage from "./components/WatchPage.jsx";
 import SearchPage from "./components/SearchPage.jsx";
+import CastPage from "./components/CastPage.jsx";
 
 function App() {
   useEffect(() => {
@@ -29,6 +30,7 @@ function App() {
           path="/:mediaType/:movieID/:season?/:ep?/"
           element={<WatchPage />}
         ></Route>
+        <Route path="/cast/:personID" element={<CastPage />} />
       </Routes>
     </Router>
   );

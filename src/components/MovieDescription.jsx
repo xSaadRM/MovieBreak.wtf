@@ -274,7 +274,7 @@ const MovieDescription = () => {
           <Carousel
             movies={movieInfos.credits.cast}
             type={"Cast"}
-            media_type={"Cast"}
+            media_type={"cast"}
             category={"Credits"}
           />
         </div>
