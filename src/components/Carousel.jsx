@@ -13,6 +13,7 @@ const Carousel = ({ movies, type, category, media_type }) => {
     dots: true,
     infinite: false,
     speed: 500,
+    centerMode: true,
     slidesToShow: 5.5, // Number of slides to show at once
     slidesToScroll: 4, // Number of slides to scroll
     responsive: [
