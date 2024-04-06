@@ -31,6 +31,7 @@ function App() {
           element={<WatchPage />}
         ></Route>
         <Route path="/cast/:personID" element={<CastPage />} />
+        <Route path="/person/:personID" element={<CastPage />} />
       </Routes>
     </Router>
   );
