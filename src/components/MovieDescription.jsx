@@ -236,7 +236,6 @@ const MovieDescription = () => {
 
         {seasonDetails && (
           <div className="season-details">
-            {/* <p>{seasonDetails.overview}</p> */}
             <div className="episodes-list">
               {seasonDetails.episodes.map((episode) => (
                 <div

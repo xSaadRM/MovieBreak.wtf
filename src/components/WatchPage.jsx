@@ -9,13 +9,16 @@ import DisableDevtool from "disable-devtool";
 
 const WatchPage = () => {
   const location = useLocation();
-  const { episodeDetails, movieName } = location.state || {};
+  const { episodeDetails } = location.state || {};
   const [sources, setSources] = useState();
   const [activeServer, setActiveServer] = useState(null);
   const [streamVideo, setStreamVideo] = useState("");
   const [subtitles, setSubtitles] = useState("");
   const [loading, setLoading] = useState(false);
   const { mediaType, movieID, season, ep } = useParams();
+  const [isOverviewAllShowed, setIsOverviewAllShowed] = useState(false);
+  const [wordsInOverview, setWordsInOverview] = useState(13);
+  const [debugRes, setDebugRes] = useState();
 
   useEffect(() => {
     DisableDevtool({
@@ -53,6 +56,7 @@ const WatchPage = () => {
         if (!response.ok) {
           throw new Error("Failed to fetch stream URL");
         }
+        setDebugRes(response);
         const data = await response.json();
         const streamURLArray = data.url_array; // Assuming the response directly provides the stream URL
         setSources(streamURLArray);
@@ -117,9 +121,6 @@ const WatchPage = () => {
       <div className="movie-description-container">
         {mediaType === "tv" && episodeDetails && (
           <>
-            <div className="season-details watch-page">
-              <h1>{episodeDetails.name}</h1>
-            </div>
             <div
               className="blured-backdrop"
               style={{
@@ -131,24 +132,59 @@ const WatchPage = () => {
                 src={`https://image.tmdb.org/t/p/original/${episodeDetails.still_path}`}
                 alt="Backdrop"
               />
+              <div className="movie-infos">
+                <div className="movie-ids">
+                  <h3>{episodeDetails.title || episodeDetails.name}</h3>
+                  <p>
+                    {episodeDetails.air_date || episodeDetails.release_date}
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div className="sections-container">
+              <div className="sections">
+                <div className="section active">
+                  <h4>Episode Overview</h4>
+                </div>
+              </div>
+              <div className="overview">
+                <p>
+                  {!isOverviewAllShowed
+                    ? episodeDetails.overview
+                        .split(" ")
+                        .slice(0, wordsInOverview)
+                        .join(" ") + "...."
+                    : episodeDetails.overview}
+                  {!isOverviewAllShowed ? (
+                    <span
+                      className="show-more-toggle"
+                      onClick={setIsOverviewAllShowed}
+                    >
+                      Show more
+                    </span>
+                  ) : null}
+                </p>
+              </div>
             </div>
           </>
         )}
         {sources && (
           <>
             <div id="player"></div>
-            <div className="sources-list">
-              <h3>Servers List</h3>
-              <div className="sources-container">
+            <div className="sources-container">
+              <div className="sources-list">
+                <div className="sources-label">Choose Server :</div>
                 {sources.map((source, index) => {
                   const isActive = source.url === activeServer;
                   return (
                     <div
-                      className={isActive ? "active" : ""}
+                      className={
+                        isActive ? "source-link active" : "source-link"
+                      }
                       key={source.name}
                       onClick={() => handleServerSwitch(source.url)}
                     >
-                      {source.name.replace(/Player/g, `${index + 1} -`)}
+                      <p>{`Server - ${index + 1}`}</p>
                     </div>
                   );
                 })}

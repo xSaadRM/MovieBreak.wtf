@@ -1,10 +1,4 @@
-.season-details.watch-page h1 {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.sources-list {
+.sources-container {
   margin-top: 10px;
   display: flex;
   flex-wrap: wrap;
@@ -12,7 +6,7 @@
   justify-content: center;
   align-items: center;
 }
-.sources-container {
+.sources-list {
   max-width: 90%; /* Adjusted */
   width: auto; /* Adjusted */
   display: flex;
@@ -22,22 +16,32 @@
   flex-wrap: wrap;
   justify-content: center; /* Added */
 }
-.sources-list .sources-container div {
+.sources-container .sources-list div {
   display: flex;
   justify-content: center;
   align-items: center;
   color: aliceblue;
-  padding: 10px;
   border-radius: 30px;
   width: 50%;
 }
-
-.sources-list .sources-container div:hover {
-  background-color: rgba(26, 1, 73, 0.705);
+.sources-container .sources-list .source-link p {
+  padding: 10px;
+  border-radius: 30px;
+}
+.sources-container .sources-list .sources-label {
+  padding: 10px 10px 15px 10px;
+  margin-bottom: 5px;
+  border-radius: 30px 30px 0 0;
+  width: 100%;
+  border-bottom: 1px black solid;
 }
 
-.sources-list .sources-container div.active {
-  background-color: rgba(26, 1, 73, 0.705);
+.sources-container .sources-list .source-link:hover {
+  background-color: rgb(26, 1, 73);
+}
+
+.sources-container .sources-list .source-link.active p {
+  background-color: rgb(26, 1, 73);
 }
 .movie-not-found {
   border-radius: 10px;
