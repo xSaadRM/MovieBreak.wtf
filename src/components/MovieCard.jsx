@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-
+import "../styles/Card.css";
 const MovieCard = ({ movie, isCategorized, media_type }) => {
   const navigate = useNavigate();
 
@@ -45,7 +45,7 @@ const MovieCard = ({ movie, isCategorized, media_type }) => {
           </p>
         )}
       </div>
-      <div>
+      <div className="the-card-image">
         {(movie && movie.poster_path) || movie.profile_path ? (
           <img
             src={`https://image.tmdb.org/t/p/w370_and_h556_bestv2${

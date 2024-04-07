@@ -2,6 +2,7 @@ import Carousel from "./Carousel";
 import { useEffect, useState } from "react";
 import DisableDevtool from "disable-devtool";
 import SearchPage from "./SearchPage";
+import Navbar from "./Navbar";
 
 const HomePage = () => {
 
@@ -71,7 +72,7 @@ const HomePage = () => {
   return (
     <>
       <div className="app">
-        <h1>MovieBreak</h1>
+        <Navbar />
         <SearchPage />
         <Carousel
           movies={trendingTV}

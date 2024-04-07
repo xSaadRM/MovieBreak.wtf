@@ -68,8 +68,6 @@ const MovieDescription = () => {
     if (mediaType === "tv") {
       if (season) {
         setSelectedSeason(season);
-      } else {
-        setSelectedSeason("1");
       }
     }
   }, [mediaType, movieID, season]);
@@ -103,7 +101,7 @@ const MovieDescription = () => {
       navigate(`/${mediaType}/${movieID}/${selectedSeason}`);
       fetchSeasonDetails();
     }
-  }, [selectedSeason, mediaType, movieID, navigate]);
+  }, [selectedSeason]);
 
   const handleEpisodeClick = (episodeDetails, movieName) => {
     setLoading(true);

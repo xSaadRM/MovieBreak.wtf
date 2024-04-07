@@ -18,7 +18,6 @@ const WatchPage = () => {
   const { mediaType, movieID, season, ep } = useParams();
   const [isOverviewAllShowed, setIsOverviewAllShowed] = useState(false);
   const [wordsInOverview, setWordsInOverview] = useState(13);
-  const [debugRes, setDebugRes] = useState();
 
   useEffect(() => {
     DisableDevtool({
@@ -56,7 +55,6 @@ const WatchPage = () => {
         if (!response.ok) {
           throw new Error("Failed to fetch stream URL");
         }
-        setDebugRes(response);
         const data = await response.json();
         const streamURLArray = data.url_array; // Assuming the response directly provides the stream URL
         setSources(streamURLArray);

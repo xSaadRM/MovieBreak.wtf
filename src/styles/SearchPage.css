@@ -1,16 +1,20 @@
 .search {
   margin: 40px 0;
-  width: 71%;
+  width: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 0;
   border-radius: 3rem;
-  background: #0011ff2c;
-}
-
-.search input {
+  background: #00000077;
   padding: 10px 20px;
+}
+.search input::placeholder {
+  text-align: start;
+}
+.search input {
+  text-align: center;
+  width: 50%;
   flex: 1;
   border: none;
   font-size: large;
@@ -27,22 +31,16 @@
   cursor: pointer;
 }
 .search button {
-  padding: 0 20px;
   background-color: transparent;
 }
 
 @media screen and (max-width: 600px) {
-  .search {
-    padding: 0;
-    width: 100%;
-  }
-
   .search input {
     font-size: 1rem;
   }
 
   .search img {
     width: 20px;
-    height: 20px;
+    height: auto;
   }
 }

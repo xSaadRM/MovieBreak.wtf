@@ -82,82 +82,6 @@ body {
   flex-wrap: wrap;
 }
 
-.movie {
-  width: 310px;
-  height: 460px;
-  margin: 1.5rem;
-
-  position: relative;
-  border-radius: 12px;
-  overflow: hidden;
-  border: none;
-
-  transition: all 0.4s cubic-bezier(0.175, 0.885, 0, 1);
-  box-shadow: 0px 13px 10px -7px rgba(0, 0, 0, 0.1);
-}
-
-.movie div:nth-of-type(1) {
-  position: absolute;
-  padding: 16px;
-  width: 100%;
-  opacity: 0;
-  top: 0;
-  color: #f9d3b4;
-}
-
-.movie:hover {
-  box-shadow: 0px 30px 18px -8px rgba(0, 0, 0, 0.1);
-  transform: scale(1.05, 1.05);
-}
-
-.movie div:nth-of-type(2) {
-  width: 100%;
-  height: 100%;
-}
-
-.movie div:nth-of-type(2) img {
-  height: 100%;
-  width: 100%;
-}
-
-.movie div:nth-of-type(3) {
-  z-index: 2;
-  background-color: #343739;
-  padding: 16px 24px 24px 24px;
-
-  position: absolute;
-  bottom: 0;
-  right: 0;
-  left: 0;
-}
-
-.movie div:nth-of-type(3) span {
-  font-family: "Raleway", sans-serif;
-  text-transform: uppercase;
-  font-size: 13px;
-  letter-spacing: 2px;
-  font-weight: 500;
-  color: #f0f0f0;
-}
-
-.movie div:nth-of-type(3) h3 {
-  margin-top: 5px;
-  font-family: "Roboto Slab", serif;
-  color: #f9d3b4;
-}
-
-.movie:hover div:nth-of-type(2) {
-  height: 100%;
-  opacity: 0.3;
-}
-
-.movie:hover div:nth-of-type(3) {
-  background-color: transparent;
-}
-
-.movie:hover div:nth-of-type(1) {
-  opacity: 1;
-}
 
 @media screen and (max-width: 600px) {
   .app {
@@ -166,9 +90,6 @@ body {
 }
 
 @media screen and (max-width: 400px) {
-  .trending-carousel .movie div:nth-of-type(3) {
-    background-color: rgb(90, 90, 192);
-  }
   .app {
     padding: 4rem 1rem;
   }
@@ -192,60 +113,7 @@ body {
   margin: 50% 20%;
 }
 
-/* carousel.css */
 
-.trending-carousel {
-  width: 80%;
-  margin: 0 auto;
-  margin-bottom: 40px;
-}
-
-.trending-carousel-title {
-  padding: 10px;
-  font-size: small;
-  color: rgb(0, 0, 0);
-  margin: auto;
-  border-radius: 10px;
-  width: 100%;
-  background: #c93737;
-  text-align: center;
-  margin-bottom: 10px;
-}
-
-.trending-carousel .movie {
-  border-radius: 10px;
-  width: 90%;
-  height: auto;
-}
-.trending-carousel .movie img {
-  border-radius: 10px;
-  width: 90%;
-  height: auto;
-}
-.movie:hover {
-  box-shadow: 0 3px 13px 0px white;
-}
-.trending-carousel .movie div:nth-of-type(3) {
-  display: flex;
-  background-color: rgb(90, 90, 192);
-  justify-content: center;
-  align-items: center;
-  padding: 10px;
-}
-.trending-carousel .movie:hover div:nth-of-type(3) {
-  background-color: transparent;
-}
-.trending-carousel .movie:hover span {
-  opacity: 0;
-}
-.trending-carousel .movie span {
-  text-align: center;
-  font-weight: bold;
-  font-size: large;
-}
-.trending-carousel .movie:hover h3 {
-  opacity: 0;
-}
 /* Apply scrollbar styles only for screens without touch support */
 @media (hover: hover) and (pointer: fine) {
   .slick-list {

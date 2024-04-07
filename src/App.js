@@ -10,11 +10,11 @@ import CastPage from "./components/CastPage.jsx";
 
 function App() {
   useEffect(() => {
-    DisableDevtool({
-      ondevtoolopen: () => {
-        window.location.href = "/sonic.html";
-      },
-    });
+    // DisableDevtool({
+    //   ondevtoolopen: () => {
+    //     window.location.href = "/sonic.html";
+    //   },
+    // });
   }, []);
 
   return (
