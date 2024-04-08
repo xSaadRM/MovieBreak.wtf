@@ -26,21 +26,6 @@ body {
   flex-direction: column;
 }
 
-.app h1 {
-  font-size: 3rem;
-  letter-spacing: 0.9px;
-  background: linear-gradient(
-    90deg,
-    rgba(99, 87, 212, 0.836) 0%,
-    rgba(228, 50, 50, 0.733) 100%
-  );
-  background-clip: text;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  width: fit-content;
-}
-
-
 /* .search button {
   padding: 20px 40px;
   border-radius: 0.5rem;
@@ -74,8 +59,6 @@ body {
 
 .container {
   width: 100%;
-  /* margin-top: 3rem; */
-
   display: flex;
   justify-content: center;
   align-items: center;
@@ -91,21 +74,10 @@ body {
 
 @media screen and (max-width: 400px) {
   .app {
-    padding: 4rem 1rem;
+    padding: 3rem 1rem;
   }
 
-  h1 {
-    font-size: 2rem;
-  }
 
-  .container {
-    margin-top: 2rem;
-  }
-
-  .movie {
-    width: "100%";
-    margin: 1rem;
-  }
 }
 .placeholder-content {
   opacity: 1 !important;
@@ -113,8 +85,6 @@ body {
   margin: 50% 20%;
 }
 
-
-/* Apply scrollbar styles only for screens without touch support */
 @media (hover: hover) and (pointer: fine) {
   .slick-list {
     scrollbar-width: none;

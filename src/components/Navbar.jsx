@@ -13,7 +13,9 @@ const Navbar = () => {
         </div>
         <div className="navbar">
           <div className="main-navbar">
-            <img src={HomeIcon} alt="home" onClick={() => navigate("/")} />
+            {window.location.pathname !=="/" && (
+                <img src={HomeIcon} alt="home" onClick={() => navigate("/")} />
+              )}
             {/* <img src={MenuIcon} alt="menu" /> */}
           </div>
         </div>

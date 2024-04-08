@@ -115,7 +115,7 @@ const WatchPage = () => {
           />
         </div>
       )}
-      <Navbar />
+      {mediaType === "tv" && <Navbar />}
       <div className="movie-description-container">
         {mediaType === "tv" && episodeDetails && (
           <>

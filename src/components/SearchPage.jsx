@@ -32,7 +32,7 @@ const SearchPage = () => {
   return (
     <>
       {document.location.pathname == "/search" && <Navbar />}
-      <div className="container">
+      <div className="search-container">
         {" "}
         <form
           className="search"
