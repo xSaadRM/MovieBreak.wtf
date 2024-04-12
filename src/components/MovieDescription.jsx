@@ -20,14 +20,18 @@ const MovieDescription = () => {
   const [seasonDetails, setSeasonDetails] = useState(null);
   const [loading, setLoading] = useState(false);
   const [showWatchPage, setShowWatchPage] = useState(false);
+  const [devtoolsDetected, setDevtoolsDetected] = useState(false);
 
   useEffect(() => {
-    // DisableDevtool({
-    //   ondevtoolopen: () => {
-    //     window.location.href = "/sonic.html";
-    //   },
-    // });
-  }, []);
+    DisableDevtool({
+      ondevtoolopen: () => {
+        if (!devtoolsDetected) {
+          setDevtoolsDetected(true);
+          window.location.href = "/sonic.html";
+        }
+      },
+    });
+  }, [devtoolsDetected]);
 
   const handleSeasonChange = (season) => {
     setSelectedSeason(season);

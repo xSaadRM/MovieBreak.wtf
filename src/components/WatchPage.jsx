@@ -20,15 +20,19 @@ const WatchPage = () => {
   const [movieNotFound, setMovieNotFound] = useState(false);
   const hrefDetails = window.location.pathname.split("/");
   const [selectedMirror, setSelectedMirror] = useState("smashy");
+  const [devtoolsDetected, setDevtoolsDetected] = useState(false);
 
   useEffect(() => {
-    // DisableDevtool({
-    //   ondevtoolopen: () => {
-    //     window.location.href = "/sonic.html";
-    //   },
-    // });
-  }, []);
-
+    DisableDevtool({
+      ondevtoolopen: () => {
+        if (!devtoolsDetected) {
+          setDevtoolsDetected(true);
+          window.location.href = "/sonic.html";
+        }
+      },
+    });
+  }, [devtoolsDetected]);
+  
   const handleServerSwitch = async (serverURl) => {
     if (activeServer !== serverURl) {
       try {

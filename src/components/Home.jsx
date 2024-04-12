@@ -9,6 +9,7 @@ const HomePage = () => {
   const [trendingMovie, setTrendingMovie] = useState("");
   const [topTV, setTopTV] = useState("");
   const [topMovie, setTopMovie] = useState("");
+  const [devtoolsDetected, setDevtoolsDetected] = useState(false);
 
   const getTrending = async (type) => {
     try {
@@ -57,12 +58,15 @@ const HomePage = () => {
   };
 
   useEffect(() => {
-    // DisableDevtool({
-    //   ondevtoolopen: () => {
-    //     window.location.href = "/sonic.html";
-    //   },
-    // });
-  }, []);
+    DisableDevtool({
+      ondevtoolopen: () => {
+        if (!devtoolsDetected) {
+          setDevtoolsDetected(true);
+          window.location.href = "/sonic.html";
+        }
+      },
+    });
+  }, [devtoolsDetected]);
 
   useEffect(() => {
     fetchTrendingData();
