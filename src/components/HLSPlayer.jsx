@@ -7,7 +7,33 @@ import "../styles/VideoJS.css"; // Import CSS file for custom styles
 export const VideoJS = (props) => {
   const videoRef = React.useRef(null);
   const playerRef = React.useRef(null);
-  const { options, onReady } = props;
+  const { src } = props;
+
+  const options = {
+    autoplay: true,
+    controls: true,
+    responsive: true,
+    fluid: true,
+    sources: [
+      {
+        src: src,
+        type: "application/x-mpegURL",
+      },
+    ],
+  };
+
+  const onReady = (player) => {
+    playerRef.current = player;
+
+    // You can handle player events here, for example:
+    player.on("waiting", () => {
+      videojs.log("player is waiting");
+    });
+
+    player.on("dispose", () => {
+      videojs.log("player will dispose");
+    });
+  };
 
   React.useEffect(() => {
     // Make sure Video.js player is only initialized once

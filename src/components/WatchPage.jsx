@@ -3,7 +3,9 @@ import "../styles/WatchPage.css";
 import React from "react";
 import { useParams, useLocation } from "react-router-dom";
 import ScaleLoader from "react-spinners/ScaleLoader";
-import Playerjs from "../Player"; // Import Playerjs library
+import Playerjs from "../Player";
+import VideoJS from "./HLSPlayer";
+import videojs from "video.js";
 import Navbar from "./Navbar";
 import DisableDevtool from "disable-devtool";
 
@@ -21,7 +23,7 @@ const WatchPage = () => {
   const hrefDetails = window.location.pathname.split("/");
   const [selectedMirror, setSelectedMirror] = useState("smashy");
   const [devtoolsDetected, setDevtoolsDetected] = useState(false);
-
+  const [streamVideo2, setStreamVideo2] = useState("");
   useEffect(() => {
     DisableDevtool({
       ondevtoolopen: () => {
@@ -32,7 +34,7 @@ const WatchPage = () => {
       },
     });
   }, [devtoolsDetected]);
-  
+
   const handleServerSwitch = async (serverURl) => {
     if (activeServer !== serverURl) {
       try {
@@ -150,7 +152,7 @@ const WatchPage = () => {
   }, [selectedMirror]);
 
   useEffect(() => {
-    if (streamVideo || subtitles) {
+    if (selectedMirror === "smashy" || (streamVideo && subtitles)) {
       var player = new Playerjs({
         id: "player",
         file: `${streamVideo}`,
@@ -183,7 +185,7 @@ const WatchPage = () => {
 
     // Listen for player events
     window.PlayerjsEvents = handlePlayerEvents;
-  }, [streamVideo, subtitles]);
+  }, [streamVideo, subtitles, selectedMirror]);
 
   const getEpisodes = async (slug) => {
     try {
@@ -300,7 +302,7 @@ const WatchPage = () => {
           const match = regex.exec(scriptTag);
           if (match) {
             const fileUrl = match[1];
-            setStreamVideo(fileUrl);
+            setStreamVideo2(fileUrl);
             // splitSubtitles(fileUrl);
             break;
           }
@@ -311,29 +313,36 @@ const WatchPage = () => {
     }
     setLoading(false);
   };
-  // const splitSubtitles = async (m3u8) => {
-  //   const response = await fetch(m3u8);
-  //   const blob = await response.blob();
-  //   const reader = new FileReader();
 
-  //   // Define a function to handle the onload event
-  //   reader.onload = function () {
-  //     const data = reader.result; // This contains the data as a string
-  //     const regex = /#EXT-X-MEDIA:TYPE=SUBTITLES.*?NAME="(.*?)".*?URI="(.*?)"/g;
-  //     let match;
-  //     let subtitlesTrack = [];
-  //     const baseurl = m3u8.split("/");
-  //     while ((match = regex.exec(data))) {
-  //       baseurl[baseurl.length - 1] = match[2];
-  //       subtitlesTrack.push(`[${match[1]}]${baseurl.join("/")}`);
-  //       console.log(subtitlesTrack.toString());
-  //       setSubtitles(subtitlesTrack.toString());
-  //     }
-  //   };
+  const splitSubtitles = async (m3u8) => {
+    const response = await fetch(m3u8);
+    const blob = await response.blob();
+    const reader = new FileReader();
 
-  //   // Read the blob as text
-  //   reader.readAsText(blob);
-  // };
+    // Define a function to handle the onload event
+    reader.onload = function () {
+      const data = reader.result; // This contains the data as a string
+      const regex = /#EXT-X-MEDIA:TYPE=SUBTITLES.*?NAME="(.*?)".*?URI="(.*?)"/g;
+      let match;
+      let subtitlesArray = [];
+      const baseurl = m3u8.split("/");
+
+      while ((match = regex.exec(data))) {
+        baseurl[baseurl.length - 1] = match[2];
+        const label = `[${match[1]}]`;
+
+        // Encode the file URL
+        const encodedFileUrl = encodeURIComponent(baseurl);
+
+        subtitlesArray.push(`${label}${encodedFileUrl}`);
+      }
+      setSubtitles(subtitlesArray.toString());
+    };
+
+    // Read the blob as text
+    reader.readAsText(blob);
+  };
+
   return (
     <div className="watch-page">
       {movieNotFound === true && (
@@ -403,7 +412,12 @@ const WatchPage = () => {
           </>
         )}
         <>
-          {streamVideo && <div id="player"></div>}
+          {selectedMirror === "smashy" && streamVideo && subtitles ? (
+            <div id="player"></div>
+          ) : null}
+          {selectedMirror === "ridotv" && streamVideo2 ? (
+            <VideoJS src={streamVideo2} />
+          ) : null}
           <div className="sources-container">
             <div className="sources-list">
               <div className="sections mirrors">
