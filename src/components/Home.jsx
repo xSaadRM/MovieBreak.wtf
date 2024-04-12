@@ -5,7 +5,6 @@ import SearchPage from "./SearchPage";
 import Navbar from "./Navbar";
 
 const HomePage = () => {
-
   const [trendingTV, setTrendingTV] = useState("");
   const [trendingMovie, setTrendingMovie] = useState("");
   const [topTV, setTopTV] = useState("");
@@ -58,11 +57,11 @@ const HomePage = () => {
   };
 
   useEffect(() => {
-    DisableDevtool({
-      ondevtoolopen: () => {
-        window.location.href = "/sonic.html";
-      },
-    });
+    // DisableDevtool({
+    //   ondevtoolopen: () => {
+    //     window.location.href = "/sonic.html";
+    //   },
+    // });
   }, []);
 
   useEffect(() => {

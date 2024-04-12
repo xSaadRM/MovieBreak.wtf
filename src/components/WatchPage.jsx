@@ -17,28 +17,32 @@ const WatchPage = () => {
   const [loading, setLoading] = useState(false);
   const { mediaType, movieID, season, ep } = useParams();
   const [isOverviewAllShowed, setIsOverviewAllShowed] = useState(false);
-  const [wordsInOverview, setWordsInOverview] = useState(13);
+  const [movieNotFound, setMovieNotFound] = useState(false);
+  const hrefDetails = window.location.pathname.split("/");
+  const [selectedMirror, setSelectedMirror] = useState("smashy");
 
   useEffect(() => {
-    DisableDevtool({
-      ondevtoolopen: () => {
-        window.location.href = "/sonic.html";
-      },
-    });
+    // DisableDevtool({
+    //   ondevtoolopen: () => {
+    //     window.location.href = "/sonic.html";
+    //   },
+    // });
   }, []);
 
   const handleServerSwitch = async (serverURl) => {
-    try {
-      setActiveServer(serverURl);
-      setLoading(true);
-      const response = await fetch(serverURl);
-      const data = await response.json();
-      setStreamVideo(data.sourceUrls[0]);
-      setSubtitles(data.subtitles);
-    } catch (error) {
-      console.error(error);
+    if (activeServer !== serverURl) {
+      try {
+        setActiveServer(serverURl);
+        setLoading(true);
+        const response = await fetch(serverURl);
+        const data = await response.json();
+        setStreamVideo(data.sourceUrls[0]);
+        setSubtitles(data.subtitles);
+      } catch (error) {
+        console.error(error);
+      }
+      setLoading(false);
     }
-    setLoading(false);
   };
 
   useEffect(() => {
@@ -64,11 +68,85 @@ const WatchPage = () => {
       }
       setLoading(false);
     };
-    fetchStreamURL();
-  }, [mediaType, movieID, season, ep]);
+    const getSlug = async () => {
+      const { movieName } = location.state;
+
+      setLoading(true);
+      // Manual encoding for characters that aren't encoded in the standard encodeURIComponent function
+      const manualEncode = (str) => {
+        return Array.from(str)
+          .map((char) => {
+            const charCode = char.charCodeAt(0);
+            // If the character is not alphanumeric or one of these: - _ . ! ~ * ' ( )
+            if (
+              (charCode >= 0x30 && charCode <= 0x39) || // 0-9
+              (charCode >= 0x41 && charCode <= 0x5a) || // A-Z
+              (charCode >= 0x61 && charCode <= 0x7a) || // a-z
+              char === "-" ||
+              char === "_" ||
+              char === "." ||
+              char === "!" ||
+              char === "~" ||
+              char === "*" ||
+              char === "'" ||
+              char === "(" ||
+              char === ")"
+            ) {
+              return char;
+            } else {
+              return encodeURIComponent(char).replace(/%/g, "%25");
+            }
+          })
+          .join("");
+      };
+
+      const encodedMovieName = manualEncode(movieName);
+
+      try {
+        const response = await fetch(
+          `https://rough.isra.workers.dev/?destination=https%3A%2F%2Fridomovies.tv%2Fcore%2Fapi%2Fsearch%3Fq%3D${encodedMovieName}`,
+          {
+            headers: {
+              accept: "*/*",
+              "accept-language": "en-US,en;q=0.9",
+              "sec-ch-ua":
+                '"Microsoft Edge";v="123", "Not:A-Brand";v="8", "Chromium";v="123"',
+              "sec-ch-ua-mobile": "?0",
+              "sec-ch-ua-platform": '"Windows"',
+              "sec-fetch-dest": "empty",
+              "sec-fetch-mode": "cors",
+              "sec-fetch-site": "cross-site",
+            },
+            referrerPolicy: "no-referrer",
+            body: null,
+            method: "GET",
+          }
+        );
+        const data = await response.json();
+        let found = false;
+        for (const item of data.data.items) {
+          if (item.contentable.tmdbId == hrefDetails[2]) {
+            getEpisodes(item.slug);
+            found = true;
+          }
+        }
+        if (!found) {
+          setMovieNotFound(true);
+        }
+      } catch (error) {
+        console.error("Error fetching", error);
+      }
+    };
+    if (selectedMirror === "smashy") {
+      fetchStreamURL();
+    }
+    if (mediaType === "tv" && selectedMirror === "ridotv") {
+      getSlug();
+    }
+  }, [selectedMirror]);
+
   useEffect(() => {
-    if (streamVideo && subtitles) {
-      console.log(streamVideo);
+    if (streamVideo || subtitles) {
       var player = new Playerjs({
         id: "player",
         file: `${streamVideo}`,
@@ -103,8 +181,162 @@ const WatchPage = () => {
     window.PlayerjsEvents = handlePlayerEvents;
   }, [streamVideo, subtitles]);
 
+  const getEpisodes = async (slug) => {
+    try {
+      const response = await fetch(
+        `https://rough.isra.workers.dev/?destination=https%3A%2F%2Fridomovies.tv%2Ftv%2F${slug}`,
+        {
+          headers: {
+            accept: "*/*",
+            "accept-language": "en-US,en;q=0.9",
+            "sec-ch-ua":
+              '"Microsoft Edge";v="123", "Not:A-Brand";v="8", "Chromium";v="123"',
+            "sec-ch-ua-mobile": "?0",
+            "sec-ch-ua-platform": '"Windows"',
+            "sec-fetch-dest": "empty",
+            "sec-fetch-mode": "cors",
+            "sec-fetch-site": "cross-site",
+          },
+          referrerPolicy: "no-referrer",
+          body: null,
+          method: "GET",
+        }
+      );
+
+      const htmlContent = await response.text();
+
+      // Regular expression to match the episodes JSON data
+      const regex = /"episodes\\":\[(.*?)\]/g;
+      const matches = regex.exec(htmlContent);
+      if (matches) {
+        // Replace backslashes with an empty string
+        const cleanJson = matches[1]
+          .replace(/\\"/g, `"`)
+          .replace(/\\\\"/g, "`");
+        // Parse the cleaned JSON string
+        const episodesData = JSON.parse(`[${cleanJson}]`);
+
+        // Extract ID and episodeNumber of each episode
+        const episodeInfo = episodesData.map((episode) => ({
+          id: episode.id,
+          episodeNumber: episode.episodeNumber,
+        }));
+
+        getIFrame(episodeInfo);
+      } else {
+        console.log("No episodes found in the HTML content.");
+      }
+    } catch (error) {
+      setMovieNotFound(true);
+      console.log(error);
+    }
+  };
+  const getIFrame = async (dataIDs) => {
+    if (dataIDs.length > 0 && hrefDetails[4] && dataIDs[hrefDetails[3] - 1]) {
+      const episodeId = dataIDs[hrefDetails[4] - 1].id;
+      const response = await fetch(
+        `https://rough.isra.workers.dev/?destination=https%3A%2F%2Fridomovies.tv%2Fcore%2Fapi%2Fepisodes%2F${episodeId}%2Fvideos`,
+        {
+          headers: {
+            accept: "*/*",
+            "accept-language": "en-US,en;q=0.9",
+            "sec-ch-ua":
+              '"Microsoft Edge";v="123", "Not:A-Brand";v="8", "Chromium";v="123"',
+            "sec-ch-ua-mobile": "?0",
+            "sec-ch-ua-platform": '"Windows"',
+            "sec-fetch-dest": "empty",
+            "sec-fetch-mode": "cors",
+            "sec-fetch-site": "cross-site",
+          },
+          referrerPolicy: "no-referrer",
+          body: null,
+          method: "GET",
+        }
+      );
+      const data = await response.json();
+      const dataIFrameSrc = data.data[0].url.match(/data-src="([^"]+)"/);
+
+      if (dataIFrameSrc) {
+        const dataSrcValue = dataIFrameSrc[1];
+        getM3U8(dataSrcValue);
+      } else {
+        console.log("No data-src attribute found in the URL.");
+      }
+    } else {
+    }
+  };
+  const getM3U8 = async (iFrameURL) => {
+    const response = await fetch(
+      `https://rough.isra.workers.dev/?destination=${iFrameURL}`,
+      {
+        headers: {
+          accept: "*/*",
+          "accept-language": "en-US,en;q=0.9",
+          "sec-ch-ua":
+            '"Microsoft Edge";v="123", "Not:A-Brand";v="8", "Chromium";v="123"',
+          "sec-ch-ua-mobile": "?0",
+          "sec-ch-ua-platform": '"Windows"',
+          "sec-fetch-dest": "empty",
+          "sec-fetch-mode": "cors",
+          "sec-fetch-site": "cross-site",
+          "x-referer": "https://ridomovies.tv/",
+        },
+        referrerPolicy: "no-referrer",
+        body: null,
+        method: "GET",
+      }
+    );
+    const data = await response.text();
+    const scriptTagRegex = /<script[^>]*>(.*?)<\/script>/gs;
+    const scriptTags = data.match(scriptTagRegex);
+    if (scriptTags) {
+      for (const scriptTag of scriptTags) {
+        if (scriptTag.includes("jwplayer")) {
+          const regex = /file:\s*"(.*?)"/;
+          const match = regex.exec(scriptTag);
+          if (match) {
+            const fileUrl = match[1];
+            setStreamVideo(fileUrl);
+            // splitSubtitles(fileUrl);
+            break;
+          }
+        }
+      }
+    } else {
+      console.error("No script tags found");
+    }
+    setLoading(false);
+  };
+  // const splitSubtitles = async (m3u8) => {
+  //   const response = await fetch(m3u8);
+  //   const blob = await response.blob();
+  //   const reader = new FileReader();
+
+  //   // Define a function to handle the onload event
+  //   reader.onload = function () {
+  //     const data = reader.result; // This contains the data as a string
+  //     const regex = /#EXT-X-MEDIA:TYPE=SUBTITLES.*?NAME="(.*?)".*?URI="(.*?)"/g;
+  //     let match;
+  //     let subtitlesTrack = [];
+  //     const baseurl = m3u8.split("/");
+  //     while ((match = regex.exec(data))) {
+  //       baseurl[baseurl.length - 1] = match[2];
+  //       subtitlesTrack.push(`[${match[1]}]${baseurl.join("/")}`);
+  //       console.log(subtitlesTrack.toString());
+  //       setSubtitles(subtitlesTrack.toString());
+  //     }
+  //   };
+
+  //   // Read the blob as text
+  //   reader.readAsText(blob);
+  // };
   return (
     <div className="watch-page">
+      {movieNotFound === true && (
+        <div className="movie-not-found">
+          <p>this ressource is not found on any server</p>
+        </div>
+      )}
       {loading && (
         <div className="loading-animation">
           <ScaleLoader
@@ -150,7 +382,7 @@ const WatchPage = () => {
                   {!isOverviewAllShowed
                     ? episodeDetails.overview
                         .split(" ")
-                        .slice(0, wordsInOverview)
+                        .slice(0, 13)
                         .join(" ") + "...."
                     : episodeDetails.overview}
                   {!isOverviewAllShowed ? (
@@ -166,30 +398,62 @@ const WatchPage = () => {
             </div>
           </>
         )}
-        {sources && (
-          <>
-            <div id="player"></div>
-            <div className="sources-container">
-              <div className="sources-list">
-                <div className="sources-label">Choose Server :</div>
-                {sources.map((source, index) => {
-                  const isActive = source.url === activeServer;
-                  return (
-                    <div
-                      className={
-                        isActive ? "source-link active" : "source-link"
-                      }
-                      key={source.name}
-                      onClick={() => handleServerSwitch(source.url)}
-                    >
-                      <p>{`Server - ${index + 1}`}</p>
-                    </div>
-                  );
-                })}
+        <>
+          {streamVideo && <div id="player"></div>}
+          <div className="sources-container">
+            <div className="sources-list">
+              <div className="sections mirrors">
+                <div
+                  onClick={() => {
+                    if (selectedMirror !== "smashy") {
+                      setSelectedMirror("smashy");
+                    }
+                  }}
+                  className={
+                    selectedMirror === "smashy"
+                      ? "mirror section active"
+                      : "mirror section"
+                  }
+                >
+                  <h4>Main Mirror</h4>
+                </div>
+                <div
+                  onClick={() => {
+                    if (selectedMirror !== "ridotv") {
+                      setSelectedMirror("ridotv");
+                    }
+                  }}
+                  className={
+                    selectedMirror === "ridotv"
+                      ? "mirror section active"
+                      : "mirror section"
+                  }
+                >
+                  <h4>Backup Mirror</h4>
+                </div>
               </div>
+              {sources && selectedMirror === "smashy" && (
+                <>
+                  <div className="sources-label">Choose Server :</div>
+                  {sources.map((source, index) => {
+                    const isActive = source.url === activeServer;
+                    return (
+                      <div
+                        className={
+                          isActive ? "source-link active" : "source-link"
+                        }
+                        key={source.name}
+                        onClick={() => handleServerSwitch(source.url)}
+                      >
+                        <p>{`Server - ${index + 1}`}</p>
+                      </div>
+                    );
+                  })}
+                </>
+              )}
             </div>
-          </>
-        )}
+          </div>
+        </>
       </div>
     </div>
   );

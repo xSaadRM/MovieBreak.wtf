@@ -22,11 +22,11 @@ const MovieDescription = () => {
   const [showWatchPage, setShowWatchPage] = useState(false);
 
   useEffect(() => {
-    DisableDevtool({
-      ondevtoolopen: () => {
-        window.location.href = "/sonic.html";
-      },
-    });
+    // DisableDevtool({
+    //   ondevtoolopen: () => {
+    //     window.location.href = "/sonic.html";
+    //   },
+    // });
   }, []);
 
   const handleSeasonChange = (season) => {

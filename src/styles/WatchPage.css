@@ -29,7 +29,7 @@
   border-radius: 30px;
 }
 .sources-container .sources-list .sources-label {
-  padding: 10px 10px 15px 10px;
+  padding: 10px 0 15px 10px;
   margin-bottom: 5px;
   border-radius: 30px 30px 0 0;
   width: 100%;
@@ -62,4 +62,8 @@
   background-color: rgba(155, 12, 12, 0.603);
   color: white;
   font-size: xx-large;
+}
+.mirrors {
+  padding-top: 10px;
+  width: 100% !important;
 }
