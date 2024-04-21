@@ -3,7 +3,10 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import MovieCard from "./MovieCard";
-import "../styles/Carousel.css"
+import "../styles/Carousel.css";
+import ScaleLoader from "react-spinners/ScaleLoader";
+import LoadingAnimation from "./LoadingAnimation";
+
 const Carousel = ({ movies, type, category, media_type }) => {
   const settings = {
     draggable: true,
@@ -39,7 +42,7 @@ const Carousel = ({ movies, type, category, media_type }) => {
   };
 
   if (!movies) {
-    return <div>Loading...</div>;
+    return <LoadingAnimation loading={true} />;
   }
 
   return (

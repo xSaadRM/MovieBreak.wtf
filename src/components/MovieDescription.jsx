@@ -7,6 +7,7 @@ import PlayIcon from "../assets/play.svg";
 import Navbar from "./Navbar";
 import Carousel from "./Carousel";
 import WatchPage from "./WatchPage";
+import LoadingAnimation from "./LoadingAnimation";
 
 const MovieDescription = () => {
   const navigate = useNavigate();
@@ -122,16 +123,7 @@ const MovieDescription = () => {
   return (
     <div className="movie-description-page">
       <Navbar />
-      {loading && (
-        <div className="loading-animation">
-          <ScaleLoader
-            color="blue"
-            size={150}
-            aria-label="Loading Spinner"
-            data-testid="loader"
-          />
-        </div>
-      )}
+      <LoadingAnimation loading={loading} />
       <div
         className="blured-backdrop"
         style={{
