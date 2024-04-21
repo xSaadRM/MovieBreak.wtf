@@ -5,7 +5,7 @@ import Navbar from "./Navbar";
 import "../styles/SearchPage.css";
 import SearchIcon from "../assets/search.svg";
 
-const SearchPage = () => {
+const SearchPage = ({isHomePage}) => {
   const navigate = useNavigate();
   const [searchTerm, setSearchTerm] = useState(
     localStorage.getItem("searchTerm") || ""
@@ -33,7 +33,6 @@ const SearchPage = () => {
     <>
       {document.location.pathname == "/search" && <Navbar />}
       <div className="search-container">
-        {" "}
         <form
           className="search"
           onSubmit={async (e) => {
@@ -43,7 +42,7 @@ const SearchPage = () => {
         >
           <input
             placeholder="Seach for movies"
-            value={searchTerm}
+            value={!isHomePage ? searchTerm : undefined}
             onChange={(e) => {
               setSearchTerm(e.target.value);
             }}

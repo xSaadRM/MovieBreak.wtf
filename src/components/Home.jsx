@@ -76,7 +76,7 @@ const HomePage = () => {
     <>
       <div className="app">
         <Navbar />
-        <SearchPage />
+        <SearchPage isHomePage={true}/>
         <Carousel
           movies={trendingTV}
           media_type={"tv"}
