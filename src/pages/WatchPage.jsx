@@ -122,7 +122,7 @@ const WatchPage = () => {
 
       try {
         const response = await fetch(
-          `https://ridomovies.tv/core/api/search?q=${movieName}`,
+          `https://rv.lil-hacker.workers.dev/?url=https://ridomovies.tv/core/api/search?q=${movieName}`,
           {
             headers: {
               accept: "*/*",
