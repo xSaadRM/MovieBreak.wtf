@@ -2,17 +2,15 @@ import { useEffect, useState } from "react";
 import "../styles/WatchPage.css";
 import React from "react";
 import { useParams, useLocation } from "react-router-dom";
-import ScaleLoader from "react-spinners/ScaleLoader";
-import Playerjs from "../Player";
-import VideoJS from "./HLSPlayer";
-import videojs from "video.js";
-import Navbar from "./Navbar";
+import Navbar from "../components/Navbar";
 import DisableDevtool from "disable-devtool";
-import LoadingAnimation from "./LoadingAnimation";
+import LoadingAnimation from "../components/LoadingAnimation";
+import HLSPlayer from "../components/movie-player/HLSPlayer";
+import SmashyCaptcha from "../components/movie-player/SmashyCaptcha";
 
 const WatchPage = () => {
   const location = useLocation();
-  const { episodeDetails } = location.state || {};
+  const { episodeDetails, movieName } = location.state || {};
   const [sources, setSources] = useState();
   const [activeServer, setActiveServer] = useState(null);
   const [streamVideo, setStreamVideo] = useState("");
@@ -21,29 +19,45 @@ const WatchPage = () => {
   const { mediaType, movieID, season, ep } = useParams();
   const [isOverviewAllShowed, setIsOverviewAllShowed] = useState(false);
   const [movieNotFound, setMovieNotFound] = useState(false);
-  const [selectedMirror, setSelectedMirror] = useState("smashy");
+  const [selectedMirror, setSelectedMirror] = useState("ridotv");
   const [devtoolsDetected, setDevtoolsDetected] = useState(false);
-  const [streamVideo2, setStreamVideo2] = useState("");
+  const [smashyUnverified, setSmashyUnverified] = useState(false);
+
   useEffect(() => {
-    DisableDevtool({
-      ondevtoolopen: () => {
-        if (!devtoolsDetected) {
-          setDevtoolsDetected(true);
-          window.location.href = "/sonic.html";
-        }
-      },
-    });
+    // DisableDevtool({
+    //   ondevtoolopen: () => {
+    //     if (!devtoolsDetected) {
+    //       setDevtoolsDetected(true);
+    //       window.location.href = "/sonic.html";
+    //     }
+    //   },
+    // });
   }, [devtoolsDetected]);
+
+  useEffect(() => {
+    if (!movieName || !episodeDetails) {
+      if (mediaType === "tv") {
+        document.location.pathname = `${mediaType}/${movieID}/${
+          season ? season : ""
+        }`;
+      }
+    }
+  });
 
   const handleServerSwitch = async (serverURl) => {
     if (activeServer !== serverURl) {
       try {
-        setActiveServer(serverURl);
         setLoading(true);
+
         const response = await fetch(serverURl);
         const data = await response.json();
-        setStreamVideo(data.sourceUrls[0]);
-        setSubtitles(data.subtitles);
+        if (data.sourceUrls[0] !== "Verification needed") {
+          setActiveServer(serverURl);
+          setStreamVideo(data.sourceUrls[0]);
+          setSubtitles(data.subtitles);
+        } else {
+          setSmashyUnverified(true);
+        }
       } catch (error) {
         console.error(error);
       }
@@ -75,8 +89,6 @@ const WatchPage = () => {
       setLoading(false);
     };
     const getSlug = async () => {
-      const { movieName } = location.state;
-
       setLoading(true);
       // Manual encoding for characters that aren't encoded in the standard encodeURIComponent function
       const manualEncode = (str) => {
@@ -110,7 +122,7 @@ const WatchPage = () => {
 
       try {
         const response = await fetch(
-          `https://rough.isra.workers.dev/?destination=https%3A%2F%2Fridomovies.tv%2Fcore%2Fapi%2Fsearch%3Fq%3D${encodedMovieName}`,
+          `https://ridomovies.tv/core/api/search?q=${movieName}`,
           {
             headers: {
               accept: "*/*",
@@ -141,6 +153,7 @@ const WatchPage = () => {
         }
       } catch (error) {
         console.error("Error fetching", error);
+        setLoading(false);
       }
     };
     if (selectedMirror === "smashy") {
@@ -151,62 +164,10 @@ const WatchPage = () => {
     }
   }, [selectedMirror]);
 
-  useEffect(() => {
-    if (selectedMirror === "smashy" || (streamVideo && subtitles)) {
-      var player = new Playerjs({
-        id: "player",
-        file: `${streamVideo}`,
-        subtitle: subtitles,
-      });
-    }
-    // Function to handle player events
-    function handlePlayerEvents(event, id, data) {
-      // Handle different events
-      switch (event) {
-        case "play":
-          console.log("Playback started");
-          break;
-        case "pause":
-          console.log("Playback paused");
-          // You can perform actions when playback is paused
-          break;
-        case "error":
-          console.error("Playback error:", data);
-
-          // Handle playback errors
-          break;
-
-        // Add more cases for other events as needed
-        default:
-          // Handle other events
-          break;
-      }
-    }
-
-    // Listen for player events
-    window.PlayerjsEvents = handlePlayerEvents;
-  }, [streamVideo, subtitles, selectedMirror]);
-
   const getEpisodes = async (slug) => {
     try {
       const response = await fetch(
-        `https://rough.isra.workers.dev/?destination=https%3A%2F%2Fridomovies.tv%2Ftv%2F${slug}`,
-        {
-          headers: {
-            accept: "*/*",
-            "accept-language": "en-US,en;q=0.9",
-            "sec-ch-ua":
-              '"Microsoft Edge";v="123", "Not:A-Brand";v="8", "Chromium";v="123"',
-            "sec-ch-ua-mobile": "?0",
-            "sec-ch-ua-platform": '"Windows"',
-            "sec-fetch-dest": "empty",
-            "sec-fetch-mode": "cors",
-            "sec-fetch-site": "cross-site",
-          },
-          referrerPolicy: "no-referrer",
-          body: null,
-          method: "GET",
-        }
+        `https://rv.lil-hacker.workers.dev?url=https://ridomovies.tv/tv/${slug}`
       );
 
       const htmlContent = await response.text();
@@ -239,7 +200,6 @@ const WatchPage = () => {
       // Call getIFrame with seasons object
       getIFrame(seasons);
     } catch (error) {
-      setMovieNotFound(true);
       console.log(error);
     }
   };
@@ -248,7 +208,7 @@ const WatchPage = () => {
     if (seasons.length > 0) {
       const episodeId = seasons[season - 1][ep - 1].id;
       const response = await fetch(
-        `https://rough.isra.workers.dev/?destination=https%3A%2F%2Fridomovies.tv%2Fcore%2Fapi%2Fepisodes%2F${episodeId}%2Fvideos`,
+        `https://rv.lil-hacker.workers.dev/?url=https%3A%2F%2Fridomovies.tv%2Fcore%2Fapi%2Fepisodes%2F${episodeId}%2Fvideos`,
         {
           headers: {
             accept: "*/*",
@@ -280,24 +240,7 @@ const WatchPage = () => {
   };
   const getM3U8 = async (iFrameURL) => {
     const response = await fetch(
-      `https://rough.isra.workers.dev/?destination=${iFrameURL}`,
-      {
-        headers: {
-          accept: "*/*",
-          "accept-language": "en-US,en;q=0.9",
-          "sec-ch-ua":
-            '"Microsoft Edge";v="123", "Not:A-Brand";v="8", "Chromium";v="123"',
-          "sec-ch-ua-mobile": "?0",
-          "sec-ch-ua-platform": '"Windows"',
-          "sec-fetch-dest": "empty",
-          "sec-fetch-mode": "cors",
-          "sec-fetch-site": "cross-site",
-          "x-referer": "https://ridomovies.tv/",
-        },
-        referrerPolicy: "no-referrer",
-        body: null,
-        method: "GET",
-      }
+      `https://rv.lil-hacker.workers.dev/?url=${iFrameURL}`
     );
     const data = await response.text();
     const scriptTagRegex = /<script[^>]*>(.*?)<\/script>/gs;
@@ -309,7 +252,7 @@ const WatchPage = () => {
           const match = regex.exec(scriptTag);
           if (match) {
             const fileUrl = match[1];
-            setStreamVideo2(fileUrl);
+            setStreamVideo(fileUrl);
             // splitSubtitles(fileUrl);
             break;
           }
@@ -410,12 +353,10 @@ const WatchPage = () => {
           </>
         )}
         <>
-          {selectedMirror === "smashy" && streamVideo && subtitles ? (
-            <div id="player"></div>
+          {streamVideo ? (
+            <HLSPlayer mirror={selectedMirror} url={streamVideo} />
           ) : null}
-          {selectedMirror === "ridotv" && streamVideo2 ? (
-            <VideoJS src={streamVideo2} />
-          ) : null}
+          {smashyUnverified ? <SmashyCaptcha /> : null}
           <div className="sources-container">
             <div className="sources-list">
               <div className="sections mirrors">

@@ -1,24 +1,10 @@
-.double-click-tracker {
-  z-index: 0;
-  left: 0;
-  top: 0;
-  transform: translateY(50%);
+.videojs-container {
+  position: relative;
+}
+.videosjs-custom-controls {
   position: absolute;
-  display: flex;
-  width: 100%;
-  height: 50%;
-  flex-direction: row;
-  align-items: center;
-}
-
-.tracker-child {
-  width: 100%;
-  height: 100%;
-}
-
-.player-container {
-  margin-top: 10px;
-}
-.vjs-menu-content {
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   z-index: 1;
 }

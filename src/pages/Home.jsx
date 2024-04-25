@@ -1,8 +1,8 @@
-import Carousel from "./Carousel";
+import Carousel from "../components/Carousel";
 import { useEffect, useState } from "react";
 import DisableDevtool from "disable-devtool";
-import SearchPage from "./SearchPage";
-import Navbar from "./Navbar";
+import SearchPage from "../components/SearchPage";
+import Navbar from "../components/Navbar";
 
 const HomePage = () => {
   const [trendingTV, setTrendingTV] = useState("");
@@ -58,14 +58,14 @@ const HomePage = () => {
   };
 
   useEffect(() => {
-    DisableDevtool({
-      ondevtoolopen: () => {
-        if (!devtoolsDetected) {
-          setDevtoolsDetected(true);
-          window.location.href = "/sonic.html";
-        }
-      },
-    });
+    // DisableDevtool({
+    //   ondevtoolopen: () => {
+    //     if (!devtoolsDetected) {
+    //       setDevtoolsDetected(true);
+    //       window.location.href = "/sonic.html";
+    //     }
+    //   },
+    // });
   }, [devtoolsDetected]);
 
   useEffect(() => {
@@ -76,7 +76,7 @@ const HomePage = () => {
     <>
       <div className="app">
         <Navbar />
-        <SearchPage isHomePage={true}/>
+        <SearchPage isHomePage={true} />
         <Carousel
           movies={trendingTV}
           media_type={"tv"}

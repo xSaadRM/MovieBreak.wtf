@@ -1,13 +1,13 @@
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import ScaleLoader from "react-spinners/ScaleLoader";
 import DisableDevtool from "disable-devtool";
 import "../styles/MovieDescription.css";
 import PlayIcon from "../assets/play.svg";
-import Navbar from "./Navbar";
-import Carousel from "./Carousel";
+import Navbar from "../components/Navbar";
+import Carousel from "../components/Carousel";
 import WatchPage from "./WatchPage";
-import LoadingAnimation from "./LoadingAnimation";
+import LoadingAnimation from "../components/LoadingAnimation";
 
 const MovieDescription = () => {
   const navigate = useNavigate();
@@ -24,14 +24,14 @@ const MovieDescription = () => {
   const [devtoolsDetected, setDevtoolsDetected] = useState(false);
 
   useEffect(() => {
-    DisableDevtool({
-      ondevtoolopen: () => {
-        if (!devtoolsDetected) {
-          setDevtoolsDetected(true);
-          window.location.href = "/sonic.html";
-        }
-      },
-    });
+    // DisableDevtool({
+    //   ondevtoolopen: () => {
+    //     if (!devtoolsDetected) {
+    //       setDevtoolsDetected(true);
+    //       window.location.href = "/sonic.html";
+    //     }
+    //   },
+    // });
   }, [devtoolsDetected]);
 
   const handleSeasonChange = (season) => {
@@ -211,7 +211,9 @@ const MovieDescription = () => {
             </div>
           </>
         )}
-        {showWatchPage && <WatchPage />}
+        <Suspense fallback={<LoadingAnimation loading={true} />}>
+          {showWatchPage && <WatchPage />}
+        </Suspense>
         {mediaType === "tv" && (
           <div className="select-season">
             <select
@@ -227,37 +229,37 @@ const MovieDescription = () => {
             </select>
           </div>
         )}
-
         {seasonDetails && (
           <div className="season-details">
             <div className="episodes-list">
-              {seasonDetails.episodes.map((episode) => (
-                <div
-                  key={episode.id}
-                  className="episode"
-                  onClick={() => {
-                    handleEpisodeClick(
-                      episode,
-                      movieInfos.title || movieInfos.name
-                    );
-                  }}
-                >
-                  {/* Episode image */}
-                  <img
-                    src={`https://image.tmdb.org/t/p/w400/${episode.still_path}`}
-                    alt={`Episode ${episode.episode_number} Still`}
-                    className="episode-image"
-                  />
+              {seasonDetails.episodes &&
+                seasonDetails.episodes.map((episode) => (
+                  <div
+                    key={episode.id}
+                    className="episode"
+                    onClick={() => {
+                      handleEpisodeClick(
+                        episode,
+                        movieInfos.title || movieInfos.name
+                      );
+                    }}
+                  >
+                    {/* Episode image */}
+                    <img
+                      src={`https://image.tmdb.org/t/p/w400/${episode.still_path}`}
+                      alt={`Episode ${episode.episode_number} Still`}
+                      className="episode-image"
+                    />
 
-                  {/* Episode details */}
-                  <div className="episode-details">
-                    <h3>
-                      E{episode.episode_number} - {episode.name}
-                    </h3>
-                    <p className="airdate">{episode.air_date}</p>
+                    {/* Episode details */}
+                    <div className="episode-details">
+                      <h3>
+                        E{episode.episode_number} - {episode.name}
+                      </h3>
+                      <p className="airdate">{episode.air_date}</p>
+                    </div>
                   </div>
-                </div>
-              ))}
+                ))}
             </div>
           </div>
         )}

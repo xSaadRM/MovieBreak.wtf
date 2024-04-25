@@ -1,25 +1,25 @@
 import DisableDevtool from "disable-devtool";
 import { useEffect, useState } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import MovieDescription from "./components/MovieDescription.jsx";
-import HomePage from "./components/Home.jsx";
 import "./styles/App.css";
-import WatchPage from "./components/WatchPage.jsx";
 import SearchPage from "./components/SearchPage.jsx";
 import CastPage from "./components/CastPage.jsx";
+import MovieDescription from "./pages/MovieDescription.jsx";
+import HomePage from "./pages/Home.jsx";
+import WatchPage from "./pages/WatchPage.jsx";
 
 function App() {
   const [devtoolsDetected, setDevtoolsDetected] = useState(false);
 
   useEffect(() => {
-    DisableDevtool({
-      ondevtoolopen: () => {
-        if (!devtoolsDetected) {
-          setDevtoolsDetected(true);
-          window.location.href = "/sonic.html";
-        }
-      },
-    });
+    // DisableDevtool({
+    //   ondevtoolopen: () => {
+    //     if (!devtoolsDetected) {
+    //       setDevtoolsDetected(true);
+    //       window.location.href = "/sonic.html";
+    //     }
+    //   },
+    // });
   }, [devtoolsDetected]);
 
   return (

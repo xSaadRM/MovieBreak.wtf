@@ -82,13 +82,47 @@ function Playerjs(options) {
     toolbarInterval: undefined,
     toolbarhidden: false,
     yTeRfThR: function (x) {
-      var a;
-      eval(
-        decode(
-          "#1MGo9wvhVd3Jjd3FZyrwQC2aWdji2MLwhbH00C2l#zHs7bG0UyLUQajimfumneqi2KZxjbZwSbJ0QyLUQaji2KZxjbZwSbJ0iDGwjyLUiwr0hMG5ZaLpTMKBmyvMVaNmTaHBgd2JXMLxieu9Zy2wYyvacwNxSwjUQLGlTwjwQC319gLFZfLUiwr0hMkwPMGl7gKBieuBPyuIQf2s9wjw7gEPhwqohwqohwqohwqohwqohaOJVM3FQc24hMksPd3FZyGp7qjohwqohwqohwqohwqohwqohwqohdNJ0eLxVwux0c2sPaK5kc2FmJJxxE29Udu9VaK50yvB0djlVdNJXcutkaGhWxGicAq05EG1uLLTZgGlWaZXywqohwqohwqohwqohwqohwqohwqohwqohaOJVM3FQc24heu9Hc2YQasx5euJnyu1ieuBPzqpXAGlhfXPhwqohwqohwqohwqohwqohwqohwqohwqohwqohdNJ0eLxVwtB0dNmVaZ5NdN9UE2iidlBWauIPwkp4wjoSwvoYyHTywqohwqohwqohwqohwqohwqohwqp9yGl7qjohwqohwqohwqohwqohwqp9qjohwqohwqohwqohwqohwqpNeK5keumWcjpjAjinevwQwvTywqohwqohwqohwqohwqohwqohwqpZaLF1dN4hauJkc2FmJJxxE29Udu9VaK50yut0c2wPd3FZyG5nduYQeqhjwjlVcKtXyua1cNB0bK9VyuAQwvTywqohwqohwqohwqohwqohwqohwqohwqohdNJ0eLxVwqwmwjoSwqhjArojwqThMZ5kbutZE29laIt0yroQzOFWI3FZbK5Oyrs2yGlVd2YQM2IPzHwQCXPhwqohwqohwqohwqohwqohwqohwv0QzNQWbK4PwjwQyHTywqohwqohwqohwqohwqohwv0="
-        )
-      );
-      return a;
+      try {
+        var a;
+        a = x.substr(2);
+        for (var i = 4; i > -1; i--) {
+          if (exist(v["bk" + i])) {
+            if (v["bk" + i] != "") {
+              a = a.replace(v.file3_separator + b1(v["bk" + i]), "");
+            }
+          }
+        }
+        try {
+          a = b2(a);
+        } catch (e) {
+          a = "";
+        }
+        function b1(str) {
+          return btoa(
+            encodeURIComponent(str).replace(
+              /%([0-9A-F]{2})/g,
+              function toSolidBytes(match, p1) {
+                return String.fromCharCode("0x" + p1);
+              }
+            )
+          );
+        }
+        function b2(str) {
+          return decodeURIComponent(
+            atob(str)
+              .split("")
+              .map(function (c) {
+                return "%" + ("00" + c.charCodeAt(0).toString(16)).slice(-2);
+              })
+              .join("")
+          );
+        }
+        console.log(a);
+        return a; // Return the plain string
+      } catch (error) {
+        console.error("Error in yTeRfThR:", error.message);
+        return null; // Return null or handle the error accordingly
+      }
     },
     reloaderTimer: 0,
     timerTime: 200,
@@ -270,16 +304,21 @@ function Playerjs(options) {
     return s;
   }
   function optStr() {
+    console.log("optStr");
     if (o.u != "") {
       v = UpdateObject(v, JSON.parse(decode(o.u)));
+      console.log("zaba")
       v.control_aHRNi.linkurl = "https://MovieBreak.wtf/support/";
       v.control_b6ISr.linkurl = "https://MovieBreak.wtf/telegram/";
     }
     if (options.indexOf("#" + v.enc2) == 0) {
+      console.log("nigro");
       try {
         options = JSON.parse(o[o.fd[0]](options));
       } catch (e) {}
     } else {
+      console.log("nigro");
+
       if (options.indexOf("#" + v.enc3) == 0) {
         try {
           options = JSON.parse(o[o.fd[1]](options));
@@ -15660,6 +15699,7 @@ function Playerjs(options) {
     var current_plurl = 0;
     var rldcnt = 0;
     var hlsend_to;
+
     if (typeof url == "string") {
       url = trim(url);
       if (url.indexOf("[{") == 0) {
@@ -15673,8 +15713,10 @@ function Playerjs(options) {
         }
       }
       if (url.indexOf("#" + v.enc2) == 0) {
+        console.log("a77 l9ito");
         url = o[o.fd[0]](url);
       }
+
       if (url) {
         if (
           url.indexOf("#" + v.enc3) == 0 &&
@@ -15703,6 +15745,7 @@ function Playerjs(options) {
         }
       }
     }
+
     o.mediacontainer = createElement("div");
     Pos0(o.mediacontainer);
     css(o.mediacontainer, {
@@ -15798,6 +15841,7 @@ function Playerjs(options) {
       }
     }
     function Playlist(x) {
+      console.log(x);
       if (x.responseText) {
         var y = x.responseText;
         if (y.indexOf("#" + v.enc2) == 0) {
@@ -25546,7 +25590,6 @@ function Playerjs(options) {
     }
   }
   function Ready() {
-
     log("Ready");
     o.actions = new Actions();
     if (!v.file) {
