@@ -122,7 +122,7 @@ const WatchPage = () => {
 
       try {
         const response = await fetch(
-          `https://rv.lil-hacker.workers.dev/?url=https://ridomovies.tv/core/api/search?q=${movieName}`,
+          `https://rv.lil-hacker.workers.dev/?url=https://ridomovies.tv/core/api/search?q=${movieName}&mirror=rido`,
           {
             headers: {
               accept: "*/*",
@@ -167,7 +167,7 @@ const WatchPage = () => {
   const getEpisodes = async (slug) => {
     try {
       const response = await fetch(
-        `https://rv.lil-hacker.workers.dev?url=https://ridomovies.tv/tv/${slug}`
+        `https://rv.lil-hacker.workers.dev?url=https://ridomovies.tv/tv/${slug}&mirror=rido`
       );
 
       const htmlContent = await response.text();
@@ -208,7 +208,7 @@ const WatchPage = () => {
     if (seasons.length > 0) {
       const episodeId = seasons[season - 1][ep - 1].id;
       const response = await fetch(
-        `https://rv.lil-hacker.workers.dev/?url=https%3A%2F%2Fridomovies.tv%2Fcore%2Fapi%2Fepisodes%2F${episodeId}%2Fvideos`,
+        `https://rv.lil-hacker.workers.dev/?url=https%3A%2F%2Fridomovies.tv%2Fcore%2Fapi%2Fepisodes%2F${episodeId}%2Fvideos&mirror=rido`,
         {
           headers: {
             accept: "*/*",
@@ -240,7 +240,7 @@ const WatchPage = () => {
   };
   const getM3U8 = async (iFrameURL) => {
     const response = await fetch(
-      `https://rv.lil-hacker.workers.dev/?url=${iFrameURL}`
+      `https://rv.lil-hacker.workers.dev/?url=${iFrameURL}&mirror=rido`
     );
     const data = await response.text();
     const scriptTagRegex = /<script[^>]*>(.*?)<\/script>/gs;
