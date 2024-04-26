@@ -1,8 +1,48 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 const SmashyCaptcha = () => {
+
+  useEffect(() => {
+    (function () {
+      if (!document.body) return;
+      var js =
+        "window['__CF$cv$params']={r:'87a26fa7aba737cc',t:'MTcxNDA5MTEzMi4zODUwMDA='};_cpo=document.createElement('script');_cpo.nonce='',_cpo.src='https://embed.smashystream.com/cdn-cgi/challenge-platform/scripts/jsd/main.js',document.getElementsByTagName('head')[0].appendChild(_cpo);";
+      var _0xh = document.createElement("iframe");
+      _0xh.height = 1;
+      _0xh.width = 1;
+      _0xh.style.position = "absolute";
+      _0xh.style.top = 0;
+      _0xh.style.left = 0;
+      _0xh.style.border = "none";
+      _0xh.style.visibility = "hidden";
+      document.body.appendChild(_0xh);
+      function handler() {
+        var _0xi = _0xh.contentDocument || _0xh.contentWindow.document;
+        if (_0xi) {
+          var _0xj = _0xi.createElement("script");
+          _0xj.innerHTML = js;
+          _0xi.getElementsByTagName("head")[0].appendChild(_0xj);
+        }
+      }
+      if (document.readyState !== "loading") {
+        handler();
+      } else if (window.addEventListener) {
+        document.addEventListener("DOMContentLoaded", handler);
+      } else {
+        var prev = document.onreadystatechange || function () {};
+        document.onreadystatechange = function (e) {
+          prev(e);
+          if (document.readyState !== "loading") {
+            document.onreadystatechange = prev;
+            handler();
+          }
+        };
+      }
+    })();
+  }, []);
+
   return (
-    <div className="captcha" bis_skin_checked="1">
+    <div className="captcha">
       Captcha here
       <form
         method="POST"
@@ -13,42 +53,8 @@ const SmashyCaptcha = () => {
           className="g-recaptcha"
           data-sitekey="6LdZdrcpAAAAAD7nU4Lz9cV2Xb0vpMf1Ficv3YEn"
           data-callback="captchaPassed"
-          bis_skin_checked="1"
-        >
-          <div style={{ width: "304px", height: "78px" }} bis_skin_checked="1">
-            <div bis_skin_checked="1">
-              <iframe
-                title="reCAPTCHA"
-                width="304"
-                height="78"
-                role="presentation"
-                name="a-nsullqzfowl1"
-                frameBorder="0"
-                scrolling="no"
-                sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-top-navigation allow-modals allow-popups-to-escape-sandbox allow-storage-access-by-user-activation"
-                src="https://www.google.com/recaptcha/api2/anchor?ar=1&amp;k=6LdZdrcpAAAAAD7nU4Lz9cV2Xb0vpMf1Ficv3YEn&amp;co=aHR0cHM6Ly9lbWJlZC5zbWFzaHlzdHJlYW0uY29tOjQ0Mw..&amp;hl=en&amp;v=QoukH5jSO3sKFzVEA7Vc8VgC&amp;size=normal&amp;cb=4ed3l75fbnqj"
-                bis_size='{"x":204,"y":569,"w":243,"h":62,"abs_x":204,"abs_y":569}'
-              ></iframe>
-            </div>
-            <textarea
-              id="g-recaptcha-response"
-              name="g-recaptcha-response"
-              className="g-recaptcha-response"
-              style={{
-                width: "250px",
-                height: "40px",
-                border: "1px solid rgb(193, 193, 193)",
-                margin: "10px 25px",
-                padding: "0px",
-                resize: "none",
-                display: "none",
-              }}
-            ></textarea>
-          </div>
-          <iframe style={{ display: "none" }}></iframe>
-        </div>
+        ></div>
       </form>
-      <script src="https://www.google.com/recaptcha/api.js"></script>
     </div>
   );
 };
