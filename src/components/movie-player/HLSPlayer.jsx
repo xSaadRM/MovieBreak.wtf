@@ -14,7 +14,7 @@ const HLSPlayer = ({ url, mirror, subtitles }) => {
     } else {
       setVideoUrl(url);
     }
-  }, [url]); // Added 'mirror' to the dependency array
+  }, [url]);
 
   const playerReady = () => {
     const player = playerRef.current.getInternalPlayer("hls");
@@ -54,7 +54,6 @@ const HLSPlayer = ({ url, mirror, subtitles }) => {
             : "",
           hls: {
             hlsOptions: {
-              // This enables quality switching
               enableWorker: true,
               fragLoadingTimeOut: 20000,
               fragLoadingMaxRetry: 10,

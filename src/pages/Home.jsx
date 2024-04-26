@@ -58,14 +58,14 @@ const HomePage = () => {
   };
 
   useEffect(() => {
-    // DisableDevtool({
-    //   ondevtoolopen: () => {
-    //     if (!devtoolsDetected) {
-    //       setDevtoolsDetected(true);
-    //       window.location.href = "/sonic.html";
-    //     }
-    //   },
-    // });
+    DisableDevtool({
+      ondevtoolopen: () => {
+        if (!devtoolsDetected) {
+          setDevtoolsDetected(true);
+          window.location.href = "/sonic.html";
+        }
+      },
+    });
   }, [devtoolsDetected]);
 
   useEffect(() => {

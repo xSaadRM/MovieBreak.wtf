@@ -24,14 +24,14 @@ const MovieDescription = () => {
   const [devtoolsDetected, setDevtoolsDetected] = useState(false);
 
   useEffect(() => {
-    // DisableDevtool({
-    //   ondevtoolopen: () => {
-    //     if (!devtoolsDetected) {
-    //       setDevtoolsDetected(true);
-    //       window.location.href = "/sonic.html";
-    //     }
-    //   },
-    // });
+    DisableDevtool({
+      ondevtoolopen: () => {
+        if (!devtoolsDetected) {
+          setDevtoolsDetected(true);
+          window.location.href = "/sonic.html";
+        }
+      },
+    });
   }, [devtoolsDetected]);
 
   const handleSeasonChange = (season) => {
