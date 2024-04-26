@@ -2,7 +2,7 @@ import React, { useEffect, useState, useRef } from "react";
 import ReactPlayer from "react-player";
 import SmashyStreamDecoder from "./decoder";
 
-const HLSPlayer = ({ url, mirror }) => {
+const HLSPlayer = ({ url, mirror, subtitles }) => {
   const [videoUrl, setVideoUrl] = useState(url);
   const [qualities, setQualities] = useState(null);
   const playerRef = useRef(null);
@@ -16,18 +16,14 @@ const HLSPlayer = ({ url, mirror }) => {
     }
   }, [url]); // Added 'mirror' to the dependency array
 
-  useEffect(() => {
+  const playerReady = () => {
     const player = playerRef.current.getInternalPlayer("hls");
-    if (player) {
-      player.on("hlsFragLoaded", () => {
-        const newQualities = player.levels.map((level, index) => ({
-          index,
-          label: level.height ? `${level.height}p` : "Auto",
-        }));
-        setQualities(newQualities);
-      });
-    }
-  }, [videoUrl]);
+    const newQualities = player.levels.map((level, index) => ({
+      index,
+      label: level.height ? `${level.height}p` : "Auto",
+    }));
+    setQualities(newQualities);
+  };
 
   const handleQualityChange = (e) => {
     const player = playerRef.current.getInternalPlayer("hls");
@@ -35,6 +31,10 @@ const HLSPlayer = ({ url, mirror }) => {
     const qualityIndex = parseInt(e.target.value);
     player.currentLevel = qualityIndex;
   };
+
+  useEffect(() => {
+    console.log("subtitles:", subtitles ? subtitles : null);
+  }, [subtitles]);
 
   return (
     <div>
@@ -45,7 +45,13 @@ const HLSPlayer = ({ url, mirror }) => {
         controls={true}
         width="100%"
         height="100%"
+        onReady={playerReady}
         config={{
+          file: subtitles
+            ? {
+                tracks: subtitles,
+              }
+            : "",
           hls: {
             hlsOptions: {
               // This enables quality switching

@@ -19,7 +19,7 @@ const WatchPage = () => {
   const { mediaType, movieID, season, ep } = useParams();
   const [isOverviewAllShowed, setIsOverviewAllShowed] = useState(false);
   const [movieNotFound, setMovieNotFound] = useState(false);
-  const [selectedMirror, setSelectedMirror] = useState("ridotv");
+  const [selectedMirror, setSelectedMirror] = useState("");
   const [devtoolsDetected, setDevtoolsDetected] = useState(false);
   const [smashyUnverified, setSmashyUnverified] = useState(false);
 
@@ -44,17 +44,29 @@ const WatchPage = () => {
     }
   });
 
-  const handleServerSwitch = async (serverURl) => {
-    if (activeServer !== serverURl) {
+  const handleServerSwitch = async (serverURL) => {
+    if (activeServer !== serverURL) {
       try {
         setLoading(true);
 
-        const response = await fetch(serverURl);
+        const response = await fetch(serverURL);
         const data = await response.json();
         if (data.sourceUrls[0] !== "Verification needed") {
-          setActiveServer(serverURl);
+          setActiveServer(serverURL);
           setStreamVideo(data.sourceUrls[0]);
-          setSubtitles(data.subtitles);
+          const subtitles = data.subtitles.split(",");
+          const formattedSubtitles = subtitles
+            .map((subtitle) => {
+              const index = subtitle.indexOf("]");
+              if (index !== -1) {
+                const lang = subtitle.substring(1, index);
+                const url = subtitle.substring(index + 1);
+                return { lang, url };
+              }
+              return null; // Return null for invalid subtitles
+            })
+            .filter((subtitle) => subtitle !== null); // Filter out null values
+          setSubtitles(formattedSubtitles);
         } else {
           setSmashyUnverified(true);
         }
@@ -253,7 +265,6 @@ const WatchPage = () => {
           if (match) {
             const fileUrl = match[1];
             setStreamVideo(fileUrl);
-            // splitSubtitles(fileUrl);
             break;
           }
         }
@@ -262,35 +273,6 @@ const WatchPage = () => {
       console.error("No script tags found");
     }
     setLoading(false);
-  };
-
-  const splitSubtitles = async (m3u8) => {
-    const response = await fetch(m3u8);
-    const blob = await response.blob();
-    const reader = new FileReader();
-
-    // Define a function to handle the onload event
-    reader.onload = function () {
-      const data = reader.result; // This contains the data as a string
-      const regex = /#EXT-X-MEDIA:TYPE=SUBTITLES.*?NAME="(.*?)".*?URI="(.*?)"/g;
-      let match;
-      let subtitlesArray = [];
-      const baseurl = m3u8.split("/");
-
-      while ((match = regex.exec(data))) {
-        baseurl[baseurl.length - 1] = match[2];
-        const label = `[${match[1]}]`;
-
-        // Encode the file URL
-        const encodedFileUrl = encodeURIComponent(baseurl);
-
-        subtitlesArray.push(`${label}${encodedFileUrl}`);
-      }
-      setSubtitles(subtitlesArray.toString());
-    };
-
-    // Read the blob as text
-    reader.readAsText(blob);
   };
 
   return (
@@ -354,7 +336,11 @@ const WatchPage = () => {
         )}
         <>
           {streamVideo ? (
-            <HLSPlayer mirror={selectedMirror} url={streamVideo} />
+            <HLSPlayer
+              mirror={selectedMirror}
+              url={streamVideo}
+              subtitles={subtitles}
+            />
           ) : null}
           {smashyUnverified ? <SmashyCaptcha /> : null}
           <div className="sources-container">
@@ -363,6 +349,7 @@ const WatchPage = () => {
                 <div
                   onClick={() => {
                     if (selectedMirror !== "smashy") {
+                      setActiveServer("");
                       setSelectedMirror("smashy");
                     }
                   }}
