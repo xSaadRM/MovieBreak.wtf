@@ -4,7 +4,7 @@ import SmashyStreamDecoder from "./decoder";
 
 const HLSPlayer = ({ url, mirror }) => {
   const [videoUrl, setVideoUrl] = useState(url);
-  const [qualities, setQualities] = useState([]);
+  const [qualities, setQualities] = useState(null);
   const playerRef = useRef(null);
 
   useEffect(() => {
@@ -56,17 +56,18 @@ const HLSPlayer = ({ url, mirror }) => {
           },
         }}
       />
-      <select onChange={handleQualityChange} defaultValue={-1}>
-        <option key={-1} value={-1}>
-          AUTO
-        </option>
-        {qualities &&
-          qualities.map((quality) => (
+      {qualities && (
+        <select onChange={handleQualityChange} defaultValue={-1}>
+          <option key={-1} value={-1}>
+            AUTO
+          </option>
+          {qualities.map((quality) => (
             <option key={quality.index} value={quality.index}>
               {quality.label}
             </option>
           ))}
-      </select>
+        </select>
+      )}
     </div>
   );
 };
