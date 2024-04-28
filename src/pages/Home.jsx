@@ -1,16 +1,21 @@
 import Carousel from "../components/Carousel";
-import { useEffect, useState } from "react";
+import { useEffect, useReducer, useState } from "react";
 import DisableDevtool from "disable-devtool";
 import SearchPage from "../components/SearchPage";
 import Navbar from "../components/Navbar";
+import {
+  initialState,
+  reducer,
+  setTrendingMovies,
+  setTopMovies,
+  setTrendingShows,
+  setTopShows,
+} from "../reducer/reducer";
 
 const HomePage = () => {
-  const [trendingTV, setTrendingTV] = useState("");
-  const [trendingMovie, setTrendingMovie] = useState("");
-  const [topTV, setTopTV] = useState("");
-  const [topMovie, setTopMovie] = useState("");
+  const [state, dispatch] = useReducer(reducer, initialState);
+  const { trendingMovies, topMovies, trendingShows, topShows } = state;
   const [devtoolsDetected, setDevtoolsDetected] = useState(false);
-
   const getTrending = async (type) => {
     try {
       const response = await fetch(
@@ -45,32 +50,32 @@ const HomePage = () => {
 
   const fetchTrendingData = async () => {
     const trendingMovies = await getTrending("movie");
-    setTrendingMovie(trendingMovies);
+    dispatch(setTrendingMovies(trendingMovies));
 
     const trendingTVShows = await getTrending("tv");
-    setTrendingTV(trendingTVShows);
+    dispatch(setTrendingShows(trendingTVShows));
 
     const topMovie = await getTop("movie");
-    setTopMovie(topMovie);
+    dispatch(setTopMovies(topMovie));
 
-    const topTV = await getTop("tv");
-    setTopTV(topTV);
+    const topTVResponse = await getTop("tv");
+    dispatch(setTopShows(topTVResponse));
   };
-
-  useEffect(() => {
-    DisableDevtool({
-      ondevtoolopen: () => {
-        if (!devtoolsDetected) {
-          setDevtoolsDetected(true);
-          window.location.href = "/sonic.html";
-        }
-      },
-    });
-  }, [devtoolsDetected]);
 
   useEffect(() => {
     fetchTrendingData();
   }, []);
+
+  useEffect(() => {
+    // DisableDevtool({
+    //   ondevtoolopen: () => {
+    //     if (!devtoolsDetected) {
+    //       setDevtoolsDetected(true);
+    //       window.location.href = "/sonic.html";
+    //     }
+    //   },
+    // });
+  }, [devtoolsDetected]);
 
   return (
     <>
@@ -78,25 +83,25 @@ const HomePage = () => {
         <Navbar />
         <SearchPage isHomePage={true} />
         <Carousel
-          movies={trendingTV}
+          movies={trendingShows}
           media_type={"tv"}
           type="TV Shows"
           category={"Trending"}
         />
         <Carousel
-          movies={trendingMovie}
+          movies={trendingMovies}
           media_type={"movie"}
           type="Movies"
           category={"Trending"}
         />
         <Carousel
-          movies={topTV}
+          movies={topShows}
           media_type={"tv"}
           type="TV Shows"
           category={"Top Rated"}
         />
         <Carousel
-          movies={topMovie}
+          movies={topMovies}
           media_type={"movie"}
           type="Movies"
           category={"Top Rated"}

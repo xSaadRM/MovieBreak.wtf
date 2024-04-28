@@ -1,6 +1,5 @@
-import { Suspense, useEffect, useState } from "react";
+import { Suspense, useEffect, useReducer, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import ScaleLoader from "react-spinners/ScaleLoader";
 import DisableDevtool from "disable-devtool";
 import "../styles/MovieDescription.css";
 import PlayIcon from "../assets/play.svg";
@@ -8,11 +7,13 @@ import Navbar from "../components/Navbar";
 import Carousel from "../components/Carousel";
 import WatchPage from "./WatchPage";
 import LoadingAnimation from "../components/LoadingAnimation";
+import { reducer, initialState } from "../reducer/reducer";
 
 const MovieDescription = () => {
   const navigate = useNavigate();
   const { mediaType, movieID, season } = useParams();
-  const [movieInfos, setMovieInfos] = useState("");
+  const [state, dispatch] = useReducer(reducer, initialState);
+  const { movieInfos } = state;
   const [seasons, setSeasons] = useState([]);
   const [selectedSeason, setSelectedSeason] = useState("");
   const [isOverviewAllShowed, setIsOverviewAllShowed] = useState(false);
@@ -24,14 +25,14 @@ const MovieDescription = () => {
   const [devtoolsDetected, setDevtoolsDetected] = useState(false);
 
   useEffect(() => {
-    DisableDevtool({
-      ondevtoolopen: () => {
-        if (!devtoolsDetected) {
-          setDevtoolsDetected(true);
-          window.location.href = "/sonic.html";
-        }
-      },
-    });
+    // DisableDevtool({
+    //   ondevtoolopen: () => {
+    //     if (!devtoolsDetected) {
+    //       setDevtoolsDetected(true);
+    //       window.location.href = "/sonic.html";
+    //     }
+    //   },
+    // });
   }, [devtoolsDetected]);
 
   const handleSeasonChange = (season) => {
@@ -51,7 +52,7 @@ const MovieDescription = () => {
           throw new Error("Failed to fetch movie info");
         }
         const movieInfosResponse = await response.json();
-        setMovieInfos(movieInfosResponse);
+        dispatch({ type: "SET_MOVIE_INFOS", payload: movieInfosResponse });
         console.log(movieInfosResponse);
         if (mediaType === "tv") {
           const numberOfSeasons = movieInfosResponse.number_of_seasons;

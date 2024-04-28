@@ -1,21 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useReducer } from "react";
 import { useNavigate } from "react-router-dom";
 import "../styles/Card.css";
+import fallbackImage from "../assets/noPoster.jpeg";
 
-const MovieCard = React.memo(({ movie, isCategorized, media_type }) => {
+const MovieCard = ({ movie, isCategorized, media_type }) => {
   const navigate = useNavigate();
-
   const [isHovered, setIsHovered] = useState(false);
-  const [imageLoaded, setImageLoaded] = useState(false);
-
-  // Preload image when movie data changes
-  useEffect(() => {
-    const image = new Image();
-    image.src = `https://image.tmdb.org/t/p/w370_and_h556_bestv2${
-      movie.poster_path || movie.profile_path
-    }`;
-    image.onload = () => setImageLoaded(true);
-  }, [movie]);
 
   const handleMouseOver = () => {
     setIsHovered(true);
@@ -50,24 +40,16 @@ const MovieCard = React.memo(({ movie, isCategorized, media_type }) => {
         )}
       </div>
       <div className="the-card-image">
-        {(imageLoaded || !movie.poster_path) && (
-          <img
-            src={`https://image.tmdb.org/t/p/w370_and_h556_bestv2${
-              movie.poster_path || movie.profile_path
-            }`}
-            alt={movie.original_title || movie.original_name}
-            onLoad={() => setImageLoaded(true)}
-          />
-        )}
-        {!imageLoaded && !movie.poster_path && (
-          <>
-            <img
-              src="https://www.themoviedb.org/assets/2/v4/glyphicons/basic/glyphicons-basic-4-user-grey-d8fe957375e70239d6abdd549fd7568c89281b2179b5f4470e2e12895792dfa5.svg"
-              alt="No Poster Available"
-            />
-            <div className="placeholder-content">No Poster Available</div>
-          </>
-        )}
+        <img
+          src={
+            movie.poster_path || movie.profile_path
+              ? `https://image.tmdb.org/t/p/w370_and_h556_bestv2${
+                  movie.poster_path || movie.profile_path
+                }`
+              : fallbackImage
+          }
+          alt={movie.original_title || movie.original_name}
+        />
       </div>
       <div>
         <span>{movie.original_title || movie.original_name}</span>
@@ -84,6 +66,6 @@ const MovieCard = React.memo(({ movie, isCategorized, media_type }) => {
       </div>
     </div>
   );
-});
+};
 
 export default MovieCard;
