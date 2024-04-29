@@ -32,10 +32,10 @@ export const setMovieInfos = (infos) => ({
 
 export const initialState = {
   movieInfos: movieInfos,
-  trendingShows: hotMovies,
-  trendingMovies: hotMovies,
-  topShows: hotMovies,
-  topMovies: hotMovies,
+  trendingShows: hotMovies.trendingWeek.shows,
+  trendingMovies: hotMovies.trendingWeek.movies,
+  topShows: hotMovies.topRated.shows,
+  topMovies: hotMovies.topRated.movies,
 };
 
 // Reducer function

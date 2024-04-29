@@ -2,11 +2,21 @@
   transform: translate3d(0px, 0px, 0px) !important;
 }
 .trending-carousel {
-  width: 80%;
+  width: 95%;
   margin: 0 auto;
   margin-bottom: 40px;
 }
-
+.slick-prev,
+.slick-next {
+  height: 50%;
+  z-index: 1;
+}
+.slick-prev {
+  left: 0;
+}
+.slick-next {
+  right: 0;
+}
 .trending-carousel-title {
   padding: 10px;
   font-size: small;

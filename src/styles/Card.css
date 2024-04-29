@@ -47,11 +47,16 @@
 
 .movie div:nth-of-type(3) span {
   font-family: "Raleway", sans-serif;
-  text-transform: uppercase;
   font-size: 13px;
   letter-spacing: 2px;
   font-weight: 500;
   color: #f0f0f0;
+  text-wrap: nowrap;
+  width: 100%;
+  text-wrap: nowrap;
+  text-align: center;
+  text-overflow: ellipsis;
+  overflow: hidden;
 }
 
 .movie div:nth-of-type(3) h3 {
