@@ -1,4 +1,4 @@
-import { Suspense, useEffect, useReducer, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import DisableDevtool from "disable-devtool";
 import "../styles/MovieDescription.css";
@@ -7,19 +7,16 @@ import Navbar from "../components/Navbar";
 import Carousel from "../components/Carousel";
 import WatchPage from "./WatchPage";
 import LoadingAnimation from "../components/LoadingAnimation";
-import { reducer, initialState } from "../reducer/reducer";
+import { setSeasonDetails } from "../reducer/reducer";
 
-const MovieDescription = () => {
+const MovieDescription = ({ state, dispatch }) => {
   const navigate = useNavigate();
   const { mediaType, movieID, season } = useParams();
-  const [state, dispatch] = useReducer(reducer, initialState);
-  const { movieInfos } = state;
+  const { movieInfos, seasonDetails } = state;
   const [seasons, setSeasons] = useState([]);
-  const [selectedSeason, setSelectedSeason] = useState("");
   const [isOverviewAllShowed, setIsOverviewAllShowed] = useState(false);
   const [wordsInOverview, setWordsInOverview] = useState(13);
   const [currentSection, setCurrentSection] = useState("overview");
-  const [seasonDetails, setSeasonDetails] = useState(null);
   const [loading, setLoading] = useState(false);
   const [showWatchPage, setShowWatchPage] = useState(false);
   const [devtoolsDetected, setDevtoolsDetected] = useState(false);
@@ -36,7 +33,7 @@ const MovieDescription = () => {
   }, [devtoolsDetected]);
 
   const handleSeasonChange = (season) => {
-    setSelectedSeason(season);
+    navigate(`/${mediaType}/${movieID}/${season}`);
   };
   useEffect(() => {
     if (window.innerWidth >= 800) {
@@ -53,7 +50,7 @@ const MovieDescription = () => {
         }
         const movieInfosResponse = await response.json();
         dispatch({ type: "SET_MOVIE_INFOS", payload: movieInfosResponse });
-        console.log(movieInfosResponse);
+        // console.log(movieInfosResponse);
         if (mediaType === "tv") {
           const numberOfSeasons = movieInfosResponse.number_of_seasons;
           if (numberOfSeasons > 0) {
@@ -71,12 +68,7 @@ const MovieDescription = () => {
     };
 
     getMovieInfos();
-    if (mediaType === "tv") {
-      if (season) {
-        setSelectedSeason(season);
-      }
-    }
-  }, [mediaType, movieID, season]);
+  }, [movieID]);
 
   const handleSectionClick = (name) => {
     if (name !== currentSection) {
@@ -88,13 +80,14 @@ const MovieDescription = () => {
     const fetchSeasonDetails = async () => {
       try {
         const response = await fetch(
-          `https://api.themoviedb.org/3/tv/${movieID}/season/${selectedSeason}?api_key=d0e6107be30f2a3cb0a34ad2a90ceb6f&language=en-US`
+          `https://api.themoviedb.org/3/tv/${movieID}/season/${season}?api_key=d0e6107be30f2a3cb0a34ad2a90ceb6f&language=en-US`
         );
         if (!response.ok) {
           throw new Error("Failed to fetch season details");
         }
         const seasonDetailsResponse = await response.json();
-        setSeasonDetails(seasonDetailsResponse);
+        dispatch(setSeasonDetails(seasonDetailsResponse));
+        // console.log(seasonDetails);
         setLoading(false);
       } catch (error) {
         console.error("Error fetching season details:", error.message);
@@ -102,19 +95,16 @@ const MovieDescription = () => {
       }
     };
 
-    if (selectedSeason) {
+    if (season) {
       setLoading(true);
-      navigate(`/${mediaType}/${movieID}/${selectedSeason}`);
       fetchSeasonDetails();
     }
-  }, [selectedSeason]);
+  }, [season]);
 
-  const handleEpisodeClick = (episodeDetails, movieName) => {
+  const handleEpisodeClick = (episodeDetails) => {
     setLoading(true);
-    const newUrl = `/${mediaType}/${movieID}/${selectedSeason}/${episodeDetails.episode_number}`;
-    navigate(newUrl, {
-      state: { episodeDetails, movieName },
-    });
+    const newUrl = `/${mediaType}/${movieID}/${season}/${episodeDetails.episode_number}`;
+    navigate(newUrl);
   };
 
   const handleWatchClick = () => {
@@ -218,7 +208,7 @@ const MovieDescription = () => {
         {mediaType === "tv" && (
           <div className="select-season">
             <select
-              value={selectedSeason}
+              value={season}
               onChange={(e) => handleSeasonChange(e.target.value)}
             >
               <option value="">Select Season</option>
