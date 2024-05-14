@@ -9,7 +9,7 @@ const SmashyStreamDecoder = (url) => {
     }
   } else {
     console.warn("URL is not encoded");
-    return `https://rv.lil-hacker.workers.dev/?mirror=smashy&url=${url}`;
+    return url;
   }
 };
 
@@ -51,7 +51,7 @@ const yTeRfThR = function (x) {
           .join("")
       );
     }
-    return `https://rv.lil-hacker.workers.dev/?mirror=smashy&url=${a}`;
+    return a;
   } catch (error) {
     console.error("Error in yTeRfThR:", error.message);
     return null; // Return null or handle the error accordingly

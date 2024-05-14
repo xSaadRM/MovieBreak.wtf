@@ -1,0 +1,212 @@
+.moviebreak-player {
+  color: aliceblue;
+  position: relative;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+  display: flex;
+  justify-content: center;
+  padding: 0;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.moviebreak-player video {
+  object-fit: cover;
+  width: 100%;
+  height: auto;
+}
+
+.moviebreak-controls {
+  background-color: hsla(0, 0%, 0%, 0.226);
+  transition: opacity 1s ease, visibility 1s ease;
+  visibility: hidden;
+  opacity: 0;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  z-index: 1;
+}
+
+.moviebreak-player .movie-infos,
+.provider-list,
+.providers,
+.provider,
+.cloud-icon {
+  transition: opacity 0.5s ease, visibility 0.5s ease;
+  visibility: hidden;
+  opacity: 0;
+}
+
+.moviebreak-player.showcontrols .movie-infos,
+.showcontrols .moviebreak-controls,
+.showcontrols .cloud-icon,
+.provider-list.show-providers,
+.showcontrols .show-providers .providers,
+.showcontrols .show-providers .provider {
+  visibility: visible;
+  opacity: 1;
+  transition-delay: 0s;
+}
+
+.moviebreak-player.hidecontrols .movie-infos {
+  opacity: 0;
+}
+
+.centerControls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+  width: 40%;
+  height: auto;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.play-button svg {
+  cursor: pointer;
+  width: 60px !important;
+}
+.moviebreak-controls svg {
+  width: 40px;
+  height: auto;
+}
+.seek:hover,
+.play-button:hover,
+.cloud-icon:hover,
+.fullscreen-toggle:hover {
+  transform: scale(1.2);
+}
+.seek:hover svg,
+.play-button:hover svg,
+.cloud-icon:hover svg,
+.fullscreen-toggle:hover svg {
+  filter: drop-shadow(0 0 4px hsl(258, 99%, 40%));
+}
+.moviebreak-controls .loading-animation {
+  position: relative;
+}
+.seek {
+  cursor: pointer;
+  position: relative;
+}
+.seek p {
+  position: absolute;
+  bottom: 0;
+}
+.seekForward p {
+  left: 5px;
+}
+.seekBackward p {
+  right: 5px;
+}
+
+.provider-list {
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  position: absolute;
+  right: 0;
+  top: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: flex-end;
+}
+
+.providers {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  visibility: hidden;
+  opacity: 0;
+  overflow: scroll;
+
+  /* Hide scrollbar in webkit-based browsers */
+  scrollbar-width: none; /* For Firefox */
+  -ms-overflow-style: none; /* For Internet Explorer and Edge */
+  /* For Chrome and Safari */
+  ::-webkit-scrollbar {
+    display: none;
+  }
+  overflow-y: scroll;
+  flex-direction: column;
+  gap: 15px;
+  border-radius: 12px;
+  padding: 10px;
+  background-color: hsla(189, 91%, 39%, 0.719);
+}
+
+.cloud-icon {
+  right: 0;
+  z-index: 2;
+  position: absolute;
+  top: 0;
+  width: fit-content;
+  height: auto;
+  cursor: pointer;
+  padding: 10px 10px 0 0;
+}
+
+.show-providers .provider-list {
+  width: 100%;
+  height: 100%;
+}
+
+.provider {
+  visibility: hidden;
+  opacity: 0;
+  font-size: small;
+  text-align: center;
+  cursor: pointer;
+  padding: 10px 5px;
+  background-color: hsla(278, 69%, 16%, 0.671);
+  font-weight: bolder;
+  border-radius: 10px;
+  width: 90%;
+}
+.provider:hover {
+  background-color: hsl(277, 81%, 14%);
+}
+
+.provider.active {
+  background-color: hsl(277, 81%, 14%);
+}
+
+.moviebreak-player .movie-infos {
+  top: 0;
+}
+
+.control-bar-container {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  bottom: 20px;
+  width: 100%;
+  height: 15%;
+}
+.control-bar {
+  padding-left: 10px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  padding: 10px;
+}
+.seek-bar {
+  width: 90%;
+}
+.seek-bar input {
+  width: 100%;
+  accent-color: blue;
+}
+.seek-bar span {
+  position: relative;
+}
