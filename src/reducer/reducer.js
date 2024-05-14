@@ -1,5 +1,6 @@
 import { hotMovies } from "../schemas/movieSchemas/hotMovies";
 import { movieInfos } from "../schemas/movieSchemas/movieInfos";
+import { seasonDetails } from "../schemas/movieSchemas/seasonDetails";
 
 // Action types
 const SET_TRENDING_SHOWS = "SET_TRENDING_SHOWS";
@@ -7,6 +8,7 @@ const SET_TOP_SHOWS = "SET_TOP_SHOWS";
 const SET_TRENDING_MOVIES = "SET_TRENDING_MOVIES";
 const SET_TOP_MOVIES = "SET_TOP_MOVIES";
 const SET_MOVIE_INFOS = "SET_MOVIE_INFOS";
+const SET_SEASON_DETAILS = "SET_SEASON_DETAILS";
 
 // Action creators
 export const setTrendingShows = (shows) => ({
@@ -29,8 +31,13 @@ export const setMovieInfos = (infos) => ({
   type: SET_MOVIE_INFOS,
   payload: infos,
 });
+export const setSeasonDetails = (infos) => ({
+  type: SET_SEASON_DETAILS,
+  payload: infos,
+});
 
 export const initialState = {
+  seasonDetails: seasonDetails,
   movieInfos: movieInfos,
   trendingShows: hotMovies.trendingWeek.shows,
   trendingMovies: hotMovies.trendingWeek.movies,
@@ -65,6 +72,11 @@ export const reducer = (state, action) => {
       return {
         ...state,
         topMovies: action.payload,
+      };
+    case SET_SEASON_DETAILS:
+      return {
+        ...state,
+        seasonDetails: action.payload,
       };
     default:
       return state;
