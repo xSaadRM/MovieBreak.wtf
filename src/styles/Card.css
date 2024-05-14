@@ -18,10 +18,12 @@
 .movie div:nth-of-type(1) {
   position: absolute;
   padding: 16px;
-  width: 100%;
+  width: fit-content;
   opacity: 0;
   top: 0;
   color: #f9d3b4;
+  background-color: #000000c2;
+  border-radius: 0 20px 20px 0;
 }
 
 .movie div:nth-of-type(2) {
@@ -38,7 +40,6 @@
   z-index: 2;
   background-color: #343739;
   padding: 16px 24px 24px 24px;
-
   position: absolute;
   bottom: 0;
   right: 0;
@@ -67,7 +68,6 @@
 
 .movie:hover div:nth-of-type(2) {
   height: 100%;
-  opacity: 0.3;
 }
 
 .movie:hover div:nth-of-type(3) {
