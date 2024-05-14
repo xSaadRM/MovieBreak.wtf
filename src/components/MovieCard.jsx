@@ -17,7 +17,11 @@ const MovieCard = ({ movie, isCategorized, media_type }) => {
 
   const handleClick = () => {
     if (isHovered) {
-      navigate(`/${media_type ? media_type : movie.media_type}/${movie.id}`);
+      navigate(
+        `/${media_type ? media_type : movie.media_type}/${movie.id}/${
+          (media_type || movie.media_type) == "tv" ? "1" : ""
+        }`
+      );
     }
   };
 
