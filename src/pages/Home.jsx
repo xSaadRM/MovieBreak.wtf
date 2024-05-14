@@ -1,19 +1,16 @@
 import Carousel from "../components/Carousel";
-import { useEffect, useReducer, useState } from "react";
+import { useEffect, useState } from "react";
 import DisableDevtool from "disable-devtool";
 import SearchPage from "../components/SearchPage";
 import Navbar from "../components/Navbar";
 import {
-  initialState,
-  reducer,
   setTrendingMovies,
   setTopMovies,
   setTrendingShows,
   setTopShows,
 } from "../reducer/reducer";
 
-const HomePage = () => {
-  const [state, dispatch] = useReducer(reducer, initialState);
+const HomePage = ({ state, dispatch }) => {
   const { trendingMovies, topMovies, trendingShows, topShows } = state;
   const [devtoolsDetected, setDevtoolsDetected] = useState(false);
   const getTrending = async (type) => {
