@@ -26,13 +26,18 @@
   height: 100%;
   position: absolute;
   z-index: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
 }
 
 .moviebreak-player .movie-infos,
 .provider-list,
 .providers,
 .provider,
-.cloud-icon {
+.cloud-icon,
+.optionSwitcher {
   transition: opacity 0.5s ease, visibility 0.5s ease;
   visibility: hidden;
   opacity: 0;
@@ -43,7 +48,8 @@
 .showcontrols .cloud-icon,
 .provider-list.show-providers,
 .showcontrols .show-providers .providers,
-.showcontrols .show-providers .provider {
+.showcontrols .show-providers .provider,
+.showcontrols .optionSwitcher.show {
   visibility: visible;
   opacity: 1;
   transition-delay: 0s;
@@ -57,7 +63,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  position: relative;
+  position: absolute;
   width: 40%;
   height: auto;
   top: 50%;
@@ -76,13 +82,17 @@
 .seek:hover,
 .play-button:hover,
 .cloud-icon:hover,
-.fullscreen-toggle:hover {
+.fullscreen-toggle:hover,
+.settings-icon:hover,
+.subtitleIcon:hover {
   transform: scale(1.2);
 }
 .seek:hover svg,
 .play-button:hover svg,
 .cloud-icon:hover svg,
-.fullscreen-toggle:hover svg {
+.fullscreen-toggle:hover svg,
+.settings-icon:hover svg,
+.subtitleIcon:hover svg {
   filter: drop-shadow(0 0 4px hsl(258, 99%, 40%));
 }
 .moviebreak-controls .loading-animation {
@@ -116,7 +126,8 @@
   justify-content: flex-end;
 }
 
-.providers {
+.providers,
+.optionSwitcher.show {
   width: 100%;
   height: 100%;
   display: flex;
@@ -180,22 +191,21 @@
 }
 
 .control-bar-container {
-  position: absolute;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  bottom: 20px;
   width: 100%;
   height: 15%;
+  margin-bottom: 1em;
 }
+
 .control-bar {
   padding-left: 10px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  position: relative;
   width: 100%;
   height: 100%;
   padding: 10px;
@@ -209,4 +219,37 @@
 }
 .seek-bar span {
   position: relative;
+}
+.optionSwitcher.show {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 50%;
+  height: 50%;
+}
+.option {
+  display: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  background-color: hsla(278, 69%, 16%, 0.671);
+  gap: 5px;
+  justify-content: center;
+  align-items: center;
+}
+.option .current {
+  font-size: small;
+}
+.optionSwitcher.show .option {
+  display: flex;
+}
+
+.option:hover,
+.option.active {
+  background-color: hsl(263, 80%, 17%);
+}
+
+.control-bar .right-controls {
+  display: flex;
+  justify-content: center;
 }
