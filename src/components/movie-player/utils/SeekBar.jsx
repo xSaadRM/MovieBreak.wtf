@@ -29,7 +29,9 @@ const SeekBar = ({ videoRef }) => {
     videoRef.current.addEventListener("timeupdate", handleTimeUpdate);
 
     return () => {
-      videoRef.current.removeEventListener("timeupdate", handleTimeUpdate);
+      if (videoRef.current) {
+        videoRef.current.removeEventListener("timeupdate", handleTimeUpdate);
+      }
     };
   }, [videoRef]);
 
