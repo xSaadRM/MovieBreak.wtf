@@ -1,6 +1,5 @@
 import Carousel from "../components/Carousel";
-import { useEffect, useState } from "react";
-import DisableDevtool from "disable-devtool";
+import { useEffect } from "react";
 import SearchPage from "../components/SearchPage";
 import Navbar from "../components/Navbar";
 import {
@@ -12,7 +11,6 @@ import {
 
 const HomePage = ({ state, dispatch }) => {
   const { trendingMovies, topMovies, trendingShows, topShows } = state;
-  const [devtoolsDetected, setDevtoolsDetected] = useState(false);
   const getTrending = async (type) => {
     try {
       const response = await fetch(
@@ -45,34 +43,22 @@ const HomePage = ({ state, dispatch }) => {
     }
   };
 
-  const fetchTrendingData = async () => {
-    const trendingMovies = await getTrending("movie");
-    dispatch(setTrendingMovies(trendingMovies));
-
-    const trendingTVShows = await getTrending("tv");
-    dispatch(setTrendingShows(trendingTVShows));
-
-    const topMovie = await getTop("movie");
-    dispatch(setTopMovies(topMovie));
-
-    const topTVResponse = await getTop("tv");
-    dispatch(setTopShows(topTVResponse));
-  };
-
   useEffect(() => {
+    const fetchTrendingData = async () => {
+      const trendingMovies = await getTrending("movie");
+      dispatch(setTrendingMovies(trendingMovies));
+
+      const trendingTVShows = await getTrending("tv");
+      dispatch(setTrendingShows(trendingTVShows));
+
+      const topMovie = await getTop("movie");
+      dispatch(setTopMovies(topMovie));
+
+      const topTVResponse = await getTop("tv");
+      dispatch(setTopShows(topTVResponse));
+    };
     fetchTrendingData();
-  }, []);
-
-  useEffect(() => {
-    // DisableDevtool({
-    //   ondevtoolopen: () => {
-    //     if (!devtoolsDetected) {
-    //       setDevtoolsDetected(true);
-    //       window.location.href = "/sonic.html";
-    //     }
-    //   },
-    // });
-  }, [devtoolsDetected]);
+  }, [dispatch]);
 
   return (
     <>

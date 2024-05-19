@@ -1,4 +1,4 @@
-import React, { useState, useReducer } from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "../styles/Card.css";
 import fallbackImage from "../assets/noPoster.jpeg";
@@ -19,7 +19,7 @@ const MovieCard = ({ movie, isCategorized, media_type }) => {
     if (isHovered) {
       navigate(
         `/${media_type ? media_type : movie.media_type}/${movie.id}/${
-          (media_type || movie.media_type) == "tv" ? "1" : ""
+          (media_type || movie.media_type) === "tv" ? "1" : ""
         }`
       );
     }

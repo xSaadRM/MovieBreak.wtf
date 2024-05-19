@@ -34,7 +34,7 @@ const QualitySwitcher = ({ hlsRef }) => {
         {hlsRef.current?.levels.map((level, index) => (
           <div
             className={`option ${
-              hlsRef.current.currentLevel == index &&
+              hlsRef.current.currentLevel === index &&
               !hlsRef.current.autoLevelEnabled
                 ? "active"
                 : ""

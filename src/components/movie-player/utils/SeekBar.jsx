@@ -22,15 +22,16 @@ const SeekBar = ({ videoRef }) => {
   };
 
   useEffect(() => {
+    const video = videoRef;
     const handleTimeUpdate = () => {
-      setCurrentTime(videoRef.current?.currentTime);
+      setCurrentTime(video.current?.currentTime);
     };
 
-    videoRef.current.addEventListener("timeupdate", handleTimeUpdate);
+    video.current.addEventListener("timeupdate", handleTimeUpdate);
 
     return () => {
-      if (videoRef.current) {
-        videoRef.current.removeEventListener("timeupdate", handleTimeUpdate);
+      if (video.current) {
+        video.current.removeEventListener("timeupdate", handleTimeUpdate);
       }
     };
   }, [videoRef]);

@@ -156,7 +156,7 @@ export const getSlug = async (movieID, movieName) => {
     const data = await response.json();
     let found = false;
     for (const item of data.data.items) {
-      if (item.contentable.tmdbId == movieID) {
+      if (item.contentable.tmdbId === movieID) {
         found = true;
         return { status: 200, data: item.slug };
       }

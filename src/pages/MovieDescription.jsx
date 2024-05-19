@@ -1,6 +1,5 @@
 import { Suspense, useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import DisableDevtool from "disable-devtool";
 import "../styles/MovieDescription.css";
 import PlayIcon from "../assets/play.svg";
 import Navbar from "../components/Navbar";
@@ -19,18 +18,6 @@ const MovieDescription = ({ state, dispatch }) => {
   const [currentSection, setCurrentSection] = useState("overview");
   const [loading, setLoading] = useState(false);
   const [showWatchPage, setShowWatchPage] = useState(false);
-  const [devtoolsDetected, setDevtoolsDetected] = useState(false);
-
-  useEffect(() => {
-    // DisableDevtool({
-    //   ondevtoolopen: () => {
-    //     if (!devtoolsDetected) {
-    //       setDevtoolsDetected(true);
-    //       window.location.href = "/sonic.html";
-    //     }
-    //   },
-    // });
-  }, [devtoolsDetected]);
 
   const handleSeasonChange = (season) => {
     navigate(`/${mediaType}/${movieID}/${season}`);
@@ -68,7 +55,7 @@ const MovieDescription = ({ state, dispatch }) => {
     };
 
     getMovieInfos();
-  }, [movieID]);
+  }, [movieID, dispatch, mediaType]);
 
   const handleSectionClick = (name) => {
     if (name !== currentSection) {
@@ -99,7 +86,7 @@ const MovieDescription = ({ state, dispatch }) => {
       setLoading(true);
       fetchSeasonDetails();
     }
-  }, [season]);
+  }, [season, dispatch, movieID]);
 
   const handleEpisodeClick = (episodeDetails) => {
     setLoading(true);

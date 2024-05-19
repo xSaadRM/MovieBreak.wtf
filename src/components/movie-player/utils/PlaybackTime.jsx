@@ -4,17 +4,19 @@ const PlaybackTime = ({ videoRef }) => {
   const [timeStamp, setTimeStamp] = useState(0);
 
   useEffect(() => {
+    const video = videoRef;
+
     const handleTimeupdate = (event) => {
       setTimeStamp(event.target.currentTime);
     };
-    videoRef.current.addEventListener("timeupdate", handleTimeupdate);
+    video.current.addEventListener("timeupdate", handleTimeupdate);
 
     return () => {
-      if (videoRef.current) {
-        videoRef.current.removeEventListener("timeupdate", handleTimeupdate);
+      if (video.current) {
+        video.current.removeEventListener("timeupdate", handleTimeupdate);
       }
     };
-  }, []);
+  }, [videoRef]);
 
   return (
     <p className="current-time">

@@ -22,7 +22,7 @@ const SearchPage = ({isHomePage}) => {
 
   useEffect(() => {
     localStorage.setItem("searchTerm", searchTerm);
-    if (document.location.pathname == "/search") {
+    if (document.location.pathname === "/search") {
       if (searchTerm) {
         searchMovie(searchTerm);
       }
@@ -31,7 +31,7 @@ const SearchPage = ({isHomePage}) => {
 
   return (
     <>
-      {document.location.pathname == "/search" && <Navbar />}
+      {document.location.pathname === "/search" && <Navbar />}
       <div className="search-container">
         <form
           className="search"

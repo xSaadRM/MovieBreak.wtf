@@ -3,27 +3,14 @@ import "../styles/WatchPage.css";
 import React from "react";
 import { useParams } from "react-router-dom";
 import Navbar from "../components/Navbar";
-import DisableDevtool from "disable-devtool";
 import HLSPlayer from "../components/movie-player/HLSPlayer";
 
 const WatchPage = ({ state }) => {
   const { seasonDetails } = state;
   const { mediaType, ep } = useParams();
   const [isOverviewAllShowed, setIsOverviewAllShowed] = useState(false);
-  const [devtoolsDetected, setDevtoolsDetected] = useState(false);
   const episodeNumber = ep - 1;
   const episodeDetails = seasonDetails.episodes[episodeNumber];
-
-  useEffect(() => {
-    // DisableDevtool({
-    //   ondevtoolopen: () => {
-    //     if (!devtoolsDetected) {
-    //       setDevtoolsDetected(true);
-    //       window.location.href = "/sonic.html";
-    //     }
-    //   },
-    // });
-  }, [devtoolsDetected]);
 
   useEffect(() => {
     // console.log(seasonDetails);

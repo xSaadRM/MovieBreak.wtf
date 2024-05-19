@@ -41,6 +41,7 @@ const VideoPlayer = ({ episodeDetails, state }) => {
   const [smashyPlayers, setSmashyPlayers] = useState([]);
 
   useEffect(() => {
+    const video = videoRef;
     const getProviders = async () => {
       const getSlugResponse = await getSlug(movieInfos.id, movieInfos.name);
       setSlug(getSlugResponse);
@@ -91,11 +92,11 @@ const VideoPlayer = ({ episodeDetails, state }) => {
       setIsLoading(false);
       console.log("[SRM] level switchED", data);
     };
-    videoRef.current.addEventListener("seeking", handleSeeking);
-    videoRef.current.addEventListener("seeked", handleSeeked);
-    videoRef.current.addEventListener("play", handlePlay);
-    videoRef.current.addEventListener("pause", handlePause);
-    videoRef.current.addEventListener("canplaythrough", handleReadyState);
+    video.current.addEventListener("seeking", handleSeeking);
+    video.current.addEventListener("seeked", handleSeeked);
+    video.current.addEventListener("play", handlePlay);
+    video.current.addEventListener("pause", handlePause);
+    video.current.addEventListener("canplaythrough", handleReadyState);
     const hls = new Hls();
     hlsRef.current = hls;
     if (Hls.isSupported()) {
@@ -106,16 +107,16 @@ const VideoPlayer = ({ episodeDetails, state }) => {
       hls.on(Hls.Events.LEVEL_SWITCHING, handleLevelSwitching);
       hls.on(Hls.Events.LEVEL_SWITCHED, handleLevelSwitched);
 
-      hls.attachMedia(videoRef.current);
+      hls.attachMedia(video.current);
     }
 
     return () => {
-      if (videoRef.current) {
-        videoRef.current.removeEventListener("seeking", handleSeeking);
-        videoRef.current.removeEventListener("seeked", handleSeeked);
-        videoRef.current.removeEventListener("play", handlePlay);
-        videoRef.current.removeEventListener("pause", handlePause);
-        videoRef.current.removeEventListener(
+      if (video.current) {
+        video.current.removeEventListener("seeking", handleSeeking);
+        video.current.removeEventListener("seeked", handleSeeked);
+        video.current.removeEventListener("play", handlePlay);
+        video.current.removeEventListener("pause", handlePause);
+        video.current.removeEventListener(
           "canplaythrough",
           handleReadyState
         );
@@ -131,7 +132,7 @@ const VideoPlayer = ({ episodeDetails, state }) => {
         hls.destroy();
       }
     };
-  }, []);
+  }, [episodeDetails, movieInfos]);
 
   useEffect(() => {
     setIsLoading(
@@ -144,7 +145,7 @@ const VideoPlayer = ({ episodeDetails, state }) => {
       setisproviderListShown(false);
       hlsRef.current.loadSource(src);
       hlsRef.current.on(Hls.Events.ERROR, function (event, data) {
-        if (data.fatal == true && data.details == "internalException") {
+        if (data.fatal === true && data.details === "internalException") {
           setisPlaying(false);
           setPlayerReady(false);
           hlsRef.current.loadSource(src);
@@ -156,7 +157,7 @@ const VideoPlayer = ({ episodeDetails, state }) => {
   useEffect(() => {
     const getSRC = async () => {
       if (activeProvider && activeProvider.name === "ridotv") {
-        if (slug && slug.status == 200) {
+        if (slug && slug.status === 200) {
           const m3u8 = await fetchRidoTV(
             slug.data,
             episodeDetails.episode_number,
@@ -170,7 +171,7 @@ const VideoPlayer = ({ episodeDetails, state }) => {
       }
     };
     getSRC();
-  }, [activeProvider]);
+  }, [activeProvider, episodeDetails, slug]);
 
   const playerTap = () => {
     setisControlsShown((prev) => !prev);
@@ -304,7 +305,7 @@ const VideoPlayer = ({ episodeDetails, state }) => {
               <div
                 key={player.name}
                 className={`provider ${
-                  activeProvider.index == index ? "active" : ""
+                  activeProvider.index === index ? "active" : ""
                 }`}
                 onClick={() => {
                   if (isproviderListShown) {
