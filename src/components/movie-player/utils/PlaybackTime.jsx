@@ -10,7 +10,9 @@ const PlaybackTime = ({ videoRef }) => {
     videoRef.current.addEventListener("timeupdate", handleTimeupdate);
 
     return () => {
-      videoRef.current.removeEventListener("timeupdate", handleTimeupdate);
+      if (videoRef.current) {
+        videoRef.current.removeEventListener("timeupdate", handleTimeupdate);
+      }
     };
   }, []);
 
