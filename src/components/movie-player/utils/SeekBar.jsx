@@ -51,7 +51,7 @@ const SeekBar = ({ videoRef }) => {
         ref={inputRef}
         type="range"
         min={0}
-        max={videoRef.current.duration}
+        max={videoRef.current.duration.toString()}
         step={1}
         value={isSeeking ? currentTime : videoRef.current.currentTime}
         onChange={handleSeekChange}
