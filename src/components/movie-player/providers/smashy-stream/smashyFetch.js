@@ -6,7 +6,7 @@ export const getWorkingPlayers = async (tmdb, season, episode) => {
       }`
     ),
     fetch(
-      `https://embed.smashystream.com/data.php?tmdb=${tmdb}${
+      `https://embed.smashystream.com/dataa.php?tmdb=${tmdb}${
         season && episode ? `&season=${season}&episode=${episode}` : ""
       }`
     ),
