@@ -6,13 +6,6 @@ import PauseCircleIcon from "@mui/icons-material/PauseCircle";
 import Cloud from "@mui/icons-material/Cloud";
 import RedoIcon from "@mui/icons-material/Redo";
 import UndoIcon from "@mui/icons-material/Undo";
-import SubtitlesIcon from "@mui/icons-material/Subtitles";
-import SubtitlesOffIcon from "@mui/icons-material/SubtitlesOff";
-import FourKIcon from "@mui/icons-material/FourK";
-import TwoKIcon from "@mui/icons-material/TwoK";
-import HighQualityIcon from "@mui/icons-material/HighQuality";
-import HdIcon from "@mui/icons-material/Hd";
-import SdIcon from "@mui/icons-material/Sd";
 import { fetchRidoTV, getSlug } from "./providers/ridotv";
 import LoadingAnimation from "../LoadingAnimation";
 import {
@@ -23,6 +16,8 @@ import SmashyStreamDecoder from "./providers/smashy-stream/decoder";
 import { Fullscreen } from "@mui/icons-material";
 import SeekBar from "./utils/SeekBar";
 import PlaybackTime from "./utils/PlaybackTime";
+import QualitySwitcher from "./utils/QualitySwitcher";
+import SubtitleSwitcher from "./utils/SubtitleSwitcher";
 
 const VideoPlayer = ({ episodeDetails, state }) => {
   const { movieInfos } = state;
@@ -30,7 +25,11 @@ const VideoPlayer = ({ episodeDetails, state }) => {
   const hlsRef = useRef(null);
   const playerRef = useRef(null);
   const [isproviderListShown, setisproviderListShown] = useState(false);
-  const [activeProvider, setactiveProvider] = useState();
+  const [activeProvider, setactiveProvider] = useState({
+    name: null,
+    url: null,
+    index: null,
+  });
   const [src, setSrc] = useState("");
   const [isPlaying, setisPlaying] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -69,7 +68,6 @@ const VideoPlayer = ({ episodeDetails, state }) => {
     const handleReadyState = () => {
       setPlayerReady(true);
     };
-    const handleMediaAtached = async () => {};
     const handleManifestLoading = (event, data) => {
       setManifestLoading(true);
     };
@@ -82,12 +80,17 @@ const VideoPlayer = ({ episodeDetails, state }) => {
     const handleLevelLoaded = (event, data) => {
       setLevelLoading(false);
     };
-    const handleAudioTrackLoading = (event, data) => {
-      console.log("Audio track loading:", data);
+    const handleLevelSwitching = (event, data) => {
+      if (!hls.autoLevelEnabled) {
+        setIsLoading(true);
+      }
+      console.log("[SRM] level switching", data);
     };
-    const handleSubtitleTrackLoading = (event, data) => {};
-    const handleFragLoading = (event, data) => {};
 
+    const handleLevelSwitched = (event, data) => {
+      setIsLoading(false);
+      console.log("[SRM] level switchED", data);
+    };
     videoRef.current.addEventListener("seeking", handleSeeking);
     videoRef.current.addEventListener("seeked", handleSeeked);
     videoRef.current.addEventListener("play", handlePlay);
@@ -96,14 +99,12 @@ const VideoPlayer = ({ episodeDetails, state }) => {
     const hls = new Hls();
     hlsRef.current = hls;
     if (Hls.isSupported()) {
-      hls.on(Hls.Events.MEDIA_ATTACHED, handleMediaAtached);
       hls.on(Hls.Events.MANIFEST_LOADING, handleManifestLoading);
       hls.on(Hls.Events.LEVEL_LOADING, handleLevelLoading);
       hls.on(Hls.Events.MANIFEST_LOADED, handleManifestLoaded);
       hls.on(Hls.Events.LEVEL_LOADED, handleLevelLoaded);
-      hls.on(Hls.Events.AUDIO_TRACK_LOADING, handleAudioTrackLoading);
-      hls.on(Hls.Events.SUBTITLE_TRACK_LOADING, handleSubtitleTrackLoading);
-      hls.on(Hls.Events.FRAG_LOADING, handleFragLoading);
+      hls.on(Hls.Events.LEVEL_SWITCHING, handleLevelSwitching);
+      hls.on(Hls.Events.LEVEL_SWITCHED, handleLevelSwitched);
 
       hls.attachMedia(videoRef.current);
     }
@@ -124,9 +125,9 @@ const VideoPlayer = ({ episodeDetails, state }) => {
         hls.off(Hls.Events.LEVEL_LOADING, handleLevelLoading);
         hls.off(Hls.Events.MANIFEST_LOADED, handleManifestLoaded);
         hls.off(Hls.Events.LEVEL_LOADED, handleLevelLoaded);
-        hls.off(Hls.Events.AUDIO_TRACK_LOADING, handleAudioTrackLoading);
-        hls.off(Hls.Events.SUBTITLE_TRACK_LOADING, handleSubtitleTrackLoading);
-        hls.off(Hls.Events.FRAG_LOADING, handleFragLoading);
+        hls.off(Hls.Events.LEVEL_SWITCHING, handleLevelSwitching);
+        hls.off(Hls.Events.LEVEL_SWITCHED, handleLevelSwitched);
+
         hls.destroy();
       }
     };
@@ -171,10 +172,6 @@ const VideoPlayer = ({ episodeDetails, state }) => {
     getSRC();
   }, [activeProvider]);
 
-  useEffect(() => {
-    setactiveProvider({ name: "ridotv" });
-  }, [slug, smashyPlayers]);
-
   const playerTap = () => {
     setisControlsShown((prev) => !prev);
   };
@@ -185,7 +182,7 @@ const VideoPlayer = ({ episodeDetails, state }) => {
         document.exitFullscreen();
       } else {
         playerRef.current.requestFullscreen();
-        window.screen.orientation.lock("landscape")
+        window.screen.orientation.lock("landscape");
       }
     }
   };
@@ -260,8 +257,12 @@ const VideoPlayer = ({ episodeDetails, state }) => {
             <SeekBar videoRef={videoRef} />
             <div className="control-bar">
               <PlaybackTime videoRef={videoRef} />
-              <div className="fullscreen-toggle" onClick={handleDoubleClick}>
-                <Fullscreen />
+              <div className="right-controls">
+                <SubtitleSwitcher hlsRef={hlsRef} />
+                <QualitySwitcher hlsRef={hlsRef} />
+                <div className="fullscreen-toggle" onClick={handleDoubleClick}>
+                  <Fullscreen />
+                </div>
               </div>
             </div>
           </div>
