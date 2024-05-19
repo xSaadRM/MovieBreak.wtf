@@ -13,7 +13,7 @@ const SubtitleSwitcher = ({ hlsRef }) => {
           setIsSubtitleMenuShown((prev) => !prev);
         }}
       >
-        <SubtitlesIcon />
+        {hls.subtitleTrack == -1 ? <SubtitlesOffIcon /> : <SubtitlesIcon />}{" "}
       </div>
       <div className={`optionSwitcher ${isSubtitleMenuShown ? "show" : ""}`}>
         <div
@@ -22,7 +22,7 @@ const SubtitleSwitcher = ({ hlsRef }) => {
             hls.subtitleTrack = -1;
           }}
         >
-          Disable
+          {hls.subtitleTrack == -1 ? "Disabled" : "Disable"}
         </div>
         {hls?.subtitleTracks?.map((subTrack, index) => {
           return (
