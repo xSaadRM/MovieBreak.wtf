@@ -262,11 +262,15 @@ const VideoPlayer = ({ episodeDetails, state }) => {
             <div className="control-bar">
               <PlaybackTime videoRef={videoRef} />
               <div className="right-controls">
-                <SubtitleSwitcher
-                  subtitlesManagerRef={subtitlesManagerRef}
-                  hlsRef={hlsRef}
-                />
-                <QualitySwitcher hlsRef={hlsRef} />
+                {isControlsShown && (
+                  <>
+                    <SubtitleSwitcher
+                      subtitlesManagerRef={subtitlesManagerRef}
+                      hlsRef={hlsRef}
+                    />
+                    <QualitySwitcher hlsRef={hlsRef} />
+                  </>
+                )}
                 <div className="fullscreen-toggle" onClick={handleDoubleClick}>
                   <Fullscreen />
                 </div>
@@ -298,7 +302,9 @@ const VideoPlayer = ({ episodeDetails, state }) => {
         <div className={`providers`}>
           {slug.status !== 404 ? (
             <div
-              className="provider"
+              className={`provider ${
+                activeProvider.name === "ridotv" ? "active" : ""
+              }`}
               key={"ridotv"}
               onClick={() => {
                 if (isproviderListShown) {

@@ -4,7 +4,15 @@ import SubtitlesOffIcon from "@mui/icons-material/SubtitlesOff";
 
 const SubtitleSwitcher = ({ hlsRef, subtitlesManagerRef }) => {
   const [isSubtitleMenuShown, setIsSubtitleMenuShown] = useState(false);
-  let hls = hlsRef.current;
+  const [subtitleTrack, setSubtitleTrack] = useState(
+    hlsRef.current.subtitleTrack
+  );
+
+  const handleSubtitleTrackChange = (index) => {
+    hlsRef.current.subtitleTrack = index;
+    setSubtitleTrack(index);
+  };
+
   return (
     <>
       <div
@@ -13,24 +21,31 @@ const SubtitleSwitcher = ({ hlsRef, subtitlesManagerRef }) => {
           setIsSubtitleMenuShown((prev) => !prev);
         }}
       >
-        {hls.subtitleTrack === -1 ? <SubtitlesOffIcon /> : <SubtitlesIcon />}{" "}
+        {hlsRef.current.subtitleTrack === -1 ? (
+          <SubtitlesOffIcon />
+        ) : (
+          <SubtitlesIcon />
+        )}{" "}
       </div>
       <div className={`optionSwitcher ${isSubtitleMenuShown ? "show" : ""}`}>
         <div
-          className="option"
+          className={`option ${subtitleTrack === -1 ? "active" : ""}`}
           onClick={() => {
-            hls.subtitleTrack = -1;
+            handleSubtitleTrackChange(-1);
           }}
         >
-          {hls.subtitleTrack === -1 ? "Disabled" : "Disable"}
+          {subtitleTrack === -1 ? "Disabled" : "Disable"}
         </div>
-        {hls.subtitleTracks[0]
-          ? hls.subtitleTracks.map((subTrack, index) => {
+        {hlsRef.current.subtitleTracks[0]
+          ? hlsRef.current.subtitleTracks.map((subTrack, index) => {
               return (
                 <div
-                  className="option"
+                  key={index}
+                  className={`option ${
+                    subtitleTrack === index ? "active" : ""
+                  }`}
                   onClick={() => {
-                    hls.subtitleTrack = index;
+                    handleSubtitleTrackChange(index);
                   }}
                 >
                   {subTrack.name}
@@ -41,6 +56,7 @@ const SubtitleSwitcher = ({ hlsRef, subtitlesManagerRef }) => {
               (subTrack, index) => {
                 return (
                   <div
+                    key={index}
                     className="option"
                     onClick={() => {
                       subtitlesManagerRef.current.switchTrack(index);
