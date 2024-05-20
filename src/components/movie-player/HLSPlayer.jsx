@@ -48,22 +48,35 @@ const VideoPlayer = ({ episodeDetails, state }) => {
 
   useEffect(() => {
     const video = videoRef;
+
     const getProviders = async () => {
-      const getSlugResponse = await getSlug(
-        movieInfos.id,
-        episodeDetails ? movieInfos.name : movieInfos.title
-      );
-      setSlug(getSlugResponse);
-      const fetchAutoEmbed = await fetchAutoEmbedCC(movieInfos.id);
-      setAutoEmbedServers(fetchAutoEmbed);
-      const getSmashyPlayers = await getWorkingPlayers(
-        movieInfos.id,
-        episodeDetails?.season_number,
-        episodeDetails?.episode_number
-      );
-      setSmashyPlayers(getSmashyPlayers);
+      const getSlugResponse = async () => {
+        const data = await getSlug(
+          movieInfos.id,
+          episodeDetails ? movieInfos.name : movieInfos.title
+        );
+        setSlug(data);
+      };
+      const fetchAutoEmbed = async () => {
+        const data = await fetchAutoEmbedCC(movieInfos.id);
+        setAutoEmbedServers(data);
+      };
+      const getSmashyPlayers = async () => {
+        const data = await getWorkingPlayers(
+          movieInfos.id,
+          episodeDetails?.season_number,
+          episodeDetails?.episode_number
+        );
+        setSmashyPlayers(data);
+      };
+
+      getSlugResponse();
+      fetchAutoEmbed();
+      getSmashyPlayers();
     };
+
     getProviders();
+
     const handleSeeking = () => {
       setIsLoading(true);
     };
