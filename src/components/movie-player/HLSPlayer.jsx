@@ -20,6 +20,7 @@ import QualitySwitcher from "./utils/QualitySwitcher";
 import SubtitleSwitcher from "./utils/SubtitleSwitcher";
 import SubtitlesLoader from "./utils/SubtitlesLoader";
 import { SubtitlesManager } from "./utils/SubtitlesManager";
+import { fetchAutoEmbedCC } from "./providers/autoembed";
 
 const VideoPlayer = ({ episodeDetails, state }) => {
   const { movieInfos } = state;
@@ -43,6 +44,8 @@ const VideoPlayer = ({ episodeDetails, state }) => {
   const [slug, setSlug] = useState({});
   const [smashyPlayers, setSmashyPlayers] = useState([]);
   const [subtitles, setsubtitles] = useState(null);
+  const [autoEmbedServers, setAutoEmbedServers] = useState([]);
+
   useEffect(() => {
     const video = videoRef;
     const getProviders = async () => {
@@ -51,6 +54,8 @@ const VideoPlayer = ({ episodeDetails, state }) => {
         episodeDetails ? movieInfos.name : movieInfos.title
       );
       setSlug(getSlugResponse);
+      const fetchAutoEmbed = await fetchAutoEmbedCC(movieInfos.id);
+      setAutoEmbedServers(fetchAutoEmbed);
       const getSmashyPlayers = await getWorkingPlayers(
         movieInfos.id,
         episodeDetails?.season_number,
@@ -174,6 +179,8 @@ const VideoPlayer = ({ episodeDetails, state }) => {
           videoRef.current,
           data.subtitles
         );
+      } else if (activeProvider && activeProvider.name === "autoEmbed") {
+        setSrc(activeProvider.url);
       }
     };
     getSRC();
@@ -328,7 +335,10 @@ const VideoPlayer = ({ episodeDetails, state }) => {
               <div
                 key={player.name}
                 className={`provider ${
-                  activeProvider.index === index ? "active" : ""
+                  activeProvider.name === "smashy" &&
+                  activeProvider.index === index
+                    ? "active"
+                    : ""
                 }`}
                 onClick={() => {
                   if (isproviderListShown) {
@@ -341,6 +351,30 @@ const VideoPlayer = ({ episodeDetails, state }) => {
                 }}
               >
                 Smashy - {player.name}
+              </div>
+            );
+          })}
+          {autoEmbedServers.map((server, index) => {
+            return (
+              <div
+                key={`autoEmbed${server.title}`}
+                className={`provider ${
+                  activeProvider.name === "autoEmbed" &&
+                  activeProvider.index === index
+                    ? "active"
+                    : ""
+                }`}
+                onClick={() => {
+                  if (isproviderListShown) {
+                    setactiveProvider({
+                      name: "autoEmbed",
+                      url: server.file,
+                      index: index,
+                    });
+                  }
+                }}
+              >
+                AutoEmbed - {server.title}
               </div>
             );
           })}
