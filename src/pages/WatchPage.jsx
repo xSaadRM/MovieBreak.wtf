@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import "../styles/WatchPage.css";
 import React from "react";
 import { useParams } from "react-router-dom";
@@ -11,10 +11,6 @@ const WatchPage = ({ state }) => {
   const [isOverviewAllShowed, setIsOverviewAllShowed] = useState(false);
   const episodeNumber = ep - 1;
   const episodeDetails = seasonDetails.episodes[episodeNumber];
-
-  useEffect(() => {
-    // console.log(seasonDetails);
-  }, [seasonDetails]);
 
   return (
     <div className="watch-page">

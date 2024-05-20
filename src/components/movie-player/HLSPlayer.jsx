@@ -46,12 +46,15 @@ const VideoPlayer = ({ episodeDetails, state }) => {
   useEffect(() => {
     const video = videoRef;
     const getProviders = async () => {
-      const getSlugResponse = await getSlug(movieInfos.id, movieInfos.name);
+      const getSlugResponse = await getSlug(
+        movieInfos.id,
+        episodeDetails ? movieInfos.name : movieInfos.title
+      );
       setSlug(getSlugResponse);
       const getSmashyPlayers = await getWorkingPlayers(
         movieInfos.id,
-        episodeDetails.season_number,
-        episodeDetails.episode_number
+        episodeDetails?.season_number,
+        episodeDetails?.episode_number
       );
       setSmashyPlayers(getSmashyPlayers);
     };
@@ -158,8 +161,8 @@ const VideoPlayer = ({ episodeDetails, state }) => {
         if (slug && slug.status === 200) {
           const m3u8 = await fetchRidoTV(
             slug.data,
-            episodeDetails.episode_number,
-            episodeDetails.season_number
+            episodeDetails?.episode_number,
+            episodeDetails?.season_number
           );
           setSrc(m3u8);
         }
@@ -211,13 +214,18 @@ const VideoPlayer = ({ episodeDetails, state }) => {
     >
       <video
         ref={videoRef}
-        poster={`https://image.tmdb.org/t/p/original/${episodeDetails.still_path}`}
+        poster={`https://image.tmdb.org/t/p/original/${
+          episodeDetails?.still_path || movieInfos.backdrop_path
+        }`}
       ></video>
       <div className="movie-infos">
         <div className="movie-ids">
           <h3>
-            {movieInfos.name} - S{episodeDetails.season_number} E
-            {episodeDetails.episode_number}
+            {episodeDetails ? movieInfos.name : movieInfos.title}
+            {episodeDetails
+              ? `- S${episodeDetails.season_number} E
+            ${episodeDetails.episode_number}`
+              : ""}
           </h3>
         </div>
       </div>

@@ -4,7 +4,7 @@ import "../styles/MovieDescription.css";
 import PlayIcon from "../assets/play.svg";
 import Navbar from "../components/Navbar";
 import Carousel from "../components/Carousel";
-import WatchPage from "./WatchPage";
+import HLSPlayer from "../components/movie-player/HLSPlayer";
 import LoadingAnimation from "../components/LoadingAnimation";
 import { setSeasonDetails } from "../reducer/reducer";
 
@@ -109,24 +109,29 @@ const MovieDescription = ({ state, dispatch }) => {
         }}
       ></div>
       <div className="movie-description-container">
-        <div className="backdrop">
-          <img
-            src={`https://image.tmdb.org/t/p/original/${movieInfos.backdrop_path}`}
-            alt="Backdrop"
-          />
-          <div className="movie-infos">
-            <div className="movie-ids">
-              <h3>{movieInfos.original_title || movieInfos.original_name}</h3>
-              <p>{movieInfos.first_air_date || movieInfos.release_date}</p>
+        {showWatchPage ? (
+          <HLSPlayer state={state} />
+        ) : (
+          <div className="backdrop">
+            <img
+              src={`https://image.tmdb.org/t/p/original/${movieInfos.backdrop_path}`}
+              alt="Backdrop"
+            />
+            <div className="movie-infos">
+              <div className="movie-ids">
+                <h3>{movieInfos.original_title || movieInfos.original_name}</h3>
+                <p>{movieInfos.first_air_date || movieInfos.release_date}</p>
+              </div>
             </div>
+            {mediaType === "movie" && (
+              <div className="watch-button" onClick={() => handleWatchClick()}>
+                <img src={PlayIcon} alt="Play" />
+                <p>Watch</p>
+              </div>
+            )}
           </div>
-          {mediaType === "movie" && (
-            <div className="watch-button" onClick={() => handleWatchClick()}>
-              <img src={PlayIcon} alt="Play" />
-              <p>Watch</p>
-            </div>
-          )}
-        </div>
+        )}
+
         {movieInfos && (
           <>
             <div className="sections-container">
@@ -189,9 +194,6 @@ const MovieDescription = ({ state, dispatch }) => {
             </div>
           </>
         )}
-        <Suspense fallback={<LoadingAnimation loading={true} />}>
-          {showWatchPage && <WatchPage />}
-        </Suspense>
         {mediaType === "tv" && (
           <div className="select-season">
             <select
@@ -207,7 +209,7 @@ const MovieDescription = ({ state, dispatch }) => {
             </select>
           </div>
         )}
-        {seasonDetails && (
+        {mediaType === "tv" && seasonDetails && (
           <div className="season-details">
             <div className="episodes-list">
               {seasonDetails.episodes &&
