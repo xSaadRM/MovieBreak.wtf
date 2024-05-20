@@ -1,6 +1,8 @@
-export const fetchAutoEmbedCC = async (id) => {
+export const fetchAutoEmbedCC = async (id, season, ep) => {
   const response = await fetch(
-    `https://autoembed.cc/embed/player.php?id=${id}`
+    `https://autoembed.cc/embed/player.php?id=${id}${
+      season && ep ? `&s=${season}&e=${ep}` : ""
+    }`
   );
   const data = await response.text();
   const matchedData = /"file": (\[[\S\s]*\])/g.exec(data);

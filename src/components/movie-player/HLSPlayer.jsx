@@ -58,7 +58,11 @@ const VideoPlayer = ({ episodeDetails, state }) => {
         setSlug(data);
       };
       const fetchAutoEmbed = async () => {
-        const data = await fetchAutoEmbedCC(movieInfos.id);
+        const data = await fetchAutoEmbedCC(
+          movieInfos.id,
+          episodeDetails?.season_number,
+          episodeDetails?.episode_number
+        );
         setAutoEmbedServers(data);
       };
       const getSmashyPlayers = async () => {
