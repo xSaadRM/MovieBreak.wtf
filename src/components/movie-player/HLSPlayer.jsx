@@ -18,12 +18,15 @@ import SeekBar from "./utils/SeekBar";
 import PlaybackTime from "./utils/PlaybackTime";
 import QualitySwitcher from "./utils/QualitySwitcher";
 import SubtitleSwitcher from "./utils/SubtitleSwitcher";
+import SubtitlesLoader from "./utils/SubtitlesLoader";
+import { SubtitlesManager } from "./utils/SubtitlesManager";
 
 const VideoPlayer = ({ episodeDetails, state }) => {
   const { movieInfos } = state;
   const videoRef = useRef(null);
   const hlsRef = useRef(null);
   const playerRef = useRef(null);
+  const subtitlesManagerRef = useRef(null);
   const [isproviderListShown, setisproviderListShown] = useState(false);
   const [activeProvider, setactiveProvider] = useState({
     name: null,
@@ -39,7 +42,7 @@ const VideoPlayer = ({ episodeDetails, state }) => {
   const [playerReady, setPlayerReady] = useState(false);
   const [slug, setSlug] = useState({});
   const [smashyPlayers, setSmashyPlayers] = useState([]);
-
+  const [subtitles, setsubtitles] = useState(null);
   useEffect(() => {
     const video = videoRef;
     const getProviders = async () => {
@@ -85,12 +88,10 @@ const VideoPlayer = ({ episodeDetails, state }) => {
       if (!hls.autoLevelEnabled) {
         setIsLoading(true);
       }
-      console.log("[SRM] level switching", data);
     };
 
     const handleLevelSwitched = (event, data) => {
       setIsLoading(false);
-      console.log("[SRM] level switchED", data);
     };
     video.current.addEventListener("seeking", handleSeeking);
     video.current.addEventListener("seeked", handleSeeked);
@@ -116,10 +117,7 @@ const VideoPlayer = ({ episodeDetails, state }) => {
         video.current.removeEventListener("seeked", handleSeeked);
         video.current.removeEventListener("play", handlePlay);
         video.current.removeEventListener("pause", handlePause);
-        video.current.removeEventListener(
-          "canplaythrough",
-          handleReadyState
-        );
+        video.current.removeEventListener("canplaythrough", handleReadyState);
       }
       if (hlsRef.current) {
         hls.off(Hls.Events.MANIFEST_LOADING, handleManifestLoading);
@@ -167,7 +165,12 @@ const VideoPlayer = ({ episodeDetails, state }) => {
         }
       } else if (activeProvider && activeProvider.name === "smashy") {
         const data = await getM3U8(activeProvider.url);
+        setsubtitles(data.subtitles);
         setSrc(SmashyStreamDecoder(data.sourceUrls[0]));
+        subtitlesManagerRef.current = new SubtitlesManager(
+          videoRef.current,
+          data.subtitles
+        );
       }
     };
     getSRC();
@@ -259,7 +262,10 @@ const VideoPlayer = ({ episodeDetails, state }) => {
             <div className="control-bar">
               <PlaybackTime videoRef={videoRef} />
               <div className="right-controls">
-                <SubtitleSwitcher hlsRef={hlsRef} />
+                <SubtitleSwitcher
+                  subtitlesManagerRef={subtitlesManagerRef}
+                  hlsRef={hlsRef}
+                />
                 <QualitySwitcher hlsRef={hlsRef} />
                 <div className="fullscreen-toggle" onClick={handleDoubleClick}>
                   <Fullscreen />
@@ -268,6 +274,9 @@ const VideoPlayer = ({ episodeDetails, state }) => {
             </div>
           </div>
         </div>
+      ) : null}
+      {subtitles && !hlsRef.current.subtitleTracks[0] ? (
+        <SubtitlesLoader subtitlesManagerRef={subtitlesManagerRef} />
       ) : null}
       <div
         className="cloud-icon"

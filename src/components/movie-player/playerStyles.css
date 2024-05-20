@@ -253,3 +253,8 @@
   display: flex;
   justify-content: center;
 }
+.subtitleText {
+  position: absolute;
+  bottom: 10%;
+  background-color: black;
+}

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import SubtitlesIcon from "@mui/icons-material/Subtitles";
 import SubtitlesOffIcon from "@mui/icons-material/SubtitlesOff";
 
-const SubtitleSwitcher = ({ hlsRef }) => {
+const SubtitleSwitcher = ({ hlsRef, subtitlesManagerRef }) => {
   const [isSubtitleMenuShown, setIsSubtitleMenuShown] = useState(false);
   let hls = hlsRef.current;
   return (
@@ -24,18 +24,33 @@ const SubtitleSwitcher = ({ hlsRef }) => {
         >
           {hls.subtitleTrack === -1 ? "Disabled" : "Disable"}
         </div>
-        {hls?.subtitleTracks?.map((subTrack, index) => {
-          return (
-            <div
-              className="option"
-              onClick={() => {
-                hls.subtitleTrack = index;
-              }}
-            >
-              {subTrack.name}
-            </div>
-          );
-        })}
+        {hls.subtitleTracks[0]
+          ? hls.subtitleTracks.map((subTrack, index) => {
+              return (
+                <div
+                  className="option"
+                  onClick={() => {
+                    hls.subtitleTrack = index;
+                  }}
+                >
+                  {subTrack.name}
+                </div>
+              );
+            })
+          : subtitlesManagerRef.current?.subtitleArray.map(
+              (subTrack, index) => {
+                return (
+                  <div
+                    className="option"
+                    onClick={() => {
+                      subtitlesManagerRef.current.switchTrack(index);
+                    }}
+                  >
+                    {subTrack.name}
+                  </div>
+                );
+              }
+            )}
       </div>
     </>
   );
