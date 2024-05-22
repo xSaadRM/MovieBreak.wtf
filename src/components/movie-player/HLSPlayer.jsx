@@ -13,7 +13,7 @@ import {
   getWorkingPlayers,
 } from "./providers/smashy-stream/smashyFetch";
 import SmashyStreamDecoder from "./providers/smashy-stream/decoder";
-import { Fullscreen } from "@mui/icons-material";
+import { Fullscreen, NavigateBefore } from "@mui/icons-material";
 import SeekBar from "./utils/SeekBar";
 import PlaybackTime from "./utils/PlaybackTime";
 import QualitySwitcher from "./utils/QualitySwitcher";
@@ -21,9 +21,15 @@ import SubtitleSwitcher from "./utils/SubtitleSwitcher";
 import SubtitlesLoader from "./utils/SubtitlesLoader";
 import { SubtitlesManager } from "./utils/SubtitlesManager";
 import { fetchAutoEmbedCC } from "./providers/autoembed";
+import NavigateNextIcon from "@mui/icons-material/NavigateNext";
+import { useNavigate, useParams } from "react-router-dom";
 
-const VideoPlayer = ({ episodeDetails, state }) => {
-  const { movieInfos } = state;
+const VideoPlayer = ({ state }) => {
+  const navigate = useNavigate();
+  const { mediaType, movieID, season, ep } = useParams();
+  const { movieInfos, seasonDetails } = state;
+  const episodeDetails =
+    mediaType === "tv" ? seasonDetails.episodes[ep - 1] : null;
   const videoRef = useRef(null);
   const hlsRef = useRef(null);
   const playerRef = useRef(null);
@@ -47,13 +53,14 @@ const VideoPlayer = ({ episodeDetails, state }) => {
   const [autoEmbedServers, setAutoEmbedServers] = useState([]);
 
   useEffect(() => {
+    console.log(ep, mediaType, seasonDetails);
     const video = videoRef;
 
     const getProviders = async () => {
       const getSlugResponse = async () => {
         const data = await getSlug(
           movieInfos.id,
-          episodeDetails ? movieInfos.name : movieInfos.title
+          mediaType === "tv" ? movieInfos.name : movieInfos.title
         );
         setSlug(data);
       };
@@ -245,7 +252,7 @@ const VideoPlayer = ({ episodeDetails, state }) => {
       <div className="movie-infos">
         <div className="movie-ids">
           <h3>
-            {episodeDetails ? movieInfos.name : movieInfos.title}
+            {mediaType === "tv" ? movieInfos.name : movieInfos.title}
             {episodeDetails
               ? `- S${episodeDetails.season_number} E
             ${episodeDetails.episode_number}`
@@ -257,7 +264,7 @@ const VideoPlayer = ({ episodeDetails, state }) => {
         <div className="moviebreak-controls">
           <div className="centerControls">
             <div
-              className="seekBackward seek"
+              className="icon seekBackward seek"
               onClick={(e) => {
                 e.stopPropagation();
                 videoRef.current.currentTime -= 10;
@@ -267,14 +274,14 @@ const VideoPlayer = ({ episodeDetails, state }) => {
               <p>10</p>
             </div>
             {!isLoading ? (
-              <div className="play-button" onClick={togglePlay}>
+              <div className="icon play-button" onClick={togglePlay}>
                 {isPlaying ? <PauseCircleIcon /> : <PlayCircleIcon />}
               </div>
             ) : (
               <LoadingAnimation loading={true} />
             )}
             <div
-              className="seekForward seek"
+              className="icon seekForward seek"
               onClick={(e) => {
                 e.stopPropagation();
                 videoRef.current.currentTime += 30;
@@ -293,6 +300,23 @@ const VideoPlayer = ({ episodeDetails, state }) => {
             <SeekBar videoRef={videoRef} />
             <div className="control-bar">
               <PlaybackTime videoRef={videoRef} />
+              <div
+                className="icon previousEpisode-button"
+                onClick={() => {
+                  navigate(`/${mediaType}/${movieID}/${season}/${ep - 1}`);
+                }}
+              >
+                <NavigateBefore />
+              </div>
+              <div
+                className="icon nextEpisode-button"
+                onClick={() => {
+                  console.log(+ep);
+                  navigate(`/${mediaType}/${movieID}/${season}/${+ep + 1}`);
+                }}
+              >
+                <NavigateNextIcon />
+              </div>
               <div className="right-controls">
                 {isControlsShown && (
                   <>
@@ -303,7 +327,10 @@ const VideoPlayer = ({ episodeDetails, state }) => {
                     <QualitySwitcher hlsRef={hlsRef} />
                   </>
                 )}
-                <div className="fullscreen-toggle" onClick={handleDoubleClick}>
+                <div
+                  className="icon fullscreen-toggle"
+                  onClick={handleDoubleClick}
+                >
                   <Fullscreen />
                 </div>
               </div>
@@ -315,7 +342,7 @@ const VideoPlayer = ({ episodeDetails, state }) => {
         <SubtitlesLoader subtitlesManagerRef={subtitlesManagerRef} />
       ) : null}
       <div
-        className="cloud-icon"
+        className="icon cloud"
         onClick={(e) => {
           e.stopPropagation();
           if (isControlsShown) {

@@ -7,7 +7,7 @@ const QualitySwitcher = ({ hlsRef }) => {
   return (
     <>
       <div
-        className="settings-icon"
+        className="icon settings"
         onClick={() => setisSettingsShown((prev) => !prev)}
       >
         <Settings />

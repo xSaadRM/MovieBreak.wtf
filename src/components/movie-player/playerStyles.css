@@ -36,7 +36,7 @@
 .provider-list,
 .providers,
 .provider,
-.cloud-icon,
+.icon.cloud,
 .optionSwitcher {
   transition: opacity 0.5s ease, visibility 0.5s ease;
   visibility: hidden;
@@ -45,7 +45,7 @@
 
 .moviebreak-player.showcontrols .movie-infos,
 .showcontrols .moviebreak-controls,
-.showcontrols .cloud-icon,
+.showcontrols .icon.cloud,
 .provider-list.show-providers,
 .showcontrols .show-providers .providers,
 .showcontrols .show-providers .provider,
@@ -79,20 +79,10 @@
   width: 40px;
   height: auto;
 }
-.seek:hover,
-.play-button:hover,
-.cloud-icon:hover,
-.fullscreen-toggle:hover,
-.settings-icon:hover,
-.subtitleIcon:hover {
+.icon:hover {
   transform: scale(1.2);
 }
-.seek:hover svg,
-.play-button:hover svg,
-.cloud-icon:hover svg,
-.fullscreen-toggle:hover svg,
-.settings-icon:hover svg,
-.subtitleIcon:hover svg {
+.icon:hover svg {
   filter: drop-shadow(0 0 4px hsl(258, 99%, 40%));
 }
 .moviebreak-controls .loading-animation {
@@ -150,7 +140,7 @@
   background-color: hsla(189, 91%, 39%, 0.719);
 }
 
-.cloud-icon {
+.icon.cloud {
   right: 0;
   z-index: 2;
   position: absolute;

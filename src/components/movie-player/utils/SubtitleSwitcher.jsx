@@ -16,7 +16,7 @@ const SubtitleSwitcher = ({ hlsRef, subtitlesManagerRef }) => {
   return (
     <>
       <div
-        className="subtitleIcon"
+        className="icon subtitles"
         onClick={() => {
           setIsSubtitleMenuShown((prev) => !prev);
         }}
