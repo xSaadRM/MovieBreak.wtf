@@ -300,23 +300,27 @@ const VideoPlayer = ({ state }) => {
             <SeekBar videoRef={videoRef} />
             <div className="control-bar">
               <PlaybackTime videoRef={videoRef} />
-              <div
-                className="icon previousEpisode-button"
-                onClick={() => {
-                  navigate(`/${mediaType}/${movieID}/${season}/${ep - 1}`);
-                }}
-              >
-                <NavigateBefore />
-              </div>
-              <div
-                className="icon nextEpisode-button"
-                onClick={() => {
-                  console.log(+ep);
-                  navigate(`/${mediaType}/${movieID}/${season}/${+ep + 1}`);
-                }}
-              >
-                <NavigateNextIcon />
-              </div>
+              {mediaType === "tv" ? (
+                <>
+                  <div
+                    className="icon previousEpisode-button"
+                    onClick={() => {
+                      navigate(`/${mediaType}/${movieID}/${season}/${ep - 1}`);
+                    }}
+                  >
+                    <NavigateBefore />
+                  </div>
+                  <div
+                    className="icon nextEpisode-button"
+                    onClick={() => {
+                      console.log(+ep);
+                      navigate(`/${mediaType}/${movieID}/${season}/${+ep + 1}`);
+                    }}
+                  >
+                    <NavigateNextIcon />
+                  </div>
+                </>
+              ) : null}
               <div className="right-controls">
                 {isControlsShown && (
                   <>
