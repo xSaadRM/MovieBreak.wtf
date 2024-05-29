@@ -11,6 +11,10 @@
 # production
 /build
 
+#deploy
+ftpconfig.json
+deploy.js
+
 # misc
 .DS_Store
 .env.local
