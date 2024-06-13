@@ -8,9 +8,15 @@ import {
   setTrendingShows,
   setTopShows,
 } from "../reducer/reducer";
+import { useState } from "react";
 
 const HomePage = ({ state, dispatch }) => {
   const { trendingMovies, topMovies, trendingShows, topShows } = state;
+  const [activeSection, setactiveSection] = useState({
+    weekTrending: "tv",
+    topRated: "tv",
+  });
+
   const getTrending = async (type) => {
     try {
       const response = await fetch(
@@ -65,25 +71,85 @@ const HomePage = ({ state, dispatch }) => {
       <div className="app">
         <Navbar />
         <SearchPage isHomePage={true} />
+        <div className="movieSection">
+          <p>Trending this week</p>
+          <div className="toggle">
+            <span
+              onClick={() => {
+                setactiveSection({
+                  ...activeSection,
+                  weekTrending: "tv",
+                });
+              }}
+              className={activeSection.weekTrending === "tv" ? "active" : ""}
+            >
+              TV
+            </span>
+            <span
+              onClick={() => {
+                setactiveSection({
+                  ...activeSection,
+                  weekTrending: "movies",
+                });
+              }}
+              className={
+                activeSection.weekTrending === "movies" ? "active" : ""
+              }
+            >
+              Movies
+            </span>
+          </div>
+        </div>
         <Carousel
+          className={activeSection.weekTrending === "tv" ? "active" : ""}
           movies={trendingShows}
           media_type={"tv"}
           type="TV Shows"
           category={"Trending"}
         />
         <Carousel
+          className={activeSection.weekTrending === "movies" ? "active" : ""}
           movies={trendingMovies}
           media_type={"movie"}
           type="Movies"
           category={"Trending"}
         />
+        <div className="movieSection">
+          <p>Top rated</p>
+          <div className="toggle">
+            <span
+              onClick={() => {
+                setactiveSection({
+                  ...activeSection,
+                  topRated: "tv",
+                });
+              }}
+              className={activeSection.topRated === "tv" ? "active" : ""}
+            >
+              TV
+            </span>
+            <span
+              onClick={() => {
+                setactiveSection({
+                  ...activeSection,
+                  topRated: "movies",
+                });
+              }}
+              className={activeSection.topRated === "movies" ? "active" : ""}
+            >
+              Movies
+            </span>
+          </div>
+        </div>
         <Carousel
+          className={activeSection.topRated === "tv" ? "active" : ""}
           movies={topShows}
           media_type={"tv"}
           type="TV Shows"
           category={"Top Rated"}
         />
         <Carousel
+          className={activeSection.topRated === "movies" ? "active" : ""}
           movies={topMovies}
           media_type={"movie"}
           type="Movies"

@@ -1,0 +1,1140 @@
+{
+  "adult": false,
+  "backdrop_path": "/yWKPYjbkV8Bb9JLSKsX7KEQCuoh.jpg",
+  "created_by": [
+    {
+      "id": 217587,
+      "credit_id": "63692d911684f7007a9beaa4",
+      "name": "Leslye Headland",
+      "original_name": "Leslye Headland",
+      "gender": 1,
+      "profile_path": "/tHrxGDqAp89F9m0ISRUuuUeKrb4.jpg"
+    }
+  ],
+  "episode_run_time": [42],
+  "first_air_date": "2024-06-04",
+  "genres": [
+    {
+      "id": 9648,
+      "name": "Mystery"
+    },
+    {
+      "id": 10765,
+      "name": "Sci-Fi & Fantasy"
+    }
+  ],
+  "homepage": "https://www.disneyplus.com/series/the-acolyte/39RAA0bOYXQ0",
+  "id": 114479,
+  "in_production": true,
+  "languages": ["en"],
+  "last_air_date": "2024-06-11",
+  "last_episode_to_air": {
+    "id": 5220954,
+    "overview": "On a mysterious planet, the tragic journey of two sisters begins.",
+    "name": "Destiny",
+    "vote_average": 5.6,
+    "vote_count": 9,
+    "air_date": "2024-06-11",
+    "episode_number": 3,
+    "episode_type": "standard",
+    "production_code": "",
+    "runtime": 44,
+    "season_number": 1,
+    "show_id": 114479,
+    "still_path": "/nXNMktM90svjlXGeIG8Uq0qWZQz.jpg"
+  },
+  "name": "The Acolyte",
+  "next_episode_to_air": {
+    "id": 5220955,
+    "overview": "",
+    "name": "Episode 4",
+    "vote_average": 0,
+    "vote_count": 0,
+    "air_date": "2024-06-18",
+    "episode_number": 4,
+    "episode_type": "standard",
+    "production_code": "",
+    "runtime": null,
+    "season_number": 1,
+    "show_id": 114479,
+    "still_path": "/gM0rJ2B4VchITCJAvJX0KXbx3dA.jpg"
+  },
+  "networks": [
+    {
+      "id": 2739,
+      "logo_path": "/1edZOYAfoyZyZ3rklNSiUpXX30Q.png",
+      "name": "Disney+",
+      "origin_country": ""
+    }
+  ],
+  "number_of_episodes": 8,
+  "number_of_seasons": 1,
+  "origin_country": ["US"],
+  "original_language": "en",
+  "original_name": "The Acolyte",
+  "overview": "An investigation into a shocking crime spree pits a respected Jedi Master against a dangerous warrior from his past. As more clues emerge, they travel down a dark path where sinister forces reveal all is not what it seems.",
+  "popularity": 1354.328,
+  "poster_path": "/mztdt3y6GBsJR69zHtszFezTCLT.jpg",
+  "production_companies": [
+    {
+      "id": 1,
+      "logo_path": "/tlVSws0RvvtPBwViUyOFAO0vcQS.png",
+      "name": "Lucasfilm Ltd.",
+      "origin_country": "US"
+    },
+    {
+      "id": 199908,
+      "logo_path": null,
+      "name": "Shoot to Midnight",
+      "origin_country": "US"
+    }
+  ],
+  "production_countries": [
+    {
+      "iso_3166_1": "US",
+      "name": "United States of America"
+    }
+  ],
+  "seasons": [
+    {
+      "air_date": "2024-06-04",
+      "episode_count": 8,
+      "id": 171720,
+      "name": "Season 1",
+      "overview": "",
+      "poster_path": "/1dcoIe9uKbWykq2zsnkaz2rxPnP.jpg",
+      "season_number": 1,
+      "vote_average": 6
+    }
+  ],
+  "spoken_languages": [
+    {
+      "english_name": "English",
+      "iso_639_1": "en",
+      "name": "English"
+    }
+  ],
+  "status": "Returning Series",
+  "tagline": "In an age of light, a darkness rises.",
+  "type": "Miniseries",
+  "vote_average": 6.009,
+  "vote_count": 115,
+  "videos": {
+    "results": [
+      {
+        "iso_639_1": "en",
+        "iso_3166_1": "US",
+        "name": "Streaming Tomorrow on Disney+",
+        "key": "Hl7HG4PbZWE",
+        "site": "YouTube",
+        "size": 1080,
+        "type": "Teaser",
+        "official": true,
+        "published_at": "2024-06-03T16:00:14.000Z",
+        "id": "665fb25c6eee97d9ddbc3508"
+      },
+      {
+        "iso_639_1": "en",
+        "iso_3166_1": "US",
+        "name": "Crafting the Combat",
+        "key": "7Dju63U24m0",
+        "site": "YouTube",
+        "size": 1080,
+        "type": "Behind the Scenes",
+        "official": true,
+        "published_at": "2024-06-02T17:00:05.000Z",
+        "id": "665d771b9407b0a20e491b65"
+      },
+      {
+        "iso_639_1": "en",
+        "iso_3166_1": "US",
+        "name": "It's Coming",
+        "key": "6poFQjvrsco",
+        "site": "YouTube",
+        "size": 1080,
+        "type": "Teaser",
+        "official": true,
+        "published_at": "2024-06-01T18:00:04.000Z",
+        "id": "665d77261913c1f7b75ab1ae"
+      },
+      {
+        "iso_639_1": "en",
+        "iso_3166_1": "US",
+        "name": "Awake",
+        "key": "lIF1B7S6ogY",
+        "site": "YouTube",
+        "size": 1080,
+        "type": "Teaser",
+        "official": true,
+        "published_at": "2024-05-31T16:00:45.000Z",
+        "id": "665d77347c431fc42b491b4b"
+      },
+      {
+        "iso_639_1": "en",
+        "iso_3166_1": "US",
+        "name": "Launch Event Recap",
+        "key": "9DItelHk3ng",
+        "site": "YouTube",
+        "size": 1080,
+        "type": "Featurette",
+        "official": true,
+        "published_at": "2024-05-30T21:05:21.000Z",
+        "id": "665d77413505ed45b02324f3"
+      },
+      {
+        "iso_639_1": "en",
+        "iso_3166_1": "US",
+        "name": "Star Wars Conversations",
+        "key": "9NRL4pCcZ8Q",
+        "site": "YouTube",
+        "size": 1080,
+        "type": "Featurette",
+        "official": true,
+        "published_at": "2024-05-30T17:00:07.000Z",
+        "id": "665d76faa3fa5bac70491afc"
+      },
+      {
+        "iso_639_1": "en",
+        "iso_3166_1": "US",
+        "name": "Exploring Star Wars",
+        "key": "RXF0IfbgpXQ",
+        "site": "YouTube",
+        "size": 1080,
+        "type": "Featurette",
+        "official": true,
+        "published_at": "2024-05-29T20:00:20.000Z",
+        "id": "6657fe724446eef9fa74d83c"
+      },
+      {
+        "iso_639_1": "en",
+        "iso_3166_1": "US",
+        "name": "Red Saber Green Saber",
+        "key": "Wb_zdHIQOj8",
+        "site": "YouTube",
+        "size": 1080,
+        "type": "Featurette",
+        "official": true,
+        "published_at": "2024-05-29T19:00:27.000Z",
+        "id": "6657fe83336fcc95f4a8d764"
+      },
+      {
+        "iso_639_1": "en",
+        "iso_3166_1": "US",
+        "name": "Launch Event",
+        "key": "0DaWPcYe2pc",
+        "site": "YouTube",
+        "size": 1080,
+        "type": "Featurette",
+        "official": true,
+        "published_at": "2024-05-24T21:40:12.000Z",
+        "id": "66550c719b4bab3b43b7e023"
+      },
+      {
+        "iso_639_1": "en",
+        "iso_3166_1": "US",
+        "name": "Creating the Acolyte",
+        "key": "zotV8szyesw",
+        "site": "YouTube",
+        "size": 1080,
+        "type": "Behind the Scenes",
+        "official": true,
+        "published_at": "2024-05-23T17:00:44.000Z",
+        "id": "66501a4e05b667e3ed0680d3"
+      },
+      {
+        "iso_639_1": "en",
+        "iso_3166_1": "US",
+        "name": "Evolve",
+        "key": "QIrF3elBNS8",
+        "site": "YouTube",
+        "size": 1080,
+        "type": "Teaser",
+        "official": true,
+        "published_at": "2024-05-22T18:20:55.000Z",
+        "id": "664e4305ed0fe590824295c8"
+      },
+      {
+        "iso_639_1": "en",
+        "iso_3166_1": "US",
+        "name": "Mae and  Sol Fight",
+        "key": "ABX8upKvrto",
+        "site": "YouTube",
+        "size": 1080,
+        "type": "Clip",
+        "official": true,
+        "published_at": "2024-05-22T14:00:13.000Z",
+        "id": "664e15812b7c699c7a9ac4e0"
+      },
+      {
+        "iso_639_1": "en",
+        "iso_3166_1": "US",
+        "name": "Sol of the Jedi",
+        "key": "B0WxdRadrm8",
+        "site": "YouTube",
+        "size": 1080,
+        "type": "Behind the Scenes",
+        "official": true,
+        "published_at": "2024-05-21T15:00:15.000Z",
+        "id": "664de807c7aa0dab00b9967c"
+      },
+      {
+        "iso_639_1": "en",
+        "iso_3166_1": "US",
+        "name": "Amandla & Her Violin",
+        "key": "c3hCVk5Z9po",
+        "site": "YouTube",
+        "size": 1080,
+        "type": "Behind the Scenes",
+        "official": true,
+        "published_at": "2024-05-20T18:00:18.000Z",
+        "id": "664de81602b79c298334999e"
+      },
+      {
+        "iso_639_1": "en",
+        "iso_3166_1": "US",
+        "name": "Plan",
+        "key": "Py_IYpy4IlQ",
+        "site": "YouTube",
+        "size": 1080,
+        "type": "Teaser",
+        "official": true,
+        "published_at": "2024-05-18T17:00:16.000Z",
+        "id": "664902a1959912b3d97a4382"
+      },
+      {
+        "iso_639_1": "en",
+        "iso_3166_1": "US",
+        "name": "Conflict",
+        "key": "7BCP4JSMoKc",
+        "site": "YouTube",
+        "size": 1080,
+        "type": "Teaser",
+        "official": true,
+        "published_at": "2024-05-11T17:00:04.000Z",
+        "id": "664028ef0ac7c93a3a439310"
+      },
+      {
+        "iso_639_1": "en",
+        "iso_3166_1": "US",
+        "name": "Official Trailer",
+        "key": "6tzur6JrUEA",
+        "site": "YouTube",
+        "size": 1080,
+        "type": "Trailer",
+        "official": true,
+        "published_at": "2024-05-04T14:51:45.000Z",
+        "id": "66366a4605b549012c6e5df9"
+      },
+      {
+        "iso_639_1": "en",
+        "iso_3166_1": "US",
+        "name": "Official Trailer",
+        "key": "BtytYWhg2mc",
+        "site": "YouTube",
+        "size": 1080,
+        "type": "Trailer",
+        "official": true,
+        "published_at": "2024-03-19T15:00:14.000Z",
+        "id": "65f9afbc24b333014779b7c9"
+      }
+    ]
+  },
+  "credits": {
+    "cast": [
+      {
+        "adult": false,
+        "gender": 3,
+        "id": 561869,
+        "known_for_department": "Acting",
+        "name": "Amandla Stenberg",
+        "original_name": "Amandla Stenberg",
+        "popularity": 55.24,
+        "profile_path": "/5blEjiO4zA8x2AFPyfVds7J3yhq.jpg",
+        "character": "Mae Aniseya / Osha Aniseya",
+        "credit_id": "61b163651d01910064bc7cd7",
+        "order": 0
+      },
+      {
+        "adult": false,
+        "gender": 2,
+        "id": 73249,
+        "known_for_department": "Acting",
+        "name": "Lee Jung-jae",
+        "original_name": "이정재",
+        "popularity": 17.764,
+        "profile_path": "/3h5Cfm0X8ohWn7psZkqdNWqXAHH.jpg",
+        "character": "Master Sol",
+        "credit_id": "631a18d7426ae8007f84189d",
+        "order": 1
+      }
+    ],
+    "crew": [
+      {
+        "adult": false,
+        "gender": 1,
+        "id": 217587,
+        "known_for_department": "Writing",
+        "name": "Leslye Headland",
+        "original_name": "Leslye Headland",
+        "popularity": 5.93,
+        "profile_path": "/tHrxGDqAp89F9m0ISRUuuUeKrb4.jpg",
+        "credit_id": "5fd2f8497e12f0003c30e63a",
+        "department": "Production",
+        "job": "Executive Producer"
+      },
+      {
+        "adult": false,
+        "gender": 1,
+        "id": 489,
+        "known_for_department": "Production",
+        "name": "Kathleen Kennedy",
+        "original_name": "Kathleen Kennedy",
+        "popularity": 5.733,
+        "profile_path": "/ndgYlie0PHkyqEiEBGM8SqrPOkr.jpg",
+        "credit_id": "5fd2f85c9a9f9a0041921390",
+        "department": "Production",
+        "job": "Executive Producer"
+      },
+      {
+        "adult": false,
+        "gender": 2,
+        "id": 1174045,
+        "known_for_department": "Production",
+        "name": "Simon Emanuel",
+        "original_name": "Simon Emanuel",
+        "popularity": 12.484,
+        "profile_path": "/clw3K31l1TKmoDoSPSBu1F8rVNc.jpg",
+        "credit_id": "636960919a64c1007f31736b",
+        "department": "Production",
+        "job": "Executive Producer"
+      },
+      {
+        "adult": false,
+        "gender": 2,
+        "id": 104831,
+        "known_for_department": "Writing",
+        "name": "Jeff King",
+        "original_name": "Jeff King",
+        "popularity": 12.807,
+        "profile_path": "/vOzeRBFopObv1hOZOATP4VJi552.jpg",
+        "credit_id": "6369609a35039800824970dc",
+        "department": "Production",
+        "job": "Executive Producer"
+      },
+      {
+        "adult": false,
+        "gender": 2,
+        "id": 587808,
+        "known_for_department": "Writing",
+        "name": "Jason A. Micallef",
+        "original_name": "Jason A. Micallef",
+        "popularity": 2.154,
+        "profile_path": "/tlBZpAbn9YVc5ydpWHDjmCwi5rg.jpg",
+        "credit_id": "636960a19f1be70081a680ce",
+        "department": "Production",
+        "job": "Executive Producer"
+      },
+      {
+        "adult": false,
+        "gender": 0,
+        "id": 1354805,
+        "known_for_department": "Writing",
+        "name": "Rayne Roberts",
+        "original_name": "Rayne Roberts",
+        "popularity": 0.317,
+        "profile_path": null,
+        "credit_id": "636960b79a64c10082eafabd",
+        "department": "Production",
+        "job": "Producer"
+      },
+      {
+        "adult": false,
+        "gender": 0,
+        "id": 40838,
+        "known_for_department": "Production",
+        "name": "Damian Anderson",
+        "original_name": "Damian Anderson",
+        "popularity": 1.295,
+        "profile_path": null,
+        "credit_id": "636960bd9f1be70081a680d4",
+        "department": "Production",
+        "job": "Producer"
+      },
+      {
+        "adult": false,
+        "gender": 1,
+        "id": 51922,
+        "known_for_department": "Production",
+        "name": "Carmen Cuba",
+        "original_name": "Carmen Cuba",
+        "popularity": 4.199,
+        "profile_path": "/994fHTwOhrpvO8mnroGaGHZ2s11.jpg",
+        "credit_id": "64a9e65f9c97bd011c586a5e",
+        "department": "Production",
+        "job": "Casting"
+      },
+      {
+        "adult": false,
+        "gender": 2,
+        "id": 1761126,
+        "known_for_department": "Sound",
+        "name": "Michael Abels",
+        "original_name": "Michael Abels",
+        "popularity": 1.376,
+        "profile_path": "/ggugPV938TZrPS5lRe4qZPvrjZO.jpg",
+        "credit_id": "65d65b55fdf8b7017cc758f6",
+        "department": "Sound",
+        "job": "Original Music Composer"
+      },
+      {
+        "adult": false,
+        "gender": 1,
+        "id": 98430,
+        "known_for_department": "Writing",
+        "name": "Charmaine DeGraté",
+        "original_name": "Charmaine DeGraté",
+        "popularity": 2.442,
+        "profile_path": "/cs7jzuvKMe9t2DHKQ9NtKBeDZMh.jpg",
+        "credit_id": "65f8827a903c52017e2a1f98",
+        "department": "Production",
+        "job": "Co-Executive Producer"
+      },
+      {
+        "adult": false,
+        "gender": 2,
+        "id": 1688158,
+        "known_for_department": "Writing",
+        "name": "Kor Adana",
+        "original_name": "Kor Adana",
+        "popularity": 0.932,
+        "profile_path": null,
+        "credit_id": "65f88280ae3843017d4cbfe2",
+        "department": "Production",
+        "job": "Co-Executive Producer"
+      },
+      {
+        "adult": false,
+        "gender": 2,
+        "id": 1,
+        "known_for_department": "Directing",
+        "name": "George Lucas",
+        "original_name": "George Lucas",
+        "popularity": 16.515,
+        "profile_path": "/WCSZzWdtPmdRxH9LUCVi2JPCSJ.jpg",
+        "credit_id": "65fa148fffc9de01615ea7b5",
+        "department": "Writing",
+        "job": "Original Film Writer"
+      },
+      {
+        "adult": false,
+        "gender": 2,
+        "id": 2983557,
+        "known_for_department": "Writing",
+        "name": "Cameron Squires",
+        "original_name": "Cameron Squires",
+        "popularity": 1.437,
+        "profile_path": null,
+        "credit_id": "65fa149e26dac1018713dfed",
+        "department": "Production",
+        "job": "Co-Producer"
+      },
+      {
+        "adult": false,
+        "gender": 1,
+        "id": 1403427,
+        "known_for_department": "Production",
+        "name": "Candice D. Campos",
+        "original_name": "Candice D. Campos",
+        "popularity": 1.411,
+        "profile_path": null,
+        "credit_id": "65fa14ab1bf2660186737c14",
+        "department": "Production",
+        "job": "Co-Producer"
+      },
+      {
+        "adult": false,
+        "gender": 0,
+        "id": 2428470,
+        "known_for_department": "Writing",
+        "name": "Eileen Shim",
+        "original_name": "Eileen Shim",
+        "popularity": 4.192,
+        "profile_path": null,
+        "credit_id": "65fa14bbc50ad2017effbe63",
+        "department": "Production",
+        "job": "Producer"
+      },
+      {
+        "adult": false,
+        "gender": 0,
+        "id": 1728544,
+        "known_for_department": "Visual Effects",
+        "name": "Rob Bredow",
+        "original_name": "Rob Bredow",
+        "popularity": 0.93,
+        "profile_path": null,
+        "credit_id": "65fa14c1a589020186313650",
+        "department": "Production",
+        "job": "Producer"
+      },
+      {
+        "adult": false,
+        "gender": 2,
+        "id": 1561360,
+        "known_for_department": "Sound",
+        "name": "Brian Chumney",
+        "original_name": "Brian Chumney",
+        "popularity": 2.44,
+        "profile_path": "/hioKZVbtglGhL0rdI9mjqf2AwEe.jpg",
+        "credit_id": "662ff970f6fd180122236342",
+        "department": "Sound",
+        "job": "Supervising Sound Editor"
+      },
+      {
+        "adult": false,
+        "gender": 1,
+        "id": 1756237,
+        "known_for_department": "Sound",
+        "name": "Kimberly Patrick",
+        "original_name": "Kimberly Patrick",
+        "popularity": 0.988,
+        "profile_path": null,
+        "credit_id": "662ff9831f0275012c14f05b",
+        "department": "Sound",
+        "job": "Sound Designer"
+      },
+      {
+        "adult": false,
+        "gender": 1,
+        "id": 2053274,
+        "known_for_department": "Sound",
+        "name": "Bonnie Wild",
+        "original_name": "Bonnie Wild",
+        "popularity": 3.531,
+        "profile_path": "/idPtIhDGE9IZ6w6ZTsKOIWZ0wKC.jpg",
+        "credit_id": "662ff99060c751012c655437",
+        "department": "Sound",
+        "job": "Sound Re-Recording Mixer"
+      },
+      {
+        "adult": false,
+        "gender": 0,
+        "id": 1445837,
+        "known_for_department": "Sound",
+        "name": "Stephen Urata",
+        "original_name": "Stephen Urata",
+        "popularity": 0.906,
+        "profile_path": null,
+        "credit_id": "662ff99ef6fd180122236349",
+        "department": "Sound",
+        "job": "Sound Re-Recording Mixer"
+      },
+      {
+        "adult": false,
+        "gender": 0,
+        "id": 1836068,
+        "known_for_department": "Production",
+        "name": "Adam Teeuw",
+        "original_name": "Adam Teeuw",
+        "popularity": 0.83,
+        "profile_path": null,
+        "credit_id": "66580e04079f9f4836b43698",
+        "department": "Production",
+        "job": "Co-Producer"
+      },
+      {
+        "adult": false,
+        "gender": 0,
+        "id": 1546026,
+        "known_for_department": "Art",
+        "name": "Kevin Jenkins",
+        "original_name": "Kevin Jenkins",
+        "popularity": 1.117,
+        "profile_path": null,
+        "credit_id": "66580fda4446eef9fa74db7f",
+        "department": "Art",
+        "job": "Production Design"
+      },
+      {
+        "adult": false,
+        "gender": 1,
+        "id": 1537674,
+        "known_for_department": "Costume & Make-Up",
+        "name": "Jennifer Bryan",
+        "original_name": "Jennifer Bryan",
+        "popularity": 1.876,
+        "profile_path": "/oA5QovyVfEG0SUIs0DIhGsriyok.jpg",
+        "credit_id": "66580fe3d8f807cefa5056e4",
+        "department": "Costume & Make-Up",
+        "job": "Costume Design"
+      },
+      {
+        "adult": false,
+        "gender": 0,
+        "id": 40802,
+        "known_for_department": "Costume & Make-Up",
+        "name": "Jeremy Woodhead",
+        "original_name": "Jeremy Woodhead",
+        "popularity": 1.703,
+        "profile_path": null,
+        "credit_id": "66580ff15d22bc30f02d22bd",
+        "department": "Costume & Make-Up",
+        "job": "Hair Designer"
+      },
+      {
+        "adult": false,
+        "gender": 0,
+        "id": 40802,
+        "known_for_department": "Costume & Make-Up",
+        "name": "Jeremy Woodhead",
+        "original_name": "Jeremy Woodhead",
+        "popularity": 1.703,
+        "profile_path": null,
+        "credit_id": "66580ff84446eef9fa74db8a",
+        "department": "Costume & Make-Up",
+        "job": "Makeup Designer"
+      },
+      {
+        "adult": false,
+        "gender": 2,
+        "id": 149731,
+        "known_for_department": "Acting",
+        "name": "Mark Ginther",
+        "original_name": "Mark Ginther",
+        "popularity": 2.553,
+        "profile_path": "/kaaLC5LcqpsLIdbaINQuUfbbrCr.jpg",
+        "credit_id": "665811c006bf687a67a8d7c4",
+        "department": "Crew",
+        "job": "Stunt Coordinator"
+      },
+      {
+        "adult": false,
+        "gender": 0,
+        "id": 3419064,
+        "known_for_department": "Directing",
+        "name": "Christopher Clark Cowan",
+        "original_name": "Christopher Clark Cowan",
+        "popularity": 0.595,
+        "profile_path": null,
+        "credit_id": "665812cc1d04f3b44d2d203a",
+        "department": "Crew",
+        "job": "Other"
+      },
+      {
+        "adult": false,
+        "gender": 0,
+        "id": 1417825,
+        "known_for_department": "Crew",
+        "name": "Julian Foddy",
+        "original_name": "Julian Foddy",
+        "popularity": 0.635,
+        "profile_path": null,
+        "credit_id": "665812ec46f30f137474dd10",
+        "department": "Visual Effects",
+        "job": "Visual Effects Supervisor"
+      },
+      {
+        "adult": false,
+        "gender": 0,
+        "id": 2000842,
+        "known_for_department": "Visual Effects",
+        "name": "Carlos Ciudad",
+        "original_name": "Carlos Ciudad",
+        "popularity": 1.405,
+        "profile_path": null,
+        "credit_id": "665812f9bf4e331d736c1b4a",
+        "department": "Visual Effects",
+        "job": "Visual Effects Producer"
+      },
+      {
+        "adult": false,
+        "gender": 1,
+        "id": 2387495,
+        "known_for_department": "Writing",
+        "name": "Jocelyn Bioh",
+        "original_name": "Jocelyn Bioh",
+        "popularity": 1.72,
+        "profile_path": "/colhbCJmNOBNu6nqD2CEFKF5wZM.jpg",
+        "credit_id": "665fca2138a55165fcc8fd45",
+        "department": "Production",
+        "job": "Consulting Producer"
+      },
+      {
+        "adult": false,
+        "gender": 1,
+        "id": 1583355,
+        "known_for_department": "Acting",
+        "name": "Jen Richards",
+        "original_name": "Jen Richards",
+        "popularity": 2.996,
+        "profile_path": "/7kScKnA9uGeDTegvQAWFO9u1F55.jpg",
+        "credit_id": "665fca28bc97aa0bd2386e5a",
+        "department": "Production",
+        "job": "Consulting Producer"
+      },
+      {
+        "adult": false,
+        "gender": 0,
+        "id": 2273627,
+        "known_for_department": "Writing",
+        "name": "Claire Kiechel",
+        "original_name": "Claire Kiechel",
+        "popularity": 0.76,
+        "profile_path": null,
+        "credit_id": "665fca30b150f9f5f968fbf7",
+        "department": "Production",
+        "job": "Supervising Producer"
+      },
+      {
+        "adult": false,
+        "gender": 1,
+        "id": 16363,
+        "known_for_department": "Production",
+        "name": "Nina Gold",
+        "original_name": "Nina Gold",
+        "popularity": 3.761,
+        "profile_path": "/emeKuabMDN3C8x8ibby7FNtjRgu.jpg",
+        "credit_id": "665fcae8465e037cc876be7a",
+        "department": "Production",
+        "job": "Casting"
+      },
+      {
+        "adult": false,
+        "gender": 0,
+        "id": 1559588,
+        "known_for_department": "Directing",
+        "name": "Dominic Fysh",
+        "original_name": "Dominic Fysh",
+        "popularity": 0.592,
+        "profile_path": null,
+        "credit_id": "665fcb5ee8889a71fa4b84cb",
+        "department": "Production",
+        "job": "Associate Producer"
+      },
+      {
+        "adult": false,
+        "gender": 0,
+        "id": 4744106,
+        "known_for_department": "Writing",
+        "name": "Jasmyne Flournoy",
+        "original_name": "Jasmyne Flournoy",
+        "popularity": 0.571,
+        "profile_path": null,
+        "credit_id": "665fcc81176dc87395387e27",
+        "department": "Writing",
+        "job": "Staff Writer"
+      },
+      {
+        "adult": false,
+        "gender": 2,
+        "id": 4202617,
+        "known_for_department": "Crew",
+        "name": "Brian Jackson",
+        "original_name": "Brian Jackson",
+        "popularity": 1.129,
+        "profile_path": "/3uForJAYuHFlFPxK7MMtt8RAz0c.jpg",
+        "credit_id": "66627ff9a6587a66b93ca6c4",
+        "department": "Crew",
+        "job": "Systems Administrators & Support"
+      }
+    ]
+  },
+  "images": {
+    "backdrops": [
+      {
+        "aspect_ratio": 1.778,
+        "height": 720,
+        "iso_639_1": "en",
+        "file_path": "/rv0HCrT9XroIzNh2Syq4Iu5ApfQ.jpg",
+        "vote_average": 5.246,
+        "vote_count": 2,
+        "width": 1280
+      },
+      {
+        "aspect_ratio": 1.778,
+        "height": 2160,
+        "iso_639_1": "en",
+        "file_path": "/mUMqBrlwNbvDDUnLLbhpXD4o2Yu.jpg",
+        "vote_average": 5.172,
+        "vote_count": 1,
+        "width": 3840
+      },
+      {
+        "aspect_ratio": 1.778,
+        "height": 2160,
+        "iso_639_1": "en",
+        "file_path": "/d0DTw50Pm1evV17bqSQHW7KtfVE.jpg",
+        "vote_average": 5.172,
+        "vote_count": 1,
+        "width": 3840
+      },
+      {
+        "aspect_ratio": 1.778,
+        "height": 2160,
+        "iso_639_1": "en",
+        "file_path": "/cmVAvC6FjiBlos7TpZPzjCXHRK6.jpg",
+        "vote_average": 5.056,
+        "vote_count": 5,
+        "width": 3840
+      },
+      {
+        "aspect_ratio": 1.778,
+        "height": 2160,
+        "iso_639_1": "en",
+        "file_path": "/xUz32WKMNXj4RdFNbIe5DIyQnwj.jpg",
+        "vote_average": 4.996,
+        "vote_count": 6,
+        "width": 3840
+      }
+    ],
+    "logos": [
+      {
+        "aspect_ratio": 3.482,
+        "height": 1436,
+        "iso_639_1": "en",
+        "file_path": "/5wflsimgf1XrvuiR6wIsrv5rjjF.png",
+        "vote_average": 5.318,
+        "vote_count": 3,
+        "width": 5000
+      },
+      {
+        "aspect_ratio": 2.454,
+        "height": 1287,
+        "iso_639_1": "en",
+        "file_path": "/bzAJuFgyWvMVA1iWdN2zpbib8ML.png",
+        "vote_average": 5.318,
+        "vote_count": 3,
+        "width": 3158
+      },
+      {
+        "aspect_ratio": 3.62,
+        "height": 221,
+        "iso_639_1": "en",
+        "file_path": "/4DRNbPhDtO1Jwm4AS9JA4xNFhGF.png",
+        "vote_average": 5.246,
+        "vote_count": 2,
+        "width": 800
+      },
+      {
+        "aspect_ratio": 4.992,
+        "height": 1000,
+        "iso_639_1": "en",
+        "file_path": "/41ZGdnmonUOSPecUeP88hU75VO2.png",
+        "vote_average": 0,
+        "vote_count": 0,
+        "width": 4992
+      }
+    ],
+    "posters": [
+      {
+        "aspect_ratio": 0.667,
+        "height": 1500,
+        "iso_639_1": "en",
+        "file_path": "/mztdt3y6GBsJR69zHtszFezTCLT.jpg",
+        "vote_average": 5.52,
+        "vote_count": 8,
+        "width": 1000
+      },
+      {
+        "aspect_ratio": 0.667,
+        "height": 2818,
+        "iso_639_1": "en",
+        "file_path": "/yuCKJsbzzadXh6tMUsIwZ2zaKXy.jpg",
+        "vote_average": 5.384,
+        "vote_count": 2,
+        "width": 1879
+      },
+      {
+        "aspect_ratio": 0.667,
+        "height": 3000,
+        "iso_639_1": "en",
+        "file_path": "/wdSwhrZ625av7D9BCJczsXAf4Ix.jpg",
+        "vote_average": 5.384,
+        "vote_count": 2,
+        "width": 2000
+      },
+      {
+        "aspect_ratio": 0.667,
+        "height": 3000,
+        "iso_639_1": "en",
+        "file_path": "/fW2nOB5EXEOh64qufAxeW4AU3AB.jpg",
+        "vote_average": 5.264,
+        "vote_count": 8,
+        "width": 2000
+      },
+      {
+        "aspect_ratio": 0.666,
+        "height": 2500,
+        "iso_639_1": "en",
+        "file_path": "/1dcoIe9uKbWykq2zsnkaz2rxPnP.jpg",
+        "vote_average": 5.258,
+        "vote_count": 6,
+        "width": 1666
+      },
+      {
+        "aspect_ratio": 0.667,
+        "height": 3000,
+        "iso_639_1": "en",
+        "file_path": "/beuhd82BZ2r0IHIlo6pXQ0CC4RD.jpg",
+        "vote_average": 5.252,
+        "vote_count": 4,
+        "width": 2000
+      },
+      {
+        "aspect_ratio": 0.71,
+        "height": 2818,
+        "iso_639_1": "en",
+        "file_path": "/zQrkqpRVPLLSOEtW6DgAXzpX3fu.jpg",
+        "vote_average": 5.252,
+        "vote_count": 4,
+        "width": 2000
+      },
+      {
+        "aspect_ratio": 0.666,
+        "height": 2500,
+        "iso_639_1": "en",
+        "file_path": "/css6F3PQFyyy27uioXZLxdVuOw1.jpg",
+        "vote_average": 5.246,
+        "vote_count": 2,
+        "width": 1666
+      },
+      {
+        "aspect_ratio": 0.667,
+        "height": 3000,
+        "iso_639_1": "en",
+        "file_path": "/A39gG313JsNMeHawz4dDYGhrhSO.jpg",
+        "vote_average": 5.246,
+        "vote_count": 2,
+        "width": 2000
+      },
+      {
+        "aspect_ratio": 0.667,
+        "height": 750,
+        "iso_639_1": "en",
+        "file_path": "/wqqnuOpC0WYtTURzGIHE4PdaDKR.jpg",
+        "vote_average": 5.18,
+        "vote_count": 3,
+        "width": 500
+      },
+      {
+        "aspect_ratio": 0.666,
+        "height": 2500,
+        "iso_639_1": "en",
+        "file_path": "/qZf0D953txfFrY9t6Nupk9Lqlwc.jpg",
+        "vote_average": 5.18,
+        "vote_count": 3,
+        "width": 1666
+      },
+      {
+        "aspect_ratio": 0.667,
+        "height": 1200,
+        "iso_639_1": "en",
+        "file_path": "/llcq1fIwtk7MYdm0YCZCX9MnKhz.jpg",
+        "vote_average": 5.172,
+        "vote_count": 1,
+        "width": 800
+      },
+      {
+        "aspect_ratio": 0.667,
+        "height": 3000,
+        "iso_639_1": "en",
+        "file_path": "/cWVIGRcNzVZoUKkjMLBipubq21.jpg",
+        "vote_average": 5.106,
+        "vote_count": 2,
+        "width": 2000
+      },
+      {
+        "aspect_ratio": 0.666,
+        "height": 2500,
+        "iso_639_1": "en",
+        "file_path": "/nEh4H0FxNMB3f04Dg1CyiXafLBa.jpg",
+        "vote_average": 0,
+        "vote_count": 0,
+        "width": 1666
+      },
+      {
+        "aspect_ratio": 0.666,
+        "height": 2500,
+        "iso_639_1": "en",
+        "file_path": "/vJRhfWgqKLIip9DD5TuHvQ4e3VZ.jpg",
+        "vote_average": 0,
+        "vote_count": 0,
+        "width": 1666
+      },
+      {
+        "aspect_ratio": 0.667,
+        "height": 3000,
+        "iso_639_1": "en",
+        "file_path": "/j9jSfSH2LX5n1QiTSwbl6yYWDlH.jpg",
+        "vote_average": 0,
+        "vote_count": 0,
+        "width": 2000
+      },
+      {
+        "aspect_ratio": 0.667,
+        "height": 3000,
+        "iso_639_1": "en",
+        "file_path": "/5sxz1ukqI6z55Mr0ktXEhUkEfti.jpg",
+        "vote_average": 0,
+        "vote_count": 0,
+        "width": 2000
+      },
+      {
+        "aspect_ratio": 0.667,
+        "height": 1500,
+        "iso_639_1": "en",
+        "file_path": "/5K2VmyuJ5qvnWbEAVzQa7GLDYkM.jpg",
+        "vote_average": 0,
+        "vote_count": 0,
+        "width": 1000
+      },
+      {
+        "aspect_ratio": 0.667,
+        "height": 1500,
+        "iso_639_1": "en",
+        "file_path": "/b0qCrlnbS5wpdMMWjwbCjpyVfj2.jpg",
+        "vote_average": 0,
+        "vote_count": 0,
+        "width": 1000
+      },
+      {
+        "aspect_ratio": 0.667,
+        "height": 3000,
+        "iso_639_1": "en",
+        "file_path": "/fYQSXl4mEthiPHNN2z50xXLp5IM.jpg",
+        "vote_average": 0,
+        "vote_count": 0,
+        "width": 2000
+      },
+      {
+        "aspect_ratio": 0.667,
+        "height": 3000,
+        "iso_639_1": "en",
+        "file_path": "/5rGSmuBuTUHQYfZJ8ScpwsSFJwY.jpg",
+        "vote_average": 0,
+        "vote_count": 0,
+        "width": 2000
+      },
+      {
+        "aspect_ratio": 0.667,
+        "height": 1500,
+        "iso_639_1": "en",
+        "file_path": "/ceuDC71g99tMkASYT8GwERHeZG7.jpg",
+        "vote_average": 0,
+        "vote_count": 0,
+        "width": 1000
+      }
+    ]
+  },
+  "external_ids": {
+    "imdb_id": "tt12262202",
+    "freebase_mid": null,
+    "freebase_id": null,
+    "tvdb_id": 393197,
+    "tvrage_id": null,
+    "wikidata_id": "Q104161310",
+    "facebook_id": null,
+    "instagram_id": "officialacolyte",
+    "twitter_id": "OfficialAcolyte"
+  }
+}

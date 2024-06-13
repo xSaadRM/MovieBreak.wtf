@@ -6,12 +6,14 @@ const SubtitlesLoader = ({ subtitlesManagerRef }) => {
   useEffect(() => {
     const subtitleContainerElement = subtitleContainerRef.current;
 
-    if (subtitlesManagerRef && subtitleContainerElement) {
+    if (subtitlesManagerRef.current && subtitleContainerElement) {
       subtitlesManagerRef.current.init(subtitleContainerElement);
+      console.log("init");
     }
 
     return () => {
-      if (subtitlesManagerRef) {
+      if (subtitlesManagerRef.current) {
+        console.log("destroy");
         subtitlesManagerRef.current.destroy();
       }
     };

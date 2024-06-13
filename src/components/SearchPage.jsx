@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import MovieCard from "./MovieCard";
 import Navbar from "./Navbar";
 import "../styles/SearchPage.css";
 import SearchIcon from "../assets/search.svg";
+import MovieCard from "./MovieCard";
 
 const SearchPage = ({isHomePage}) => {
   const navigate = useNavigate();

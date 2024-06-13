@@ -32,7 +32,12 @@ export const getWorkingPlayers = async (tmdb, season, episode) => {
 };
 
 export const getM3U8 = async (url) => {
-  const response = await fetch(url);
+  let response;
+  try {
+    response = await fetch(url);
+  } catch (error) {
+    response = await fetch(`https://corsproxy.io/?${encodeURIComponent(url)}`);
+  }
   const responseJSON = await response.json();
   return responseJSON;
 };

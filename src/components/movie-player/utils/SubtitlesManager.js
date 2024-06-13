@@ -13,11 +13,13 @@ export class SubtitlesManager {
     if (this.plainSubtitles) {
       let subtitleList = this.plainSubtitles.split(",");
       subtitleList.forEach((subtitle) => {
-        const formattedSub = subtitle.split("]");
-        this.subtitleArray.push({
-          name: formattedSub[0].replace("[", ""),
-          url: formattedSub[1],
-        });
+        if (subtitle !== "") {
+          const formattedSub = subtitle.split("]");
+          this.subtitleArray.push({
+            name: formattedSub[0].replace("[", ""),
+            url: formattedSub[1],
+          });
+        }
       });
       this.subtitles = await this.fetchSubtitles(
         this.subtitleArray[index || this.index].url
@@ -136,10 +138,13 @@ export class SubtitlesManager {
   }
 
   async switchTrack(index) {
-    this.destroy();
-    this.init(this.subtitleContainer, index);
+    this.index = index;
   }
   destroy() {
+    if (this.subtitleContainer) {
+      this.subtitleContainer.textContent = "";
+    }
+    this.subtitleArray = [];
     this.videoElement.removeEventListener("timeupdate", this.handleTimeupdate);
   }
 }

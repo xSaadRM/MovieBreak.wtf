@@ -1,32 +1,46 @@
-import { Suspense, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import "../styles/MovieDescription.css";
 import PlayIcon from "../assets/play.svg";
 import Navbar from "../components/Navbar";
 import Carousel from "../components/Carousel";
 import HLSPlayer from "../components/movie-player/HLSPlayer";
-import LoadingAnimation from "../components/LoadingAnimation";
-import { setSeasonDetails } from "../reducer/reducer";
-
+import {
+  setSeasonDetails,
+  setShahid4uEpisodes,
+  setSlug,
+} from "../reducer/reducer";
+import { shahid4uFetch } from "../components/movie-player/providers/shahid4u";
+import { getSlug } from "../components/movie-player/providers/ridotv";
+import Skeleton from "@mui/material/Skeleton";
+import "../styles/MUISkeleton.css";
+import LazyImage from "../components/LazyImage";
+import { Star } from "@mui/icons-material";
+import Overview from "../components/Overview";
+import Clips from "../components/Clips";
+import noPoster from "../assets/noPoster.jpeg";
 const MovieDescription = ({ state, dispatch }) => {
   const navigate = useNavigate();
   const { mediaType, movieID, season } = useParams();
-  const { movieInfos, seasonDetails } = state;
   const [seasons, setSeasons] = useState([]);
-  const [isOverviewAllShowed, setIsOverviewAllShowed] = useState(false);
-  const [wordsInOverview, setWordsInOverview] = useState(13);
-  const [currentSection, setCurrentSection] = useState("overview");
-  const [loading, setLoading] = useState(false);
   const [showWatchPage, setShowWatchPage] = useState(false);
+  const [movieInfos_, setMovieInfos_] = useState(null);
+  const releaseDate = /(\d+)-\d+-\d+/g.exec(movieInfos_?.first_air_date);
+  const [seasonDetails_, setSeasonDetails_] = useState(null);
 
-  const handleSeasonChange = (season) => {
-    navigate(`/${mediaType}/${movieID}/${season}`);
+  const getShahid4uEpisodes = async () => {
+    try {
+      const data = await shahid4uFetch(
+        mediaType,
+        mediaType === "tv" ? movieInfos_.name : movieInfos_.title,
+        season,
+        releaseDate[1]
+      );
+      dispatch(setShahid4uEpisodes(data));
+    } catch (error) {}
   };
-  useEffect(() => {
-    if (window.innerWidth >= 800) {
-      setWordsInOverview(50);
-    }
 
+  useEffect(() => {
     const getMovieInfos = async () => {
       try {
         const response = await fetch(
@@ -36,8 +50,8 @@ const MovieDescription = ({ state, dispatch }) => {
           throw new Error("Failed to fetch movie info");
         }
         const movieInfosResponse = await response.json();
+        setMovieInfos_(movieInfosResponse);
         dispatch({ type: "SET_MOVIE_INFOS", payload: movieInfosResponse });
-        // console.log(movieInfosResponse);
         if (mediaType === "tv") {
           const numberOfSeasons = movieInfosResponse.number_of_seasons;
           if (numberOfSeasons > 0) {
@@ -53,15 +67,8 @@ const MovieDescription = ({ state, dispatch }) => {
         // Handle error gracefully, e.g., show a message to the user
       }
     };
-
     getMovieInfos();
-  }, [movieID, dispatch, mediaType]);
-
-  const handleSectionClick = (name) => {
-    if (name !== currentSection) {
-      setCurrentSection(name);
-    }
-  };
+  }, []);
 
   useEffect(() => {
     const fetchSeasonDetails = async () => {
@@ -74,55 +81,105 @@ const MovieDescription = ({ state, dispatch }) => {
         }
         const seasonDetailsResponse = await response.json();
         dispatch(setSeasonDetails(seasonDetailsResponse));
-        // console.log(seasonDetails);
-        setLoading(false);
+        setSeasonDetails_(seasonDetailsResponse);
       } catch (error) {
         console.error("Error fetching season details:", error.message);
         // Handle error gracefully, e.g., show a message to the user
       }
     };
-
     if (season) {
-      setLoading(true);
       fetchSeasonDetails();
+    } else if (mediaType === "tv") {
+      handleSeasonChange(1);
     }
-  }, [season, dispatch, movieID]);
+
+    if (movieInfos_ && season) {
+      if (movieInfos_) {
+        getShahid4uEpisodes();
+      }
+    }
+  }, [season]);
+
+  useEffect(() => {
+    const getSlugResponse = async (id, movieName) => {
+      try {
+        const data = await getSlug(id, movieName);
+        dispatch(setSlug(data));
+      } catch (e) {
+        console.error(e);
+      }
+    };
+
+    if (movieInfos_) {
+      getShahid4uEpisodes();
+      if (mediaType === "tv") {
+        dispatch(setSlug({status: "loading"}));
+        getSlugResponse(
+          movieInfos_.id,
+          mediaType === "tv" ? movieInfos_.name : movieInfos_.title
+        );
+      }
+    }
+  }, [movieInfos_]);
 
   const handleEpisodeClick = (episodeDetails) => {
-    setLoading(true);
     const newUrl = `/${mediaType}/${movieID}/${season}/${episodeDetails.episode_number}`;
+
     navigate(newUrl);
   };
 
   const handleWatchClick = () => {
     setShowWatchPage(true);
   };
+  const handleSeasonChange = (season) => {
+    navigate(`/${mediaType}/${movieID}/${season}`, { replace: true });
+  };
 
   return (
     <div className="movie-description-page">
       <Navbar />
-      <LoadingAnimation loading={loading} />
-      <div
-        className="blured-backdrop"
-        style={{
-          backgroundImage: `url(https://image.tmdb.org/t/p/original/${movieInfos.backdrop_path})`,
-        }}
-      ></div>
+      {movieInfos_ && (
+        <div
+          className="blured-backdrop"
+          style={{
+            backgroundImage: `url(https://image.tmdb.org/t/p/original/${movieInfos_.backdrop_path})`,
+          }}
+        ></div>
+      )}
       <div className="movie-description-container">
         {showWatchPage ? (
           <HLSPlayer state={state} />
         ) : (
           <div className="backdrop">
-            <img
-              src={`https://image.tmdb.org/t/p/original/${movieInfos.backdrop_path}`}
+            <LazyImage
+              ratio={"16/9"}
+              src={`https://image.tmdb.org/t/p/original/${movieInfos_?.backdrop_path}`}
               alt="Backdrop"
             />
-            <div className="movie-infos">
-              <div className="movie-ids">
-                <h3>{movieInfos.original_title || movieInfos.original_name}</h3>
-                <p>{movieInfos.first_air_date || movieInfos.release_date}</p>
-              </div>
-            </div>
+            {movieInfos_ && (
+              <>
+                <div className="movie-infos">
+                  <div className="movie-ids">
+                    <h3>{movieInfos_.title || movieInfos_.name}</h3>
+                  </div>
+                </div>
+                <p className="badge_topLeft rating">
+                  <Star htmlColor="yellow" fontSize="auto" />
+                  {(movieInfos_.vote_average || movieInfos_.popularity).toFixed(
+                    1
+                  )}
+                </p>
+                <p className="releaseDate">
+                  {(
+                    movieInfos_.first_air_date || movieInfos_.release_date
+                  ).split("-")[0] +
+                    " / " +
+                    (
+                      movieInfos_.first_air_date || movieInfos_.release_date
+                    ).split("-")[1]}
+                </p>
+              </>
+            )}
             {mediaType === "movie" && (
               <div className="watch-button" onClick={() => handleWatchClick()}>
                 <img src={PlayIcon} alt="Play" />
@@ -131,126 +188,97 @@ const MovieDescription = ({ state, dispatch }) => {
             )}
           </div>
         )}
-
-        {movieInfos && (
+        <Overview
+          overviewText={movieInfos_?.overview}
+          genres={movieInfos_?.genres}
+        />
+        <Clips videos={movieInfos_?.videos?.results} />
+        {mediaType === "tv" && (
           <>
-            <div className="sections-container">
-              <div className="sections">
-                <div
-                  onClick={() => handleSectionClick("overview")}
-                  className={
-                    currentSection === "overview" ? "section active" : "section"
-                  }
-                >
-                  <h4>Overview</h4>
-                </div>
-                <div
-                  onClick={() => handleSectionClick("clips")}
-                  className={
-                    currentSection === "clips" ? "section active" : "section"
-                  }
-                >
-                  <h4>Clips</h4>
+            <div className="select-season">
+              <select
+                value={season}
+                onChange={(e) => handleSeasonChange(e.target.value)}
+              >
+                {!season && <option value="">Select Season</option>}
+                {seasons.map((season) => (
+                  <option key={season} value={season}>
+                    Season {season}
+                  </option>
+                ))}
+              </select>
+            </div>
+            {seasonDetails_ && (
+              <div className="season-details">
+                <div className="episodes-list">
+                  {seasonDetails_ &&
+                    seasonDetails_.episodes &&
+                    seasonDetails_.episodes.map((episode) => (
+                      <div
+                        key={episode.id}
+                        className="episode"
+                        onClick={() => {
+                          handleEpisodeClick(
+                            episode,
+                            movieInfos_.title || movieInfos_.name
+                          );
+                        }}
+                      >
+                        {/* Episode image */}
+
+                        {episode.still_path ? (
+                          <LazyImage
+                            ratio={"16/9"}
+                            src={`https://image.tmdb.org/t/p/w400/${episode.still_path}`}
+                            alt={`Episode ${episode.episode_number} Still`}
+                            className="episode-image"
+                          />
+                        ) : (
+                          <LazyImage
+                            ratio={"16/9"}
+                            src={
+                              "https://www.themoviedb.org/assets/2/v4/glyphicons/basic/glyphicons-basic-38-picture-grey-c2ebdbb057f2a7614185931650f8cee23fa137b93812ccb132b9df511df1cfac.svg"
+                            }
+                            alt={`Episode ${episode.episode_number} Still`}
+                            className="episode-image"
+                            style={{ aspectRatio: "16/9" }}
+                          />
+                        )}
+
+                        {/* Episode details */}
+                        <div className="episode-details">
+                          {episode.episode_number ? (
+                            <>
+                              <p className="badge_topLeft">
+                                E{episode.episode_number}
+                              </p>
+                              <h3 className="text">
+                                <p>{episode.name}</p>
+                              </h3>
+                            </>
+                          ) : (
+                            <Skeleton className="text" variant="text" />
+                          )}
+                          {episode.air_date ? (
+                            <p className="airdate">{episode.air_date}</p>
+                          ) : (
+                            <Skeleton className="text" variant="text" />
+                          )}
+                        </div>
+                      </div>
+                    ))}
                 </div>
               </div>
-              {currentSection === "overview" && (
-                <div className="overview">
-                  <p>
-                    {!isOverviewAllShowed
-                      ? movieInfos.overview
-                          .split(" ")
-                          .slice(0, wordsInOverview)
-                          .join(" ") + "...."
-                      : movieInfos.overview}
-                    {!isOverviewAllShowed ? (
-                      <span
-                        className="show-more-toggle"
-                        onClick={setIsOverviewAllShowed}
-                      >
-                        Show more
-                      </span>
-                    ) : null}
-                  </p>
-                </div>
-              )}
-              {currentSection === "clips" && (
-                <div className="clips">
-                  {movieInfos.videos.results.map((clip) => (
-                    <div className="clip" key={clip.id}>
-                      <a
-                        href={`https://www.youtube.com/watch?v=${clip.key}`}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
-                        <img
-                          src={`https://img.youtube.com/vi/${clip.key}/mqdefault.jpg`}
-                          alt={clip.name}
-                        />
-                      </a>
-                    </div>
-                  ))}
-                </div>
-              )}
-            </div>
+            )}
           </>
         )}
-        {mediaType === "tv" && (
-          <div className="select-season">
-            <select
-              value={season}
-              onChange={(e) => handleSeasonChange(e.target.value)}
-            >
-              <option value="">Select Season</option>
-              {seasons.map((season) => (
-                <option key={season} value={season}>
-                  Season {season}
-                </option>
-              ))}
-            </select>
-          </div>
-        )}
-        {mediaType === "tv" && seasonDetails && (
-          <div className="season-details">
-            <div className="episodes-list">
-              {seasonDetails.episodes &&
-                seasonDetails.episodes.map((episode) => (
-                  <div
-                    key={episode.id}
-                    className="episode"
-                    onClick={() => {
-                      handleEpisodeClick(
-                        episode,
-                        movieInfos.title || movieInfos.name
-                      );
-                    }}
-                  >
-                    {/* Episode image */}
-                    <img
-                      src={`https://image.tmdb.org/t/p/w400/${episode.still_path}`}
-                      alt={`Episode ${episode.episode_number} Still`}
-                      className="episode-image"
-                    />
-
-                    {/* Episode details */}
-                    <div className="episode-details">
-                      <h3>
-                        E{episode.episode_number} - {episode.name}
-                      </h3>
-                      <p className="airdate">{episode.air_date}</p>
-                    </div>
-                  </div>
-                ))}
-            </div>
-          </div>
-        )}
       </div>
-      {movieInfos && movieInfos.credits && (
+      {movieInfos_ && movieInfos_.credits && (
         <div className="cast">
           <Carousel
-            movies={movieInfos.credits.cast}
-            type={"Cast"}
-            media_type={"cast"}
-            category={"Credits"}
+            movies={movieInfos_.credits.cast}
+            media_type={"person"}
+            className={"active"}
           />
         </div>
       )}

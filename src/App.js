@@ -1,5 +1,5 @@
 import DisableDevtool from "disable-devtool";
-import { useEffect, useReducer, useState } from "react";
+import { useEffect, useReducer } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import "./styles/App.css";
 import SearchPage from "./components/SearchPage.jsx";
@@ -8,33 +8,28 @@ import MovieDescription from "./pages/MovieDescription.jsx";
 import HomePage from "./pages/Home.jsx";
 import WatchPage from "./pages/WatchPage.jsx";
 import { reducer, initialState } from "./reducer/reducer.js";
+import FloatingSocials from "./components/FloatingSocial.jsx";
 
 function App() {
   const [state, dispatch] = useReducer(reducer, initialState);
-  const [devtoolsDetected, setDevtoolsDetected] = useState(false);
 
   useEffect(() => {
     DisableDevtool({
       ondevtoolopen: () => {
-        if (!devtoolsDetected) {
-          setDevtoolsDetected(true);
-          window.location.href = "/sonic.html";
-        }
+        window.location.href = "/sonic.html";
       },
     });
-  }, [devtoolsDetected]);
+  }, []);
 
   return (
     <Router>
+      <FloatingSocials />
       <Routes>
         <Route
           path="/"
           element={<HomePage state={state} dispatch={dispatch} />}
         />
-        <Route
-          path="/search"
-          element={<SearchPage state={state} dispatch={dispatch} />}
-        />
+        <Route path="/search" element={<SearchPage />} />
         <Route
           path="/:mediaType/:movieID/:season?/"
           element={<MovieDescription state={state} dispatch={dispatch} />}

@@ -19,6 +19,7 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-google-recaptcha": "^3.1.0",
+    "react-loading-skeleton": "^3.4.0",
     "react-player": "^2.16.0",
     "react-router-dom": "^6.22.3",
     "react-scripts": "5.0.1",
@@ -33,11 +34,15 @@
   },
   "scripts": {
     "start": "react-scripts start",
+    "start:obf": "npx webpack serve --config webpack.config.js",
     "build": "react-scripts build",
+    "build:obf": "react-scripts build && npx webpack --config webpack.config.js",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "deploy": "node deploy",
-    "build:d": "react-scripts build && node deploy "
+    "build:d": "react-scripts build && node deploy",
+    "build:obf:d": "react-scripts build && npx webpack --config webpack.config.js && node deploy",
+    "obfuscate": "npx webpack --config webpack.config.js"
   },
   "eslintConfig": {
     "extends": [
@@ -58,6 +63,10 @@
     ]
   },
   "devDependencies": {
-    "@babel/plugin-proposal-private-property-in-object": "^7.21.11"
+    "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
+    "@babel/preset-react": "^7.24.6",
+    "babel-loader": "^9.1.3",
+    "webpack-cli": "^5.1.4",
+    "webpack-obfuscator": "^3.5.1"
   }
 }

@@ -9,6 +9,8 @@ const SET_TRENDING_MOVIES = "SET_TRENDING_MOVIES";
 const SET_TOP_MOVIES = "SET_TOP_MOVIES";
 const SET_MOVIE_INFOS = "SET_MOVIE_INFOS";
 const SET_SEASON_DETAILS = "SET_SEASON_DETAILS";
+const SET_SHAHID4U_EPISODE = "SET_SHAHID4U_EPISODE";
+const SET_SLUG = "SET_SLUG";
 
 // Action creators
 export const setTrendingShows = (shows) => ({
@@ -35,8 +37,18 @@ export const setSeasonDetails = (infos) => ({
   type: SET_SEASON_DETAILS,
   payload: infos,
 });
+export const setShahid4uEpisodes = (infos) => ({
+  type: SET_SHAHID4U_EPISODE,
+  payload: infos,
+});
+export const setSlug = (infos) => ({
+  type: SET_SLUG,
+  payload: infos,
+});
 
 export const initialState = {
+  slug: {},
+  shahid4uEpisodes: [],
   seasonDetails: seasonDetails,
   movieInfos: movieInfos,
   trendingShows: hotMovies.trendingWeek.shows,
@@ -77,6 +89,16 @@ export const reducer = (state, action) => {
       return {
         ...state,
         seasonDetails: action.payload,
+      };
+    case SET_SHAHID4U_EPISODE:
+      return {
+        ...state,
+        shahid4uEpisodes: action.payload,
+      };
+    case SET_SLUG:
+      return {
+        ...state,
+        slug: action.payload,
       };
     default:
       return state;

@@ -3,7 +3,7 @@ export const fetchRidoTV = async (slug, ep, season) => {
     const getEpisodes = async (slug) => {
       try {
         const response = await fetch(
-          `https://rv.lil-hacker.workers.dev?url=https://ridomovies.tv/tv/${slug}&mirror=rido`
+          `https://rv.lil-hacker.workers.dev/proxy?mirror=rido&url=https://ridomovies.tv/tv/${slug}`
         );
 
         const htmlContent = await response.text();
@@ -34,49 +34,63 @@ export const fetchRidoTV = async (slug, ep, season) => {
         }
         // Now seasons object contains episodes grouped by season
         // Call getIFrame with seasons object
-        return getIFrame(seasons);
+        if (seasons[season - 1].length < ep) {
+          return 404;
+        } else {
+          return getIFrame(seasons);
+        }
       } catch (error) {
         console.log(error);
       }
     };
-
     const getIFrame = async (seasons) => {
-      if (seasons.length > 0) {
-        const episodeId = seasons[season - 1][ep - 1].id;
-        const response = await fetch(
-          `https://rv.lil-hacker.workers.dev/?url=https%3A%2F%2Fridomovies.tv%2Fcore%2Fapi%2Fepisodes%2F${episodeId}%2Fvideos&mirror=rido`,
-          {
-            headers: {
-              accept: "*/*",
-              "accept-language": "en-US,en;q=0.9",
-              "sec-ch-ua":
-                '"Microsoft Edge";v="123", "Not:A-Brand";v="8", "Chromium";v="123"',
-              "sec-ch-ua-mobile": "?0",
-              "sec-ch-ua-platform": '"Windows"',
-              "sec-fetch-dest": "empty",
-              "sec-fetch-mode": "cors",
-              "sec-fetch-site": "cross-site",
-            },
-            referrerPolicy: "no-referrer",
-            body: null,
-            method: "GET",
-          }
-        );
-        const data = await response.json();
-        const dataIFrameSrc = data.data[0].url.match(/data-src="([^"]+)"/);
-
-        if (dataIFrameSrc) {
-          const dataSrcValue = dataIFrameSrc[1];
-          return getM3U8(dataSrcValue);
-        } else {
-          console.log("No data-src attribute found in the URL.");
+      console.log("seasons: \n", seasons);
+      let data;
+      if (season && ep) {
+        if (seasons.length > 0) {
+          const episodeId = seasons[season - 1][ep - 1].id;
+          const response = await fetch(
+            `https://rv.lil-hacker.workers.dev/proxy?mirror=rido&url=https://ridomovies.tv/core/api/episodes/${episodeId}/videos`,
+            {
+              headers: {
+                accept: "*/*",
+                "accept-language": "en-US,en;q=0.9",
+                "sec-ch-ua":
+                  '"Microsoft Edge";v="123", "Not:A-Brand";v="8", "Chromium";v="123"',
+                "sec-ch-ua-mobile": "?0",
+                "sec-ch-ua-platform": '"Windows"',
+                "sec-fetch-dest": "empty",
+                "sec-fetch-mode": "cors",
+                "sec-fetch-site": "cross-site",
+              },
+              referrerPolicy: "no-referrer",
+              body: null,
+              method: "GET",
+            }
+          );
+          data = await response.json();
         }
       } else {
+        const response = await fetch(
+          `https%3A%2F%2Fridomovies.tv%2Fcore%2Fapi%2Fmovies%2F${slug}%2Fvideos`
+        );
+        data = await response.json();
+      }
+      if (!data.data[0]) {
+        return 404
+      }
+      const dataIFrameSrc = data.data[0].url.match(/data-src="([^"]+)"/);
+
+      if (dataIFrameSrc) {
+        const dataSrcValue = dataIFrameSrc[1];
+        return getM3U8(dataSrcValue);
+      } else {
+        console.log("No data-src attribute found in the URL.");
       }
     };
     const getM3U8 = async (iFrameURL) => {
       const response = await fetch(
-        `https://rv.lil-hacker.workers.dev/?url=${iFrameURL}&mirror=rido`
+        `https://rv.lil-hacker.workers.dev/proxy?mirror=rido&url=${iFrameURL}`
       );
       const data = await response.text();
       const scriptTagRegex = /<script[^>]*>(.*?)<\/script>/gs;
@@ -96,62 +110,61 @@ export const fetchRidoTV = async (slug, ep, season) => {
         console.error("No script tags found");
       }
     };
-    return getEpisodes(slug);
+    const getIframeID = async () => {
+      const response = await fetch(
+        `https://rv.lil-hacker.workers.dev/proxy?mirror=rido&url=https://ridomovies.tv/movies/${slug}`
+      );
+      const doc = await response.text();
+      const iframeID = /data-video[\s]*[\S]*=[\s]*"([\S]*)"/g.exec(doc);
+      return await getStreamURL(iframeID[1]);
+    };
+    const getStreamURL = async (id) => {
+      const response = await fetch(
+        `https://rv.lil-hacker.workers.dev/proxy?mirror=rido&url=https://closeload.top/video/embed/${id}/`
+      );
+      const responseText = await response.text();
+      const sourceURL = /eval\([\s\S]*\)/g.exec(responseText);
+      const evalcode = sourceURL[0].replace(
+        "return p",
+        `const tempElement = document.createElement("noscript");
+      tempElement.classList.add("data-slug");
+      tempElement.textContent = p; // Assuming 'p' is defined somewhere in your code.
+      document.body.appendChild(tempElement);
+      return p;`
+      );
+
+      const evalFunction = new Function(evalcode);
+      try {
+        evalFunction();
+      } catch (error) {}
+      const ridoPage = document.querySelector(".data-slug");
+      const srcVar =
+        /myPlayer.src\({src:atob\(([\S]*)\),type:'application\/x-mpegURL'}\)/g.exec(
+          ridoPage.textContent
+        );
+
+      const codedSRCRegex = new RegExp(srcVar[1] + `="([\\S]*)";`, "g");
+      const codedSRC = codedSRCRegex.exec(ridoPage.textContent);
+      return `https://rv.lil-hacker.workers.dev/?mirror=closeload&url=${atob(
+        codedSRC[1]
+      )}`;
+    };
+    if (slug && ep && season) {
+      return await getEpisodes(slug);
+    } else if (slug) {
+      return await getIframeID();
+    }
   } catch (error) {
     return error;
   }
 };
 
 export const getSlug = async (movieID, movieName) => {
-  // Manual encoding for characters that aren't encoded in the standard encodeURIComponent function
-  const manualEncode = (str) => {
-    return Array.from(str)
-      .map((char) => {
-        const charCode = char.charCodeAt(0);
-        // If the character is not alphanumeric or one of these: - _ . ! ~ * ' ( )
-        if (
-          (charCode >= 0x30 && charCode <= 0x39) || // 0-9
-          (charCode >= 0x41 && charCode <= 0x5a) || // A-Z
-          (charCode >= 0x61 && charCode <= 0x7a) || // a-z
-          char === "-" ||
-          char === "_" ||
-          char === "." ||
-          char === "!" ||
-          char === "~" ||
-          char === "*" ||
-          char === "'" ||
-          char === "(" ||
-          char === ")"
-        ) {
-          return char;
-        } else {
-          return encodeURIComponent(char).replace(/%/g, "%25");
-        }
-      })
-      .join("");
-  };
-
-  const encodedMovieName = manualEncode(movieName);
+  const formatedTitle = encodeURIComponent(movieName);
 
   try {
     const response = await fetch(
-      `https://rv.lil-hacker.workers.dev/?url=https://ridomovies.tv/core/api/search?q=${encodedMovieName}&mirror=rido`,
-      {
-        headers: {
-          accept: "*/*",
-          "accept-language": "en-US,en;q=0.9",
-          "sec-ch-ua":
-            '"Microsoft Edge";v="123", "Not:A-Brand";v="8", "Chromium";v="123"',
-          "sec-ch-ua-mobile": "?0",
-          "sec-ch-ua-platform": '"Windows"',
-          "sec-fetch-dest": "empty",
-          "sec-fetch-mode": "cors",
-          "sec-fetch-site": "cross-site",
-        },
-        referrerPolicy: "no-referrer",
-        body: null,
-        method: "GET",
-      }
+      `https://rv.lil-hacker.workers.dev/proxy?mirror=rido&url=https://ridomovies.tv/core/api/search?q=${formatedTitle}`
     );
     const data = await response.json();
     let found = false;

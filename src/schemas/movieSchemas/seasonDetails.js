@@ -1,10 +1,10 @@
 export const seasonDetails = {
   _id: "5f19a102447f9c00373913cb",
-  air_date: "2024-04-09",
+  air_date: undefined,
   episodes: [
     {
-      air_date: "2024-04-10",
-      episode_number: 1,
+      air_date: undefined,
+      episode_number: undefined,
       episode_type: "standard",
       id: 2362884,
       name: "The End",
@@ -13,7 +13,7 @@ export const seasonDetails = {
       runtime: 75,
       season_number: 1,
       show_id: 106379,
-      still_path: "/sEQLaNLxV6zX22ESkTlbXFDROKK.jpg",
+      still_path: undefined,
       vote_average: 7.4,
       vote_count: 37,
       crew: [
@@ -28,7 +28,7 @@ export const seasonDetails = {
           name: "Jonathan Nolan",
           original_name: "Jonathan Nolan",
           popularity: 28.165,
-          profile_path: "/qd8d381vz2skpreY1BfVuSfLJts.jpg",
+          profile_path: undefined,
         },
         {
           job: "Writer",
@@ -41,7 +41,7 @@ export const seasonDetails = {
           name: "Geneva Robertson-Dworet",
           original_name: "Geneva Robertson-Dworet",
           popularity: 14.025,
-          profile_path: "/rtSFutIrgA1pmW1CO0NPzIsRFsP.jpg",
+          profile_path: undefined,
         },
         {
           job: "Writer",
@@ -132,7 +132,7 @@ export const seasonDetails = {
           name: "Craig Kuehne",
           original_name: "Craig Kuehne",
           popularity: 6.374,
-          profile_path: "/qgMUhgcQbpR4UKdC93rtfqWRZMr.jpg",
+          profile_path: undefined,
         },
         {
           job: "First Assistant Director",
@@ -262,7 +262,7 @@ export const seasonDetails = {
           name: "Casey O'Neill",
           original_name: "Casey O'Neill",
           popularity: 6.239,
-          profile_path: "/aoT1prEjm2i4BYk2UUwYYhUtwTZ.jpg",
+          profile_path: undefined,
         },
         {
           job: "Executive Producer",
@@ -314,7 +314,7 @@ export const seasonDetails = {
           name: "Daniel Gray Longino",
           original_name: "Daniel Gray Longino",
           popularity: 5.189,
-          profile_path: "/r1nYCNbmwTElvvHbSFNpLT1JbuN.jpg",
+          profile_path: undefined,
         },
         {
           job: "Unit Production Manager",
@@ -342,7 +342,7 @@ export const seasonDetails = {
           name: "Sarita Choudhury",
           original_name: "Sarita Choudhury",
           popularity: 33.226,
-          profile_path: "/pABEOxQAns54tHpxN2w73b7SiPB.jpg",
+          profile_path: undefined,
         },
         {
           character: "Betty Pearson",
@@ -355,7 +355,7 @@ export const seasonDetails = {
           name: "Leslie Uggams",
           original_name: "Leslie Uggams",
           popularity: 17.216,
-          profile_path: "/peLaqLcs3y2WY4TbrLOXQGt9I8S.jpg",
+          profile_path: undefined,
         },
         {
           character: "Elder Cleric Quintus",
@@ -368,7 +368,7 @@ export const seasonDetails = {
           name: "Michael Cristofer",
           original_name: "Michael Cristofer",
           popularity: 16.29,
-          profile_path: "/yWZr1U6A4UAatvgqvX1zmOgB92S.jpg",
+          profile_path: undefined,
         },
         {
           character: "Thaddeus",
@@ -381,7 +381,7 @@ export const seasonDetails = {
           name: "Johnny Pemberton",
           original_name: "Johnny Pemberton",
           popularity: 13.431,
-          profile_path: "/qP7y28lDW5wzUAUQ2sx6741Hx7a.jpg",
+          profile_path: undefined,
         },
         {
           character: "Honcho",
@@ -394,7 +394,7 @@ export const seasonDetails = {
           name: "Mykelti Williamson",
           original_name: "Mykelti Williamson",
           popularity: 22.18,
-          profile_path: "/e5f7XCZAUEQ55rVhdphqzdMMI8b.jpg",
+          profile_path: undefined,
         },
         {
           character: "Mr. Handy (voice)",
@@ -407,7 +407,7 @@ export const seasonDetails = {
           name: "Matt Berry",
           original_name: "Matt Berry",
           popularity: 20.303,
-          profile_path: "/7a1sWg1W7ZmNF8bLSnyAlJgQQGD.jpg",
+          profile_path: undefined,
         },
         {
           character: "Woody Thomas",
@@ -420,7 +420,7 @@ export const seasonDetails = {
           name: "Zach Cherry",
           original_name: "Zach Cherry",
           popularity: 14.325,
-          profile_path: "/fT3Wv8ef0Vn0daHWAObCp2Bd4Y.jpg",
+          profile_path: undefined,
         },
         {
           character: "Stephanie Harper",
@@ -433,7 +433,7 @@ export const seasonDetails = {
           name: "Annabel O'Hagan",
           original_name: "Annabel O'Hagan",
           popularity: 56.118,
-          profile_path: "/nMfZOMXEGg2bbWQuybUsEkc2SU.jpg",
+          profile_path: undefined,
         },
         {
           character: "Chet",
@@ -446,7 +446,7 @@ export const seasonDetails = {
           name: "Dave Register",
           original_name: "Dave Register",
           popularity: 8.337,
-          profile_path: "/bJYuf9SpvFPPsjfA7GG4LMgARmB.jpg",
+          profile_path: undefined,
         },
         {
           character: "Reg McPhee",
@@ -459,7 +459,7 @@ export const seasonDetails = {
           name: "Rodrigo Luzzi",
           original_name: "Rodrigo Luzzi",
           popularity: 4.863,
-          profile_path: "/4xpKNyiV0SETMsnBZHSqCmkzSNr.jpg",
+          profile_path: undefined,
         },
         {
           character: "Monty",
@@ -472,7 +472,7 @@ export const seasonDetails = {
           name: "Cameron Cowperthwaite",
           original_name: "Cameron Cowperthwaite",
           popularity: 51.818,
-          profile_path: "/uT8SXIWieodbiVxjzSavuVr5rM1.jpg",
+          profile_path: undefined,
         },
         {
           character: "Cleric Felix",
@@ -485,7 +485,7 @@ export const seasonDetails = {
           name: "Jacinto Taras Riddick",
           original_name: "Jacinto Taras Riddick",
           popularity: 3.733,
-          profile_path: "/6wOQDSJgTI5u3aEy3MdGieB2qme.jpg",
+          profile_path: undefined,
         },
         {
           character: "Biggie",
@@ -498,7 +498,7 @@ export const seasonDetails = {
           name: "Joel Marsh Garland",
           original_name: "Joel Marsh Garland",
           popularity: 12.062,
-          profile_path: "/8EwivG7w0ZuwhJYhCeuYBmzIGhz.jpg",
+          profile_path: undefined,
         },
         {
           character: "Bob Spencer",
@@ -511,7 +511,7 @@ export const seasonDetails = {
           name: "Mike Doyle",
           original_name: "Mike Doyle",
           popularity: 10.489,
-          profile_path: "/vWvYo2T80nz0F4hcXRBDpawUBo0.jpg",
+          profile_path: undefined,
         },
         {
           character: "Mrs. Spencer",
@@ -524,7 +524,7 @@ export const seasonDetails = {
           name: "Janie Brookshire",
           original_name: "Janie Brookshire",
           popularity: 3.926,
-          profile_path: "/fa9qvKFGFqAqJVXTOFTOUVaH4vd.jpg",
+          profile_path: undefined,
         },
         {
           character: "Davey",
@@ -537,7 +537,7 @@ export const seasonDetails = {
           name: "Leer Leary",
           original_name: "Leer Leary",
           popularity: 3.346,
-          profile_path: "/4Wz7pde3bKd8y090wmRV66lPCbb.jpg",
+          profile_path: undefined,
         },
         {
           character: "Slim",
@@ -563,7 +563,7 @@ export const seasonDetails = {
           name: "Brendan Burke",
           original_name: "Brendan Burke",
           popularity: 14.781,
-          profile_path: "/caUA0KNcjFVxq8DAfEiAWgybOF6.jpg",
+          profile_path: undefined,
         },
         {
           character: "Janey Howard",
@@ -576,7 +576,7 @@ export const seasonDetails = {
           name: "Teagan Meredith",
           original_name: "Teagan Meredith",
           popularity: 1.527,
-          profile_path: "/sUP2xZkXb1aEwTDlugrvWpVYNpI.jpg",
+          profile_path: undefined,
         },
         {
           character: "Frank",
@@ -589,7 +589,7 @@ export const seasonDetails = {
           name: "Jamal Thomas",
           original_name: "Jamal Thomas",
           popularity: 5.25,
-          profile_path: "/79sLd1k5eRHjemjyKTe46eqHx7v.jpg",
+          profile_path: undefined,
         },
         {
           character: "News Anchor",
@@ -602,7 +602,7 @@ export const seasonDetails = {
           name: "Logan Crawford",
           original_name: "Logan Crawford",
           popularity: 8.22,
-          profile_path: "/bJhvtiLihpOwMVZsslqSDSNG8Je.jpg",
+          profile_path: undefined,
         },
         {
           character: "Weather Newscaster",
@@ -641,7 +641,7 @@ export const seasonDetails = {
           name: "Cedric Cannon",
           original_name: "Cedric Cannon",
           popularity: 1.945,
-          profile_path: "/3PtbLNqbkSwX1kuri68DNWh3MIU.jpg",
+          profile_path: undefined,
         },
         {
           character: "Vault 32 Raider",
@@ -654,7 +654,7 @@ export const seasonDetails = {
           name: "Tom DiNardo",
           original_name: "Tom DiNardo",
           popularity: 1.285,
-          profile_path: "/dhPk0F3DBwiJjNybA9rqomoZ0Ko.jpg",
+          profile_path: undefined,
         },
         {
           character: "Young Rose MacLean",
@@ -667,7 +667,7 @@ export const seasonDetails = {
           name: "Elle Vertes",
           original_name: "Elle Vertes",
           popularity: 5.071,
-          profile_path: "/aBvUrvXMgN7ylP2pS4McYQenAoL.jpg",
+          profile_path: undefined,
         },
         {
           character: "Young Lucy MacLean",
@@ -680,7 +680,7 @@ export const seasonDetails = {
           name: "Luciana VanDette",
           original_name: "Luciana VanDette",
           popularity: 2.63,
-          profile_path: "/sHu5Kdq0ZnKJpEbVNovXlHmmJKo.jpg",
+          profile_path: undefined,
         },
         {
           character: "Young Maximus",
@@ -693,7 +693,7 @@ export const seasonDetails = {
           name: "Amir Carr",
           original_name: "Amir Carr",
           popularity: 4.973,
-          profile_path: "/gicdHCZoFjlp6LH3tljnAydHGCb.jpg",
+          profile_path: undefined,
         },
         {
           character: "Roy Spencer",
@@ -706,7 +706,7 @@ export const seasonDetails = {
           name: "Mason Cufari",
           original_name: "Mason Cufari",
           popularity: 2.477,
-          profile_path: "/9o9bNDomtugse7iHQtPfVY6S6LM.jpg",
+          profile_path: undefined,
         },
         {
           character: "Guard",
@@ -732,7 +732,7 @@ export const seasonDetails = {
           name: "Kyle MacLachlan",
           original_name: "Kyle MacLachlan",
           popularity: 32.892,
-          profile_path: "/ooI51tWwL5qVHV6KrOdbi01s2ib.jpg",
+          profile_path: undefined,
         },
         {
           character: "Dane",
@@ -745,7 +745,7 @@ export const seasonDetails = {
           name: "Xelia Mendes-Jones",
           original_name: "Xelia Mendes-Jones",
           popularity: 39.886,
-          profile_path: "/pUr1bvy2XFWpN1xgLaTfsQ1CvC6.jpg",
+          profile_path: undefined,
         },
         {
           character: "Lucy MacLean Stunt Double",
@@ -758,7 +758,7 @@ export const seasonDetails = {
           name: "Hannah Scott",
           original_name: "Hannah Scott",
           popularity: 9.369,
-          profile_path: "/j46iWEDyMzR9kMYIfhUkeGNyGWR.jpg",
+          profile_path: undefined,
         },
         {
           character: "The Ghoul Stunt Double",
@@ -771,7 +771,7 @@ export const seasonDetails = {
           name: "Justice Hedenberg",
           original_name: "Justice Hedenberg",
           popularity: 8.134,
-          profile_path: "/dnztktpdUIHnmWJ2xyjphFuQFMC.jpg",
+          profile_path: undefined,
         },
         {
           character: "Maximus Stunt Double",
@@ -862,7 +862,7 @@ export const seasonDetails = {
           name: "David Armstrong",
           original_name: "David Armstrong",
           popularity: 3.266,
-          profile_path: "/5VYa1NvWm9kIv4pgGCuCJYlIFzy.jpg",
+          profile_path: undefined,
         },
         {
           character: "Honcho Stunt Double",
@@ -875,7 +875,7 @@ export const seasonDetails = {
           name: "Brandon McClary",
           original_name: "Brandon McClary",
           popularity: 4.169,
-          profile_path: "/pfMCrsSGddE3U1vLcav06g0yYiM.jpg",
+          profile_path: undefined,
         },
         {
           character: "Biggie Stunt Double",
@@ -888,7 +888,7 @@ export const seasonDetails = {
           name: "Danny Schoch",
           original_name: "Danny Schoch",
           popularity: 1.434,
-          profile_path: "/jSlD2U1xViL4W733Y8MlMPWjxRj.jpg",
+          profile_path: undefined,
         },
         {
           character: "Slim Stunt Double",
@@ -906,8 +906,8 @@ export const seasonDetails = {
       ],
     },
     {
-      air_date: "2024-04-10",
-      episode_number: 2,
+      air_date: undefined,
+      episode_number: undefined,
       episode_type: "standard",
       id: 4845562,
       name: "The Target",
@@ -916,7 +916,7 @@ export const seasonDetails = {
       runtime: 66,
       season_number: 1,
       show_id: 106379,
-      still_path: "/zyEkugNM2IIlSyNWFc3sJpjaoFD.jpg",
+      still_path: undefined,
       vote_average: 7.6,
       vote_count: 27,
       crew: [
@@ -931,7 +931,7 @@ export const seasonDetails = {
           name: "Jonathan Nolan",
           original_name: "Jonathan Nolan",
           popularity: 28.165,
-          profile_path: "/qd8d381vz2skpreY1BfVuSfLJts.jpg",
+          profile_path: undefined,
         },
         {
           job: "Writer",
@@ -944,7 +944,7 @@ export const seasonDetails = {
           name: "Geneva Robertson-Dworet",
           original_name: "Geneva Robertson-Dworet",
           popularity: 14.025,
-          profile_path: "/rtSFutIrgA1pmW1CO0NPzIsRFsP.jpg",
+          profile_path: undefined,
         },
         {
           job: "Writer",
@@ -1035,7 +1035,7 @@ export const seasonDetails = {
           name: "Craig Kuehne",
           original_name: "Craig Kuehne",
           popularity: 6.374,
-          profile_path: "/qgMUhgcQbpR4UKdC93rtfqWRZMr.jpg",
+          profile_path: undefined,
         },
         {
           job: "First Assistant Director",
@@ -1087,7 +1087,7 @@ export const seasonDetails = {
           name: "Maggie Kaszuba",
           original_name: "Maggie Kaszuba",
           popularity: 1.399,
-          profile_path: "/kMEWB23qzKVhSwy1wSOTRKBAYqz.jpg",
+          profile_path: undefined,
         },
         {
           job: "Second Second Assistant Director",
@@ -1165,7 +1165,7 @@ export const seasonDetails = {
           name: "Casey O'Neill",
           original_name: "Casey O'Neill",
           popularity: 6.239,
-          profile_path: "/aoT1prEjm2i4BYk2UUwYYhUtwTZ.jpg",
+          profile_path: undefined,
         },
         {
           job: "Executive Producer",
@@ -1217,7 +1217,7 @@ export const seasonDetails = {
           name: "Daniel Gray Longino",
           original_name: "Daniel Gray Longino",
           popularity: 5.189,
-          profile_path: "/r1nYCNbmwTElvvHbSFNpLT1JbuN.jpg",
+          profile_path: undefined,
         },
         {
           job: "Unit Production Manager",
@@ -1245,7 +1245,7 @@ export const seasonDetails = {
           name: "Amir Carr",
           original_name: "Amir Carr",
           popularity: 4.973,
-          profile_path: "/gicdHCZoFjlp6LH3tljnAydHGCb.jpg",
+          profile_path: undefined,
         },
         {
           character: "Wilzig",
@@ -1258,7 +1258,7 @@ export const seasonDetails = {
           name: "Michael Emerson",
           original_name: "Michael Emerson",
           popularity: 17.954,
-          profile_path: "/Ao4RxVstziaPiQ5wXkm7P8CDNDS.jpg",
+          profile_path: undefined,
         },
         {
           character: "Ma June",
@@ -1271,7 +1271,7 @@ export const seasonDetails = {
           name: "Dale Dickey",
           original_name: "Dale Dickey",
           popularity: 31.441,
-          profile_path: "/588WXHw17JYi2rAqIVQXzgYENu3.jpg",
+          profile_path: undefined,
         },
         {
           character: "Snake Oil Salesman",
@@ -1284,7 +1284,7 @@ export const seasonDetails = {
           name: "Jon Daly",
           original_name: "Jon Daly",
           popularity: 6.68,
-          profile_path: "/v8lq3HUmdQk1t50DAP1vt3LcJJM.jpg",
+          profile_path: undefined,
         },
         {
           character: "Farmer",
@@ -1297,7 +1297,7 @@ export const seasonDetails = {
           name: "Michael Abbott Jr.",
           original_name: "Michael Abbott Jr.",
           popularity: 6.522,
-          profile_path: "/lL6epnepASAxQolqXeNve8hEcaR.jpg",
+          profile_path: undefined,
         },
         {
           character: "Barv",
@@ -1323,7 +1323,7 @@ export const seasonDetails = {
           name: "Jake Garber",
           original_name: "Jake Garber",
           popularity: 6.201,
-          profile_path: "/bYUTYworrOBjM6fCK6QBNuJG3pI.jpg",
+          profile_path: undefined,
         },
         {
           character: "Filly Vendor #1",
@@ -1336,7 +1336,7 @@ export const seasonDetails = {
           name: "Martin Pfefferkorn",
           original_name: "Martin Pfefferkorn",
           popularity: 2.347,
-          profile_path: "/sKIQ68d6pZYqAL6Lpn9ry42yFJu.jpg",
+          profile_path: undefined,
         },
         {
           character: "Filly Vendor #2",
@@ -1349,7 +1349,7 @@ export const seasonDetails = {
           name: "David Bluvband",
           original_name: "David Bluvband",
           popularity: 2.226,
-          profile_path: "/hFZqFdQG4VBL1vtYEYeOjUHaPBE.jpg",
+          profile_path: undefined,
         },
         {
           character: "Filly Vendor #3",
@@ -1375,7 +1375,7 @@ export const seasonDetails = {
           name: "Bari Hyman",
           original_name: "Bari Hyman",
           popularity: 3.957,
-          profile_path: "/a0NZfg66cKSd1iqdQqfPiXr62vv.jpg",
+          profile_path: undefined,
         },
         {
           character: "Knight Titus",
@@ -1388,7 +1388,7 @@ export const seasonDetails = {
           name: "Michael Rapaport",
           original_name: "Michael Rapaport",
           popularity: 34.935,
-          profile_path: "/nWD2kufgy6lPyFVCPr9A3e7FMMn.jpg",
+          profile_path: undefined,
         },
         {
           character: "Lucy MacLean Stunt Double",
@@ -1401,7 +1401,7 @@ export const seasonDetails = {
           name: "Hannah Scott",
           original_name: "Hannah Scott",
           popularity: 9.369,
-          profile_path: "/j46iWEDyMzR9kMYIfhUkeGNyGWR.jpg",
+          profile_path: undefined,
         },
         {
           character: "Maximus Stunt Double",
@@ -1414,7 +1414,7 @@ export const seasonDetails = {
           name: "Victor Plajas",
           original_name: "Victor Plajas",
           popularity: 1.437,
-          profile_path: "/mWnrtjy3TEmlMzGEILCuXIOjrWs.jpg",
+          profile_path: undefined,
         },
         {
           character: "The Ghoul Stunt Double",
@@ -1427,7 +1427,7 @@ export const seasonDetails = {
           name: "Justice Hedenberg",
           original_name: "Justice Hedenberg",
           popularity: 8.134,
-          profile_path: "/dnztktpdUIHnmWJ2xyjphFuQFMC.jpg",
+          profile_path: undefined,
         },
         {
           character: "Wilzig Stunt Double",
@@ -1453,7 +1453,7 @@ export const seasonDetails = {
           name: "Samantha MacIvor",
           original_name: "Samantha MacIvor",
           popularity: 5.6,
-          profile_path: "/ztH9qxR7mknj8Rs2MCNhayA7n5l.jpg",
+          profile_path: undefined,
         },
         {
           character: "Administrator",
@@ -1510,8 +1510,8 @@ export const seasonDetails = {
       ],
     },
     {
-      air_date: "2024-04-10",
-      episode_number: 3,
+      air_date: undefined,
+      episode_number: undefined,
       episode_type: "standard",
       id: 4845563,
       name: "The Head",
@@ -1520,7 +1520,7 @@ export const seasonDetails = {
       runtime: 57,
       season_number: 1,
       show_id: 106379,
-      still_path: "/dj45nhpYWrLd3DhAewOxjdt2GuT.jpg",
+      still_path: undefined,
       vote_average: 7.7,
       vote_count: 23,
       crew: [
@@ -1535,7 +1535,7 @@ export const seasonDetails = {
           name: "Jonathan Nolan",
           original_name: "Jonathan Nolan",
           popularity: 28.165,
-          profile_path: "/qd8d381vz2skpreY1BfVuSfLJts.jpg",
+          profile_path: undefined,
         },
         {
           job: "Writer",
@@ -1548,7 +1548,7 @@ export const seasonDetails = {
           name: "Geneva Robertson-Dworet",
           original_name: "Geneva Robertson-Dworet",
           popularity: 14.025,
-          profile_path: "/rtSFutIrgA1pmW1CO0NPzIsRFsP.jpg",
+          profile_path: undefined,
         },
         {
           job: "Writer",
@@ -1639,7 +1639,7 @@ export const seasonDetails = {
           name: "Craig Kuehne",
           original_name: "Craig Kuehne",
           popularity: 6.374,
-          profile_path: "/qgMUhgcQbpR4UKdC93rtfqWRZMr.jpg",
+          profile_path: undefined,
         },
         {
           job: "Editor",
@@ -1704,7 +1704,7 @@ export const seasonDetails = {
           name: "Maggie Kaszuba",
           original_name: "Maggie Kaszuba",
           popularity: 1.399,
-          profile_path: "/kMEWB23qzKVhSwy1wSOTRKBAYqz.jpg",
+          profile_path: undefined,
         },
         {
           job: "Second Second Assistant Director",
@@ -1886,7 +1886,7 @@ export const seasonDetails = {
           name: "Casey O'Neill",
           original_name: "Casey O'Neill",
           popularity: 6.239,
-          profile_path: "/aoT1prEjm2i4BYk2UUwYYhUtwTZ.jpg",
+          profile_path: undefined,
         },
         {
           job: "Executive Producer",
@@ -1938,7 +1938,7 @@ export const seasonDetails = {
           name: "Daniel Gray Longino",
           original_name: "Daniel Gray Longino",
           popularity: 5.189,
-          profile_path: "/r1nYCNbmwTElvvHbSFNpLT1JbuN.jpg",
+          profile_path: undefined,
         },
         {
           job: "Unit Production Manager",
@@ -1966,7 +1966,7 @@ export const seasonDetails = {
           name: "Leslie Uggams",
           original_name: "Leslie Uggams",
           popularity: 17.216,
-          profile_path: "/peLaqLcs3y2WY4TbrLOXQGt9I8S.jpg",
+          profile_path: undefined,
         },
         {
           character: "Thaddeus",
@@ -1979,7 +1979,7 @@ export const seasonDetails = {
           name: "Johnny Pemberton",
           original_name: "Johnny Pemberton",
           popularity: 13.431,
-          profile_path: "/qP7y28lDW5wzUAUQ2sx6741Hx7a.jpg",
+          profile_path: undefined,
         },
         {
           character: "Woody Thomas",
@@ -1992,7 +1992,7 @@ export const seasonDetails = {
           name: "Zach Cherry",
           original_name: "Zach Cherry",
           popularity: 14.325,
-          profile_path: "/fT3Wv8ef0Vn0daHWAObCp2Bd4Y.jpg",
+          profile_path: undefined,
         },
         {
           character: "Stephanie Harper",
@@ -2005,7 +2005,7 @@ export const seasonDetails = {
           name: "Annabel O'Hagan",
           original_name: "Annabel O'Hagan",
           popularity: 56.118,
-          profile_path: "/nMfZOMXEGg2bbWQuybUsEkc2SU.jpg",
+          profile_path: undefined,
         },
         {
           character: "Chet",
@@ -2018,7 +2018,7 @@ export const seasonDetails = {
           name: "Dave Register",
           original_name: "Dave Register",
           popularity: 8.337,
-          profile_path: "/bJYuf9SpvFPPsjfA7GG4LMgARmB.jpg",
+          profile_path: undefined,
         },
         {
           character: "Reg McPhee",
@@ -2031,7 +2031,7 @@ export const seasonDetails = {
           name: "Rodrigo Luzzi",
           original_name: "Rodrigo Luzzi",
           popularity: 4.863,
-          profile_path: "/4xpKNyiV0SETMsnBZHSqCmkzSNr.jpg",
+          profile_path: undefined,
         },
         {
           character: "Davey",
@@ -2044,7 +2044,7 @@ export const seasonDetails = {
           name: "Leer Leary",
           original_name: "Leer Leary",
           popularity: 3.346,
-          profile_path: "/4Wz7pde3bKd8y090wmRV66lPCbb.jpg",
+          profile_path: undefined,
         },
         {
           character: "Officer Shortsight",
@@ -2057,7 +2057,7 @@ export const seasonDetails = {
           name: "Brendan Burke",
           original_name: "Brendan Burke",
           popularity: 14.781,
-          profile_path: "/caUA0KNcjFVxq8DAfEiAWgybOF6.jpg",
+          profile_path: undefined,
         },
         {
           character: "Janey Howard",
@@ -2070,7 +2070,7 @@ export const seasonDetails = {
           name: "Teagan Meredith",
           original_name: "Teagan Meredith",
           popularity: 1.527,
-          profile_path: "/sUP2xZkXb1aEwTDlugrvWpVYNpI.jpg",
+          profile_path: undefined,
         },
         {
           character: "Barb Howard",
@@ -2083,7 +2083,7 @@ export const seasonDetails = {
           name: "Frances Turner",
           original_name: "Frances Turner",
           popularity: 30.961,
-          profile_path: "/gc89yMClEPTRmB0eIJ2hh0sQEIV.jpg",
+          profile_path: undefined,
         },
         {
           character: "Marianne the Vault Scholar",
@@ -2122,7 +2122,7 @@ export const seasonDetails = {
           name: "Nina Kassa",
           original_name: "Nina Kassa",
           popularity: 2.475,
-          profile_path: "/iTinCHv12i6gUxMAUAYPdYp1Kat.jpg",
+          profile_path: undefined,
         },
         {
           character: "George Yaffe",
@@ -2135,7 +2135,7 @@ export const seasonDetails = {
           name: "Joe Castle Baker",
           original_name: "Joe Castle Baker",
           popularity: 1.11,
-          profile_path: "/fWCZj8khQVCjOWSpvp027QmNHz0.jpg",
+          profile_path: undefined,
         },
         {
           character: "Jorge the Villain",
@@ -2148,7 +2148,7 @@ export const seasonDetails = {
           name: "Roberto De Felice",
           original_name: "Roberto De Felice",
           popularity: 3.112,
-          profile_path: "/5Jaa6GyuAwYEWARMBrdd6d2h2L.jpg",
+          profile_path: undefined,
         },
         {
           character: "Assistant Director",
@@ -2200,7 +2200,7 @@ export const seasonDetails = {
           name: "Daniel Martin",
           original_name: "Daniel Martin",
           popularity: 3.575,
-          profile_path: "/1nJKkeix4sUUkSWwWGoy1YNwWbb.jpg",
+          profile_path: undefined,
         },
         {
           character: "Vault 33 Engineer",
@@ -2213,7 +2213,7 @@ export const seasonDetails = {
           name: "Daniel Danielson",
           original_name: "Daniel Danielson",
           popularity: 1.885,
-          profile_path: "/arzWakJZUFQiD743j1dlmyEp8V1.jpg",
+          profile_path: undefined,
         },
         {
           character: "Vault 33 Dweller",
@@ -2239,7 +2239,7 @@ export const seasonDetails = {
           name: "Hannah Scott",
           original_name: "Hannah Scott",
           popularity: 9.369,
-          profile_path: "/j46iWEDyMzR9kMYIfhUkeGNyGWR.jpg",
+          profile_path: undefined,
         },
         {
           character: "The Ghoul Stunt Double",
@@ -2252,7 +2252,7 @@ export const seasonDetails = {
           name: "Justice Hedenberg",
           original_name: "Justice Hedenberg",
           popularity: 8.134,
-          profile_path: "/dnztktpdUIHnmWJ2xyjphFuQFMC.jpg",
+          profile_path: undefined,
         },
         {
           character: "Thaddeus Stunt Double",
@@ -2265,7 +2265,7 @@ export const seasonDetails = {
           name: "David Armstrong",
           original_name: "David Armstrong",
           popularity: 3.266,
-          profile_path: "/5VYa1NvWm9kIv4pgGCuCJYlIFzy.jpg",
+          profile_path: undefined,
         },
         {
           character: "Maximus Stunt Double",
@@ -2330,7 +2330,7 @@ export const seasonDetails = {
           name: "Evan Dane Taylor",
           original_name: "Evan Dane Taylor",
           popularity: 8.45,
-          profile_path: "/vAa36T4nIgAsDT3KRfllm5DxbWy.jpg",
+          profile_path: undefined,
         },
         {
           character: "Scavenger",
@@ -2361,8 +2361,8 @@ export const seasonDetails = {
       ],
     },
     {
-      air_date: "2024-04-10",
-      episode_number: 4,
+      air_date: undefined,
+      episode_number: undefined,
       episode_type: "standard",
       id: 5197532,
       name: "The Ghouls",
@@ -2371,7 +2371,7 @@ export const seasonDetails = {
       runtime: 49,
       season_number: 1,
       show_id: 106379,
-      still_path: "/qHsYEQ8yZGomnVZT2rmpwz27r4l.jpg",
+      still_path: undefined,
       vote_average: 7.7,
       vote_count: 22,
       crew: [
@@ -2438,7 +2438,7 @@ export const seasonDetails = {
           name: "Daniel Gray Longino",
           original_name: "Daniel Gray Longino",
           popularity: 5.189,
-          profile_path: "/r1nYCNbmwTElvvHbSFNpLT1JbuN.jpg",
+          profile_path: undefined,
         },
         {
           job: "Writer",
@@ -2451,7 +2451,7 @@ export const seasonDetails = {
           name: "Kieran Fitzgerald",
           original_name: "Kieran Fitzgerald",
           popularity: 5.179,
-          profile_path: "/le9TwSnh68l1ztWwhj9oQVOQgo0.jpg",
+          profile_path: undefined,
         },
         {
           job: "Director of Photography",
@@ -2698,7 +2698,7 @@ export const seasonDetails = {
           name: "Casey O'Neill",
           original_name: "Casey O'Neill",
           popularity: 6.239,
-          profile_path: "/aoT1prEjm2i4BYk2UUwYYhUtwTZ.jpg",
+          profile_path: undefined,
         },
         {
           job: "Assistant Director Trainee",
@@ -2763,7 +2763,7 @@ export const seasonDetails = {
           name: "Daniel Gray Longino",
           original_name: "Daniel Gray Longino",
           popularity: 5.189,
-          profile_path: "/r1nYCNbmwTElvvHbSFNpLT1JbuN.jpg",
+          profile_path: undefined,
         },
         {
           job: "Unit Production Manager",
@@ -2791,7 +2791,7 @@ export const seasonDetails = {
           name: "Leslie Uggams",
           original_name: "Leslie Uggams",
           popularity: 17.216,
-          profile_path: "/peLaqLcs3y2WY4TbrLOXQGt9I8S.jpg",
+          profile_path: undefined,
         },
         {
           character: "Woody Thomas",
@@ -2804,7 +2804,7 @@ export const seasonDetails = {
           name: "Zach Cherry",
           original_name: "Zach Cherry",
           popularity: 14.325,
-          profile_path: "/fT3Wv8ef0Vn0daHWAObCp2Bd4Y.jpg",
+          profile_path: undefined,
         },
         {
           character: "Stephanie Harper",
@@ -2817,7 +2817,7 @@ export const seasonDetails = {
           name: "Annabel O'Hagan",
           original_name: "Annabel O'Hagan",
           popularity: 56.118,
-          profile_path: "/nMfZOMXEGg2bbWQuybUsEkc2SU.jpg",
+          profile_path: undefined,
         },
         {
           character: "Chet",
@@ -2830,7 +2830,7 @@ export const seasonDetails = {
           name: "Dave Register",
           original_name: "Dave Register",
           popularity: 8.337,
-          profile_path: "/bJYuf9SpvFPPsjfA7GG4LMgARmB.jpg",
+          profile_path: undefined,
         },
         {
           character: "Reg McPhee",
@@ -2843,7 +2843,7 @@ export const seasonDetails = {
           name: "Rodrigo Luzzi",
           original_name: "Rodrigo Luzzi",
           popularity: 4.863,
-          profile_path: "/4xpKNyiV0SETMsnBZHSqCmkzSNr.jpg",
+          profile_path: undefined,
         },
         {
           character: "Vault 32 Raider",
@@ -2856,7 +2856,7 @@ export const seasonDetails = {
           name: "Tom DiNardo",
           original_name: "Tom DiNardo",
           popularity: 1.285,
-          profile_path: "/dhPk0F3DBwiJjNybA9rqomoZ0Ko.jpg",
+          profile_path: undefined,
         },
         {
           character: "Young Rose MacLean",
@@ -2869,7 +2869,7 @@ export const seasonDetails = {
           name: "Elle Vertes",
           original_name: "Elle Vertes",
           popularity: 5.071,
-          profile_path: "/aBvUrvXMgN7ylP2pS4McYQenAoL.jpg",
+          profile_path: undefined,
         },
         {
           character: "Young Lucy MacLean",
@@ -2882,7 +2882,7 @@ export const seasonDetails = {
           name: "Luciana VanDette",
           original_name: "Luciana VanDette",
           popularity: 2.63,
-          profile_path: "/sHu5Kdq0ZnKJpEbVNovXlHmmJKo.jpg",
+          profile_path: undefined,
         },
         {
           character: "Jorge the Villain",
@@ -2895,7 +2895,7 @@ export const seasonDetails = {
           name: "Roberto De Felice",
           original_name: "Roberto De Felice",
           popularity: 3.112,
-          profile_path: "/5Jaa6GyuAwYEWARMBrdd6d2h2L.jpg",
+          profile_path: undefined,
         },
         {
           character: "Dervin",
@@ -2908,7 +2908,7 @@ export const seasonDetails = {
           name: "Daniel Martin",
           original_name: "Daniel Martin",
           popularity: 3.575,
-          profile_path: "/1nJKkeix4sUUkSWwWGoy1YNwWbb.jpg",
+          profile_path: undefined,
         },
         {
           character: "Snip Snip (voice)",
@@ -2921,7 +2921,7 @@ export const seasonDetails = {
           name: "Matt Berry",
           original_name: "Matt Berry",
           popularity: 20.303,
-          profile_path: "/7a1sWg1W7ZmNF8bLSnyAlJgQQGD.jpg",
+          profile_path: undefined,
         },
         {
           character: "Roger",
@@ -2934,7 +2934,7 @@ export const seasonDetails = {
           name: "Neal Huff",
           original_name: "Neal Huff",
           popularity: 12.968,
-          profile_path: "/9AZJ2b5QvyTYb8gLPXDfVbU7YYD.jpg",
+          profile_path: undefined,
         },
         {
           character: "Bud Askins",
@@ -2947,7 +2947,7 @@ export const seasonDetails = {
           name: "Michael Esper",
           original_name: "Michael Esper",
           popularity: 7.59,
-          profile_path: "/ri6OmRuEnbF3pcirudq3Gvc0oI5.jpg",
+          profile_path: undefined,
         },
         {
           character: "Huey",
@@ -2960,7 +2960,7 @@ export const seasonDetails = {
           name: "Matthew Cardarople",
           original_name: "Matthew Cardarople",
           popularity: 9.66,
-          profile_path: "/xhKO4iMPnwQS1GeDiY8vOyLFa8x.jpg",
+          profile_path: undefined,
         },
         {
           character: "Squirrel",
@@ -2986,7 +2986,7 @@ export const seasonDetails = {
           name: "Danielle Alonzo",
           original_name: "Danielle Alonzo",
           popularity: 1.228,
-          profile_path: "/ssojOKEMf0c1Gaa7hGv9vSYAPlW.jpg",
+          profile_path: undefined,
         },
         {
           character: "Freed Ghoul",
@@ -2999,7 +2999,7 @@ export const seasonDetails = {
           name: "Peter Brensinger",
           original_name: "Peter Brensinger",
           popularity: 3.46,
-          profile_path: "/qKmz6tQfrSsOHr90QsOyHzNCjsB.jpg",
+          profile_path: undefined,
         },
         {
           character: "Martha",
@@ -3012,7 +3012,7 @@ export const seasonDetails = {
           name: "Alexa Marcigliano",
           original_name: "Alexa Marcigliano",
           popularity: 1.54,
-          profile_path: "/sR3u5MAK0KOixm4WxAtYbqEixrJ.jpg",
+          profile_path: undefined,
         },
         {
           character: "Feral Ghoul",
@@ -3025,7 +3025,7 @@ export const seasonDetails = {
           name: "Warren E. Hull",
           original_name: "Warren E. Hull",
           popularity: 1.803,
-          profile_path: "/w3N0yyPy720juVTKFPRoescMKv5.jpg",
+          profile_path: undefined,
         },
         {
           character: "Feral Ghoul",
@@ -3038,7 +3038,7 @@ export const seasonDetails = {
           name: "Scott Hoffman",
           original_name: "Scott Hoffman",
           popularity: 2.248,
-          profile_path: "/e2fh518lU8iH9AShbzayHiNNPGD.jpg",
+          profile_path: undefined,
         },
         {
           character: "Feral Ghoul",
@@ -3051,7 +3051,7 @@ export const seasonDetails = {
           name: "David Armstrong",
           original_name: "David Armstrong",
           popularity: 3.266,
-          profile_path: "/5VYa1NvWm9kIv4pgGCuCJYlIFzy.jpg",
+          profile_path: undefined,
         },
         {
           character: "Vault 33 Dweller",
@@ -3064,7 +3064,7 @@ export const seasonDetails = {
           name: "A.J. Paratore",
           original_name: "A.J. Paratore",
           popularity: 0.806,
-          profile_path: "/wfgnzK7bIOExtsGKpLuIb6CSCPz.jpg",
+          profile_path: undefined,
         },
         {
           character: "Vault 33 Dweller",
@@ -3077,7 +3077,7 @@ export const seasonDetails = {
           name: "Chelsea Mahr",
           original_name: "Chelsea Mahr",
           popularity: 1.801,
-          profile_path: "/sIVTfYPuKqAJEA0j7f5fSY1HGyI.jpg",
+          profile_path: undefined,
         },
         {
           character: "Dead Vault 32 Raider",
@@ -3090,7 +3090,7 @@ export const seasonDetails = {
           name: "Emely Cartagena",
           original_name: "Emely Cartagena",
           popularity: 1.482,
-          profile_path: "/m9dmOFQgVowBvCI9qSNyIw7u0jj.jpg",
+          profile_path: undefined,
         },
         {
           character: "Dead Vault 32 Raider",
@@ -3116,7 +3116,7 @@ export const seasonDetails = {
           name: "Hannah Scott",
           original_name: "Hannah Scott",
           popularity: 9.369,
-          profile_path: "/j46iWEDyMzR9kMYIfhUkeGNyGWR.jpg",
+          profile_path: undefined,
         },
         {
           character: "The Ghoul Stunt Double",
@@ -3129,7 +3129,7 @@ export const seasonDetails = {
           name: "Justice Hedenberg",
           original_name: "Justice Hedenberg",
           popularity: 8.134,
-          profile_path: "/dnztktpdUIHnmWJ2xyjphFuQFMC.jpg",
+          profile_path: undefined,
         },
         {
           character: "Huey Stunt Double",
@@ -3147,8 +3147,8 @@ export const seasonDetails = {
       ],
     },
     {
-      air_date: "2024-04-10",
-      episode_number: 5,
+      air_date: undefined,
+      episode_number: undefined,
       episode_type: "standard",
       id: 5197533,
       name: "The Past",
@@ -3157,7 +3157,7 @@ export const seasonDetails = {
       runtime: 46,
       season_number: 1,
       show_id: 106379,
-      still_path: "/5jFf0PjFocJ4V8SvC4FsnruQNWJ.jpg",
+      still_path: undefined,
       vote_average: 7.7,
       vote_count: 21,
       crew: [
@@ -3380,7 +3380,7 @@ export const seasonDetails = {
           name: "Samuel D. Hunter",
           original_name: "Samuel D. Hunter",
           popularity: 1.912,
-          profile_path: "/fqbON3w2FhHQ5xvyhoiu65MxxeY.jpg",
+          profile_path: undefined,
         },
         {
           job: "Unit Production Manager",
@@ -3434,7 +3434,7 @@ export const seasonDetails = {
           name: "Leslie Uggams",
           original_name: "Leslie Uggams",
           popularity: 17.216,
-          profile_path: "/peLaqLcs3y2WY4TbrLOXQGt9I8S.jpg",
+          profile_path: undefined,
         },
         {
           character: "Thaddeus",
@@ -3447,7 +3447,7 @@ export const seasonDetails = {
           name: "Johnny Pemberton",
           original_name: "Johnny Pemberton",
           popularity: 13.431,
-          profile_path: "/qP7y28lDW5wzUAUQ2sx6741Hx7a.jpg",
+          profile_path: undefined,
         },
         {
           character: "Woody Thomas",
@@ -3460,7 +3460,7 @@ export const seasonDetails = {
           name: "Zach Cherry",
           original_name: "Zach Cherry",
           popularity: 14.325,
-          profile_path: "/fT3Wv8ef0Vn0daHWAObCp2Bd4Y.jpg",
+          profile_path: undefined,
         },
         {
           character: "Stephanie Harper",
@@ -3473,7 +3473,7 @@ export const seasonDetails = {
           name: "Annabel O'Hagan",
           original_name: "Annabel O'Hagan",
           popularity: 56.118,
-          profile_path: "/nMfZOMXEGg2bbWQuybUsEkc2SU.jpg",
+          profile_path: undefined,
         },
         {
           character: "Chet",
@@ -3486,7 +3486,7 @@ export const seasonDetails = {
           name: "Dave Register",
           original_name: "Dave Register",
           popularity: 8.337,
-          profile_path: "/bJYuf9SpvFPPsjfA7GG4LMgARmB.jpg",
+          profile_path: undefined,
         },
         {
           character: "Reg McPhee",
@@ -3499,7 +3499,7 @@ export const seasonDetails = {
           name: "Rodrigo Luzzi",
           original_name: "Rodrigo Luzzi",
           popularity: 4.863,
-          profile_path: "/4xpKNyiV0SETMsnBZHSqCmkzSNr.jpg",
+          profile_path: undefined,
         },
         {
           character: "Davey",
@@ -3512,7 +3512,7 @@ export const seasonDetails = {
           name: "Leer Leary",
           original_name: "Leer Leary",
           popularity: 3.346,
-          profile_path: "/4Wz7pde3bKd8y090wmRV66lPCbb.jpg",
+          profile_path: undefined,
         },
         {
           character: "Young Rose MacLean",
@@ -3525,7 +3525,7 @@ export const seasonDetails = {
           name: "Elle Vertes",
           original_name: "Elle Vertes",
           popularity: 5.071,
-          profile_path: "/aBvUrvXMgN7ylP2pS4McYQenAoL.jpg",
+          profile_path: undefined,
         },
         {
           character: "Young Lucy MacLean",
@@ -3538,7 +3538,7 @@ export const seasonDetails = {
           name: "Luciana VanDette",
           original_name: "Luciana VanDette",
           popularity: 2.63,
-          profile_path: "/sHu5Kdq0ZnKJpEbVNovXlHmmJKo.jpg",
+          profile_path: undefined,
         },
         {
           character: "Young Maximus",
@@ -3551,7 +3551,7 @@ export const seasonDetails = {
           name: "Amir Carr",
           original_name: "Amir Carr",
           popularity: 4.973,
-          profile_path: "/gicdHCZoFjlp6LH3tljnAydHGCb.jpg",
+          profile_path: undefined,
         },
         {
           character: "Marianne the Vault Scholar",
@@ -3577,7 +3577,7 @@ export const seasonDetails = {
           name: "Mitzi Akaha",
           original_name: "Mitzi Akaha",
           popularity: 7.578,
-          profile_path: "/TtFG6snKGPOfuV8yMKzI3p0Yg7.jpg",
+          profile_path: undefined,
         },
         {
           character: "Javin",
@@ -3590,7 +3590,7 @@ export const seasonDetails = {
           name: "Nicholas Michael McGovern",
           original_name: "Nicholas Michael McGovern",
           popularity: 1.311,
-          profile_path: "/586UjQGZ8Jw6DPKJdoHJXqcL8Dv.jpg",
+          profile_path: undefined,
         },
         {
           character: "Thaddeus Stunt Double",
@@ -3603,7 +3603,7 @@ export const seasonDetails = {
           name: "David Armstrong",
           original_name: "David Armstrong",
           popularity: 3.266,
-          profile_path: "/5VYa1NvWm9kIv4pgGCuCJYlIFzy.jpg",
+          profile_path: undefined,
         },
         {
           character: "Rink Stunt Double",
@@ -3647,8 +3647,8 @@ export const seasonDetails = {
       ],
     },
     {
-      air_date: "2024-04-10",
-      episode_number: 6,
+      air_date: undefined,
+      episode_number: undefined,
       episode_type: "standard",
       id: 5197535,
       name: "The Trap",
@@ -3658,7 +3658,7 @@ export const seasonDetails = {
       runtime: 61,
       season_number: 1,
       show_id: 106379,
-      still_path: "/aNWKd48GEEWgPjpnI5IwV5kRhIJ.jpg",
+      still_path: undefined,
       vote_average: 7.8,
       vote_count: 21,
       crew: [
@@ -3777,7 +3777,7 @@ export const seasonDetails = {
           name: "Fred Toye",
           original_name: "Fred Toye",
           popularity: 15.784,
-          profile_path: "/1BvXpOf7aLSKM7QAe0gI7BgdcGm.jpg",
+          profile_path: undefined,
         },
         {
           job: "Writer",
@@ -3790,7 +3790,7 @@ export const seasonDetails = {
           name: "Karey Dornetto",
           original_name: "Karey Dornetto",
           popularity: 4.309,
-          profile_path: "/sPrX6dH05p69NQQTuPB79QnkYj7.jpg",
+          profile_path: undefined,
         },
         {
           job: "Producer",
@@ -3842,7 +3842,7 @@ export const seasonDetails = {
           name: "Samuel D. Hunter",
           original_name: "Samuel D. Hunter",
           popularity: 1.912,
-          profile_path: "/fqbON3w2FhHQ5xvyhoiu65MxxeY.jpg",
+          profile_path: undefined,
         },
         {
           job: "Unit Production Manager",
@@ -3922,7 +3922,7 @@ export const seasonDetails = {
           name: "Sarita Choudhury",
           original_name: "Sarita Choudhury",
           popularity: 33.226,
-          profile_path: "/pABEOxQAns54tHpxN2w73b7SiPB.jpg",
+          profile_path: undefined,
         },
         {
           character: "Janey Howard",
@@ -3935,7 +3935,7 @@ export const seasonDetails = {
           name: "Teagan Meredith",
           original_name: "Teagan Meredith",
           popularity: 1.527,
-          profile_path: "/sUP2xZkXb1aEwTDlugrvWpVYNpI.jpg",
+          profile_path: undefined,
         },
         {
           character: "News Anchor",
@@ -3948,7 +3948,7 @@ export const seasonDetails = {
           name: "Logan Crawford",
           original_name: "Logan Crawford",
           popularity: 8.22,
-          profile_path: "/bJhvtiLihpOwMVZsslqSDSNG8Je.jpg",
+          profile_path: undefined,
         },
         {
           character: "Barb Howard",
@@ -3961,7 +3961,7 @@ export const seasonDetails = {
           name: "Frances Turner",
           original_name: "Frances Turner",
           popularity: 30.961,
-          profile_path: "/gc89yMClEPTRmB0eIJ2hh0sQEIV.jpg",
+          profile_path: undefined,
         },
         {
           character: "Bud Askins",
@@ -3974,7 +3974,7 @@ export const seasonDetails = {
           name: "Michael Esper",
           original_name: "Michael Esper",
           popularity: 7.59,
-          profile_path: "/ri6OmRuEnbF3pcirudq3Gvc0oI5.jpg",
+          profile_path: undefined,
         },
         {
           character: "Lucy MacLean Stunt Double",
@@ -3987,7 +3987,7 @@ export const seasonDetails = {
           name: "Hannah Scott",
           original_name: "Hannah Scott",
           popularity: 9.369,
-          profile_path: "/j46iWEDyMzR9kMYIfhUkeGNyGWR.jpg",
+          profile_path: undefined,
         },
         {
           character: "The Ghoul Stunt Double",
@@ -4000,7 +4000,7 @@ export const seasonDetails = {
           name: "Justice Hedenberg",
           original_name: "Justice Hedenberg",
           popularity: 8.134,
-          profile_path: "/dnztktpdUIHnmWJ2xyjphFuQFMC.jpg",
+          profile_path: undefined,
         },
         {
           character: "Sebastian Leslie",
@@ -4013,7 +4013,7 @@ export const seasonDetails = {
           name: "Matt Berry",
           original_name: "Matt Berry",
           popularity: 20.303,
-          profile_path: "/7a1sWg1W7ZmNF8bLSnyAlJgQQGD.jpg",
+          profile_path: undefined,
         },
         {
           character: "Overseer Benjamin",
@@ -4026,7 +4026,7 @@ export const seasonDetails = {
           name: "Chris Parnell",
           original_name: "Chris Parnell",
           popularity: 22.22,
-          profile_path: "/8K1s949E2dwBnj9NlMX0m640HQp.jpg",
+          profile_path: undefined,
         },
         {
           character: "Birdie",
@@ -4039,7 +4039,7 @@ export const seasonDetails = {
           name: "Cherien Dabis",
           original_name: "Cherien Dabis",
           popularity: 7.588,
-          profile_path: "/mfTEWYhZJURN4LbbJDlB4iVqjX.jpg",
+          profile_path: undefined,
         },
         {
           character: "Sorrel Booker",
@@ -4052,7 +4052,7 @@ export const seasonDetails = {
           name: "Glenn Fleshler",
           original_name: "Glenn Fleshler",
           popularity: 16.521,
-          profile_path: "/x1Cef2yPZS7bJTwxI7DX3q0HNcv.jpg",
+          profile_path: undefined,
         },
         {
           character: "Charles Whiteknife",
@@ -4065,7 +4065,7 @@ export const seasonDetails = {
           name: "Dallas Goldtooth",
           original_name: "Dallas Goldtooth",
           popularity: 3.443,
-          profile_path: "/lSn8AUXjAhFfafGAZ683UA8fTlp.jpg",
+          profile_path: undefined,
         },
         {
           character: "Lloyd Hawthorne",
@@ -4078,7 +4078,7 @@ export const seasonDetails = {
           name: "Eric Berryman",
           original_name: "Eric Berryman",
           popularity: 6.332,
-          profile_path: "/gcYfg02JWXKhKVsxaovt38GNTU3.jpg",
+          profile_path: undefined,
         },
         {
           character: "Cassandra Hawthorne",
@@ -4091,7 +4091,7 @@ export const seasonDetails = {
           name: "Angel Desai",
           original_name: "Angel Desai",
           popularity: 9.685,
-          profile_path: "/78ZGkrTJOpfjrns8FXKLqtqoMEx.jpg",
+          profile_path: undefined,
         },
         {
           character: "Dr. 'Nose' Edmundson",
@@ -4104,7 +4104,7 @@ export const seasonDetails = {
           name: "Harry Sutton Jr.",
           original_name: "Harry Sutton Jr.",
           popularity: 2.863,
-          profile_path: "/cEn7srro1BMcxhsTl3nZ1AKFXUs.jpg",
+          profile_path: undefined,
         },
         {
           character: "Nurse Powell",
@@ -4117,7 +4117,7 @@ export const seasonDetails = {
           name: "Chip Carriere",
           original_name: "Chip Carriere",
           popularity: 4.738,
-          profile_path: "/3OZ3fGF2iWwnhk1jM9gulUcQekk.jpg",
+          profile_path: undefined,
         },
         {
           character: "Friendly Vault 4 Dweller #1",
@@ -4130,7 +4130,7 @@ export const seasonDetails = {
           name: "Vick Krishna",
           original_name: "Vick Krishna",
           popularity: 3.337,
-          profile_path: "/tzFxxK5Xzr69FKRUEH0YHUmLy4b.jpg",
+          profile_path: undefined,
         },
         {
           character: "Friendly Vault 4 Dweller #2",
@@ -4169,7 +4169,7 @@ export const seasonDetails = {
           name: "Zeby Khan",
           original_name: "Zeby Khan",
           popularity: 2.232,
-          profile_path: "/nJJe3Frty9BnjOJ08IV5yaftJWT.jpg",
+          profile_path: undefined,
         },
         {
           character: "Party Guest #2",
@@ -4182,7 +4182,7 @@ export const seasonDetails = {
           name: "David Denowitz",
           original_name: "David Denowitz",
           popularity: 1.571,
-          profile_path: "/dXTXo8niq6A0t7JXLzyArhElGzP.jpg",
+          profile_path: undefined,
         },
         {
           character: "Party Guest #3",
@@ -4208,7 +4208,7 @@ export const seasonDetails = {
           name: "Morgen McKynzie",
           original_name: "Morgen McKynzie",
           popularity: 2.085,
-          profile_path: "/TJ6aXwAeRZzS3DZjM3nuCfmrf4.jpg",
+          profile_path: undefined,
         },
         {
           character: "Subject 476",
@@ -4234,7 +4234,7 @@ export const seasonDetails = {
           name: "Brandon McClary",
           original_name: "Brandon McClary",
           popularity: 4.169,
-          profile_path: "/pfMCrsSGddE3U1vLcav06g0yYiM.jpg",
+          profile_path: undefined,
         },
         {
           character: "Vault 4 Dweller",
@@ -4286,7 +4286,7 @@ export const seasonDetails = {
           name: "Neimah Djourabchi",
           original_name: "Neimah Djourabchi",
           popularity: 1.652,
-          profile_path: "/9xZlVhIGDNX66S8ipoOzs9NfW8s.jpg",
+          profile_path: undefined,
         },
         {
           character: "Sheriff Rex",
@@ -4299,13 +4299,13 @@ export const seasonDetails = {
           name: "Christopher Parker",
           original_name: "Christopher Parker",
           popularity: 4.41,
-          profile_path: "/6dxgmTsiXfpllG9z2Qyd9qpPnJC.jpg",
+          profile_path: undefined,
         },
       ],
     },
     {
-      air_date: "2024-04-10",
-      episode_number: 7,
+      air_date: undefined,
+      episode_number: undefined,
       episode_type: "standard",
       id: 5197536,
       name: "The Radio",
@@ -4314,7 +4314,7 @@ export const seasonDetails = {
       runtime: 62,
       season_number: 1,
       show_id: 106379,
-      still_path: "/qLXHRb2131kGo2AeTgegLI1BU3g.jpg",
+      still_path: undefined,
       vote_average: 7.7,
       vote_count: 21,
       crew: [
@@ -4472,7 +4472,7 @@ export const seasonDetails = {
           name: "Fred Toye",
           original_name: "Fred Toye",
           popularity: 15.784,
-          profile_path: "/1BvXpOf7aLSKM7QAe0gI7BgdcGm.jpg",
+          profile_path: undefined,
         },
         {
           job: "Writer",
@@ -4550,7 +4550,7 @@ export const seasonDetails = {
           name: "Samuel D. Hunter",
           original_name: "Samuel D. Hunter",
           popularity: 1.912,
-          profile_path: "/fqbON3w2FhHQ5xvyhoiu65MxxeY.jpg",
+          profile_path: undefined,
         },
         {
           job: "Unit Production Manager",
@@ -4602,7 +4602,7 @@ export const seasonDetails = {
           name: "Maggie Kaszuba",
           original_name: "Maggie Kaszuba",
           popularity: 1.399,
-          profile_path: "/kMEWB23qzKVhSwy1wSOTRKBAYqz.jpg",
+          profile_path: undefined,
         },
       ],
       guest_stars: [
@@ -4617,7 +4617,7 @@ export const seasonDetails = {
           name: "Sarita Choudhury",
           original_name: "Sarita Choudhury",
           popularity: 33.226,
-          profile_path: "/pABEOxQAns54tHpxN2w73b7SiPB.jpg",
+          profile_path: undefined,
         },
         {
           character: "Betty Pearson",
@@ -4630,7 +4630,7 @@ export const seasonDetails = {
           name: "Leslie Uggams",
           original_name: "Leslie Uggams",
           popularity: 17.216,
-          profile_path: "/peLaqLcs3y2WY4TbrLOXQGt9I8S.jpg",
+          profile_path: undefined,
         },
         {
           character: "Thaddeus",
@@ -4643,7 +4643,7 @@ export const seasonDetails = {
           name: "Johnny Pemberton",
           original_name: "Johnny Pemberton",
           popularity: 13.431,
-          profile_path: "/qP7y28lDW5wzUAUQ2sx6741Hx7a.jpg",
+          profile_path: undefined,
         },
         {
           character: "Woody Thomas",
@@ -4656,7 +4656,7 @@ export const seasonDetails = {
           name: "Zach Cherry",
           original_name: "Zach Cherry",
           popularity: 14.325,
-          profile_path: "/fT3Wv8ef0Vn0daHWAObCp2Bd4Y.jpg",
+          profile_path: undefined,
         },
         {
           character: "Stephanie Harper",
@@ -4669,7 +4669,7 @@ export const seasonDetails = {
           name: "Annabel O'Hagan",
           original_name: "Annabel O'Hagan",
           popularity: 56.118,
-          profile_path: "/nMfZOMXEGg2bbWQuybUsEkc2SU.jpg",
+          profile_path: undefined,
         },
         {
           character: "Chet",
@@ -4682,7 +4682,7 @@ export const seasonDetails = {
           name: "Dave Register",
           original_name: "Dave Register",
           popularity: 8.337,
-          profile_path: "/bJYuf9SpvFPPsjfA7GG4LMgARmB.jpg",
+          profile_path: undefined,
         },
         {
           character: "Reg McPhee",
@@ -4695,7 +4695,7 @@ export const seasonDetails = {
           name: "Rodrigo Luzzi",
           original_name: "Rodrigo Luzzi",
           popularity: 4.863,
-          profile_path: "/4xpKNyiV0SETMsnBZHSqCmkzSNr.jpg",
+          profile_path: undefined,
         },
         {
           character: "Davey",
@@ -4708,7 +4708,7 @@ export const seasonDetails = {
           name: "Leer Leary",
           original_name: "Leer Leary",
           popularity: 3.346,
-          profile_path: "/4Wz7pde3bKd8y090wmRV66lPCbb.jpg",
+          profile_path: undefined,
         },
         {
           character: "Janey Howard",
@@ -4721,7 +4721,7 @@ export const seasonDetails = {
           name: "Teagan Meredith",
           original_name: "Teagan Meredith",
           popularity: 1.527,
-          profile_path: "/sUP2xZkXb1aEwTDlugrvWpVYNpI.jpg",
+          profile_path: undefined,
         },
         {
           character: "Snake Oil Salesman",
@@ -4734,7 +4734,7 @@ export const seasonDetails = {
           name: "Jon Daly",
           original_name: "Jon Daly",
           popularity: 6.68,
-          profile_path: "/v8lq3HUmdQk1t50DAP1vt3LcJJM.jpg",
+          profile_path: undefined,
         },
         {
           character: "Barb Howard",
@@ -4747,7 +4747,7 @@ export const seasonDetails = {
           name: "Frances Turner",
           original_name: "Frances Turner",
           popularity: 30.961,
-          profile_path: "/gc89yMClEPTRmB0eIJ2hh0sQEIV.jpg",
+          profile_path: undefined,
         },
         {
           character: "Dervin",
@@ -4760,7 +4760,7 @@ export const seasonDetails = {
           name: "Daniel Martin",
           original_name: "Daniel Martin",
           popularity: 3.575,
-          profile_path: "/1nJKkeix4sUUkSWwWGoy1YNwWbb.jpg",
+          profile_path: undefined,
         },
         {
           character: "Veronica",
@@ -4773,7 +4773,7 @@ export const seasonDetails = {
           name: "Danielle Alonzo",
           original_name: "Danielle Alonzo",
           popularity: 1.228,
-          profile_path: "/ssojOKEMf0c1Gaa7hGv9vSYAPlW.jpg",
+          profile_path: undefined,
         },
         {
           character: "Lucy MacLean Stunt Double",
@@ -4786,7 +4786,7 @@ export const seasonDetails = {
           name: "Hannah Scott",
           original_name: "Hannah Scott",
           popularity: 9.369,
-          profile_path: "/j46iWEDyMzR9kMYIfhUkeGNyGWR.jpg",
+          profile_path: undefined,
         },
         {
           character: "The Ghoul Stunt Double",
@@ -4799,7 +4799,7 @@ export const seasonDetails = {
           name: "Justice Hedenberg",
           original_name: "Justice Hedenberg",
           popularity: 8.134,
-          profile_path: "/dnztktpdUIHnmWJ2xyjphFuQFMC.jpg",
+          profile_path: undefined,
         },
         {
           character: "Overseer Benjamin",
@@ -4812,7 +4812,7 @@ export const seasonDetails = {
           name: "Chris Parnell",
           original_name: "Chris Parnell",
           popularity: 22.22,
-          profile_path: "/8K1s949E2dwBnj9NlMX0m640HQp.jpg",
+          profile_path: undefined,
         },
         {
           character: "Birdie",
@@ -4825,7 +4825,7 @@ export const seasonDetails = {
           name: "Cherien Dabis",
           original_name: "Cherien Dabis",
           popularity: 7.588,
-          profile_path: "/mfTEWYhZJURN4LbbJDlB4iVqjX.jpg",
+          profile_path: undefined,
         },
         {
           character: "Charles Whiteknife",
@@ -4838,7 +4838,7 @@ export const seasonDetails = {
           name: "Dallas Goldtooth",
           original_name: "Dallas Goldtooth",
           popularity: 3.443,
-          profile_path: "/lSn8AUXjAhFfafGAZ683UA8fTlp.jpg",
+          profile_path: undefined,
         },
         {
           character: "Lloyd Hawthorne",
@@ -4851,7 +4851,7 @@ export const seasonDetails = {
           name: "Eric Berryman",
           original_name: "Eric Berryman",
           popularity: 6.332,
-          profile_path: "/gcYfg02JWXKhKVsxaovt38GNTU3.jpg",
+          profile_path: undefined,
         },
         {
           character: "Cassandra Hawthorne",
@@ -4864,7 +4864,7 @@ export const seasonDetails = {
           name: "Angel Desai",
           original_name: "Angel Desai",
           popularity: 9.685,
-          profile_path: "/78ZGkrTJOpfjrns8FXKLqtqoMEx.jpg",
+          profile_path: undefined,
         },
         {
           character: "Dr. 'Nose' Edmundson",
@@ -4877,7 +4877,7 @@ export const seasonDetails = {
           name: "Harry Sutton Jr.",
           original_name: "Harry Sutton Jr.",
           popularity: 2.863,
-          profile_path: "/cEn7srro1BMcxhsTl3nZ1AKFXUs.jpg",
+          profile_path: undefined,
         },
         {
           character: "DJ Carl",
@@ -4890,7 +4890,7 @@ export const seasonDetails = {
           name: "Fred Armisen",
           original_name: "Fred Armisen",
           popularity: 11.92,
-          profile_path: "/nLMCRlt0MV2uu4KPbDPDNsPWfBG.jpg",
+          profile_path: undefined,
         },
         {
           character: "Adam",
@@ -4903,7 +4903,7 @@ export const seasonDetails = {
           name: "Erik Estrada",
           original_name: "Erik Estrada",
           popularity: 13.463,
-          profile_path: "/9R7acxdXkI8wt4ocIbPBNMNMxIY.jpg",
+          profile_path: undefined,
         },
         {
           character: "Tommy",
@@ -4929,7 +4929,7 @@ export const seasonDetails = {
           name: "Paul Mauriello",
           original_name: "Paul Mauriello",
           popularity: 0.825,
-          profile_path: "/nq5mFw8cY9kj8uihcxblLixnIRp.jpg",
+          profile_path: undefined,
         },
         {
           character: "Sandra",
@@ -4960,8 +4960,8 @@ export const seasonDetails = {
       ],
     },
     {
-      air_date: "2024-04-10",
-      episode_number: 8,
+      air_date: undefined,
+      episode_number: undefined,
       episode_type: "finale",
       id: 5197538,
       name: "The Beginning",
@@ -4970,7 +4970,7 @@ export const seasonDetails = {
       runtime: 63,
       season_number: 1,
       show_id: 106379,
-      still_path: "/qChsq0i2LBQNd7v3T16T6PXhzH7.jpg",
+      still_path: undefined,
       vote_average: 8.0,
       vote_count: 20,
       crew: [
@@ -5076,7 +5076,7 @@ export const seasonDetails = {
           name: "Wayne Che Yip",
           original_name: "Wayne Che Yip",
           popularity: 5.933,
-          profile_path: "/rv1oGpWe6r7mOKYPsPCNxoRpjak.jpg",
+          profile_path: undefined,
         },
         {
           job: "Writer",
@@ -5141,7 +5141,7 @@ export const seasonDetails = {
           name: "Samuel D. Hunter",
           original_name: "Samuel D. Hunter",
           popularity: 1.912,
-          profile_path: "/fqbON3w2FhHQ5xvyhoiu65MxxeY.jpg",
+          profile_path: undefined,
         },
         {
           job: "Unit Production Manager",
@@ -5206,7 +5206,7 @@ export const seasonDetails = {
           name: "Maggie Kaszuba",
           original_name: "Maggie Kaszuba",
           popularity: 1.399,
-          profile_path: "/kMEWB23qzKVhSwy1wSOTRKBAYqz.jpg",
+          profile_path: undefined,
         },
         {
           job: "Editor",
@@ -5247,7 +5247,7 @@ export const seasonDetails = {
           name: "Sarita Choudhury",
           original_name: "Sarita Choudhury",
           popularity: 33.226,
-          profile_path: "/pABEOxQAns54tHpxN2w73b7SiPB.jpg",
+          profile_path: undefined,
         },
         {
           character: "Elder Cleric Quintus",
@@ -5260,7 +5260,7 @@ export const seasonDetails = {
           name: "Michael Cristofer",
           original_name: "Michael Cristofer",
           popularity: 16.29,
-          profile_path: "/yWZr1U6A4UAatvgqvX1zmOgB92S.jpg",
+          profile_path: undefined,
         },
         {
           character: "Officer Shortsight",
@@ -5273,7 +5273,7 @@ export const seasonDetails = {
           name: "Brendan Burke",
           original_name: "Brendan Burke",
           popularity: 14.781,
-          profile_path: "/caUA0KNcjFVxq8DAfEiAWgybOF6.jpg",
+          profile_path: undefined,
         },
         {
           character: "Young Lucy MacLean",
@@ -5286,7 +5286,7 @@ export const seasonDetails = {
           name: "Luciana VanDette",
           original_name: "Luciana VanDette",
           popularity: 2.63,
-          profile_path: "/sHu5Kdq0ZnKJpEbVNovXlHmmJKo.jpg",
+          profile_path: undefined,
         },
         {
           character: "Young Maximus",
@@ -5299,7 +5299,7 @@ export const seasonDetails = {
           name: "Amir Carr",
           original_name: "Amir Carr",
           popularity: 4.973,
-          profile_path: "/gicdHCZoFjlp6LH3tljnAydHGCb.jpg",
+          profile_path: undefined,
         },
         {
           character: "Barb Howard",
@@ -5312,7 +5312,7 @@ export const seasonDetails = {
           name: "Frances Turner",
           original_name: "Frances Turner",
           popularity: 30.961,
-          profile_path: "/gc89yMClEPTRmB0eIJ2hh0sQEIV.jpg",
+          profile_path: undefined,
         },
         {
           character: "Overseer Hank MacLean",
@@ -5325,7 +5325,7 @@ export const seasonDetails = {
           name: "Kyle MacLachlan",
           original_name: "Kyle MacLachlan",
           popularity: 32.892,
-          profile_path: "/ooI51tWwL5qVHV6KrOdbi01s2ib.jpg",
+          profile_path: undefined,
         },
         {
           character: "Dane",
@@ -5338,7 +5338,7 @@ export const seasonDetails = {
           name: "Xelia Mendes-Jones",
           original_name: "Xelia Mendes-Jones",
           popularity: 39.886,
-          profile_path: "/pUr1bvy2XFWpN1xgLaTfsQ1CvC6.jpg",
+          profile_path: undefined,
         },
         {
           character: "Freed Ghoul",
@@ -5351,7 +5351,7 @@ export const seasonDetails = {
           name: "Peter Brensinger",
           original_name: "Peter Brensinger",
           popularity: 3.46,
-          profile_path: "/qKmz6tQfrSsOHr90QsOyHzNCjsB.jpg",
+          profile_path: undefined,
         },
         {
           character: "Maximus Stunt Double",
@@ -5364,7 +5364,7 @@ export const seasonDetails = {
           name: "Victor Plajas",
           original_name: "Victor Plajas",
           popularity: 1.437,
-          profile_path: "/mWnrtjy3TEmlMzGEILCuXIOjrWs.jpg",
+          profile_path: undefined,
         },
         {
           character: "The Ghoul Stunt Double",
@@ -5377,7 +5377,7 @@ export const seasonDetails = {
           name: "Justice Hedenberg",
           original_name: "Justice Hedenberg",
           popularity: 8.134,
-          profile_path: "/dnztktpdUIHnmWJ2xyjphFuQFMC.jpg",
+          profile_path: undefined,
         },
         {
           character: "Bud Askins / Brain-on-a-Roomba",
@@ -5390,7 +5390,7 @@ export const seasonDetails = {
           name: "Michael Esper",
           original_name: "Michael Esper",
           popularity: 7.59,
-          profile_path: "/ri6OmRuEnbF3pcirudq3Gvc0oI5.jpg",
+          profile_path: undefined,
         },
         {
           character: "Frederick Sinclair (Big MT)",
@@ -5403,7 +5403,7 @@ export const seasonDetails = {
           name: "Michael Mulheren",
           original_name: "Michael Mulheren",
           popularity: 7.224,
-          profile_path: "/fGyHTMXAWGQ290NQktWuEF6ep1g.jpg",
+          profile_path: undefined,
         },
         {
           character: "Robert House (RobCo)",
@@ -5416,7 +5416,7 @@ export const seasonDetails = {
           name: "Anthony Misiano",
           original_name: "Anthony Misiano",
           popularity: 4.414,
-          profile_path: "/dKmAYtys1vNulEmqp88X1M0D7CF.jpg",
+          profile_path: undefined,
         },
         {
           character: "Leon Von Felden (West-Tek)",
@@ -5429,7 +5429,7 @@ export const seasonDetails = {
           name: "James Yaegashi",
           original_name: "James Yaegashi",
           popularity: 6.747,
-          profile_path: "/aeINg1xUlthMoN8ImouqkCkThYi.jpg",
+          profile_path: undefined,
         },
         {
           character: "Julia Masters (REPCONN)",
@@ -5442,7 +5442,7 @@ export const seasonDetails = {
           name: "Rebecca Watson",
           original_name: "Rebecca Watson",
           popularity: 4.408,
-          profile_path: "/dqx3CyP9nQasRKjSo9aRhahcqtZ.jpg",
+          profile_path: undefined,
         },
         {
           character: "Young Betty Pearson",
@@ -5455,7 +5455,7 @@ export const seasonDetails = {
           name: "Princess Bey",
           original_name: "Princess Bey",
           popularity: 1.867,
-          profile_path: "/bDs70U1au3GwjQwWYMjrRnNFawi.jpg",
+          profile_path: undefined,
         },
         {
           character: "Rose MacLean",
@@ -5468,7 +5468,7 @@ export const seasonDetails = {
           name: "Elle Vertes",
           original_name: "Elle Vertes",
           popularity: 5.071,
-          profile_path: "/aBvUrvXMgN7ylP2pS4McYQenAoL.jpg",
+          profile_path: undefined,
         },
         {
           character: "Ghoul Rose MacLean",
@@ -5541,7 +5541,7 @@ export const seasonDetails = {
   name: "Season 1",
   overview: "",
   id: 157128,
-  poster_path: "/AnsSKR9LuK0T9bAOcPVA3PUvyWj.jpg",
+  poster_path: undefined,
   season_number: 1,
   vote_average: 7.7,
 };

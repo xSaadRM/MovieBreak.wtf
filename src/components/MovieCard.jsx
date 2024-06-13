@@ -1,11 +1,15 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "../styles/Card.css";
-import fallbackImage from "../assets/noPoster.jpeg";
+import LazyImage from "./LazyImage";
+import { Star } from "@mui/icons-material";
+import noProfile from "../assets/noProfilePicture.png";
+import noPoster from "../assets/noPoster.jpeg";
 
 const MovieCard = ({ movie, isCategorized, media_type }) => {
   const navigate = useNavigate();
   const [isHovered, setIsHovered] = useState(false);
+  const mediaType = movie.media_type || media_type;
 
   const handleMouseOver = () => {
     setIsHovered(true);
@@ -16,59 +20,59 @@ const MovieCard = ({ movie, isCategorized, media_type }) => {
   };
 
   const handleClick = () => {
-    if (isHovered) {
-      navigate(
-        `/${media_type ? media_type : movie.media_type}/${movie.id}/${
-          (media_type || movie.media_type) === "tv" ? "1" : ""
-        }`
-      );
+    if (mediaType !== "person") {
+      if (isHovered) {
+        navigate(`/${mediaType}/${movie.id}/`);
+      }
     }
   };
 
   return (
-    <div
-      className="movie"
-      onMouseOver={handleMouseOver}
-      onMouseLeave={handleMouseLeave}
-      onClick={handleClick}
-    >
-      <div>
-        {movie && (
-          <p>
-            {movie.vote_average
-              ? `Rating: ${movie.vote_average.toFixed(1)}`
-              : movie.popularity
-              ? `Popularity: ${movie.popularity.toFixed(1)}`
-              : "N/A"}
+    <>
+      <div
+        className={"movie" + (mediaType === "person" ? " round" : "")}
+        onMouseOver={handleMouseOver}
+        onMouseLeave={handleMouseLeave}
+        onClick={handleClick}
+      >
+        <div>_CSS</div>
+        <div className="the-card-image">
+          <>
+            {movie.profile_path || movie.poster_path ? (
+              <LazyImage
+                ratio={"185/278"}
+                src={`https://image.tmdb.org/t/p/w370_and_h556_bestv2${
+                  movie.profile_path || movie.poster_path
+                }`}
+                alt={movie.name}
+              />
+            ) : (
+              <LazyImage
+                src={mediaType === "person" ? noProfile : noPoster}
+                alt={movie.name || "no-picture"}
+              />
+            )}
+          </>
+        </div>
+
+        {movie.first_air_date || movie.release_date ? (
+          <p className="releaseDate">
+            {(movie.first_air_date || movie.release_date).split("-")[0]}
+          </p>
+        ) : null}
+        {!isCategorized ? (
+          <p className="badge_topLeft">{movie.media_type.toUpperCase()}</p>
+        ) : (
+          <p className="badge_topLeft">
+            <Star htmlColor="yellow" fontSize="auto" />
+            {(movie.vote_average || movie.popularity).toFixed(1)}
           </p>
         )}
       </div>
-      <div className="the-card-image">
-        <img
-          src={
-            movie.poster_path || movie.profile_path
-              ? `https://image.tmdb.org/t/p/w370_and_h556_bestv2${
-                  movie.poster_path || movie.profile_path
-                }`
-              : fallbackImage
-          }
-          alt={movie.original_title || movie.original_name}
-        />
+      <div className="movieTitle">
+        <span>{movie.title || movie.name}</span>
       </div>
-      <div>
-        <span>{movie.original_title || movie.original_name}</span>
-        {!isCategorized && (
-          <h3>
-            {movie.media_type}
-            {movie.first_air_date
-              ? " - " + movie.first_air_date
-              : movie.release_date
-              ? " - " + movie.release_date
-              : ""}
-          </h3>
-        )}
-      </div>
-    </div>
+    </>
   );
 };
 

@@ -2,14 +2,33 @@
   transform: translate3d(0px, 0px, 0px) !important;
 }
 .trending-carousel {
+  visibility: hidden;
+  z-index: -1;
+  position: absolute;
   width: 95%;
   margin: 0 auto;
   margin-bottom: 40px;
+}
+.trending-carousel.active {
+  visibility: visible;
+  position: relative;
+  z-index: 0;
 }
 .slick-prev,
 .slick-next {
   height: 50%;
   z-index: 1;
+}
+/* .slick-prev:hover,
+.slick-next:hover {
+  box-shadow: white 0px 0px 20px, blue 5px 0px 20px;
+}
+.slick-prev.slick-disabled:hover,
+.slick-next.slick-disabled:hover {
+  box-shadow: none;
+} */
+.slick-disabled {
+  cursor: auto;
 }
 .slick-prev {
   left: 0;
@@ -29,40 +48,84 @@
   margin-bottom: 10px;
 }
 
-.trending-carousel .movie {
+.movie {
   border-radius: 10px;
   width: 90%;
   height: auto;
 }
-.trending-carousel .movie img {
+.movie img {
   border-radius: 10px;
   width: 90%;
   height: auto;
 }
-.trending-carousel .movie div:nth-of-type(3) {
+.movie div:nth-of-type(3) {
   display: flex;
   background-color: rgb(90, 90, 192);
   justify-content: center;
   align-items: center;
   padding: 10px;
 }
-.trending-carousel .movie:hover div:nth-of-type(3) {
+.movie:hover div:nth-of-type(3) {
   background-color: transparent;
 }
-.trending-carousel .movie:hover span {
+.movie:hover span {
   opacity: 0;
 }
-.trending-carousel .movie span {
+.movie span {
   text-align: center;
   font-weight: bold;
   font-size: large;
 }
-.trending-carousel .movie:hover h3 {
+.movie:hover h3 {
   opacity: 0;
 }
 
 @media screen and (max-width: 400px) {
-  .trending-carousel .movie div:nth-of-type(3) {
+  .movie div:nth-of-type(3) {
     background-color: rgb(90, 90, 192);
   }
+}
+
+.slick-dots li button,
+.slick-dots li button:before {
+  background-color: hsla(0, 0%, 100%, 0.486);
+  width: 50%;
+  height: 50%;
+  border-radius: 100%;
+  font-size: 0 !important;
+  color: transparent !important;
+  opacity: 0.5;
+}
+
+.slick-dots li.slick-active button,
+.slick-dots li.slick-active button:before {
+  box-shadow: aqua 0px 1px 13px 0px;
+  background-color: hsl(0, 0%, 100%);
+  opacity: 1;
+}
+
+.movieTitle {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: hsl(0, 0%, 100%);
+  width: 90%;
+  margin: 0 12px;
+}
+.movieTitle span {
+  padding: 5px 20px;
+  background: linear-gradient(
+    90deg,
+    hsla(226, 99%, 29%, 0.425) 0%,
+    hsla(0, 100%, 27%, 0.459) 100%
+  );
+  border-radius: 10px;
+  text-align: center;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  font-size: 13px;
+}
+.movieTitle span:hover {
+  white-space: normal;
 }

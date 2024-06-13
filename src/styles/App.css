@@ -12,9 +12,9 @@
   --font-raleway: "Raleway", sans-serif;
 }
 
-body {
+body, .app {
   font-family: var(--font-roboto);
-  background-color: rgba(10 10 18);
+  background: linear-gradient(90deg, hsl(240, 38%, 6%), hsl(231, 95%, 9%));
 }
 
 .app {
@@ -31,8 +31,44 @@ body {
   justify-content: center;
   align-items: center;
   flex-wrap: wrap;
+  gap: 10px;
+}
+.container .movie {
+  margin: 0;
+  width: clamp(150px, 17vw, 250px);
+  height: auto;
+}
+.releaseDate,
+.badge_topLeft {
+  color: hsl(180, 100%, 50%);
+  background: hsla(0, 0%, 0%, 0.616);
+  backdrop-filter: blur(20px);
+  position: absolute;
+  padding: 7px;
+  border-radius: 10px;
+  top: 5px;
+  font-size: small;
+}
+.releaseDate {
+  right: 5px;
+}
+.badge_topLeft {
+  display: flex;
+  left: 5px;
+  align-items: center;
 }
 
+.movie:hover .releaseDate,
+.movie:hover .badge_topLeft {
+  display: none;
+}
+
+.backdrop .releaseDate,
+.backdrop .rating {
+  padding: 7px 15px;
+  font-size: medium;
+  font-weight: bold;
+}
 .placeholder-content {
   opacity: 1 !important;
   position: absolute !important;
@@ -49,5 +85,89 @@ body {
   text-align: center;
   font-size: 18px;
   margin-top: 20px;
- }
- 
+}
+
+.floatingSocials {
+  z-index: 3;
+  position: fixed;
+  bottom: 10px;
+  right: 10px;
+}
+.telegram {
+  padding: 5px;
+  display: flex;
+  justify-content: center;
+  background-color: hsl(214, 100%, 59%);
+  border-radius: 100%;
+}
+
+.css-ezskuf-MuiSkeleton-root::after {
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgb(1 8 100 / 24%),
+    transparent
+  ) !important;
+}
+
+.css-ezskuf-MuiSkeleton-root {
+  background-color: rgb(223 193 193 / 66%) !important;
+}
+
+.css-1e1x4vv-MuiSkeleton-root {
+  background-color: rgb(223 193 193 / 66%) !important;
+}
+
+@media screen and (max-width: 400px) {
+  .releaseDate,
+  .badge_topLeft,
+  .backdrop .releaseDate,
+  .backdrop .rating {
+    font-size: x-small;
+  }
+}
+.movieSection {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  width: 90%;
+  color: hsl(226, 73%, 78%);
+  text-wrap: nowrap;
+}
+.movieSection p {
+  padding: 2px 10px;
+  width: fit-content;
+  font-weight: bolder;
+  background: linear-gradient(
+    90deg,
+    hsl(0, 0%, 0%) 0%,
+    hsla(0, 0%, 0%, 0) 100%
+  );
+}
+.movieSection .toggle {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 20px;
+  overflow: hidden;
+}
+.movieSection span:nth-child(1) {
+  border-right: white 1px solid;
+}
+.movieSection span:nth-child(2) {
+  border-left: white 1px solid;
+}
+
+.movieSection span {
+  font-size: small;
+  background-color: hsl(229, 95%, 16%);
+  opacity: 50%;
+  padding: 5px 10px;
+}
+.movieSection span:hover,
+.movieSection span.active {
+  background-color: hsl(229, 85%, 28%);
+  font-weight: bold;
+  opacity: 100%;
+  cursor: pointer;
+}
