@@ -12,7 +12,6 @@ const PlayButton = ({ videoRef, hlsRef }) => {
       seeking: () => {
         setIsLoading(true);
       },
-
       seeked: () => {
         setIsLoading(false);
       },
@@ -30,7 +29,9 @@ const PlayButton = ({ videoRef, hlsRef }) => {
       },
     };
     const hlsEventHandlers = {
-      manifestLoading: () => {},
+      manifestLoading: () => {
+        isLoading(true);
+      },
     };
 
     const video = videoRef.current;
@@ -42,8 +43,6 @@ const PlayButton = ({ videoRef, hlsRef }) => {
     video.addEventListener("pause", videoEventHandlers.pause);
     video.addEventListener("waiting", videoEventHandlers.waiting);
     video.addEventListener("canplaythrough", videoEventHandlers.canplaythrough);
-
-    hls.on("manifestLoading", hlsEventHandlers.manifestLoading);
 
     return () => {
       if (hls) {
