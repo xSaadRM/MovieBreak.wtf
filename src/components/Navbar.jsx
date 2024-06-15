@@ -1,7 +1,7 @@
-import HomeIcon from "../assets/home.svg";
 import "../styles/Navbar.css";
 import { useNavigate } from "react-router-dom";
-
+import SearchIcon from "@mui/icons-material/Search";
+import HomeIcon from "@mui/icons-material/Home";
 const Navbar = () => {
   const navigate = useNavigate();
   return (
@@ -11,11 +11,16 @@ const Navbar = () => {
           <h1>MovieBreak</h1>
         </div>
         <div className="navbar">
-          <div className="main-navbar">
-            {window.location.pathname !=="/" && (
-                <img src={HomeIcon} alt="home" onClick={() => navigate("/")} />
-              )}
-          </div>
+          {window.location.pathname !== "/search" && (
+            <div onClick={() => navigate("/search")}>
+              <SearchIcon />
+            </div>
+          )}
+          {window.location.pathname !== "/" && (
+            <div onClick={() => navigate("/")}>
+              <HomeIcon />
+            </div>
+          )}
         </div>
       </header>
     </>

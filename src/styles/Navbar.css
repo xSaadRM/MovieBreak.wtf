@@ -12,10 +12,7 @@ header {
     hsla(230, 96%, 9%, 0.555)
   );
   backdrop-filter: blur(2px);
-}
-.site-name {
-  padding: 0 10px;
-  width: auto;
+  padding: 5px 10px;
 }
 
 .site-name h1 {
@@ -29,22 +26,22 @@ header {
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  width: fit-content;
 }
 
 .navbar {
-  height: 100%;
-  position: absolute;
-  right: 10px;
-  padding: 5px 10px;
   display: flex;
   justify-content: center;
   align-items: center;
+  gap: 5px;
 }
-.main-navbar img {
-  width: 2rem;
+.navbar svg {
+  font-size: xx-large;
+  color: white;
 }
-.main-navbar img:hover {
+.navbar svg:hover {
+  transform: scale(1.5);
+}
+.main-navbar *:hover {
   transform: scale(1.25);
   transition: transform 0.3s ease-in-out; /* Add transition for smoother effect */
 }

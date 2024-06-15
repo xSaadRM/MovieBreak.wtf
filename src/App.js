@@ -10,11 +10,12 @@ import WatchPage from "./pages/WatchPage.jsx";
 import { reducer, initialState } from "./reducer/reducer.js";
 import FloatingSocials from "./components/FloatingSocial.jsx";
 import { indexedDBInit } from "./utils/indexedDB.js";
+import Navbar from "./components/Navbar.jsx";
 
 function App() {
   const [state, dispatch] = useReducer(reducer, initialState);
   const [groupedMovies, setGroupedMovies] = useState({ shows: {}, movies: [] });
-  
+
   const getallMovies = async () => {
     const db = await indexedDBInit();
     const tx = db.transaction("movies", "readonly");
@@ -37,15 +38,16 @@ function App() {
   };
   useEffect(() => {
     getallMovies();
-    DisableDevtool({
-      ondevtoolopen: () => {
-        window.location.href = "/sonic.html";
-      },
-    });
+    // DisableDevtool({
+    //   ondevtoolopen: () => {
+    //     window.location.href = "/sonic.html";
+    //   },
+    // });
   }, []);
 
   return (
     <Router>
+      <Navbar />
       <FloatingSocials />
       <Routes>
         <Route
