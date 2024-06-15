@@ -10,7 +10,7 @@ import noPoster from "../assets/noPoster.jpeg";
 const MovieCard = ({ movie, isCategorized, media_type }) => {
   const navigate = useNavigate();
   const [isHovered, setIsHovered] = useState(false);
-  const mediaType = movie.media_type || media_type;
+  const mediaType = movie?.media_type || media_type;
   const [tmdbID, season, ep] = movie.uid
     ? movie.uid.split("-").concat([null, null, null])
     : [null, null, null];
@@ -67,15 +67,11 @@ const MovieCard = ({ movie, isCategorized, media_type }) => {
             <WatchLater fontSize="auto" />
           )}
         </p>
-        {!isCategorized && (
-          <>
-            {mediaType !== "person" && (
-              <p className="badge bottomRight">
-                {movie.media_type.toUpperCase()}
-              </p>
-            )}
-          </>
+
+        {!isCategorized && movie.media_type && mediaType !== "person" && (
+          <p className="badge bottomRight">{movie.media_type.toUpperCase()}</p>
         )}
+
         {!movie.uid && (movie.first_air_date || movie.release_date) ? (
           <p className="releaseDate">
             {(movie.first_air_date || movie.release_date).split("-")[0]}

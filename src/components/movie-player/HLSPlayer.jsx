@@ -6,7 +6,8 @@ import RedoIcon from "@mui/icons-material/Redo";
 import UndoIcon from "@mui/icons-material/Undo";
 import { fetchRidoTV } from "./providers/ridotv";
 
-import { Fullscreen, NavigateBefore } from "@mui/icons-material";
+import Fullscreen from "@mui/icons-material/Fullscreen";
+import NavigateBefore from "@mui/icons-material/NavigateBefore";
 import SeekBar from "./utils/SeekBar";
 import PlaybackTime from "./utils/PlaybackTime";
 import QualitySwitcher from "./utils/QualitySwitcher";
@@ -25,8 +26,8 @@ import {
 } from "./providers/smashy-stream/smashyFetch";
 import { SubtitlesManager } from "./utils/SubtitlesManager";
 import SmashyStreamDecoder from "./providers/smashy-stream/decoder";
-import { openDB } from "idb";
 import { indexedDBInit } from "../../utils/indexedDB";
+import AudioSwitcher from "./utils/AudioSwitcher";
 
 const VideoPlayer = ({ state, dispatch }) => {
   const navigate = useNavigate();
@@ -339,7 +340,7 @@ const VideoPlayer = ({ state, dispatch }) => {
                   <PlaybackTime videoRef={videoRef} />
                   {mediaType === "tv" ? (
                     <>
-                      {ep !== "1" ? (
+                      {+ep !== "1" ? (
                         <div
                           className="icon previousEpisode-button"
                           onClick={() => {
@@ -380,7 +381,8 @@ const VideoPlayer = ({ state, dispatch }) => {
                               subtitlesManagerRef={subtitlesManagerRef}
                               hlsRef={hlsRef}
                             />
-                            {src && <QualitySwitcher hlsRef={hlsRef} />}{" "}
+                            {src && <QualitySwitcher hlsRef={hlsRef} />}
+                            <AudioSwitcher hlsRef={hlsRef}/>
                           </>
                         )}
                       </>

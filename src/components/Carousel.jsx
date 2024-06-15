@@ -39,7 +39,7 @@ const Carousel = ({ movies, media_type, className, type }) => {
   };
   return (
     <div className={"trending-carousel " + className}>
-      <div className={movies[3] ? "" : "fallback-carousel"}>
+      <div className={movies && movies[3] ? "" : "fallback-carousel"}>
         {movies?.length > 0 && (
           <Slider {...settings}>
             {movies?.map((movie) => (

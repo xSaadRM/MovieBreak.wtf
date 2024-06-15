@@ -1,6 +1,5 @@
 import Carousel from "../components/Carousel";
 import { useEffect } from "react";
-import Navbar from "../components/Navbar";
 import {
   setTrendingMovies,
   setTopMovies,
@@ -90,7 +89,6 @@ const HomePage = ({ state, dispatch, groupedMovies, getallMovies }) => {
   return (
     <>
       <div className="app">
-        <Navbar />
         {continueWatch.movies || continueWatch.tv ? (
           <>
             <div className="movieSection continueWatch">
@@ -215,10 +213,12 @@ const HomePage = ({ state, dispatch, groupedMovies, getallMovies }) => {
         <Carousel
           className={activeSection.topRated === "tv" ? "active" : ""}
           movies={topShows}
+          media_type={"tv"}
         />
         <Carousel
           className={activeSection.topRated === "movies" ? "active" : ""}
           movies={topMovies}
+          media_type={"movie"}
         />
       </div>
     </>

@@ -123,8 +123,8 @@ const MovieDescription = ({ state, dispatch }) => {
     }
   }, [movieInfos_]);
 
-  const handleEpisodeClick = (episodeDetails) => {
-    const newUrl = `/${mediaType}/${movieID}/${season}/${episodeDetails.episode_number}`;
+  const handleEpisodeClick = (episodeNumber) => {
+    const newUrl = `/${mediaType}/${movieID}/${season}/${episodeNumber}`;
 
     navigate(newUrl);
   };
@@ -138,74 +138,78 @@ const MovieDescription = ({ state, dispatch }) => {
 
   return (
     <>
-      {seasonDetails_ && ep && (
-        <div className="watchEpisode">
-          <div
-            className="allEpisodesButton"
-            onClick={() => {
-              navigate(`/${mediaType}/${movieID}/${ep}`, { replace: true });
-            }}
-          >
-            <ArrowBack />
-            <p>All Episodes</p>
-          </div>
-          <div className="container">
-            <MovieCard movie={movieInfos_} />
+      <div className="popUP">
+        {seasonDetails_ && ep && (
+          <div className="watchEpisode">
             <div
-              key={epToWatchDetails.id}
-              className="episode"
+              className="allEpisodesButton"
               onClick={() => {
-                handleEpisodeClick(
-                  epToWatchDetails,
-                  movieInfos_.title || movieInfos_.name
-                );
+                navigate(`/${mediaType}/${movieID}/${season}`, {
+                  replace: true,
+                });
               }}
             >
-              {/* Episode image */}
+              <ArrowBack />
+              <p>All Episodes</p>
+            </div>
+            <div className="container">
+              <MovieCard media_type={mediaType} movie={movieInfos_} />
+              <div
+                key={epToWatchDetails.id}
+                className="episode"
+                onClick={() => {
+                  handleEpisodeClick(
+                    epToWatchDetails.episode_number,
+                    movieInfos_.title || movieInfos_.name
+                  );
+                }}
+              >
+                {/* Episode image */}
 
-              {epToWatchDetails.still_path ? (
-                <LazyImage
-                  ratio={"16/9"}
-                  src={`https://image.tmdb.org/t/p/w400/${epToWatchDetails.still_path}`}
-                  alt={`Episode ${epToWatchDetails.episode_number} Still`}
-                  className="episode-image"
-                />
-              ) : (
-                <LazyImage
-                  ratio={"16/9"}
-                  src={
-                    "https://www.themoviedb.org/assets/2/v4/glyphicons/basic/glyphicons-basic-38-picture-grey-c2ebdbb057f2a7614185931650f8cee23fa137b93812ccb132b9df511df1cfac.svg"
-                  }
-                  alt={`Episode ${epToWatchDetails.episode_number} Still`}
-                  className="episode-image"
-                  style={{ aspectRatio: "16/9" }}
-                />
-              )}
+                {epToWatchDetails.still_path ? (
+                  <LazyImage
+                    ratio={"16/9"}
+                    src={`https://image.tmdb.org/t/p/w400/${epToWatchDetails.still_path}`}
+                    alt={`Episode ${epToWatchDetails.episode_number} Still`}
+                    className="episode-image"
+                  />
+                ) : (
+                  <LazyImage
+                    ratio={"16/9"}
+                    src={
+                      "https://www.themoviedb.org/assets/2/v4/glyphicons/basic/glyphicons-basic-38-picture-grey-c2ebdbb057f2a7614185931650f8cee23fa137b93812ccb132b9df511df1cfac.svg"
+                    }
+                    alt={`Episode ${epToWatchDetails.episode_number} Still`}
+                    className="episode-image"
+                    style={{ aspectRatio: "16/9" }}
+                  />
+                )}
 
-              {/* Episode details */}
-              <div className="episode-details">
-                {epToWatchDetails.episode_number ? (
-                  <>
-                    <p className="badge topLeft">
-                      E{epToWatchDetails.episode_number}
-                    </p>
-                    <h3 className="text">
-                      <p>{epToWatchDetails.name}</p>
-                    </h3>
-                  </>
-                ) : (
-                  <Skeleton className="text" variant="text" />
-                )}
-                {epToWatchDetails.air_date ? (
-                  <p className="airdate">{epToWatchDetails.air_date}</p>
-                ) : (
-                  <Skeleton className="text" variant="text" />
-                )}
+                {/* Episode details */}
+                <div className="episode-details">
+                  {epToWatchDetails.episode_number ? (
+                    <>
+                      <p className="badge topLeft">
+                        E{epToWatchDetails.episode_number}
+                      </p>
+                      <h3 className="text">
+                        <p>{epToWatchDetails.name}</p>
+                      </h3>
+                    </>
+                  ) : (
+                    <Skeleton className="text" variant="text" />
+                  )}
+                  {epToWatchDetails.air_date ? (
+                    <p className="airdate">{epToWatchDetails.air_date}</p>
+                  ) : (
+                    <Skeleton className="text" variant="text" />
+                  )}
+                </div>
               </div>
             </div>
           </div>
-        </div>
-      )}
+        )}
+      </div>
       <div className="movie-description-page">
         {movieInfos_ && (
           <div
@@ -290,7 +294,7 @@ const MovieDescription = ({ state, dispatch }) => {
                           className="episode"
                           onClick={() => {
                             handleEpisodeClick(
-                              episode,
+                              episode.episode_number,
                               movieInfos_.title || movieInfos_.name
                             );
                           }}
