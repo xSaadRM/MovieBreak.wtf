@@ -25,6 +25,8 @@ import {
 } from "./providers/smashy-stream/smashyFetch";
 import { SubtitlesManager } from "./utils/SubtitlesManager";
 import SmashyStreamDecoder from "./providers/smashy-stream/decoder";
+import { openDB } from "idb";
+import { indexedDBInit } from "../../utils/indexedDB";
 
 const VideoPlayer = ({ state, dispatch }) => {
   const navigate = useNavigate();
@@ -46,7 +48,6 @@ const VideoPlayer = ({ state, dispatch }) => {
   const [shahid4uServers, setshahid4uServers] = useState({ status: "loading" });
   const [smashyPlayers, setSmashyPlayers] = useState([]);
   const [autoEmbedServers, setAutoEmbedServers] = useState([]);
-  const [servers, setServers] = useState([]);
 
   useEffect(() => {
     const video = videoRef;
@@ -112,7 +113,6 @@ const VideoPlayer = ({ state, dispatch }) => {
   }, [episodeDetails, movieInfos, shahid4uEpisodes]);
 
   useEffect(() => {
-    let intervalId;
     const hls = hlsRef.current;
 
     const mbLoadSource = () => {
@@ -121,36 +121,6 @@ const VideoPlayer = ({ state, dispatch }) => {
       } catch (error) {
         hls.loadSource(`https://corsproxy.io/?` + src.url);
       }
-      const playbackInfoJSON = window.localStorage.getItem("MB:playbackInfo");
-      if (playbackInfoJSON) {
-        const storedData = JSON.parse(playbackInfoJSON);
-        const storedPlaybackInfo = storedData[window.location.pathname];
-        if (storedPlaybackInfo) {
-          const storedTime = storedPlaybackInfo.time;
-          if (videoRef.current) {
-            videoRef.current.currentTime = storedTime;
-          }
-        }
-      }
-      const savePlaybackTime = () => {
-        const currentTime = videoRef.current.currentTime;
-        const storedData =
-          JSON.parse(window.localStorage.getItem("MB:playbackInfo")) || {};
-        const playbackInfo = {
-          ...storedData,
-          [window.location.pathname]: {
-            movieID,
-            episode: +ep,
-            time: currentTime,
-          },
-        };
-        window.localStorage.setItem(
-          "MB:playbackInfo",
-          JSON.stringify(playbackInfo)
-        );
-      };
-
-      intervalId = setInterval(savePlaybackTime, 10000); // Save every 10 seconds
     };
     const hlsErrorE = (event, data) => {
       if (data.fatal === true && data.details === "internalException") {
@@ -173,9 +143,68 @@ const VideoPlayer = ({ state, dispatch }) => {
       if (hls) {
         hls.off(Hls.Events.ERROR, hlsErrorE);
       }
-      clearInterval(intervalId);
     };
   }, [src]);
+
+  useEffect(() => {
+    const uid = season && ep ? `${movieID}-${season}-${ep}` : movieID;
+    const video = videoRef.current;
+
+    const getMovieById = async (id) => {
+      const db = await indexedDBInit();
+      const tx = db.transaction("movies", "readonly");
+      const store = tx.objectStore("movies");
+
+      const movie = await store.get(id);
+      return movie;
+    };
+    const movie = {
+      uid: uid,
+      id: movieID,
+      title: movieInfos.name || movieInfos.title,
+      poster_path: movieInfos.poster_path,
+      release_date: movieInfos.first_air_date || movieInfos.release_date,
+      vote_average: movieInfos.vote_average,
+      media_type: mediaType,
+      playbackTime: video.currentTime,
+      movieDuration: video.duration,
+    };
+    const addMovie = async (movie) => {
+      const db = await indexedDBInit();
+      const tx = db.transaction("movies", "readwrite");
+      const store = tx.objectStore("movies");
+
+      await store.put(movie);
+      await tx.done;
+    };
+    const handleLoadedMetaData = async () => {
+      const fetchedMovieDB = await getMovieById(uid);
+      const playbackTime = fetchedMovieDB?.playbackTime || 0;
+      video.currentTime = playbackTime;
+      addMovie(movie);
+    };
+    const updatePlayback = setInterval(() => {
+      if (!video.paused) {
+        movie.playbackTime = video.currentTime;
+        movie.movieDuration = video.duration;
+        addMovie(movie);
+      }
+    }, 15000);
+
+    video.addEventListener("ended", () => {
+      clearInterval(updatePlayback);
+    });
+    video.addEventListener("loadedmetadata", handleLoadedMetaData);
+
+    return () => {
+      if (video) {
+        video.removeEventListener("ended", () => {
+          clearInterval(updatePlayback);
+        });
+        video.removeEventListener("loadedmetadata", handleLoadedMetaData);
+      }
+    };
+  }, [videoRef?.current]);
 
   useEffect(() => {
     const getSRC = async () => {
@@ -435,11 +464,7 @@ const VideoPlayer = ({ state, dispatch }) => {
                     </div>
                   );
                 })
-              ) : (
-                <div style={{ margin: "0 auto" }}>
-                  Backup Servers Unavailable
-                </div>
-              )}
+              ) : null}
               {slug.status === 404 &&
               !shahid4uServers.status === "loading" &&
               !shahid4uServers[0] ? (
@@ -447,34 +472,7 @@ const VideoPlayer = ({ state, dispatch }) => {
                   Oops! Video Unavailable
                 </div>
               ) : null}
-              {smashyPlayers && smashyPlayers.status !== "loading" ? (
-                smashyPlayers?.map((player, index) => {
-                  return (
-                    <div
-                      key={player.name}
-                      className={`provider ${
-                        activeProvider.name === "smashy" &&
-                        activeProvider.index === index
-                          ? "active"
-                          : ""
-                      }`}
-                      onClick={() => {
-                        if (isproviderListShown) {
-                          setactiveProvider({
-                            name: "smashy",
-                            url: player.url,
-                            index: index,
-                          });
-                        }
-                      }}
-                    >
-                      Smashy - {player.name}
-                    </div>
-                  );
-                })
-              ) : (
-                <div>Loading Smashy Servers...</div>
-              )}
+
               {autoEmbedServers.status !== "loading" ? (
                 autoEmbedServers?.map((server, index) => {
                   return (
@@ -502,6 +500,34 @@ const VideoPlayer = ({ state, dispatch }) => {
                 })
               ) : (
                 <div>Loading AutoEmbed Servers...</div>
+              )}
+              {smashyPlayers && smashyPlayers.status !== "loading" ? (
+                smashyPlayers?.map((player, index) => {
+                  return (
+                    <div
+                      key={player.name}
+                      className={`provider ${
+                        activeProvider.name === "smashy" &&
+                        activeProvider.index === index
+                          ? "active"
+                          : ""
+                      }`}
+                      onClick={() => {
+                        if (isproviderListShown) {
+                          setactiveProvider({
+                            name: "smashy",
+                            url: player.url,
+                            index: index,
+                          });
+                        }
+                      }}
+                    >
+                      Smashy - {player.name}
+                    </div>
+                  );
+                })
+              ) : (
+                <div>Loading Smashy Servers...</div>
               )}
             </div>
           </div>

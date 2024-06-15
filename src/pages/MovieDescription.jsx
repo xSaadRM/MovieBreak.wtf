@@ -15,10 +15,9 @@ import { getSlug } from "../components/movie-player/providers/ridotv";
 import Skeleton from "@mui/material/Skeleton";
 import "../styles/MUISkeleton.css";
 import LazyImage from "../components/LazyImage";
-import { Star } from "@mui/icons-material";
+import { ArrowBack, Star } from "@mui/icons-material";
 import Overview from "../components/Overview";
 import Clips from "../components/Clips";
-import noPoster from "../assets/noPoster.jpeg";
 const MovieDescription = ({ state, dispatch }) => {
   const navigate = useNavigate();
   const { mediaType, movieID, season } = useParams();
@@ -27,6 +26,7 @@ const MovieDescription = ({ state, dispatch }) => {
   const [movieInfos_, setMovieInfos_] = useState(null);
   const releaseDate = /(\d+)-\d+-\d+/g.exec(movieInfos_?.first_air_date);
   const [seasonDetails_, setSeasonDetails_] = useState(null);
+  const ep = new URLSearchParams(window.location.search).get("ep");
 
   const getShahid4uEpisodes = async () => {
     try {
@@ -110,15 +110,14 @@ const MovieDescription = ({ state, dispatch }) => {
       }
     };
 
-    if (movieInfos_) {
+    if (movieInfos_ && mediaType === "tv") {
       getShahid4uEpisodes();
-      if (mediaType === "tv") {
-        dispatch(setSlug({status: "loading"}));
-        getSlugResponse(
-          movieInfos_.id,
-          mediaType === "tv" ? movieInfos_.name : movieInfos_.title
-        );
-      }
+      getSlugResponse(
+        movieInfos_.id,
+        mediaType === "tv" ? movieInfos_.name : movieInfos_.title
+      );
+    } else if (mediaType === "movie") {
+      dispatch(setSlug({ status: 0 }));
     }
   }, [movieInfos_]);
 
@@ -136,20 +135,15 @@ const MovieDescription = ({ state, dispatch }) => {
   };
 
   return (
-    <div className="movie-description-page">
-      <Navbar />
-      {movieInfos_ && (
-        <div
-          className="blured-backdrop"
-          style={{
-            backgroundImage: `url(https://image.tmdb.org/t/p/original/${movieInfos_.backdrop_path})`,
-          }}
-        ></div>
-      )}
-      <div className="movie-description-container">
-        {showWatchPage ? (
-          <HLSPlayer state={state} />
-        ) : (
+    <>
+      {seasonDetails_ && ep && (
+        <div className="watchEpisode">
+          <div className="allEpisodesButton" onClick={()=>{
+            navigate(`/${mediaType}/${movieID}/${ep}`, {replace: true})
+          }}>
+            <ArrowBack />
+            <p>All Episodes</p>
+          </div>
           <div className="backdrop">
             <LazyImage
               ratio={"16/9"}
@@ -163,7 +157,7 @@ const MovieDescription = ({ state, dispatch }) => {
                     <h3>{movieInfos_.title || movieInfos_.name}</h3>
                   </div>
                 </div>
-                <p className="badge_topLeft rating">
+                <p className="badge topLeft rating">
                   <Star htmlColor="yellow" fontSize="auto" />
                   {(movieInfos_.vote_average || movieInfos_.popularity).toFixed(
                     1
@@ -187,102 +181,213 @@ const MovieDescription = ({ state, dispatch }) => {
               </div>
             )}
           </div>
-        )}
-        <Overview
-          overviewText={movieInfos_?.overview}
-          genres={movieInfos_?.genres}
-        />
-        <Clips videos={movieInfos_?.videos?.results} />
-        {mediaType === "tv" && (
-          <>
-            <div className="select-season">
-              <select
-                value={season}
-                onChange={(e) => handleSeasonChange(e.target.value)}
-              >
-                {!season && <option value="">Select Season</option>}
-                {seasons.map((season) => (
-                  <option key={season} value={season}>
-                    Season {season}
-                  </option>
-                ))}
-              </select>
-            </div>
-            {seasonDetails_ && (
-              <div className="season-details">
-                <div className="episodes-list">
-                  {seasonDetails_ &&
-                    seasonDetails_.episodes &&
-                    seasonDetails_.episodes.map((episode) => (
-                      <div
-                        key={episode.id}
-                        className="episode"
-                        onClick={() => {
-                          handleEpisodeClick(
-                            episode,
-                            movieInfos_.title || movieInfos_.name
-                          );
-                        }}
-                      >
-                        {/* Episode image */}
+          <div
+            key={seasonDetails_.episodes[ep].id}
+            className="episode"
+            onClick={() => {
+              handleEpisodeClick(
+                seasonDetails_.episodes[ep],
+                movieInfos_.title || movieInfos_.name
+              );
+            }}
+          >
+            {/* Episode image */}
 
-                        {episode.still_path ? (
-                          <LazyImage
-                            ratio={"16/9"}
-                            src={`https://image.tmdb.org/t/p/w400/${episode.still_path}`}
-                            alt={`Episode ${episode.episode_number} Still`}
-                            className="episode-image"
-                          />
-                        ) : (
-                          <LazyImage
-                            ratio={"16/9"}
-                            src={
-                              "https://www.themoviedb.org/assets/2/v4/glyphicons/basic/glyphicons-basic-38-picture-grey-c2ebdbb057f2a7614185931650f8cee23fa137b93812ccb132b9df511df1cfac.svg"
-                            }
-                            alt={`Episode ${episode.episode_number} Still`}
-                            className="episode-image"
-                            style={{ aspectRatio: "16/9" }}
-                          />
-                        )}
-
-                        {/* Episode details */}
-                        <div className="episode-details">
-                          {episode.episode_number ? (
-                            <>
-                              <p className="badge_topLeft">
-                                E{episode.episode_number}
-                              </p>
-                              <h3 className="text">
-                                <p>{episode.name}</p>
-                              </h3>
-                            </>
-                          ) : (
-                            <Skeleton className="text" variant="text" />
-                          )}
-                          {episode.air_date ? (
-                            <p className="airdate">{episode.air_date}</p>
-                          ) : (
-                            <Skeleton className="text" variant="text" />
-                          )}
-                        </div>
-                      </div>
-                    ))}
-                </div>
-              </div>
+            {seasonDetails_.episodes[ep].still_path ? (
+              <LazyImage
+                ratio={"16/9"}
+                src={`https://image.tmdb.org/t/p/w400/${seasonDetails_.episodes[ep].still_path}`}
+                alt={`Episode ${seasonDetails_.episodes[ep].episode_number} Still`}
+                className="episode-image"
+              />
+            ) : (
+              <LazyImage
+                ratio={"16/9"}
+                src={
+                  "https://www.themoviedb.org/assets/2/v4/glyphicons/basic/glyphicons-basic-38-picture-grey-c2ebdbb057f2a7614185931650f8cee23fa137b93812ccb132b9df511df1cfac.svg"
+                }
+                alt={`Episode ${seasonDetails_.episodes[ep].episode_number} Still`}
+                className="episode-image"
+                style={{ aspectRatio: "16/9" }}
+              />
             )}
-          </>
-        )}
-      </div>
-      {movieInfos_ && movieInfos_.credits && (
-        <div className="cast">
-          <Carousel
-            movies={movieInfos_.credits.cast}
-            media_type={"person"}
-            className={"active"}
-          />
+
+            {/* Episode details */}
+            <div className="episode-details">
+              {seasonDetails_.episodes[ep].episode_number ? (
+                <>
+                  <p className="badge topLeft">
+                    E{seasonDetails_.episodes[ep].episode_number}
+                  </p>
+                  <h3 className="text">
+                    <p>{seasonDetails_.episodes[ep].name}</p>
+                  </h3>
+                </>
+              ) : (
+                <Skeleton className="text" variant="text" />
+              )}
+              {seasonDetails_.episodes[ep].air_date ? (
+                <p className="airdate">
+                  {seasonDetails_.episodes[ep].air_date}
+                </p>
+              ) : (
+                <Skeleton className="text" variant="text" />
+              )}
+            </div>
+          </div>
         </div>
       )}
-    </div>
+      <div className="movie-description-page">
+        <Navbar />
+        {movieInfos_ && (
+          <div
+            className="blured-backdrop"
+            style={{
+              backgroundImage: `url(https://image.tmdb.org/t/p/original/${movieInfos_.backdrop_path})`,
+            }}
+          ></div>
+        )}
+        <div className="movie-description-container">
+          {showWatchPage ? (
+            <HLSPlayer state={state} />
+          ) : (
+            <div className="backdrop">
+              <LazyImage
+                ratio={"16/9"}
+                src={`https://image.tmdb.org/t/p/original/${movieInfos_?.backdrop_path}`}
+                alt="Backdrop"
+              />
+              {movieInfos_ && (
+                <>
+                  <div className="movie-infos">
+                    <div className="movie-ids">
+                      <h3>{movieInfos_.title || movieInfos_.name}</h3>
+                    </div>
+                  </div>
+                  <p className="badge topLeft rating">
+                    <Star htmlColor="yellow" fontSize="auto" />
+                    {(
+                      movieInfos_.vote_average || movieInfos_.popularity
+                    ).toFixed(1)}
+                  </p>
+                  <p className="releaseDate">
+                    {(
+                      movieInfos_.first_air_date || movieInfos_.release_date
+                    ).split("-")[0] +
+                      " / " +
+                      (
+                        movieInfos_.first_air_date || movieInfos_.release_date
+                      ).split("-")[1]}
+                  </p>
+                </>
+              )}
+              {mediaType === "movie" && (
+                <div
+                  className="watch-button"
+                  onClick={() => handleWatchClick()}
+                >
+                  <img src={PlayIcon} alt="Play" />
+                  <p>Watch</p>
+                </div>
+              )}
+            </div>
+          )}
+          <Overview
+            overviewText={movieInfos_?.overview}
+            genres={movieInfos_?.genres}
+          />
+          <Clips videos={movieInfos_?.videos?.results} />
+          {mediaType === "tv" && (
+            <>
+              <div className="select-season">
+                <select
+                  value={season}
+                  onChange={(e) => handleSeasonChange(e.target.value)}
+                >
+                  {!season && <option value="">Select Season</option>}
+                  {seasons.map((season) => (
+                    <option key={season} value={season}>
+                      Season {season}
+                    </option>
+                  ))}
+                </select>
+              </div>
+              {seasonDetails_ && (
+                <div className="season-details">
+                  <div className="episodes-list">
+                    {seasonDetails_ &&
+                      seasonDetails_.episodes &&
+                      seasonDetails_.episodes.map((episode) => (
+                        <div
+                          key={episode.id}
+                          className="episode"
+                          onClick={() => {
+                            handleEpisodeClick(
+                              episode,
+                              movieInfos_.title || movieInfos_.name
+                            );
+                          }}
+                        >
+                          {/* Episode image */}
+
+                          {episode.still_path ? (
+                            <LazyImage
+                              ratio={"16/9"}
+                              src={`https://image.tmdb.org/t/p/w400/${episode.still_path}`}
+                              alt={`Episode ${episode.episode_number} Still`}
+                              className="episode-image"
+                            />
+                          ) : (
+                            <LazyImage
+                              ratio={"16/9"}
+                              src={
+                                "https://www.themoviedb.org/assets/2/v4/glyphicons/basic/glyphicons-basic-38-picture-grey-c2ebdbb057f2a7614185931650f8cee23fa137b93812ccb132b9df511df1cfac.svg"
+                              }
+                              alt={`Episode ${episode.episode_number} Still`}
+                              className="episode-image"
+                              style={{ aspectRatio: "16/9" }}
+                            />
+                          )}
+
+                          {/* Episode details */}
+                          <div className="episode-details">
+                            {episode.episode_number ? (
+                              <>
+                                <p className="badge topLeft">
+                                  E{episode.episode_number}
+                                </p>
+                                <h3 className="text">
+                                  <p>{episode.name}</p>
+                                </h3>
+                              </>
+                            ) : (
+                              <Skeleton className="text" variant="text" />
+                            )}
+                            {episode.air_date ? (
+                              <p className="airdate">{episode.air_date}</p>
+                            ) : (
+                              <Skeleton className="text" variant="text" />
+                            )}
+                          </div>
+                        </div>
+                      ))}
+                  </div>
+                </div>
+              )}
+            </>
+          )}
+        </div>
+        {movieInfos_ && movieInfos_.credits && (
+          <div className="cast">
+            <Carousel
+              movies={movieInfos_.credits.cast}
+              media_type={"person"}
+              className={"active"}
+            />
+          </div>
+        )}
+      </div>
+    </>
   );
 };
 

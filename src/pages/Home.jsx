@@ -1,6 +1,5 @@
 import Carousel from "../components/Carousel";
 import { useEffect } from "react";
-import SearchPage from "../components/SearchPage";
 import Navbar from "../components/Navbar";
 import {
   setTrendingMovies,
@@ -9,13 +8,18 @@ import {
   setTopShows,
 } from "../reducer/reducer";
 import { useState } from "react";
+import WatchLater from "@mui/icons-material/WatchLater";
+import Whatshot from "@mui/icons-material/Whatshot";
+import TrendingUp from "@mui/icons-material/TrendingUp";
 
-const HomePage = ({ state, dispatch }) => {
+const HomePage = ({ state, dispatch, groupedMovies, getallMovies }) => {
   const { trendingMovies, topMovies, trendingShows, topShows } = state;
   const [activeSection, setactiveSection] = useState({
     weekTrending: "tv",
     topRated: "tv",
+    continueWatch: "tv",
   });
+  const [continueWatch, setContinueWatch] = useState({ movies: [], tv: [] });
 
   const getTrending = async (type) => {
     try {
@@ -50,6 +54,23 @@ const HomePage = ({ state, dispatch }) => {
   };
 
   useEffect(() => {
+    getallMovies();
+  }, []);
+  useEffect(() => {
+    let groupedShows = groupedMovies.shows;
+    const getLastEpisodes = async () => {
+      let lastEpisodes = [];
+      Object.keys(groupedShows).forEach((id) => {
+        const groupLength = groupedShows[id].length;
+        lastEpisodes.push(groupedShows[id][groupLength - 1]);
+      });
+      setContinueWatch({ movies: groupedMovies?.movies, tv: lastEpisodes });
+    };
+
+    getLastEpisodes();
+  }, [groupedMovies]);
+
+  useEffect(() => {
     const fetchTrendingData = async () => {
       const trendingMovies = await getTrending("movie");
       dispatch(setTrendingMovies(trendingMovies));
@@ -70,9 +91,62 @@ const HomePage = ({ state, dispatch }) => {
     <>
       <div className="app">
         <Navbar />
-        <SearchPage isHomePage={true} />
+        {continueWatch.movies || continueWatch.tv ? (
+          <>
+            <div className="movieSection continueWatch">
+              <p>
+                <WatchLater />
+                Continue Watch
+              </p>
+              <div className="toggle">
+                <span
+                  onClick={() => {
+                    setactiveSection({
+                      ...activeSection,
+                      continueWatch: "tv",
+                    });
+                  }}
+                  className={
+                    activeSection.continueWatch === "tv" ? "active" : ""
+                  }
+                >
+                  TV
+                </span>
+                <span
+                  onClick={() => {
+                    setactiveSection({
+                      ...activeSection,
+                      continueWatch: "movies",
+                    });
+                  }}
+                  className={
+                    activeSection.continueWatch === "movies" ? "active" : ""
+                  }
+                >
+                  Movies
+                </span>
+              </div>
+            </div>
+            <Carousel
+              movies={continueWatch.tv}
+              className={activeSection.continueWatch === "tv" ? "active" : ""}
+              type={"continueWatch"}
+            />
+            <Carousel
+              movies={continueWatch.movies}
+              className={
+                activeSection.continueWatch === "movies" ? "active" : ""
+              }
+              type={"continueWatch"}
+            />
+          </>
+        ) : null}
+
         <div className="movieSection">
-          <p>Trending this week</p>
+          <p>
+            <Whatshot htmlColor="red" />
+            Trending this week
+          </p>
           <div className="toggle">
             <span
               onClick={() => {
@@ -103,19 +177,16 @@ const HomePage = ({ state, dispatch }) => {
         <Carousel
           className={activeSection.weekTrending === "tv" ? "active" : ""}
           movies={trendingShows}
-          media_type={"tv"}
-          type="TV Shows"
-          category={"Trending"}
         />
         <Carousel
           className={activeSection.weekTrending === "movies" ? "active" : ""}
           movies={trendingMovies}
-          media_type={"movie"}
-          type="Movies"
-          category={"Trending"}
         />
         <div className="movieSection">
-          <p>Top rated</p>
+          <p>
+            <TrendingUp />
+            Top rated
+          </p>
           <div className="toggle">
             <span
               onClick={() => {
@@ -144,16 +215,10 @@ const HomePage = ({ state, dispatch }) => {
         <Carousel
           className={activeSection.topRated === "tv" ? "active" : ""}
           movies={topShows}
-          media_type={"tv"}
-          type="TV Shows"
-          category={"Top Rated"}
         />
         <Carousel
           className={activeSection.topRated === "movies" ? "active" : ""}
           movies={topMovies}
-          media_type={"movie"}
-          type="Movies"
-          category={"Top Rated"}
         />
       </div>
     </>

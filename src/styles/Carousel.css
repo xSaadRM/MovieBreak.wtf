@@ -48,44 +48,6 @@
   margin-bottom: 10px;
 }
 
-.movie {
-  border-radius: 10px;
-  width: 90%;
-  height: auto;
-}
-.movie img {
-  border-radius: 10px;
-  width: 90%;
-  height: auto;
-}
-.movie div:nth-of-type(3) {
-  display: flex;
-  background-color: rgb(90, 90, 192);
-  justify-content: center;
-  align-items: center;
-  padding: 10px;
-}
-.movie:hover div:nth-of-type(3) {
-  background-color: transparent;
-}
-.movie:hover span {
-  opacity: 0;
-}
-.movie span {
-  text-align: center;
-  font-weight: bold;
-  font-size: large;
-}
-.movie:hover h3 {
-  opacity: 0;
-}
-
-@media screen and (max-width: 400px) {
-  .movie div:nth-of-type(3) {
-    background-color: rgb(90, 90, 192);
-  }
-}
-
 .slick-dots li button,
 .slick-dots li button:before {
   background-color: hsla(0, 0%, 100%, 0.486);
@@ -102,30 +64,4 @@
   box-shadow: aqua 0px 1px 13px 0px;
   background-color: hsl(0, 0%, 100%);
   opacity: 1;
-}
-
-.movieTitle {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: hsl(0, 0%, 100%);
-  width: 90%;
-  margin: 0 12px;
-}
-.movieTitle span {
-  padding: 5px 20px;
-  background: linear-gradient(
-    90deg,
-    hsla(226, 99%, 29%, 0.425) 0%,
-    hsla(0, 100%, 27%, 0.459) 100%
-  );
-  border-radius: 10px;
-  text-align: center;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  overflow: hidden;
-  font-size: 13px;
-}
-.movieTitle span:hover {
-  white-space: normal;
 }

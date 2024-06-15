@@ -4,7 +4,7 @@ import "slick-carousel/slick/slick-theme.css";
 import MovieCard from "./MovieCard";
 import "../styles/Carousel.css";
 
-const Carousel = ({ movies, media_type, className }) => {
+const Carousel = ({ movies, media_type, className, type }) => {
   const settings = {
     draggable: true,
     touchMove: true,
@@ -29,7 +29,7 @@ const Carousel = ({ movies, media_type, className }) => {
       {
         breakpoint: 600,
         settings: {
-          slidesToShow: movies.length < 4 ? 3 : 2.3,
+          slidesToShow: movies?.length < 4 ? 3 : 2.3,
           slidesToScroll: 2,
           infinite: false,
           dots: false,
@@ -40,17 +40,19 @@ const Carousel = ({ movies, media_type, className }) => {
   return (
     <div className={"trending-carousel " + className}>
       <div className={movies[3] ? "" : "fallback-carousel"}>
-        <Slider {...settings}>
-          {movies.map((movie) => (
-            <div className="card" key={movie.id + "Title"}>
-              <MovieCard
-                media_type={media_type}
-                isCategorized={true}
-                movie={movie}
-              />
-            </div>
-          ))}
-        </Slider>
+        {movies?.length > 0 && (
+          <Slider {...settings}>
+            {movies?.map((movie) => (
+              <div className="card" key={movie.id + "Title"}>
+                <MovieCard
+                  media_type={media_type}
+                  isCategorized={true}
+                  movie={movie}
+                />
+              </div>
+            ))}
+          </Slider>
+        )}
       </div>
     </div>
   );
