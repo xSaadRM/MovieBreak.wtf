@@ -18,6 +18,7 @@ import LazyImage from "../components/LazyImage";
 import { ArrowBack, Star } from "@mui/icons-material";
 import Overview from "../components/Overview";
 import Clips from "../components/Clips";
+import MovieCard from "../components/MovieCard";
 const MovieDescription = ({ state, dispatch }) => {
   const navigate = useNavigate();
   const { mediaType, movieID, season } = useParams();
@@ -27,6 +28,7 @@ const MovieDescription = ({ state, dispatch }) => {
   const releaseDate = /(\d+)-\d+-\d+/g.exec(movieInfos_?.first_air_date);
   const [seasonDetails_, setSeasonDetails_] = useState(null);
   const ep = new URLSearchParams(window.location.search).get("ep");
+  const epToWatchDetails = seasonDetails_?.episodes[ep - 1] || null;
 
   const getShahid4uEpisodes = async () => {
     try {
@@ -138,107 +140,73 @@ const MovieDescription = ({ state, dispatch }) => {
     <>
       {seasonDetails_ && ep && (
         <div className="watchEpisode">
-          <div className="allEpisodesButton" onClick={()=>{
-            navigate(`/${mediaType}/${movieID}/${ep}`, {replace: true})
-          }}>
+          <div
+            className="allEpisodesButton"
+            onClick={() => {
+              navigate(`/${mediaType}/${movieID}/${ep}`, { replace: true });
+            }}
+          >
             <ArrowBack />
             <p>All Episodes</p>
           </div>
-          <div className="backdrop">
-            <LazyImage
-              ratio={"16/9"}
-              src={`https://image.tmdb.org/t/p/original/${movieInfos_?.backdrop_path}`}
-              alt="Backdrop"
-            />
-            {movieInfos_ && (
-              <>
-                <div className="movie-infos">
-                  <div className="movie-ids">
-                    <h3>{movieInfos_.title || movieInfos_.name}</h3>
-                  </div>
-                </div>
-                <p className="badge topLeft rating">
-                  <Star htmlColor="yellow" fontSize="auto" />
-                  {(movieInfos_.vote_average || movieInfos_.popularity).toFixed(
-                    1
-                  )}
-                </p>
-                <p className="releaseDate">
-                  {(
-                    movieInfos_.first_air_date || movieInfos_.release_date
-                  ).split("-")[0] +
-                    " / " +
-                    (
-                      movieInfos_.first_air_date || movieInfos_.release_date
-                    ).split("-")[1]}
-                </p>
-              </>
-            )}
-            {mediaType === "movie" && (
-              <div className="watch-button" onClick={() => handleWatchClick()}>
-                <img src={PlayIcon} alt="Play" />
-                <p>Watch</p>
+          <div className="container">
+            <MovieCard movie={movieInfos_} />
+            <div
+              key={epToWatchDetails.id}
+              className="episode"
+              onClick={() => {
+                handleEpisodeClick(
+                  epToWatchDetails,
+                  movieInfos_.title || movieInfos_.name
+                );
+              }}
+            >
+              {/* Episode image */}
+
+              {epToWatchDetails.still_path ? (
+                <LazyImage
+                  ratio={"16/9"}
+                  src={`https://image.tmdb.org/t/p/w400/${epToWatchDetails.still_path}`}
+                  alt={`Episode ${epToWatchDetails.episode_number} Still`}
+                  className="episode-image"
+                />
+              ) : (
+                <LazyImage
+                  ratio={"16/9"}
+                  src={
+                    "https://www.themoviedb.org/assets/2/v4/glyphicons/basic/glyphicons-basic-38-picture-grey-c2ebdbb057f2a7614185931650f8cee23fa137b93812ccb132b9df511df1cfac.svg"
+                  }
+                  alt={`Episode ${epToWatchDetails.episode_number} Still`}
+                  className="episode-image"
+                  style={{ aspectRatio: "16/9" }}
+                />
+              )}
+
+              {/* Episode details */}
+              <div className="episode-details">
+                {epToWatchDetails.episode_number ? (
+                  <>
+                    <p className="badge topLeft">
+                      E{epToWatchDetails.episode_number}
+                    </p>
+                    <h3 className="text">
+                      <p>{epToWatchDetails.name}</p>
+                    </h3>
+                  </>
+                ) : (
+                  <Skeleton className="text" variant="text" />
+                )}
+                {epToWatchDetails.air_date ? (
+                  <p className="airdate">{epToWatchDetails.air_date}</p>
+                ) : (
+                  <Skeleton className="text" variant="text" />
+                )}
               </div>
-            )}
-          </div>
-          <div
-            key={seasonDetails_.episodes[ep].id}
-            className="episode"
-            onClick={() => {
-              handleEpisodeClick(
-                seasonDetails_.episodes[ep],
-                movieInfos_.title || movieInfos_.name
-              );
-            }}
-          >
-            {/* Episode image */}
-
-            {seasonDetails_.episodes[ep].still_path ? (
-              <LazyImage
-                ratio={"16/9"}
-                src={`https://image.tmdb.org/t/p/w400/${seasonDetails_.episodes[ep].still_path}`}
-                alt={`Episode ${seasonDetails_.episodes[ep].episode_number} Still`}
-                className="episode-image"
-              />
-            ) : (
-              <LazyImage
-                ratio={"16/9"}
-                src={
-                  "https://www.themoviedb.org/assets/2/v4/glyphicons/basic/glyphicons-basic-38-picture-grey-c2ebdbb057f2a7614185931650f8cee23fa137b93812ccb132b9df511df1cfac.svg"
-                }
-                alt={`Episode ${seasonDetails_.episodes[ep].episode_number} Still`}
-                className="episode-image"
-                style={{ aspectRatio: "16/9" }}
-              />
-            )}
-
-            {/* Episode details */}
-            <div className="episode-details">
-              {seasonDetails_.episodes[ep].episode_number ? (
-                <>
-                  <p className="badge topLeft">
-                    E{seasonDetails_.episodes[ep].episode_number}
-                  </p>
-                  <h3 className="text">
-                    <p>{seasonDetails_.episodes[ep].name}</p>
-                  </h3>
-                </>
-              ) : (
-                <Skeleton className="text" variant="text" />
-              )}
-              {seasonDetails_.episodes[ep].air_date ? (
-                <p className="airdate">
-                  {seasonDetails_.episodes[ep].air_date}
-                </p>
-              ) : (
-                <Skeleton className="text" variant="text" />
-              )}
             </div>
           </div>
         </div>
       )}
       <div className="movie-description-page">
-        <Navbar />
         {movieInfos_ && (
           <div
             className="blured-backdrop"
@@ -304,7 +272,6 @@ const MovieDescription = ({ state, dispatch }) => {
                   value={season}
                   onChange={(e) => handleSeasonChange(e.target.value)}
                 >
-                  {!season && <option value="">Select Season</option>}
                   {seasons.map((season) => (
                     <option key={season} value={season}>
                       Season {season}
