@@ -272,29 +272,6 @@ p.title {
   align-items: center;
 }
 
-@media screen and (max-width: 768px) {
-  .airdate {
-    font-size: 14px;
-  }
-  .episode .episode-details .text {
-    font-size: 18px;
-  }
-}
-
-@media screen and (max-width: 568px) {
-  .watch-button {
-    width: 30%;
-  }
-  .watch-button p {
-    font-size: medium;
-  }
-  .episode .episode-details .text {
-    font-size: 14px;
-  }
-  .episode .episode-details span.text {
-    width: 100px;
-  }
-}
 .movie-ids.extra {
   background-color: hsla(0, 0%, 0%, 0.822);
   display: flex;
@@ -376,9 +353,8 @@ p.title {
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  margin: auto;
+  /* margin: auto; */
   width: 100%;
-  padding: 20px;
 }
 
 .allEpisodesButton {
@@ -389,4 +365,45 @@ p.title {
   justify-content: start;
   align-items: center;
   gap: 10px;
+}
+
+.watchEpisode span {
+  text-overflow: unset;
+  overflow: visible;
+}
+
+.watchEpisode .episode {
+  width: 70%;
+}
+.watchEpisode .episode .text {
+  padding: 15px;
+  /* width: 90%; */
+}
+@media screen and (max-width: 768px) {
+  .airdate {
+    font-size: 14px;
+  }
+  .episode .episode-details .text {
+    font-size: 18px;
+  }
+}
+
+@media screen and (max-width: 568px) {
+  .watch-button {
+    width: 30%;
+  }
+  .watch-button p {
+    font-size: medium;
+  }
+  .episode .episode-details .text {
+    font-size: 14px;
+  }
+  .episode .episode-details span.text {
+    width: 100px;
+  }
+}
+@media screen and (max-width: 590px) {
+  .watchEpisode .episode {
+    width: 90%;
+  }
 }
