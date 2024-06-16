@@ -1,7 +1,7 @@
 import { openDB } from "idb";
 
 const DB_NAME = "MoviesDB";
-const DB_VERSION = 2;
+const DB_VERSION = 3;
 
 const indexes = [
   { name: "title", keyPath: "title", options: { unique: false } },
@@ -14,6 +14,11 @@ const indexes = [
   {
     name: "movieDuration",
     keyPath: "movieDuration",
+    options: { unique: false },
+  },
+  {
+    name: "lastModified",
+    keyPath: "lastModified",
     options: { unique: false },
   },
 ];

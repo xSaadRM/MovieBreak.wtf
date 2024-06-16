@@ -21,6 +21,9 @@ function App() {
     const tx = db.transaction("movies", "readonly");
     const store = tx.objectStore("movies");
     const allMovies = await store.getAll();
+    allMovies.sort(function (a, b) {
+      return b.lastModified - a.lastModified;
+    });
     const tvShows = allMovies.filter((movie) => {
       return movie.media_type === "tv";
     });

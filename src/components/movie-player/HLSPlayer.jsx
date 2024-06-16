@@ -60,6 +60,7 @@ const VideoPlayer = ({ state, dispatch }) => {
     media_type: mediaType,
     playbackTime: videoRef.current?.currentTime,
     movieDuration: videoRef.current?.duration,
+    lastModified: new Date(),
   };
 
   useEffect(() => {

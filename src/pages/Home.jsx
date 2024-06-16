@@ -60,9 +60,11 @@ const HomePage = ({ state, dispatch, groupedMovies, getallMovies }) => {
     const getLastEpisodes = async () => {
       let lastEpisodes = [];
       Object.keys(groupedShows).forEach((id) => {
-        const groupLength = groupedShows[id].length;
-        lastEpisodes.push(groupedShows[id][groupLength - 1]);
+        lastEpisodes.push(groupedShows[id][0]);
       });
+      lastEpisodes.sort((a, b)=>{
+        return b.lastModified - a.lastModified;
+      })
       setContinueWatch({ movies: groupedMovies?.movies, tv: lastEpisodes });
     };
 
