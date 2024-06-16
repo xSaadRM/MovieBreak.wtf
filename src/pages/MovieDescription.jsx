@@ -155,22 +155,22 @@ const MovieDescription = ({ state, dispatch }) => {
             <div className="container">
               <MovieCard media_type={mediaType} movie={movieInfos_} />
               <div
-                key={epToWatchDetails.id}
+                key={epToWatchDetails?.id}
                 className="episode"
                 onClick={() => {
                   handleEpisodeClick(
-                    epToWatchDetails.episode_number,
+                    epToWatchDetails?.episode_number,
                     movieInfos_.title || movieInfos_.name
                   );
                 }}
               >
                 {/* Episode image */}
 
-                {epToWatchDetails.still_path ? (
+                {epToWatchDetails?.still_path ? (
                   <LazyImage
                     ratio={"16/9"}
-                    src={`https://image.tmdb.org/t/p/w400/${epToWatchDetails.still_path}`}
-                    alt={`Episode ${epToWatchDetails.episode_number} Still`}
+                    src={`https://image.tmdb.org/t/p/w400/${epToWatchDetails?.still_path}`}
+                    alt={`Episode ${epToWatchDetails?.episode_number} Still`}
                     className="episode-image"
                   />
                 ) : (
@@ -179,7 +179,7 @@ const MovieDescription = ({ state, dispatch }) => {
                     src={
                       "https://www.themoviedb.org/assets/2/v4/glyphicons/basic/glyphicons-basic-38-picture-grey-c2ebdbb057f2a7614185931650f8cee23fa137b93812ccb132b9df511df1cfac.svg"
                     }
-                    alt={`Episode ${epToWatchDetails.episode_number} Still`}
+                    alt={`Episode ${epToWatchDetails?.episode_number} Still`}
                     className="episode-image"
                     style={{ aspectRatio: "16/9" }}
                   />
@@ -187,20 +187,20 @@ const MovieDescription = ({ state, dispatch }) => {
 
                 {/* Episode details */}
                 <div className="episode-details">
-                  {epToWatchDetails.episode_number ? (
+                  {epToWatchDetails?.episode_number ? (
                     <>
                       <p className="badge topLeft">
-                        E{epToWatchDetails.episode_number}
+                        E{epToWatchDetails?.episode_number}
                       </p>
                       <h3 className="text">
-                        <p>{epToWatchDetails.name}</p>
+                        <p>{epToWatchDetails?.name}</p>
                       </h3>
                     </>
                   ) : (
                     <Skeleton className="text" variant="text" />
                   )}
-                  {epToWatchDetails.air_date ? (
-                    <p className="airdate">{epToWatchDetails.air_date}</p>
+                  {epToWatchDetails?.air_date ? (
+                    <p className="airdate">{epToWatchDetails?.air_date}</p>
                   ) : (
                     <Skeleton className="text" variant="text" />
                   )}
