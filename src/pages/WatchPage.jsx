@@ -25,6 +25,7 @@ const WatchPage = ({ state, dispatch }) => {
         <>
           {movieInfos && !movieInfos.default && (
             <HLSPlayer
+              key={window.location.pathname}
               dispatch={dispatch}
               state={state}
               episodeDetails={episodeDetails}
