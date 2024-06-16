@@ -81,14 +81,10 @@
   },
   "scripts": {
     "start": "node scripts/start.js",
-    "start:obf": "npx webpack serve --config webpack.config.js",
     "build": "node scripts/build.js",
-    "build:obf": "node scripts/build.js && npx webpack --config webpack.config.js",
     "test": "node scripts/test.js",
     "deploy": "node deploy",
-    "build:d": "node scripts/build.js && node deploy",
-    "build:obf:d": "node scripts/build.js && npx webpack --config webpack.config.js && node deploy",
-    "obfuscate": "npx webpack --config webpack.config.js"
+    "build:d": "node scripts/build.js && node deploy"
   },
   "eslintConfig": {
     "extends": [
