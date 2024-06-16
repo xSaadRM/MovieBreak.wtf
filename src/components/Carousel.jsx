@@ -47,6 +47,7 @@ const Carousel = ({ movies, media_type, className, type }) => {
         <Slider {...settings}>
           {movies?.map((movie) => (
             <MovieCard
+              key={movie.id}
               media_type={media_type}
               isCategorized={true}
               movie={movie}
