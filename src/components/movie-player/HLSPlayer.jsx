@@ -49,6 +49,18 @@ const VideoPlayer = ({ state, dispatch }) => {
   const [shahid4uServers, setshahid4uServers] = useState({ status: "loading" });
   const [smashyPlayers, setSmashyPlayers] = useState([]);
   const [autoEmbedServers, setAutoEmbedServers] = useState([]);
+  const uid = season && ep ? `${movieID}-${season}-${ep}` : movieID;
+  const movieToDBData = {
+    uid: uid,
+    id: movieID,
+    title: movieInfos.name || movieInfos.title,
+    poster_path: movieInfos.poster_path,
+    release_date: movieInfos.first_air_date || movieInfos.release_date,
+    vote_average: movieInfos.vote_average,
+    media_type: mediaType,
+    playbackTime: videoRef.current?.currentTime,
+    movieDuration: videoRef.current?.duration,
+  };
 
   useEffect(() => {
     const video = videoRef;
@@ -148,28 +160,17 @@ const VideoPlayer = ({ state, dispatch }) => {
   }, [src]);
 
   useEffect(() => {
-    const uid = season && ep ? `${movieID}-${season}-${ep}` : movieID;
     const video = videoRef.current;
-
-    const getMovieById = async (id) => {
+    let updatePlayback;
+    const getMovieById = async () => {
       const db = await indexedDBInit();
       const tx = db.transaction("movies", "readonly");
       const store = tx.objectStore("movies");
 
-      const movie = await store.get(id);
+      const movie = await store.get(uid);
       return movie;
     };
-    const movie = {
-      uid: uid,
-      id: movieID,
-      title: movieInfos.name || movieInfos.title,
-      poster_path: movieInfos.poster_path,
-      release_date: movieInfos.first_air_date || movieInfos.release_date,
-      vote_average: movieInfos.vote_average,
-      media_type: mediaType,
-      playbackTime: video.currentTime,
-      movieDuration: video.duration,
-    };
+
     const addMovie = async (movie) => {
       const db = await indexedDBInit();
       const tx = db.transaction("movies", "readwrite");
@@ -179,18 +180,17 @@ const VideoPlayer = ({ state, dispatch }) => {
       await tx.done;
     };
     const handleLoadedMetaData = async () => {
-      const fetchedMovieDB = await getMovieById(uid);
+      const fetchedMovieDB = await getMovieById();
       const playbackTime = fetchedMovieDB?.playbackTime || 0;
       video.currentTime = playbackTime;
-      addMovie(movie);
+      updatePlayback = setInterval(() => {
+        if (!video.paused) {
+          movieToDBData.playbackTime = video.currentTime;
+          movieToDBData.movieDuration = video.duration;
+          addMovie(movieToDBData);
+        }
+      }, 15000);
     };
-    const updatePlayback = setInterval(() => {
-      if (!video.paused) {
-        movie.playbackTime = video.currentTime;
-        movie.movieDuration = video.duration;
-        addMovie(movie);
-      }
-    }, 15000);
 
     video.addEventListener("ended", () => {
       clearInterval(updatePlayback);
@@ -344,27 +344,23 @@ const VideoPlayer = ({ state, dispatch }) => {
                         <div
                           className="icon previousEpisode-button"
                           onClick={() => {
-                            setactiveProvider(initialActiveProvider);
                             navigate(
                               `/${mediaType}/${movieID}/${season}/${ep - 1}`,
                               { replace: true }
                             );
-                            setisproviderListShown(true);
                           }}
                         >
                           <NavigateBefore />
                         </div>
                       ) : null}
-                      {ep !== seasonDetails.episodes.length ? (
+                      {+ep !== seasonDetails.episodes.length ? (
                         <div
                           className="icon nextEpisode-button"
                           onClick={() => {
-                            setactiveProvider(initialActiveProvider);
                             navigate(
                               `/${mediaType}/${movieID}/${season}/${+ep + 1}`,
                               { replace: true }
                             );
-                            setisproviderListShown(true);
                           }}
                         >
                           <NavigateNextIcon />
@@ -382,7 +378,7 @@ const VideoPlayer = ({ state, dispatch }) => {
                               hlsRef={hlsRef}
                             />
                             {src && <QualitySwitcher hlsRef={hlsRef} />}
-                            <AudioSwitcher hlsRef={hlsRef}/>
+                            <AudioSwitcher hlsRef={hlsRef} />
                           </>
                         )}
                       </>
