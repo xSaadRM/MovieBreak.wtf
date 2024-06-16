@@ -38,22 +38,22 @@ const Carousel = ({ movies, media_type, className, type }) => {
     ],
   };
   return (
-    <div className={"trending-carousel " + className}>
-      <div className={movies && movies[3] ? "" : "fallback-carousel"}>
-        {movies?.length > 0 && (
-          <Slider {...settings}>
-            {movies?.map((movie) => (
-              <div className="card" key={movie.id + "Title"}>
-                <MovieCard
-                  media_type={media_type}
-                  isCategorized={true}
-                  movie={movie}
-                />
-              </div>
-            ))}
-          </Slider>
-        )}
-      </div>
+    <div
+      className={`trending-carousel ${
+        movies && movies[3] ? "" : "fallback-carousel"
+      } ${className}`}
+    >
+      {movies?.length > 0 && (
+        <Slider {...settings}>
+          {movies?.map((movie) => (
+            <MovieCard
+              media_type={media_type}
+              isCategorized={true}
+              movie={movie}
+            />
+          ))}
+        </Slider>
+      )}
     </div>
   );
 };
