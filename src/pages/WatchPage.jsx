@@ -20,8 +20,44 @@ const WatchPage = ({ state, dispatch }) => {
   }, []);
 
   return (
-    <div className="watch-page">
-      <div className="movie-description-container">
+    <>
+      {window.self === window.parent ? (
+        <div className="watch-page">
+          <div className="movie-description-container">
+            <>
+              {movieInfos && !movieInfos.default && (
+                <HLSPlayer
+                  key={window.location.pathname}
+                  dispatch={dispatch}
+                  state={state}
+                  episodeDetails={episodeDetails}
+                />
+              )}
+              <div className="sources-container"></div>
+            </>
+            <>
+              <div
+                className="blured-backdrop"
+                style={{
+                  backgroundImage: `url(https://image.tmdb.org/t/p/original/${episodeDetails?.still_path})`,
+                }}
+              ></div>
+              <Overview
+                overviewText={episodeDetails?.overview}
+                genres={[" "]}
+              />
+              <div className="cast">
+                <Carousel
+                  movies={episodeDetails?.guest_stars}
+                  media_type={"person"}
+                  category={"Credits"}
+                  className={"active"}
+                />
+              </div>
+            </>
+          </div>
+        </div>
+      ) : (
         <>
           {movieInfos && !movieInfos.default && (
             <HLSPlayer
@@ -31,27 +67,9 @@ const WatchPage = ({ state, dispatch }) => {
               episodeDetails={episodeDetails}
             />
           )}
-          <div className="sources-container"></div>
         </>
-        <>
-          <div
-            className="blured-backdrop"
-            style={{
-              backgroundImage: `url(https://image.tmdb.org/t/p/original/${episodeDetails?.still_path})`,
-            }}
-          ></div>
-          <Overview overviewText={episodeDetails?.overview} genres={[" "]} />
-          <div className="cast">
-            <Carousel
-              movies={episodeDetails?.guest_stars}
-              media_type={"person"}
-              category={"Credits"}
-              className={"active"}
-            />
-          </div>
-        </>
-      </div>
-    </div>
+      )}
+    </>
   );
 };
 export default WatchPage;

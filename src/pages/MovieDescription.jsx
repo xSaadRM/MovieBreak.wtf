@@ -141,19 +141,27 @@ const MovieDescription = ({ state, dispatch }) => {
       <div className="popUP">
         {seasonDetails_ && ep && (
           <div className="watchEpisode">
-            <div
-              className="allEpisodesButton"
-              onClick={() => {
-                navigate(`/${mediaType}/${movieID}/${season}`, {
-                  replace: true,
-                });
-              }}
-            >
-              <ArrowBack />
-              <p>All Episodes</p>
-            </div>
+            {window.self === window.parent && (
+              <div
+                className="allEpisodesButton"
+                onClick={() => {
+                  navigate(`/${mediaType}/${movieID}/${season}`, {
+                    replace: true,
+                  });
+                }}
+              >
+                <ArrowBack />
+                <p>All Episodes</p>
+              </div>
+            )}
             <div className="container">
-              <MovieCard media_type={mediaType} movie={movieInfos_} />
+              {window.self === window.parent && (
+                <MovieCard
+                  media_type={mediaType}
+                  movie={movieInfos_}
+                  clickable={"no"}
+                />
+              )}
               <div
                 key={epToWatchDetails?.id}
                 className="episode"

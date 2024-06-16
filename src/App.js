@@ -11,6 +11,7 @@ import { reducer, initialState } from "./reducer/reducer.js";
 import FloatingSocials from "./components/FloatingSocial.jsx";
 import { indexedDBInit } from "./utils/indexedDB.js";
 import Navbar from "./components/Navbar.jsx";
+import Embed from "./pages/Embed.jsx";
 
 function App() {
   const [state, dispatch] = useReducer(reducer, initialState);
@@ -50,8 +51,13 @@ function App() {
 
   return (
     <Router>
-      <Navbar />
-      <FloatingSocials />
+      {!window.location.pathname.startsWith("/embed") &&
+      window.self === window.parent ? (
+        <>
+          <Navbar />
+          <FloatingSocials />
+        </>
+      ) : null}
       <Routes>
         <Route
           path="/"
@@ -74,6 +80,10 @@ function App() {
           path="/:mediaType/:movieID/:season?/:ep?/"
           element={<WatchPage state={state} dispatch={dispatch} />}
         ></Route>
+        <Route
+          path="/embed/:mediaType/:movieID/:season?/:ep?/"
+          element={<Embed />}
+        />
         <Route path="/cast/:personID" element={<CastPage />} />
       </Routes>
     </Router>
