@@ -12,18 +12,20 @@ const Overview = ({ genres, overviewText }) => {
 
   return (
     <div className="overview">
-      <div className="genres">
-        {/* <p className="title">Genres</p> */}
-        {genres ? (
-          genres.map((genre) => <p key={genre.name}>{genre.name}</p>)
-        ) : (
-          <>
-            <Skeleton className="text" width={"25%"} />
-            <Skeleton className="text" width={"25%"} />
-            <Skeleton className="text" width={"25%"} />
-          </>
-        )}
-      </div>
+      {genres?.lentgh > 0 && (
+        <div className="genres">
+          {/* <p className="title">Genres</p> */}
+          {genres ? (
+            genres.map((genre) => <p key={genre.name}>{genre.name}</p>)
+          ) : (
+            <>
+              <Skeleton className="text" width={"25%"} />
+              <Skeleton className="text" width={"25%"} />
+              <Skeleton className="text" width={"25%"} />
+            </>
+          )}
+        </div>
+      )}
       {overviewText !== "" ? (
         <>
           <p className="title">Overview</p>
