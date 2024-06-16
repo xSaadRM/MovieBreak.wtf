@@ -18,32 +18,39 @@ const Overview = ({ genres, overviewText }) => {
           genres.map((genre) => <p key={genre.name}>{genre.name}</p>)
         ) : (
           <>
-            <Skeleton className="text" width={"25%"}/>
-            <Skeleton className="text" width={"25%"}/>
-            <Skeleton className="text" width={"25%"}/>
+            <Skeleton className="text" width={"25%"} />
+            <Skeleton className="text" width={"25%"} />
+            <Skeleton className="text" width={"25%"} />
           </>
         )}
       </div>
-      <p className="title">Overview</p>
-      {overviewText ? (
-        <p className="text">
-          {!isOverviewAllShowed
-            ? overviewText.split(" ").slice(0, wordsInOverview).join(" ") +
-              "...."
-            : overviewText}
-          {!isOverviewAllShowed ? (
-            <span className="show-more-toggle" onClick={setIsOverviewAllShowed}>
-              Show more
-            </span>
-          ) : null}
-        </p>
-      ) : (
+      {overviewText !== "" ? (
         <>
-          <Skeleton className="text" />
-          <Skeleton className="text" />
-          <Skeleton className="text" width="50%" />
+          <p className="title">Overview</p>
+          {overviewText ? (
+            <p className="text">
+              {!isOverviewAllShowed
+                ? overviewText.split(" ").slice(0, wordsInOverview).join(" ") +
+                  "...."
+                : overviewText}
+              {!isOverviewAllShowed ? (
+                <span
+                  className="show-more-toggle"
+                  onClick={setIsOverviewAllShowed}
+                >
+                  Show more
+                </span>
+              ) : null}
+            </p>
+          ) : (
+            <>
+              <Skeleton className="text" />
+              <Skeleton className="text" />
+              <Skeleton className="text" width="50%" />
+            </>
+          )}
         </>
-      )}
+      ) : null}
     </div>
   );
 };
