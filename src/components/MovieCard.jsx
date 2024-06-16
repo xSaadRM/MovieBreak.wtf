@@ -83,6 +83,15 @@ const MovieCard = ({ movie, isCategorized, media_type }) => {
             ) : season || ep ? (
               <p className="releaseDate">{"S" + season + " E" + ep}</p>
             ) : null}
+            {movie.playbackTime ? (
+              <div className="progressBar">
+                <div
+                  style={{
+                    width: ((movie.movieDuration / movie.playbackTime) / 100) + "%",
+                  }}
+                ></div>
+              </div>
+            ) : null}
           </div>
           <div className="movieTitle">
             <span>{movie.title || movie.name}</span>
