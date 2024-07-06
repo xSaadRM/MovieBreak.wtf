@@ -1,0 +1,126 @@
+header {
+  position: fixed;
+  justify-content: space-between;
+  border-bottom: 1px solid hsl(from var(--text) h s l / 0.5);
+  position: static;
+  padding: 0.5rem 2%;
+}
+
+.siteName {
+  font-weight: 700;
+  font-size: 1rem;
+}
+
+.siteLogo {
+  width: 3rem;
+}
+
+.themeSwitcher {
+  z-index: 1;
+  overflow: hidden;
+  position: relative;
+  border-radius: 12px;
+  padding: 5px 10px;
+  border-style: none none solid none;
+  border-width: 1px;
+  border-color: hsl(from var(--text) h s l / 0.5);
+}
+.lightButton,
+.darkButton {
+  animation: slideToCenter 2s;
+  transition: visibility 2s, opacity 2s;
+}
+:root[data-theme="light"] .darkButton,
+:root[data-theme="dark"] .lightButton {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  animation: slideToRight 2s;
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 2s, opacity 2s;
+}
+@keyframes slideToRight {
+  from {
+  }
+  to {
+    transform: translate(100%);
+  }
+}
+@keyframes slideToCenter {
+  from {
+    transform: translate(-100%, 100%);
+  }
+  to {
+  }
+}
+
+.headerLeftSide {
+  gap: 10px;
+}
+
+.MenuSharpIcon {
+  z-index: 1;
+  padding: 5px;
+  border-radius: 5px;
+  border: 1px solid hsl(from var(--text) h s l / 0.5);
+  position: relative;
+}
+.MenuSharpIcon path {
+  transition: all 2s, opacity 0.5s;
+}
+.MenuSharpIcon.active path {
+  transform-origin: center;
+  transition: all 2s, opacity 0.5s;
+}
+
+.MenuSharpIcon path:nth-child(2) {
+  animation-name: slide;
+  animation-duration: 3s;
+}
+
+.MenuSharpIcon path:nth-child(3) {
+  opacity: 0;
+}
+
+.MenuSharpIcon.active path:first-child {
+  opacity: 0;
+  transform: rotate(45deg);
+}
+.MenuSharpIcon.active path:nth-child(2) {
+  transform: rotate(45deg);
+}
+.MenuSharpIcon.active path:nth-child(3) {
+  opacity: 1;
+  transform: rotate(-45deg);
+}
+.MenuSharpIcon.active path:last-child {
+  opacity: 0;
+  transform: rotate(-45deg);
+}
+
+.leftMenu {
+  transition: transform 2s;
+  position: fixed;
+  right: 0;
+  top: 0;
+  width: 30%;
+  height: 100vmax;
+  z-index: 0;
+  justify-content: center;
+  background: hsla(253, 100%, 63%, 0.082);
+  backdrop-filter: blur(12px);
+  transform: translate(100%);
+}
+
+.leftMenuWrapper:has(.MenuSharpIcon.active) .leftMenu {
+  transform: translate(0);
+}
+
+@keyframes slide {
+  from {
+    transform: translate(100%);
+  }
+  to {}
+}
