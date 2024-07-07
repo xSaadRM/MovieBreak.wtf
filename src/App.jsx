@@ -5,7 +5,7 @@ import LightMode from "@suid/icons-material/LightMode";
 import MenuSharp from "./Components/MenuSharp";
 import { createSignal } from "solid-js";
 
-const tmdbAPIKey = import.meta.env.tmdbAPIKey;
+const tmdbAPIKey = import.meta.env.VITE_TMDB_API_KEY;
 
 function App() {
   const [movies, setMovies] = createSignal({ popularMovies: {} });
