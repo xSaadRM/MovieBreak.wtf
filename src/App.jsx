@@ -4,7 +4,8 @@ import NightsStayIcon from "@suid/icons-material/NightsStay";
 import LightMode from "@suid/icons-material/LightMode";
 import MenuSharp from "./Components/MenuSharp";
 import { createSignal } from "solid-js";
-import { creds } from "../creds.js";
+
+const tmdbAPIKey = import.meta.env.tmdbAPIKey;
 
 function App() {
   const [movies, setMovies] = createSignal({ popularMovies: {} });
@@ -13,7 +14,7 @@ function App() {
     const res = await fetch(
       "https://api.themoviedb.org/3/trending/all/day?language=en-US" +
         "&api_key=" +
-        creds.tmdbAPIKey
+        tmdbAPIKey
     );
 
     const jwiyson = await res.json();
