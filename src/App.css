@@ -27,8 +27,8 @@ header {
 }
 .lightButton,
 .darkButton {
-  animation: slideToCenter 2s;
-  transition: visibility 2s, opacity 2s;
+  animation: slideToCenter 0.7s;
+  transition: all 0.7s;
 }
 :root[data-theme="light"] .darkButton,
 :root[data-theme="dark"] .lightButton {
@@ -36,10 +36,10 @@ header {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  animation: slideToRight 2s;
+  animation: slideToRight 0.7s;
   visibility: hidden;
   opacity: 0;
-  transition: visibility 2s, opacity 2s;
+  transition: all 0.7s;
 }
 @keyframes slideToRight {
   from {
@@ -70,7 +70,7 @@ header {
 
 .MenuSharpIcon path {
   color: currentColor;
-  transition-duration: 2s;
+  transition-duration: 0.5s;
   transform-origin: center;
 }
 
@@ -96,7 +96,7 @@ header {
 }
 
 .leftMenu {
-  transition: transform 2s;
+  transition: transform 0.5s;
   position: fixed;
   right: 0;
   top: 0;

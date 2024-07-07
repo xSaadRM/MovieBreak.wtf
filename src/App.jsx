@@ -3,15 +3,33 @@ import logo from "./assets/logo.png";
 import NightsStayIcon from "@suid/icons-material/NightsStay";
 import LightMode from "@suid/icons-material/LightMode";
 import MenuSharp from "./Components/MenuSharp";
+import { createSignal } from "solid-js";
+import { creds } from "../creds.js";
 
-const toggleMenu = (event) => {
-  const menuSharp = event.target.closest(".MenuSharpIcon");
-
-  if (menuSharp) {
-    menuSharp.classList.toggle("active");
-  }
-};
 function App() {
+  const [movies, setMovies] = createSignal({ popularMovies: {} });
+
+  const fetchMovies = async () => {
+    const res = await fetch(
+      "https://api.themoviedb.org/3/trending/all/day?language=en-US" +
+        "&api_key=" +
+        creds.tmdbAPIKey
+    );
+
+    const jwiyson = await res.json();
+    setMovies((prev) => ({ ...prev, popularMovies: jwiyson }));
+  };
+  fetchMovies();
+
+  const toggleMenu = (event) => {
+    console.log(movies());
+    const menuSharp = event.target.closest(".MenuSharpIcon");
+
+    if (menuSharp) {
+      menuSharp.classList.toggle("active");
+    }
+  };
+
   return (
     <div>
       <header class="flex">
