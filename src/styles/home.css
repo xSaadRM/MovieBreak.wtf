@@ -1,0 +1,31 @@
+.homePage {
+  padding: 0.5em;
+}
+.carousel {
+  overflow: hidden;
+  overflow-x: scroll;
+  scrollbar-width: none;
+  scroll-snap-type: x mandatory;
+}
+.homePage h5 {
+  font-size: medium;
+  padding: 0 0.5em;
+}
+.movie {
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+  flex-direction: column;
+  position: relative;
+  width: 20vw;
+  padding: 0 0.5em;
+}
+
+.movie img {
+  width: 20vw;
+  border-radius: 12px;
+}
+
+.title:not(:hover) {
+  width: 100%;
+  white-space: nowrap;
+}
