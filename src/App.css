@@ -67,37 +67,32 @@ header {
   border: 1px solid hsl(from var(--text) h s l / 0.5);
   position: relative;
 }
+
 .MenuSharpIcon path {
-  transition: all 2s, opacity 0.5s;
-}
-.MenuSharpIcon.active path {
+  color: currentColor;
+  transition-duration: 2s;
   transform-origin: center;
-  transition: all 2s, opacity 0.5s;
 }
 
-.MenuSharpIcon path:nth-child(2) {
-  animation-name: slide;
-  animation-duration: 3s;
-}
-
-.MenuSharpIcon path:nth-child(3) {
-  opacity: 0;
+.MenuSharpIcon.active path {
+  color: red;
 }
 
 .MenuSharpIcon.active path:first-child {
-  opacity: 0;
-  transform: rotate(45deg);
+  transform: translate(100%);
 }
 .MenuSharpIcon.active path:nth-child(2) {
   transform: rotate(45deg);
 }
 .MenuSharpIcon.active path:nth-child(3) {
-  opacity: 1;
   transform: rotate(-45deg);
 }
 .MenuSharpIcon.active path:last-child {
-  opacity: 0;
-  transform: rotate(-45deg);
+  transform: translate(-100%);
+}
+
+.leftMenuWrapper:has(.MenuSharpIcon.active) .leftMenu {
+  transform: translate(0);
 }
 
 .leftMenu {
@@ -112,15 +107,4 @@ header {
   background: hsla(253, 100%, 63%, 0.082);
   backdrop-filter: blur(12px);
   transform: translate(100%);
-}
-
-.leftMenuWrapper:has(.MenuSharpIcon.active) .leftMenu {
-  transform: translate(0);
-}
-
-@keyframes slide {
-  from {
-    transform: translate(100%);
-  }
-  to {}
 }
