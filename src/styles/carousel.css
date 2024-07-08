@@ -1,0 +1,91 @@
+.label {
+  font-size: medium;
+  padding: 0 0.5em;
+}
+.carousel {
+  overflow: hidden;
+  overflow-x: scroll;
+  scrollbar-width: none;
+  scroll-snap-type: x mandatory;
+}
+.movie {
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+  flex-direction: column;
+  position: relative;
+  width: 20%;
+  padding: 0 0.5em;
+}
+
+.title p {
+  margin: 5px;
+}
+.title {
+  transition: all 0.3s ease-in;
+  max-width: 100%;
+  white-space: nowrap;
+}
+
+.title:last-child {
+  white-space: normal;
+  position: absolute;
+  bottom: 0;
+  opacity: 0;
+}
+
+.title:hover,
+.title:hover ~ .title {
+  opacity: 1;
+}
+
+.title:has(~ .title:hover),
+.title:hover:has(~ .title) {
+  opacity: 0;
+}
+
+.shadow {
+  transition: all 0.5s ease-in;
+  opacity: 0;
+  width: 100%;
+  height: 20%;
+  bottom: 0;
+  z-index: 1;
+  position: absolute;
+  background: linear-gradient(180deg, hsla(0, 0%, 0%, 0), var(--secondary));
+}
+.movie:has(.title:hover) .shadow {
+  opacity: 1;
+}
+.poster {
+  z-index: 0;
+  position: relative;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.badge {
+  transition: all 0.5s ease-in;
+  font-weight: bolder;
+  font-size: x-small;
+  position: absolute;
+  z-index: 1;
+  border: 1px var(--accent) solid;
+  padding: 0.5em 7%;
+  border-radius: 8px;
+  margin: 6px;
+  background: hsla(0, 0%, 0%, 1);
+  opacity: 0;
+}
+.poster:hover .badge {
+  opacity: 1;
+}
+
+.mediaType {
+  bottom: 0;
+  right: 0;
+}
+.rating {
+  color: gold;
+  bottom: 0;
+  left: 0;
+}

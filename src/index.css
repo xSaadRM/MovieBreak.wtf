@@ -96,8 +96,6 @@ small {
   position: relative;
   width: 20vw;
   height: 100%;
-  border-radius: 12px;
-  overflow: hidden;
   z-index: 0;
 }
 .lazyImage img:not(.show) {
