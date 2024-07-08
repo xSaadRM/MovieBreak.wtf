@@ -94,11 +94,17 @@ small {
 }
 
 .lazyImage .skeleton {
-  position: absolute;
-  top: 0;
   width: 100%;
   height: auto;
   background-color: rgb(61, 61, 61);
+  position: relative;
+}
+
+.lazyImage img {
+  display: none;
+}
+.lazyImage img.show {
+  display: block;
 }
 
 .lazyImage .skeleton::after {
@@ -108,7 +114,4 @@ small {
     rgba(168, 167, 167, 0.092),
     rgba(168, 167, 167, 0.072)
   );
-}
-.lazyImage img.show ~ .skeleton {
-  z-index: -1;
 }
