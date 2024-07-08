@@ -8,12 +8,8 @@ const LazyImage = (props) => {
         {...props}
         onload={(e) => e.target.classList.add("show")}
       ></img>
-      <Skeleton
-        variant="rectangular"
-        animation={"wave"}
-        class="skeleton"
-        style={{ "aspect-ratio": props.ratio }}
-      />
+      <div className="shadow"></div>
+      <div className="skeleton" style={{ "aspect-ratio": props.ratio }}></div>
     </div>
   );
 };

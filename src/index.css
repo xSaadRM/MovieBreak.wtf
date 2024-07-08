@@ -92,27 +92,33 @@ small {
 .show {
   visibility: visible;
 }
-
-.lazyImage .skeleton {
-  width: 100%;
-  height: auto;
-  background-color: var(--background);
-  filter: brightness(65%);
+.lazyImage {
   position: relative;
+  width: 20vw;
+  height: 100%;
+  border-radius: 12px;
+  overflow: hidden;
+  z-index: 0;
+}
+.lazyImage img:not(.show) {
+  visibility: hidden;
+  position: absolute;
 }
 
-.lazyImage img {
-  display: none;
-}
-.lazyImage img.show {
-  display: block;
+.skeleton {
+  background: var(--text);
+  width: 100%;
+  animation: skeletonLoading 2s linear infinite;
 }
 
-.lazyImage .skeleton::after {
-  background: linear-gradient(
-    90deg,
-    hsla(from var(--text) h s l / 0.1),
-    hsla(from var(--text) h s l / 0.2),
-    hsla(from var(--text) h s l / 0.1)
-  );
+@keyframes skeletonLoading {
+  0% {
+    opacity: 0.4;
+  }
+  50% {
+    opacity: 0.7;
+  }
+  100% {
+    opacity: 0.4;
+  }
 }
