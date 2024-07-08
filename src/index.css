@@ -96,7 +96,8 @@ small {
 .lazyImage .skeleton {
   width: 100%;
   height: auto;
-  background-color: rgb(61, 61, 61);
+  background-color: var(--background);
+  filter: brightness(65%);
   position: relative;
 }
 
@@ -110,8 +111,8 @@ small {
 .lazyImage .skeleton::after {
   background: linear-gradient(
     90deg,
-    rgba(168, 167, 167, 0.072),
-    rgba(168, 167, 167, 0.092),
-    rgba(168, 167, 167, 0.072)
+    hsla(from var(--text) h s l / 0.1),
+    hsla(from var(--text) h s l / 0.2),
+    hsla(from var(--text) h s l / 0.1)
   );
 }
