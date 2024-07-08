@@ -20,12 +20,36 @@
   padding: 0 0.5em;
 }
 
-.movie img {
+.movie .lazyImage > * {
   width: 20vw;
   border-radius: 12px;
 }
-
-.title:not(:hover) {
+.movie:has(.title) .shadow {
   width: 100%;
+  height: 100%;
+  background: black;
+}
+.title p {
+  margin: 5px;
+}
+.title {
+  max-width: 100%;
   white-space: nowrap;
+}
+
+.title:last-child {
+  white-space: normal;
+  position: absolute;
+  bottom: 0;
+  opacity: 0;
+}
+
+.title:hover,
+.title:hover ~ .title {
+  opacity: 1;
+}
+
+.title:has(~ .title:hover),
+.title:hover:has(~ .title) {
+  opacity: 0;
 }
