@@ -31,12 +31,13 @@ const Home = () => {
                 {(movie, index) => (
                   <div class="movie flex">
                     <LazyImage
+                      ratio="135/202"
                       alt={movie.title || movie.name || "untitled"}
                       src={
                         "https://image.tmdb.org/t/p/original" +
                         movie.poster_path
                       }
-                    ><div className="shadow"></div></LazyImage>
+                    />
                     <div className="title">
                       <p className="text">{movie.title || movie.name}</p>
                     </div>

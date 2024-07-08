@@ -20,7 +20,9 @@
   padding: 0 0.5em;
 }
 
-.movie .lazyImage > * {
+.movie .lazyImage {
+  position: relative;
+  overflow: hidden;
   width: 20vw;
   border-radius: 12px;
 }

@@ -92,3 +92,23 @@ small {
 .show {
   visibility: visible;
 }
+
+.lazyImage .skeleton {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: auto;
+  background-color: rgb(61, 61, 61);
+}
+
+.lazyImage .skeleton::after {
+  background: linear-gradient(
+    90deg,
+    rgba(168, 167, 167, 0.072),
+    rgba(168, 167, 167, 0.092),
+    rgba(168, 167, 167, 0.072)
+  );
+}
+.lazyImage img.show ~ .skeleton {
+  z-index: -1;
+}
