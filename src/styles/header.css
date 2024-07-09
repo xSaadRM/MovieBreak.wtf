@@ -1,6 +1,5 @@
 header {
   z-index: 1;
-  position: fixed;
   justify-content: space-between;
   border-bottom: 1px solid var(--border-color);
   position: sticky;
@@ -91,20 +90,41 @@ header {
 .MenuSharpIcon.active path:last-child {
   transform: translate(-100%);
 }
-
-.leftMenuWrapper:has(.MenuSharpIcon.active) .leftMenu {
-  transform: translate(0);
+.leftMenuWrapper {
+  position: relative;
 }
 
 .leftMenu {
-  transition: transform 0.5s;
-  position: fixed;
-  right: 0;
-  top: 0;
-  width: 30%;
-  height: 100vmax;
-  justify-content: center;
-  background: hsla(253, 100%, 63%, 0.082);
+  aspect-ratio: 1;
+  transition: all 0.5s;
   backdrop-filter: blur(4px);
-  transform: translate(100%);
+  min-width: 30vw;
+  position: absolute;
+  opacity: 0;
+  transform: translate(0);
+  bottom: 0;
+  left: 0;
+  border-radius: 12px;
+  border: 2px var(--accent) solid;
+  box-shadow: 5px 5px 20px 2px var(--text);
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+  padding: 1em;
+  gap: 0.5em;
+}
+
+.leftMenuWrapper:has(.MenuSharpIcon.active) .leftMenu {
+  background: hsla(253, 100%, 63%, 0.082);
+  visibility: visible;
+  transform: translate(-100%, 100%);
+  opacity: 1;
+}
+
+.leftMenu a {
+  width: 100%;
+  text-align: center;
+  white-space: nowrap;
+  background: var(--secondary);
+  border-radius: 8px;
+  padding: 10px;
 }

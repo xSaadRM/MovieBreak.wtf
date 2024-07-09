@@ -38,8 +38,12 @@ const Header = () => {
           </div>
           <div className="leftMenuWrapper flex">
             <MenuSharp class="MenuSharpIcon" onclick={toggleMenu} />
-            <div class="leftMenu flex">
-              <a>about</a>
+            <div class="leftMenu flex glowContain">
+              <a>Home</a>
+              <a>TV Shows</a>
+              <a>Movies</a>
+              <a>Watchlist</a>
+              <a>History</a>
             </div>
           </div>
         </div>
