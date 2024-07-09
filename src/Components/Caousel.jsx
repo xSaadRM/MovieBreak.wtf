@@ -1,44 +1,72 @@
-import { Star } from "@suid/icons-material";
+import { ArrowBack, ArrowForward, Star } from "@suid/icons-material";
 import LazyImage from "./LazyImage";
-import { For } from "solid-js";
+import { createSignal, For, Show } from "solid-js";
 import "../styles/carousel.css";
 import "solid-slider/slider.css";
-import { Slider } from "solid-slider";
+import { Slider, SliderButton, SliderProvider } from "solid-slider";
 
 const Carousel = (props) => {
+  const [slideIndex, setSlideIndex] = createSignal({ max: 99, current: 0 });
 
   return (
-      <Slider options={{slides: {perView: "auto"}}}>
-        <For each={props.list}>
-          {(movie, index) => (
-            <div class="movie flex">
-              <div className="poster">
-                <div class="badge mediaType">
-                  {movie.media_type.toUpperCase()}
+    <div class="carousel">
+      <SliderProvider>
+        <Slider
+          options={{
+            slides: { perView: "auto" },
+            slideChanged: (data) => {
+              setSlideIndex({
+                max: data.track.details.maxIdx,
+                current: data.track.details.abs,
+              });
+            },
+          }}
+        >
+          <For each={props.list}>
+            {(movie, index) => (
+              <div class="movie flex">
+                <div className="poster">
+                  <div class="badge mediaType">
+                    {movie.media_type.toUpperCase()}
+                  </div>
+                  <div class="badge date">
+                    {(movie.release_date || movie.first_air_date).slice(0, 4)}
+                  </div>
+                  <div className="badge rating">
+                    <Star fontSize="x-small" />
+                    {movie.vote_average.toFixed(2)}
+                  </div>
+                  <LazyImage
+                    ratio="135/202"
+                    alt={movie.title || movie.name || "untitled"}
+                    src={
+                      "https://image.tmdb.org/t/p/original" + movie.poster_path
+                    }
+                  />
                 </div>
-                <div className="badge rating">
-                  <Star fontSize="x-small" />
-                  {movie.vote_average.toFixed(2)}
-                </div>
-                <LazyImage
-                  ratio="135/202"
-                  alt={movie.title || movie.name || "untitled"}
-                  src={
-                    "https://image.tmdb.org/t/p/original" + movie.poster_path
-                  }
-                />
-              </div>
 
-              <div className="title">
-                <p className="text">{movie.title || movie.name}</p>
+                <div className="title">
+                  <p className="text">{movie.title || movie.name}</p>
+                </div>
+                <div className="title">
+                  <p className="text">{movie.title || movie.name}</p>
+                </div>
               </div>
-              <div className="title">
-                <p className="text">{movie.title || movie.name}</p>
-              </div>
-            </div>
-          )}
-        </For>
-      </Slider>
+            )}
+          </For>
+        </Slider>
+        <Show when={slideIndex().current > 0}>
+          <SliderButton class="prev" prev>
+            <ArrowBack />
+          </SliderButton>
+        </Show>
+        <Show when={slideIndex().current < slideIndex().max}>
+          <SliderButton class="next" next>
+            <ArrowForward />
+          </SliderButton>
+        </Show>
+      </SliderProvider>
+    </div>
   );
 };
 

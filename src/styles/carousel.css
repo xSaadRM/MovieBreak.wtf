@@ -2,19 +2,14 @@
   font-size: medium;
   padding: 0 0.5em;
 }
-.carousel{
-  overflow: hidden;
-  overflow-x: scroll;
-  scrollbar-width: none;
-  scroll-snap-type: x mandatory;
-}
+
 .movie {
   scroll-snap-align: start;
   scroll-snap-stop: always;
   flex-direction: column;
   position: relative;
   width: 20%;
-  padding: 0 0.5em; 
+  padding: 0 0.5em;
 }
 
 .title p {
@@ -89,4 +84,58 @@
   color: gold;
   bottom: 0;
   left: 0;
+}
+.carousel {
+  overflow: hidden;
+  position: relative;
+}
+
+.prev,
+.next {
+  color: white;
+  border: none;
+  overflow: hidden;
+  position: absolute;
+  top: 0;
+  height: 100%;
+  width: 5%;
+  animation-duration: 2s;
+  animation-iteration-count: infinite;
+}
+.prev {
+  animation-name: pointingLeft;
+  left: 0;
+  background: linear-gradient(90deg, black, transparent);
+}
+.next {
+  animation-name: pointingRight;
+  background: linear-gradient(90deg, transparent, black);
+  right: 0;
+}
+
+.keen-slider {
+  position: relative !important;
+}
+
+@keyframes pointingLeft {
+  0% {
+    transform: translateX(-20%);
+  }
+  50% {
+    transform: translate(0);
+  }
+  100% {
+    transform: translate(-20%);
+  }
+}
+@keyframes pointingRight {
+  0% {
+    transform: translateX(20%);
+  }
+  50% {
+    transform: translate(0);
+  }
+  100% {
+    transform: translate(20%);
+  }
 }
