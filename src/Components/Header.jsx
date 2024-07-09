@@ -38,7 +38,7 @@ const Header = () => {
           </div>
           <div className="leftMenuWrapper flex">
             <MenuSharp class="MenuSharpIcon" onclick={toggleMenu} />
-            <div class="leftMenu flex glowContain">
+            <div class="anim2 leftMenu flex glowContain">
               <a>Home</a>
               <a>TV Shows</a>
               <a>Movies</a>

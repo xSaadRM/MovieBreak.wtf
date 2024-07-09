@@ -96,28 +96,27 @@ header {
 
 .leftMenu {
   aspect-ratio: 1;
-  transition: all 0.5s;
   backdrop-filter: blur(4px);
-  min-width: 30vw;
+  width: 30vw;
   position: absolute;
-  opacity: 0;
-  transform: translate(0);
   bottom: 0;
   left: 0;
   border-radius: 12px;
   border: 2px var(--accent) solid;
   box-shadow: 5px 5px 20px 2px var(--text);
-  justify-content: space-evenly;
+  justify-content: center;
   flex-wrap: wrap;
   padding: 1em;
   gap: 0.5em;
+  transition: transform 0.3s, scale 1s, opacity 0.3s;
 }
 
 .leftMenuWrapper:has(.MenuSharpIcon.active) .leftMenu {
   background: hsla(253, 100%, 63%, 0.082);
   visibility: visible;
-  transform: translate(-100%, 100%);
   opacity: 1;
+  scale: 1;
+  transform: translate(-100%, 100%);
 }
 
 .leftMenu a {
@@ -127,4 +126,21 @@ header {
   background: var(--secondary);
   border-radius: 8px;
   padding: 10px;
+}
+
+.leftMenu.anim1 {
+  scale: 0;
+  transform: translate(-100%, 100%);
+}
+
+.leftMenu.anim2 {
+  opacity: 0;
+  transform: translate(0);
+}
+
+
+@media screen and (min-width: 785px) {
+  .leftMenu {
+    width: 20vw;
+  }
 }
