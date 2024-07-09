@@ -27,7 +27,7 @@ import {
 import { SubtitlesManager } from "./utils/SubtitlesManager";
 import SmashyStreamDecoder from "./providers/smashy-stream/decoder";
 import { indexedDBInit } from "../../utils/indexedDB";
-import AudioSwitcher from "./utils/AudioSwitcher";
+// import AudioSwitcher from "./utils/AudioSwitcher";
 
 const VideoPlayer = ({ state, dispatch }) => {
   const navigate = useNavigate();
@@ -379,7 +379,7 @@ const VideoPlayer = ({ state, dispatch }) => {
                               hlsRef={hlsRef}
                             />
                             {src && <QualitySwitcher hlsRef={hlsRef} />}
-                            <AudioSwitcher hlsRef={hlsRef} />
+                            {/* {<AudioSwitcher hlsRef={hlsRef} />} */}
                           </>
                         )}
                       </>
