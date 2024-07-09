@@ -1,8 +1,6 @@
 import "../styles/home.css";
 import { createSignal, For } from "solid-js";
-import LazyImage from "./LazyImage";
-import "../styles/carousel.css";
-import { Star } from "@suid/icons-material";
+import Carousel from "./Caousel";
 
 const tmdbAPIKey = import.meta.env.VITE_TMDB_API_KEY;
 
@@ -28,38 +26,7 @@ const Home = () => {
         {(item, index) => (
           <div class="movieSection">
             <h5 class="label">Trending Today</h5>
-            <div class="carousel flex">
-              <For each={item.results}>
-                {(movie, index) => (
-                  <div class="movie flex">
-                    <div className="poster">
-                      <div class="badge mediaType">
-                        {movie.media_type.toUpperCase()}
-                      </div>
-                      <div className="badge rating">
-                        <Star fontSize="x-small"/>
-                        {movie.vote_average.toFixed(2)}
-                      </div>
-                      <LazyImage
-                        ratio="135/202"
-                        alt={movie.title || movie.name || "untitled"}
-                        src={
-                          "https://image.tmdb.org/t/p/original" +
-                          movie.poster_path
-                        }
-                      />
-                    </div>
-
-                    <div className="title">
-                      <p className="text">{movie.title || movie.name}</p>
-                    </div>
-                    <div className="title">
-                      <p className="text">{movie.title || movie.name}</p>
-                    </div>
-                  </div>
-                )}
-              </For>
-            </div>
+            <Carousel list={item.results}/>
           </div>
         )}
       </For>
