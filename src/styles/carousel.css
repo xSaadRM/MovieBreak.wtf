@@ -10,9 +10,7 @@
   position: relative;
   width: 20%;
 }
-.movie .lazyImage {
-  width: 20vw;
-}
+
 .title p {
   margin: 5px;
 }
@@ -148,16 +146,5 @@
   .prev svg,
   .next svg {
     font-size: medium;
-  }
-}
-
-@media screen and (max-width: 620px) {
-  .movie .lazyImage {
-    width: 25vw;
-  }
-}
-@media screen and (max-width: 420px) {
-  .movie .lazyImage {
-    width: 35vw;
   }
 }

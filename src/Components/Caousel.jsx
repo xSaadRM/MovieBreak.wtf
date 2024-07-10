@@ -14,14 +14,24 @@ const Carousel = (props) => {
         <Slider
           options={{
             breakpoints: {
-              "(max-width: 620px)": {
-                slides: { perView: "3.5", spacing: 10 },
+              "(max-width: 700px)": {
+                slides: { perView: "5", spacing: 10 },
               },
-              "(max-width: 420px)": {
+              "(max-width: 600px)": {
+                slides: { perView: "4", spacing: 10 },
+              },
+              "(max-width: 480px)": {
+                slides: { perView: "3", spacing: 10 },
+              },
+              "(max-width: 360px)": {
                 slides: { perView: "2.5", spacing: 10 },
               },
+              "(max-width: 300px)": {
+                slides: { perView: "2", spacing: 10 },
+              },
+
             },
-            slides: { perView: "auto", spacing: 10 },
+            slides: { perView: "7", spacing: 10 },
             slideChanged: (data) => {
               setSlideIndex({
                 max: data.track.details.maxIdx,
