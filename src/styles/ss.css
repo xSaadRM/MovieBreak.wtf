@@ -1,3 +1,56 @@
+@import url("https://fonts.googleapis.com/css?family=Inter:700|Inter:400");
+
+:root[data-theme="light"] {
+  --text: hsl(252, 87%, 9%);
+  --background: hsl(250, 100%, 87%);
+  --primary: hsl(252, 100%, 31%);
+  --secondary: hsl(0, 71%, 51%);
+  --secondary: hsl(172, 99%, 30%);
+  --accent: hsl(281, 100%, 22%);
+}
+
+:root[data-theme="dark"] {
+  --text: hsl(252, 87%, 91%);
+  --background: hsl(248, 83%, 7%);
+  --primary: hsl(247, 98%, 33%);
+  --secondary: hsl(270, 86%, 30%);
+  --accent: hsl(281, 100%, 78%);
+}
+:root {
+  --border-color: hsl(from var(--text) h s l / 0.5);
+}
+
+#root {
+  overflow: hidden;
+}
+body {
+  scroll-behavior: smooth;
+  box-sizing: border-box;
+  margin: 0;
+  background: var(--background);
+  font-family: "Inter";
+  font-weight: 400;
+  color: var(--text);
+  transition: background 0.5s;
+}
+
+img {
+  width: 100%;
+}
+
+
+html {
+  font-size: 100%;
+} /* 16px */
+
+
+
+.flex {
+  display: flex;
+  align-items: center;
+}
+
+
 header {
   z-index: 1;
   justify-content: space-between;
@@ -40,20 +93,6 @@ header {
   visibility: hidden;
   opacity: 0;
   transition: all 0.7s;
-}
-@keyframes slideToRight {
-  from {
-  }
-  to {
-    transform: translate(100%);
-  }
-}
-@keyframes slideToCenter {
-  from {
-    transform: translate(-100%, 100%);
-  }
-  to {
-  }
 }
 
 .headerLeftSide {
@@ -120,7 +159,6 @@ header {
 }
 
 .leftMenu a {
-  color: white;
   width: 100%;
   text-align: center;
   white-space: nowrap;
@@ -133,18 +171,17 @@ header {
   background: var(--primary);
   transform: scale(1.05);
 }
-.leftMenu.anim1 {
-  scale: 0;
-  transform: translate(-100%, 100%);
+
+
+.homePage {
+  padding: 0.5em;
+}
+.carousel {
+  overflow: hidden;
+  position: relative;
 }
 
-.leftMenu.anim2 {
-  opacity: 0;
-  transform: translate(0);
-}
 
-@media screen and (min-width: 785px) {
-  .leftMenu {
-    width: 20vw;
-  }
+.keen-slider {
+  position: relative !important;
 }

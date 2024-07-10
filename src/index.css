@@ -3,8 +3,7 @@
 :root[data-theme="light"] {
   --text: hsl(252, 87%, 9%);
   --background: hsl(250, 100%, 87%);
-  --primary: hsl(252, 100%, 31%);
-  --secondary: hsl(0, 71%, 51%);
+  --primary:  hsl(157, 100%, 17%);
   --secondary: hsl(172, 99%, 30%);
   --accent: hsl(281, 100%, 22%);
 }
