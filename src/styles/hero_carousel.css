@@ -2,6 +2,10 @@
   position: relative;
 }
 
+.hero .backdrop {
+  width: 100%;
+}
+
 .hero .info {
   position: absolute;
   z-index: 1;

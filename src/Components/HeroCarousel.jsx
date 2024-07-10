@@ -39,7 +39,7 @@ const HeroCarousel = (props) => {
                   </div>
 
                   <LazyImage
-                    ratio="135/202"
+                    ratio="642∶361"
                     alt={movie.title || movie.name || "untitled"}
                     src={
                       "https://image.tmdb.org/t/p/original" +
