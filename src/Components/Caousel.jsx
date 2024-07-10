@@ -27,7 +27,7 @@ const Carousel = (props) => {
               <div class="movie flex">
                 <div className="poster">
                   <div class="badge mediaType">
-                    {movie.media_type.toUpperCase()}
+                    {movie.media_type?.toUpperCase()}
                   </div>
                   <div class="badge date">
                     {(movie.release_date || movie.first_air_date).slice(0, 4)}
