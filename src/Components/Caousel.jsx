@@ -15,18 +15,19 @@ const Carousel = (props) => {
           options={{
             breakpoints: {
               "(max-width: 620px)": {
-                slides: {perView: "3.5"}
+                slides: { perView: "3.5", spacing: 10 },
               },
               "(max-width: 420px)": {
-                slides: {perView: "2.5"}
-              }
+                slides: { perView: "2.5", spacing: 10 },
+              },
             },
-            slides: { perView: "auto", spacing: "0px" },
+            slides: { perView: "auto", spacing: 10 },
             slideChanged: (data) => {
               setSlideIndex({
                 max: data.track.details.maxIdx,
                 current: data.track.details.abs,
               });
+              console.log(data.track.details);
             },
           }}
         >

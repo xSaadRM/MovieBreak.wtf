@@ -9,11 +9,10 @@
   flex-direction: column;
   position: relative;
   width: 20%;
-  padding: 0 0.5em;
 }
- .movie .lazyImage {
-    width: 20vw;
-  }
+.movie .lazyImage {
+  width: 20vw;
+}
 .title p {
   margin: 5px;
 }
@@ -79,12 +78,16 @@
 }
 
 .mediaType {
-  bottom: 0;
+  top: 0;
   right: 0;
 }
 .rating {
   color: gold;
   bottom: 0;
+  right: 0;
+}
+.date {
+  top: 0;
   left: 0;
 }
 .carousel {
@@ -141,7 +144,7 @@
   }
 }
 
-@media screen and (max-width:542px) {
+@media screen and (max-width: 542px) {
   .prev svg,
   .next svg {
     font-size: medium;
@@ -150,11 +153,11 @@
 
 @media screen and (max-width: 620px) {
   .movie .lazyImage {
-    width: 30vw;
+    width: 25vw;
   }
 }
 @media screen and (max-width: 420px) {
   .movie .lazyImage {
-    width: 40vw;
+    width: 35vw;
   }
 }
