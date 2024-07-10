@@ -1,6 +1,7 @@
 import "../styles/home.css";
 import { createSignal, For } from "solid-js";
-import Carousel from "./Caousel";
+import Carousel from "../Components/Caousel";
+import LazyImage from "../Components/LazyImage";
 
 const tmdbAPIKey = import.meta.env.VITE_TMDB_API_KEY;
 
@@ -33,11 +34,21 @@ const Home = () => {
   return (
     <div class="homePage">
       <For each={carousels()}>
-        {(item, index) => (
-          <div class="movieSection">
-            <h5 class="label">{item.label}</h5>
-            <Carousel list={item.data.results} />
-          </div>
+        {(item) => (
+          <>
+            <div className="backdrop">
+              <For each={item.data.results}>
+                {(movie, index) => (
+                  <img src={"https://image.tmdb.org/t/p/original" + movie.backdrop_path} />
+                )}
+              </For>
+              <div className="shadow"></div>
+            </div>
+            <div class="movieSection">
+              <h5 class="label">{item.label}</h5>
+              <Carousel list={item.data.results} />
+            </div>
+          </>
         )}
       </For>
     </div>
