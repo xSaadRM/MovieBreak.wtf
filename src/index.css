@@ -19,9 +19,6 @@
   --border-color: hsl(from var(--text) h s l / 0.5);
 }
 
-#root {
-  overflow: hidden;
-}
 body {
   scroll-behavior: smooth;
   box-sizing: border-box;

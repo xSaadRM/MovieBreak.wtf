@@ -3,6 +3,7 @@ header {
   justify-content: space-between;
   border-bottom: 1px solid var(--border-color);
   position: sticky;
+  top: 0;
   padding: 0.5rem 2%;
 }
 
@@ -95,12 +96,9 @@ header {
 }
 
 .leftMenu {
+  position: absolute;
   aspect-ratio: 1;
   backdrop-filter: blur(4px);
-  width: 30vw;
-  position: absolute;
-  bottom: 0;
-  left: 0;
   border-radius: 12px;
   border: 2px var(--accent) solid;
   box-shadow: 5px 5px 20px 2px var(--text);
@@ -108,15 +106,21 @@ header {
   flex-wrap: wrap;
   padding: 1em;
   gap: 0.5em;
-  transition: transform 0.3s, scale 1s, opacity 0.3s;
+  transition: all 0.3s;
+  top: 0;
+  right: 0;
+  background: hsla(253, 100%, 63%, 0.082);
+  width: 0;
+  opacity: 0;
+  overflow: hidden;
 }
 
 .leftMenuWrapper:has(.MenuSharpIcon.active) .leftMenu {
-  background: hsla(253, 100%, 63%, 0.082);
-  visibility: visible;
+  width: 30vw;
+  top: 100%;
+  right: 100%;
   opacity: 1;
-  scale: 1;
-  transform: translate(-100%, 100%);
+  overflow: auto;
 }
 
 .leftMenu a {
@@ -127,20 +131,16 @@ header {
   background: var(--secondary);
   border-radius: 8px;
   padding: 10px;
+  display: none;
+}
+
+.leftMenuWrapper:has(.MenuSharpIcon.active) .leftMenu a {
+  display: block;
 }
 
 .leftMenu a:hover {
   background: var(--primary);
   transform: scale(1.05);
-}
-.leftMenu.anim1 {
-  scale: 0;
-  transform: translate(-100%, 100%);
-}
-
-.leftMenu.anim2 {
-  opacity: 0;
-  transform: translate(0);
 }
 
 @media screen and (min-width: 785px) {
