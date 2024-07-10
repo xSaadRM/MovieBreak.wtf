@@ -13,7 +13,15 @@ const Carousel = (props) => {
       <SliderProvider>
         <Slider
           options={{
-            slides: { perView: "auto" },
+            breakpoints: {
+              "(max-width: 620px)": {
+                slides: {perView: "3.5"}
+              },
+              "(max-width: 420px)": {
+                slides: {perView: "2.5"}
+              }
+            },
+            slides: { perView: "auto", spacing: "0px" },
             slideChanged: (data) => {
               setSlideIndex({
                 max: data.track.details.maxIdx,
