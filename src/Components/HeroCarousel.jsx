@@ -47,7 +47,6 @@ const HeroCarousel = (props) => {
                     }
                   />
                 </div>
-                <div className="shadow"></div>
               </div>
             )}
           </For>
