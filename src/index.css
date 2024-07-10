@@ -5,6 +5,7 @@
   --background: hsl(250, 100%, 87%);
   --primary: hsl(252, 100%, 31%);
   --secondary: hsl(0, 71%, 51%);
+  --secondary: hsl(172, 99%, 30%);
   --accent: hsl(281, 100%, 22%);
 }
 
@@ -82,12 +83,10 @@ small {
   display: flex;
   align-items: center;
 }
-.glow, .glowContain > a {
-  filter: brightness(80%);
-}
 
-.glow:hover, .glowContain > a:hover {
-  filter: drop-shadow(0px 0px 10px var(--text)) brightness(120%);
+.glow:hover,
+.glowContain > a:hover {
+  filter: drop-shadow(0px 0px 10px var(--text)) brightness(130%);
 }
 
 .text {

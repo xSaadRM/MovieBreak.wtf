@@ -128,6 +128,10 @@ header {
   padding: 10px;
 }
 
+.leftMenu a:hover {
+  background: var(--primary);
+  transform: scale(1.05);
+}
 .leftMenu.anim1 {
   scale: 0;
   transform: translate(-100%, 100%);
@@ -137,7 +141,6 @@ header {
   opacity: 0;
   transform: translate(0);
 }
-
 
 @media screen and (min-width: 785px) {
   .leftMenu {
