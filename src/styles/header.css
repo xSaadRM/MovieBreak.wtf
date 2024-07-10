@@ -133,13 +133,11 @@ header {
   background: var(--secondary);
   border-radius: 8px;
   padding: 10px;
-  scale: 0;
   width: 100%;
 }
 
 .leftMenuWrapper:has(.MenuSharpIcon.active) .leftMenu a {
   font-size: unset;
-  scale: 1;
 }
 
 .leftMenu a:hover {
