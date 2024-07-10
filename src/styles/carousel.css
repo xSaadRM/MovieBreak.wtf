@@ -98,7 +98,6 @@
   position: absolute;
   top: 0;
   height: 100%;
-  width: 5%;
   animation-duration: 2s;
   animation-iteration-count: infinite;
 }
@@ -137,5 +136,12 @@
   }
   100% {
     transform: translate(20%);
+  }
+}
+
+@media screen and (max-width:542px) {
+  .prev svg,
+  .next svg {
+    font-size: medium;
   }
 }
