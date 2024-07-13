@@ -41,9 +41,7 @@ const Home = () => {
 
   return (
     <div class="homePage">
-      <div className="hero">
-        <HeroCarousel list={hero()} />
-      </div>
+      <HeroCarousel list={hero()} />
       <For each={carousels()}>
         {(item) => (
           <div class="movieSection">

@@ -1,29 +1,31 @@
 .hero {
   position: relative;
 }
-
-.hero .backdrop {
-  width: 100%;
+.hero .movie {
+  transition: 0.3s;
 }
-
 .hero .info {
   position: absolute;
   z-index: 1;
   width: 100%;
   height: 100%;
-  padding: 2em;
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
-  padding: 10px;
-  background: linear-gradient(90deg, rgb(0, 0, 0), transparent);
-  padding-left: 50px;
+  padding: 0 2.5em;
 }
-.hero .info * {
-  padding: 0.5em;
+
+.hero .title {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  font-size: 2em;
+  font-weight: bold;
+  width: 80%;
 }
-.hero .rating {
-  align-items: center;
+
+.hero .date {
+  margin-right: 5px;
+  color: var(--text);
 }
 .hero .shadow {
   z-index: 0;
@@ -32,9 +34,20 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background: linear-gradient(90deg, rgba(0, 0, 0, 0.582), transparent);
+  background: linear-gradient(90deg, var(--background), transparent);
 }
 
-.hero .next {
+.hero .next,
+.prev {
   background: none;
+}
+
+.options button {
+  margin-top: 10px;
+  border: 0;
+  padding: 0.7em 1.5em;
+  background: var(--secondary);
+  border-radius: 8px;
+  color: var(--text);
+  font-weight: bold;
 }

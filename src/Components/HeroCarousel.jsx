@@ -11,11 +11,12 @@ const HeroCarousel = (props) => {
   const [slideIndex, setSlideIndex] = createSignal({ max: 99, current: 0 });
 
   return (
-    <div class="carousel">
+    <div class="carousel hero">
       <SliderProvider>
         <Slider
           plugins={[autoplay(5000, {})]}
           options={{
+            loop: true,
             slides: { perView: 1 },
             slideChanged: (data) => {
               setSlideIndex({
@@ -30,14 +31,19 @@ const HeroCarousel = (props) => {
               <div class="movie flex">
                 <div className="backdrop">
                   <div className="info flex">
-                    <div className="date">{movie.release_date.slice(0, 4)}</div>
                     <div className="title">{movie.title || movie.name}</div>
                     <div className="flex rating">
+                      <div className="date">
+                        {movie.release_date.slice(0, 4)}
+                      </div>
                       <Star />
                       {movie.vote_average.toFixed(2)}
                     </div>
+                    <div className="options">
+                      <button>Play</button>
+                    </div>
+                    <div className="genres"></div>
                   </div>
-
                   <LazyImage
                     ratio="642∶361"
                     alt={movie.title || movie.name || "untitled"}
