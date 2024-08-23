@@ -45,10 +45,10 @@ const HeroCarousel = (props) => {
                     <div className="genres"></div>
                   </div>
                   <LazyImage
-                    ratio="642∶361"
+                    ratio="642/361"
                     alt={movie.title || movie.name || "untitled"}
                     src={
-                      "https://image.tmdb.org/t/p/w500" +
+                      "https://image.tmdb.org/t/p/original" +
                       movie.backdrop_path
                     }
                   />

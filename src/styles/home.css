@@ -1,3 +1,22 @@
+.homePage {
+  overflow: hidden;
+}
+
 .movieSection {
   padding: 0.5em;
+}
+
+.movieSection:nth-child(2) {
+  margin-top: 60vh;
+}
+
+.label {
+  position: relative;
+
+}
+
+@media screen and (max-width: 650px) {
+  .movieSection:nth-child(2) {
+    margin-top: 50%;
+  }
 }

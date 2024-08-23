@@ -2,9 +2,10 @@ header {
   z-index: 1;
   justify-content: space-between;
   border-bottom: 1px solid var(--border-color);
-  position: sticky;
+  position: fixed;
   top: 0;
   padding: 0.5rem 2%;
+  width: 97%;
 }
 
 .siteName {
@@ -26,11 +27,13 @@ header {
   border-color: var(--border-color);
   z-index: 1;
 }
+
 .lightButton,
 .darkButton {
   animation: slideToCenter 0.7s;
   transition: all 0.7s;
 }
+
 :root[data-theme="light"] .darkButton,
 :root[data-theme="dark"] .lightButton {
   position: absolute;
@@ -42,19 +45,21 @@ header {
   opacity: 0;
   transition: all 0.7s;
 }
+
 @keyframes slideToRight {
-  from {
-  }
+  from {}
+
   to {
     transform: translate(100%);
   }
 }
+
 @keyframes slideToCenter {
   from {
     transform: translate(-100%, 100%);
   }
-  to {
-  }
+
+  to {}
 }
 
 .headerLeftSide {
@@ -82,15 +87,19 @@ header {
 .MenuSharpIcon.active path:first-child {
   transform: translate(100%);
 }
+
 .MenuSharpIcon.active path:nth-child(2) {
   transform: rotate(45deg);
 }
+
 .MenuSharpIcon.active path:nth-child(3) {
   transform: rotate(-45deg);
 }
+
 .MenuSharpIcon.active path:last-child {
   transform: translate(-100%);
 }
+
 .leftMenuWrapper {
   position: relative;
 }
@@ -155,7 +164,15 @@ header {
   from {
     overflow: hidden;
   }
+
   to {
     overflow: visible;
+  }
+}
+
+
+@media screen and (max-width: 650px) {
+  header {
+    position: sticky;
   }
 }
