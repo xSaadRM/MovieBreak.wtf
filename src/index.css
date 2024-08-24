@@ -36,6 +36,11 @@ body {
   overflow: hidden;
 }
 
+a {
+  color: unset;
+  text-decoration: none;
+}
+
 .lazyImage {
   width: 100%;
   height: 100%;

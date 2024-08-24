@@ -15,12 +15,12 @@ const Header = () => {
 
   return (
     <header class="flex">
-      <div class="brand flex">
+      <a class="brand flex" href="/">
         <div class="siteLogo">
           <img src={logo} />
         </div>
         <p class="siteName">MovieBreak</p>
-      </div>
+      </a>
       <div class="headerLeftSide flex">
         <div
           class="themeSwitcher glow"
