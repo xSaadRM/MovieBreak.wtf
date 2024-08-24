@@ -14,28 +14,30 @@
 .title p {
   margin: 5px;
 }
+
 .title {
   transition: all 0.3s ease-in;
   max-width: 100%;
   white-space: nowrap;
 }
 
+/* 
 .title:last-child {
   white-space: normal;
   position: absolute;
   bottom: 0;
   opacity: 0;
-}
+} */
 
-.title:hover,
-.title:hover ~ .title {
+/* .title:hover,
+.title:hover~.title {
   opacity: 1;
-}
+} */
 
-.title:has(~ .title:hover),
+/* .title:has(~ .title:hover),
 .title:hover:has(~ .title) {
   opacity: 0;
-}
+} */
 
 .shadow {
   transition: all 0.5s ease-in;
@@ -47,9 +49,25 @@
   position: absolute;
   background: linear-gradient(180deg, hsla(0, 0%, 0%, 0), var(--secondary));
 }
+
+/* 
 .movie:has(.title:hover) .shadow {
   opacity: 1;
+} */
+.title:hover {
+  overflow: hidden;
 }
+
+.title:hover p {
+  overflow: visible;
+  text-overflow: clip;
+}
+
+.title:hover p {
+  transition: transform 3s linear;
+  transform: translate(-100%);
+}
+
 .poster {
   z-index: 0;
   position: relative;
@@ -72,6 +90,7 @@
   opacity: 0;
   color: hsl(252, 87%, 91%);
 }
+
 .poster:hover .badge {
   opacity: 1;
 }
@@ -80,15 +99,40 @@
   top: 0;
   right: 0;
 }
+
 .rating {
   color: gold;
   bottom: 0;
   right: 0;
 }
+
 .date {
   top: 0;
   left: 0;
 }
+
+.play {
+  border: none;
+  background: none;
+  padding: 0;
+  bottom: 0;
+  left: 0;
+}
+
+.play svg {
+  padding: 0.1em;
+  border-radius: 100%;
+  background: var(--secondary);
+}
+
+.play svg path:nth-child(1) {
+  fill: var(--background);
+}
+
+.play svg path:nth-child(2) {
+  fill: var(--text);
+}
+
 .carousel {
   overflow: hidden;
   position: relative;
@@ -105,11 +149,13 @@
   animation-duration: 2s;
   animation-iteration-count: infinite;
 }
+
 .prev {
   animation-name: pointingLeft;
   left: 0;
   background: linear-gradient(90deg, black, transparent);
 }
+
 .next {
   animation-name: pointingRight;
   background: linear-gradient(90deg, transparent, black);
@@ -124,26 +170,32 @@
   0% {
     transform: translateX(-20%);
   }
+
   50% {
     transform: translate(0);
   }
+
   100% {
     transform: translate(-20%);
   }
 }
+
 @keyframes pointingRight {
   0% {
     transform: translateX(20%);
   }
+
   50% {
     transform: translate(0);
   }
+
   100% {
     transform: translate(20%);
   }
 }
 
 @media screen and (max-width: 542px) {
+
   .prev svg,
   .next svg {
     font-size: medium;

@@ -22,12 +22,16 @@ const Home = () => {
       {
         url: "https://api.themoviedb.org/3/movie/popular",
         label: "Popular Movies",
+        type: "movie",
       },
     ];
     list.forEach(async (item) => {
       const res = await fetch(getFullAPIUrl(item.url));
       const jwiyson = await res.json();
-      setCarousels([...carousels(), { label: item.label, data: jwiyson }]);
+      setCarousels([
+        ...carousels(),
+        { type: item.type, label: item.label, data: jwiyson },
+      ]);
     });
 
     const heroRes = await fetch(
@@ -46,7 +50,7 @@ const Home = () => {
         {(item) => (
           <div class="movieSection">
             <h5 class="label">{item.label}</h5>
-            <Carousel list={item.data.results} />
+            <Carousel type={item.type} list={item.data.results} />
           </div>
         )}
       </For>

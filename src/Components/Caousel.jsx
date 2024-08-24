@@ -1,12 +1,27 @@
-import { ArrowBack, ArrowForward, Star } from "@suid/icons-material";
+import {
+  ArrowBack,
+  ArrowForward,
+  InfoTwoTone,
+  Star,
+} from "@suid/icons-material";
 import LazyImage from "./LazyImage";
 import { createSignal, For, Show } from "solid-js";
 import "../styles/carousel.css";
 import "solid-slider/slider.css";
 import { Slider, SliderButton, SliderProvider } from "solid-slider";
+import { useNavigate } from "@solidjs/router";
 
 const Carousel = (props) => {
+  const navigate = useNavigate();
+
   const [slideIndex, setSlideIndex] = createSignal({ max: 99, current: 0 });
+  const [slideStatus, setSlideStatus] = createSignal({
+    dragStarted: false,
+    dragChecked: false,
+    dragEnded: false,
+  });
+  const isSlideDraging =
+    slideStatus().dragStarted && slideStatus().dragChecked ? true : false;
 
   return (
     <div class="carousel">
@@ -29,15 +44,30 @@ const Carousel = (props) => {
               "(max-width: 300px)": {
                 slides: { perView: "2", spacing: 10 },
               },
-
             },
             slides: { perView: "7", spacing: 10 },
+            dragChecked: () => {
+              setSlideStatus((prev) => {
+                return { ...prev, dragChecked: true };
+              });
+            },
+            dragStarted: () => {
+              setSlideStatus((prev) => {
+                return { ...prev, dragStarted: true };
+              });
+            },
+            dragEnded: () => {
+              setSlideStatus({
+                dragStarted: false,
+                dragChecked: false,
+                dragEnded: false,
+              });
+            },
             slideChanged: (data) => {
               setSlideIndex({
                 max: data.track.details.maxIdx,
                 current: data.track.details.abs,
               });
-              console.log(data.track.details);
             },
           }}
         >
@@ -45,11 +75,9 @@ const Carousel = (props) => {
             {(movie, index) => (
               <div class="movie flex">
                 <div className="poster">
-                  <Show when={movie.media_type}>
-                    <div class="badge mediaType">
-                      {movie.media_type.toUpperCase()}
-                    </div>
-                  </Show>
+                  <div class="badge mediaType">
+                    {(movie.media_type || props.type).toUpperCase()}
+                  </div>
                   <div class="badge date">
                     {(movie.release_date || movie.first_air_date).slice(0, 4)}
                   </div>
@@ -57,21 +85,32 @@ const Carousel = (props) => {
                     <Star fontSize="x-small" />
                     {movie.vote_average.toFixed(2)}
                   </div>
+                  <div
+                    className="play badge"
+                    onclick={() => {
+                      if (!isSlideDraging) {
+                        const path = `info/${movie.media_type || props.type}/${
+                          movie.id
+                        }`;
+                        navigate(path);
+                      }
+                    }}
+                  >
+                    <InfoTwoTone />
+                  </div>
                   <LazyImage
                     ratio="135/202"
                     alt={movie.title || movie.name || "untitled"}
-                    src={
-                      "https://image.tmdb.org/t/p/w500" + movie.poster_path
-                    }
+                    src={"https://image.tmdb.org/t/p/w500" + movie.poster_path}
                   />
                 </div>
 
                 <div className="title">
                   <p className="text">{movie.title || movie.name}</p>
                 </div>
-                <div className="title">
+                {/* <div className="title">
                   <p className="text">{movie.title || movie.name}</p>
-                </div>
+                </div> */}
               </div>
             )}
           </For>
