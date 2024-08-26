@@ -126,9 +126,11 @@ header {
   opacity: 0;
   overflow: hidden;
   flex-wrap: wrap;
+  display: none;
 }
 
 .leftMenuWrapper:has(.MenuSharpIcon.active) .leftMenu {
+  display: flex;
   animation: overflowAnimation 0.3s;
   width: 30vw;
   top: 100%;

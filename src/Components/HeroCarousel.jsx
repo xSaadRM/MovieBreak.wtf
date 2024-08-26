@@ -6,9 +6,19 @@ import "solid-slider/slider.css";
 import { Slider, SliderButton, SliderProvider } from "solid-slider";
 import { autoplay } from "./autoPlayPlugin";
 import "../styles/hero_carousel.css";
+import { useNavigate } from "@solidjs/router";
 
 const HeroCarousel = (props) => {
+  const navigate = useNavigate();
+
   const [slideIndex, setSlideIndex] = createSignal({ max: 99, current: 0 });
+  const [slideStatus, setSlideStatus] = createSignal({
+    dragStarted: false,
+    dragChecked: false,
+    dragEnded: false,
+  });
+  const isSlideDraging =
+    slideStatus().dragStarted && slideStatus().dragChecked ? true : false;
 
   return (
     <div class="carousel hero">
@@ -22,6 +32,23 @@ const HeroCarousel = (props) => {
               setSlideIndex({
                 max: data.track.details.maxIdx,
                 current: data.track.details.abs,
+              });
+            },
+            dragChecked: () => {
+              setSlideStatus((prev) => {
+                return { ...prev, dragChecked: true };
+              });
+            },
+            dragStarted: () => {
+              setSlideStatus((prev) => {
+                return { ...prev, dragStarted: true };
+              });
+            },
+            dragEnded: () => {
+              setSlideStatus({
+                dragStarted: false,
+                dragChecked: false,
+                dragEnded: false,
               });
             },
           }}
@@ -40,7 +67,18 @@ const HeroCarousel = (props) => {
                       {movie.vote_average.toFixed(2)}
                     </div>
                     <div className="options">
-                      <button>Play</button>
+                      <button
+                        onclick={() => {
+                          if (!isSlideDraging) {
+                            const path = `info/${
+                              movie.media_type || props.type
+                            }/${movie.id}`;
+                            navigate(path);
+                          }
+                        }}
+                      >
+                        Play
+                      </button>
                     </div>
                     <div className="genres"></div>
                   </div>

@@ -10,7 +10,7 @@ function App() {
       <Header />
       <Router>
         <Route path={"/"} component={Home} />
-        <Route path={"/info/movie/:id"} component={MovieInfos} />
+        <Route path={"/info/:mediaType/:id"} component={MovieInfos} />
         <Route path="/about" component={About} />
       </Router>
     </>

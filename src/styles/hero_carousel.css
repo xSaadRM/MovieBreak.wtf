@@ -1,8 +1,9 @@
 .hero {
-  width: 100vw;
+  width: 100%;
   position: absolute;
   overflow: visible;
   max-height: 80vh;
+  height: 80vh;
 }
 
 
@@ -10,6 +11,10 @@
   width: 100%;
   overflow: visible;
   transition: 0.3s;
+}
+
+.backdrop {
+  width: 100%;
 }
 
 .hero .info {
