@@ -2,16 +2,11 @@ import "../styles/home.css";
 import { createSignal, For } from "solid-js";
 import Carousel from "../Components/Caousel";
 import HeroCarousel from "../Components/HeroCarousel";
-
-const tmdbAPIKey = import.meta.env.VITE_TMDB_API_KEY;
-const lang = "en-US";
+import { getFullAPIUrl } from "../Utils/tmdb";
 
 const Home = () => {
   const [carousels, setCarousels] = createSignal([]);
   const [hero, setHero] = createSignal([]);
-  const getFullAPIUrl = (baseUrl) => {
-    return `${baseUrl}?language=${lang}&api_key=${tmdbAPIKey}`;
-  };
 
   const fetchMovies = async () => {
     const list = [

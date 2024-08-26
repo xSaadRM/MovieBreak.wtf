@@ -2,10 +2,14 @@ header {
   z-index: 1;
   justify-content: space-between;
   border-bottom: 1px solid var(--border-color);
-  position: fixed;
+  position: sticky;
   top: 0;
   padding: 0.5rem 2%;
   width: 97%;
+}
+
+#root:has(.homePage) header {
+  position: fixed;
 }
 
 .siteName {
