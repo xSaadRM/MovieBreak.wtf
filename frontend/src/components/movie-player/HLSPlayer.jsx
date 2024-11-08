@@ -29,7 +29,7 @@ import SmashyStreamDecoder from "./providers/smashy-stream/decoder";
 import { indexedDBInit } from "../../utils/indexedDB";
 // import AudioSwitcher from "./utils/AudioSwitcher";
 
-const VideoPlayer = ({ state, dispatch }) => {
+const HLSPlayer = ({ state, dispatch }) => {
   const navigate = useNavigate();
   const { mediaType, movieID, season, ep } = useParams();
   const { movieInfos, seasonDetails, shahid4uEpisodes, slug } = state;
@@ -211,7 +211,7 @@ const VideoPlayer = ({ state, dispatch }) => {
   useEffect(() => {
     const getSRC = async () => {
       if (activeProvider.name === "ridotv") {
-        if (slug && slug.status === 200) {
+        if (slug && slug?.status === 200) {
           const m3u8 = await fetchRidoTV(
             slug.data,
             episodeDetails?.episode_number,
@@ -225,7 +225,7 @@ const VideoPlayer = ({ state, dispatch }) => {
         }
       } else if (activeProvider.name === "shahid") {
         const data = await shahid4uGetM3U8(activeProvider);
-        if (data.status === 404) {
+        if (data?.status === 404) {
           const updatedServers = shahid4uServers?.map((server) => {
             if (server.url === data.url) {
               return { ...server, name: server.name + " [Not Working]" };
@@ -416,9 +416,9 @@ const VideoPlayer = ({ state, dispatch }) => {
             onClick={(e) => e.stopPropagation()}
           >
             <div className={`providers`}>
-              {slug.status === "loading" ? (
+              {slug?.status === "loading" ? (
                 <div>Loading RidoTV Servers...</div>
-              ) : slug && slug.status === 200 ? (
+              ) : slug && slug?.status === 200 ? (
                 <div
                   className={`provider ${
                     activeProvider.name === "ridotv" ? "active" : ""
@@ -432,10 +432,10 @@ const VideoPlayer = ({ state, dispatch }) => {
                 >
                   RidoTV (ENG)
                 </div>
-              ) : slug && slug.status === 404 ? (
+              ) : slug && slug?.status === 404 ? (
                 <div style={{ margin: "0 auto" }}>RidoTV Unavailable</div>
               ) : null}
-              {shahid4uServers.status === "loading" ? (
+              {shahid4uServers?.status === "loading" ? (
                 <div>Loading Backup Servers...</div>
               ) : shahid4uServers[0] ? (
                 shahid4uServers?.map((server, index) => {
@@ -464,15 +464,15 @@ const VideoPlayer = ({ state, dispatch }) => {
                   );
                 })
               ) : null}
-              {slug.status === 404 &&
-              !shahid4uServers.status === "loading" &&
+              {slug?.status === 404 &&
+              !shahid4uServers?.status === "loading" &&
               !shahid4uServers[0] ? (
                 <div style={{ margin: "auto", color: "black" }}>
                   Oops! Video Unavailable
                 </div>
               ) : null}
 
-              {autoEmbedServers.status !== "loading" ? (
+              {autoEmbedServers?.status !== "loading" ? (
                 autoEmbedServers?.map((server, index) => {
                   return (
                     <div
@@ -500,7 +500,7 @@ const VideoPlayer = ({ state, dispatch }) => {
               ) : (
                 <div>Loading AutoEmbed Servers...</div>
               )}
-              {smashyPlayers && smashyPlayers.status !== "loading" ? (
+              {smashyPlayers && smashyPlayers?.status !== "loading" ? (
                 smashyPlayers?.map((player, index) => {
                   return (
                     <div
@@ -538,4 +538,4 @@ const VideoPlayer = ({ state, dispatch }) => {
   );
 };
 
-export default VideoPlayer;
+export default HLSPlayer;

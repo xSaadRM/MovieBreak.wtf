@@ -45,7 +45,7 @@ export const shahid4uFetch = async (
       ];
 
       const response = await fetch(
-        `https://rv.lil-hacker.workers.dev/proxy?mirror=shahid&url=https://shahvip.cam/season/%D9%85%D8%B3%D9%84%D8%B3%D9%84-${formatedTitle}-%D8%A7%D9%84%D9%85%D9%88%D8%B3%D9%85-${
+        `https://rv.lil-hacker.workers.dev/proxy?mirror=shahid&url=https://shiid4u.com/season/%D9%85%D8%B3%D9%84%D8%B3%D9%84-${formatedTitle}-%D8%A7%D9%84%D9%85%D9%88%D8%B3%D9%85-${
           arabicOrdinals[season - 1]
         }-%D9%85%D8%AA%D8%B1%D8%AC%D9%85`
       );
@@ -55,7 +55,7 @@ export const shahid4uFetch = async (
       );
       if (responseMovieReleaseYear[1] !== releaseYear) {
         const response = await fetch(
-          `https://rv.lil-hacker.workers.dev/proxy?mirror=shahid&url=https://shahvip.cam/season/%D9%85%D8%B3%D9%84%D8%B3%D9%84-${formatedTitle}-%D8%A7%D9%84%D9%85%D9%88%D8%B3%D9%85-${
+          `https://rv.lil-hacker.workers.dev/proxy?mirror=shahid&url=https://shiid4u.com/season/%D9%85%D8%B3%D9%84%D8%B3%D9%84-${formatedTitle}-%D8%A7%D9%84%D9%85%D9%88%D8%B3%D9%85-${
             arabicOrdinals[season - 1]
           }-%D9%85%D8%AA%D8%B1%D8%AC%D9%85-1`
         );
