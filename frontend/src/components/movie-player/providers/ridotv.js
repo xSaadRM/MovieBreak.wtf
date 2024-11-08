@@ -1,9 +1,19 @@
 export const fetchRidoTV = async (slug, ep, season) => {
   try {
     const getEpisodes = async (slug) => {
+      const payload = {
+        destination: `https://ridomovies.tv/tv/${slug}`,
+      };
       try {
         const response = await fetch(
-          `https://rv.lil-hacker.workers.dev/proxy?mirror=rido&url=https://ridomovies.tv/tv/${slug}`
+          window.location.protocol +
+            "//" +
+            window.location.hostname +
+            ":4000/proxy/",
+          {
+            method: "POST",
+            body: JSON.stringify(payload),
+          }
         );
 
         const htmlContent = await response.text();
@@ -50,7 +60,7 @@ export const fetchRidoTV = async (slug, ep, season) => {
         if (seasons.length > 0) {
           const episodeId = seasons[season - 1][ep - 1].id;
           const response = await fetch(
-            `https://rv.lil-hacker.workers.dev/proxy?mirror=rido&url=https://ridomovies.tv/core/api/episodes/${episodeId}/videos`,
+            `https://ridomovies.tv/core/api/episodes/${episodeId}/videos`,
             {
               headers: {
                 accept: "*/*",
@@ -77,7 +87,7 @@ export const fetchRidoTV = async (slug, ep, season) => {
         data = await response.json();
       }
       if (!data.data[0]) {
-        return 404
+        return 404;
       }
       const dataIFrameSrc = data.data[0].url.match(/data-src="([^"]+)"/);
 
@@ -164,7 +174,7 @@ export const getSlug = async (movieID, movieName) => {
 
   try {
     const response = await fetch(
-      `https://rv.lil-hacker.workers.dev/proxy?mirror=rido&url=https://ridomovies.tv/core/api/search?q=${formatedTitle}`
+      `https://ridomovies.tv/core/api/search?q=${formatedTitle}`
     );
     const data = await response.json();
     let found = false;

@@ -17,6 +17,9 @@ func Post(resp http.ResponseWriter, req *http.Request) {
 		http.Error(resp, "method not allowed", http.StatusMethodNotAllowed)
 		return
 	}
+
+	resp.Header().Set("Access-Control-Allow-Origin", "*")
+
 	bodyB, err := io.ReadAll(req.Body)
 	if err != nil {
 		http.Error(resp, "error reading the body", 500)
@@ -38,8 +41,6 @@ func Post(resp http.ResponseWriter, req *http.Request) {
 		return
 	}
 
-	defaultHeaders(destinationReq)
-
 	// Create a new HTTP client
 	client := &http.Client{}
 
@@ -49,17 +50,18 @@ func Post(resp http.ResponseWriter, req *http.Request) {
 		http.Error(resp, "cannot send request to destination", http.StatusInternalServerError)
 		return
 	}
+	defer destinationResp.Body.Close()
 
-	if !(destinationResp.StatusCode < 300 && destinationResp.StatusCode > 199) {
-		resp.WriteHeader(destinationResp.StatusCode)
-		return
-	}
+	resp.WriteHeader(destinationResp.StatusCode)
+
 	// Copy the headers from the destination response to the original response
 	for key, value := range destinationResp.Header {
 		resp.Header()[key] = value
 	}
-	desttinationBody, err := io.ReadAll(destinationResp.Body)
 
+	defaultHeaders(destinationReq)
+
+	desttinationBody, err := io.ReadAll(destinationResp.Body)
 	if err != nil {
 		http.Error(resp, "cannot read destination response body", http.StatusInternalServerError)
 		return

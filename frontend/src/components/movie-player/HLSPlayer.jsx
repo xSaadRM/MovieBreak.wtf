@@ -441,7 +441,7 @@ const HLSPlayer = ({ state, dispatch }) => {
                 shahid4uServers?.map((server, index) => {
                   return (
                     <div
-                      key={`autoEmbed${index}`}
+                      key={`shahid${index}`}
                       className={`provider ${
                         activeProvider.name === "shahid" &&
                         activeProvider.index === index
@@ -476,7 +476,7 @@ const HLSPlayer = ({ state, dispatch }) => {
                 autoEmbedServers?.map((server, index) => {
                   return (
                     <div
-                      key={`autoEmbed${server.title}`}
+                      key={`autoEmbed${index}`}
                       className={`provider ${
                         activeProvider.name === "autoEmbed" &&
                         activeProvider.index === index
