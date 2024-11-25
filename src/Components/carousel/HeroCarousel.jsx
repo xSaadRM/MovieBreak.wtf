@@ -1,11 +1,11 @@
 import { ArrowBack, ArrowForward, Star } from "@suid/icons-material";
-import LazyImage from "./LazyImage";
+import LazyImage from "../LazyImage";
 import { createSignal, For, Show } from "solid-js";
-import "../styles/carousel.css";
+import "/src/styles/carousel.css";
 import "solid-slider/slider.css";
 import { Slider, SliderButton, SliderProvider } from "solid-slider";
 import { autoplay } from "./autoPlayPlugin";
-import "../styles/hero_carousel.css";
+import "/src/styles/hero_carousel.css";
 import { useNavigate } from "@solidjs/router";
 
 const HeroCarousel = (props) => {

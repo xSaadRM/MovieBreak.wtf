@@ -1,7 +1,6 @@
 import "../styles/home.css";
 import { createSignal, For } from "solid-js";
-import Carousel from "../Components/Caousel";
-import HeroCarousel from "../Components/HeroCarousel";
+import { Carousel, HeroCarousel } from "../Components/carousel";
 import { getFullAPIUrl } from "../Utils/tmdb";
 
 const Home = () => {
