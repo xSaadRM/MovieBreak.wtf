@@ -2,7 +2,7 @@ import { Route, Router } from "@solidjs/router";
 import Header from "./Components/Header";
 import Home from "./Pages/Home";
 import About from "./Pages/About";
-import MovieInfos from "./Pages/MovieInfo";
+import Info from "./Pages/Info";
 
 function App() {
   return (
@@ -10,7 +10,7 @@ function App() {
       <Header />
       <Router>
         <Route path={"/"} component={Home} />
-        <Route path={"/info/:mediaType/:id"} component={MovieInfos} />
+        <Route path={"/info/:mediaType/:id"} component={Info} />
         <Route path="/about" component={About} />
       </Router>
     </>

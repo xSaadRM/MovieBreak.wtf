@@ -3,7 +3,7 @@ import { useParams } from "@solidjs/router";
 import { createSignal } from "solid-js";
 import { getFullAPIUrl } from "../Utils/tmdb";
 
-const MovieInfos = () => {
+const Info = () => {
   const { mediaType, id } = useParams();
 
   const [movieDetails, setMovieDetails] = createSignal({});
@@ -23,4 +23,4 @@ const MovieInfos = () => {
   );
 };
 
-export default MovieInfos;
+export default Info;
