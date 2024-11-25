@@ -54,19 +54,11 @@
 .movie:has(.title:hover) .shadow {
   opacity: 1;
 } */
-.title:hover {
-  overflow: hidden;
+
+.title p {
+  text-overflow: ellipsis;
 }
 
-.title:hover p {
-  overflow: visible;
-  text-overflow: clip;
-}
-
-.title:hover p {
-  transition: transform 3s linear;
-  transform: translate(-100%);
-}
 
 .poster {
   z-index: 0;

@@ -105,9 +105,6 @@ const Carousel = (props) => {
                 <div className="title">
                   <p className="text">{movie.title || movie.name}</p>
                 </div>
-                {/* <div className="title">
-                  <p className="text">{movie.title || movie.name}</p>
-                </div> */}
               </div>
             )}
           </For>
