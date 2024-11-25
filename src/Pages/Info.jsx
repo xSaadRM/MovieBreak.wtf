@@ -9,9 +9,7 @@ const Info = () => {
   const [movieDetails, setMovieDetails] = createSignal({});
 
   const fetchMovieDetails = async () => {
-    const res = await fetch(
-      getFullAPIUrl(`https://api.themoviedb.org/3/${mediaType}/${id}`)
-    );
+    const res = await fetch(getFullAPIUrl(`${mediaType}/${id}`));
     setMovieDetails(await res.json());
   };
 

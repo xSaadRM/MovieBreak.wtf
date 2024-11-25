@@ -10,17 +10,18 @@ const Home = () => {
   const fetchMovies = async () => {
     const list = [
       {
-        url: "https://api.themoviedb.org/3/trending/all/day",
+        path: "/trending/all/day",
         label: "Trending Today",
+        type: "all",
       },
       {
-        url: "https://api.themoviedb.org/3/movie/popular",
+        path: "/movie/popular",
         label: "Popular Movies",
         type: "movie",
       },
     ];
     list.forEach(async (item) => {
-      const res = await fetch(getFullAPIUrl(item.url));
+      const res = await fetch(getFullAPIUrl(item.path));
       const jwiyson = await res.json();
       setCarousels([
         ...carousels(),
@@ -28,9 +29,7 @@ const Home = () => {
       ]);
     });
 
-    const heroRes = await fetch(
-      getFullAPIUrl("https://api.themoviedb.org/3/movie/now_playing")
-    );
+    const heroRes = await fetch(getFullAPIUrl("/movie/now_playing"));
     const heroJson = await heroRes.json();
     setHero(heroJson.results);
   };
