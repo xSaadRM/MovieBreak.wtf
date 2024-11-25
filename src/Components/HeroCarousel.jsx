@@ -64,7 +64,7 @@ const HeroCarousel = (props) => {
                         {movie.release_date.slice(0, 4)}
                       </div>
                       <Star />
-                      {movie.vote_average.toFixed(2)}
+                      {movie.vote_average}
                     </div>
                     <div className="options">
                       <button

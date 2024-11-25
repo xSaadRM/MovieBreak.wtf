@@ -83,7 +83,7 @@ const Carousel = (props) => {
                   </div>
                   <div className="badge rating">
                     <Star fontSize="x-small" />
-                    {movie.vote_average.toFixed(2)}
+                    {movie.vote_average}
                   </div>
                   <div
                     className="play badge"
