@@ -1,7 +1,7 @@
 import "../styles/MovieInfos.css";
 import { useParams } from "@solidjs/router";
 import { createSignal } from "solid-js";
-import { getFullAPIUrl } from "../Utils/tmdb";
+import { getFullAPIUrl } from "../modules/tmdb";
 
 const Info = () => {
   const { mediaType, id } = useParams();
