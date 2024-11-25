@@ -41,11 +41,6 @@ a {
   text-decoration: none;
 }
 
-.lazyImage {
-  width: 100%;
-  height: 100%;
-}
-
 img {
   width: 100%;
 }
@@ -111,24 +106,34 @@ small {
   text-overflow: ellipsis;
 }
 
-.show {
-  visibility: visible;
-}
-
 .lazyImage {
   position: relative;
   width: 100%;
   z-index: 0;
 }
 
-.lazyImage img:not(.show) {
-  visibility: hidden;
+.lazyImage * {
+  transition: all 0.7s;
+}
+
+.lazyImage img {
+  opacity: 0;
   position: absolute;
 }
 
-.skeleton {
-  background: var(--text);
+.lazyImage img[data-state="true"] {
+  opacity: 1;
+}
+
+.lazyImage .skeleton {
+  opacity: 0;
+}
+
+.lazyImage .skeleton[data-state="true"] {
+  opacity: 1;
   width: 100%;
+  height: 100%;
+  background: var(--text);
   animation: skeletonLoading 2s linear infinite;
 }
 

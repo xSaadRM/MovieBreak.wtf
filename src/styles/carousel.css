@@ -111,28 +111,6 @@
   left: 0;
 }
 
-.play {
-  border: none;
-  background: none;
-  padding: 0;
-  bottom: 0;
-  left: 0;
-}
-
-.play svg {
-  padding: 0.1em;
-  border-radius: 100%;
-  background: var(--secondary);
-}
-
-.play svg path:nth-child(1) {
-  fill: var(--background);
-}
-
-.play svg path:nth-child(2) {
-  fill: var(--text);
-}
-
 .carousel {
   overflow: hidden;
   position: relative;

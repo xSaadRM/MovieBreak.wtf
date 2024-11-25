@@ -73,7 +73,17 @@ const Carousel = (props) => {
         >
           <For each={props.list}>
             {(movie, index) => (
-              <div class="movie flex">
+              <div
+                class="movie flex"
+                onclick={() => {
+                  if (!isSlideDraging) {
+                    const path = `info/${movie.media_type || props.type}/${
+                      movie.id
+                    }`;
+                    navigate(path);
+                  }
+                }}
+              >
                 <div className="poster">
                   <div class="badge mediaType">
                     {(movie.media_type || props.type).toUpperCase()}
@@ -84,19 +94,6 @@ const Carousel = (props) => {
                   <div className="badge rating">
                     <Star fontSize="x-small" />
                     {movie.vote_average}
-                  </div>
-                  <div
-                    className="play badge"
-                    onclick={() => {
-                      if (!isSlideDraging) {
-                        const path = `info/${movie.media_type || props.type}/${
-                          movie.id
-                        }`;
-                        navigate(path);
-                      }
-                    }}
-                  >
-                    <InfoTwoTone />
                   </div>
                   <LazyImage
                     ratio="135/202"

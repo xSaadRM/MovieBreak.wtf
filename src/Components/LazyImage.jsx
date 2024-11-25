@@ -3,6 +3,8 @@ import { Skeleton } from "@suid/material";
 
 const LazyImage = (props) => {
   const [isVisible, setIsVisible] = createSignal(false);
+  const [imageState, setImageState] = createSignal(null);
+
   let imgRef;
 
   onMount(() => {
@@ -30,17 +32,22 @@ const LazyImage = (props) => {
   });
 
   return (
-    <div class="lazyImage flex" ref={imgRef}>
+    <div
+      class="lazyImage flex"
+      ref={imgRef}
+      style={{ "aspect-ratio": props.ratio }}
+    >
       {isVisible() && (
         <img
-          onerror={(e) => e.target.classList.remove("show")}
+          data-state={imageState()}
+          onerror={() => setImageState(false)}
           {...props}
-          src={props.src} // Add src only when visible
-          onload={(e) => e.target.classList.add("show")}
+          src={props.src}
+          onload={() => setImageState(true)}
         />
       )}
+      <div class="skeleton" data-state={!imageState()}></div>
       <div class="shadow"></div>
-      <div class="skeleton" style={{ "aspect-ratio": props.ratio }}></div>
     </div>
   );
 };
