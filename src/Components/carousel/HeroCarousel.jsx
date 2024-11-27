@@ -7,6 +7,7 @@ import { Slider, SliderButton, SliderProvider } from "solid-slider";
 import { autoplay } from "./autoPlayPlugin";
 import "/src/styles/hero_carousel.css";
 import { useNavigate } from "@solidjs/router";
+import { selectedMovie } from "../../modules/globalStore";
 
 const HeroCarousel = (props) => {
   const navigate = useNavigate();
@@ -26,7 +27,7 @@ const HeroCarousel = (props) => {
         <Slider
           plugins={[autoplay(5000, {})]}
           options={{
-            loop: true,
+            loop: false,
             slides: { perView: 1 },
             slideChanged: (data) => {
               setSlideIndex({
@@ -54,7 +55,7 @@ const HeroCarousel = (props) => {
           }}
         >
           <For each={props.list}>
-            {(movie, index) => (
+            {(movie) => (
               <div class="movie flex">
                 <div className="backdrop">
                   <div className="info flex">
@@ -64,26 +65,25 @@ const HeroCarousel = (props) => {
                         {movie.release_date.slice(0, 4)}
                       </div>
                       <Star />
-                      {movie.vote_average}
+                      {movie.vote_average?.toFixed(1)}
                     </div>
-                    <div className="options">
-                      <button
-                        onclick={() => {
-                          if (!isSlideDraging) {
-                            const path = `info/${
-                              movie.media_type || props.type
-                            }/${movie.id}`;
-                            navigate(path);
-                          }
-                        }}
-                      >
-                        Play
-                      </button>
+                    <div
+                      className="options"
+                      onclick={() => {
+                        if (!isSlideDraging) {
+                          selectedMovie.Set(movie);
+                          const path = `info/${
+                            movie.media_type || props.type
+                          }/${movie.id}`;
+                          navigate(path);
+                        }
+                      }}
+                    >
+                      Play
                     </div>
                     <div className="genres"></div>
                   </div>
                   <LazyImage
-                    ratio="642/361"
                     alt={movie.title || movie.name || "untitled"}
                     src={
                       "https://image.tmdb.org/t/p/original" +

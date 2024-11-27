@@ -1,9 +1,8 @@
 .hero {
+  overflow: hidden;
   width: 100%;
   position: absolute;
-  overflow: visible;
-  max-height: 80vh;
-  height: 80vh;
+  height: 80vmin;
 }
 
 .backdrop::after {
@@ -24,6 +23,10 @@
 
 .backdrop {
   width: 100%;
+}
+
+.backdrop .lazyImage {
+  aspect-ratio: 642/361;
 }
 
 .hero .info {
@@ -66,7 +69,7 @@
   background: none;
 }
 
-.options button {
+.options {
   margin-top: 10px;
   border: 0;
   padding: 0.7em 1.5em;
@@ -74,11 +77,4 @@
   border-radius: 8px;
   color: var(--text);
   font-weight: bold;
-}
-
-@media screen and (min-width: 501px) {
-  .hero img {
-    object-fit: cover;
-    min-width: 100vw;
-  }
 }

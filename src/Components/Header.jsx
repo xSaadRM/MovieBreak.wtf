@@ -14,7 +14,7 @@ const Header = () => {
   };
 
   return (
-    <header class="flex">
+    <header class="flex dark-bg">
       <a class="brand flex" href="/">
         <div class="siteLogo">
           <img src={logo} />

@@ -10,6 +10,7 @@ import "/src/styles/carousel.css";
 import "solid-slider/slider.css";
 import { Slider, SliderButton, SliderProvider } from "solid-slider";
 import { useNavigate } from "@solidjs/router";
+import { selectedMovie } from "../../modules/globalStore";
 
 const Carousel = (props) => {
   const navigate = useNavigate();
@@ -72,11 +73,12 @@ const Carousel = (props) => {
           }}
         >
           <For each={props.list}>
-            {(movie, index) => (
+            {(movie) => (
               <div
                 class="movie flex"
                 onclick={() => {
                   if (!isSlideDraging) {
+                    selectedMovie.Set(movie);
                     const path = `info/${movie.media_type || props.type}/${
                       movie.id
                     }`;
@@ -93,10 +95,9 @@ const Carousel = (props) => {
                   </div>
                   <div className="badge rating">
                     <Star fontSize="x-small" />
-                    {movie.vote_average}
+                    {movie.vote_average?.toFixed(1)}
                   </div>
                   <LazyImage
-                    ratio="135/202"
                     alt={movie.title || movie.name || "untitled"}
                     src={"https://image.tmdb.org/t/p/w500" + movie.poster_path}
                   />

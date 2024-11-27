@@ -1,5 +1,4 @@
 import { createSignal, onCleanup, onMount } from "solid-js";
-import { Skeleton } from "@suid/material";
 
 const LazyImage = (props) => {
   const [isVisible, setIsVisible] = createSignal(false);
@@ -32,18 +31,13 @@ const LazyImage = (props) => {
   });
 
   return (
-    <div
-      class="lazyImage flex"
-      ref={imgRef}
-      style={{ "aspect-ratio": props.ratio }}
-    >
+    <div class="lazyImage flex" ref={imgRef}>
       {isVisible() && (
         <img
           data-state={imageState()}
           onerror={() => setImageState(false)}
-          {...props}
-          src={props.src}
           onload={() => setImageState(true)}
+          {...props}
         />
       )}
       <div class="skeleton" data-state={!imageState()}></div>

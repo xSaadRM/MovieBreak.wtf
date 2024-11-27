@@ -2,28 +2,11 @@ header {
   z-index: 1;
   justify-content: space-between;
   border-bottom: 1px solid var(--border-color);
-  position: sticky;
+  position: sticky !important;
   top: 0;
   padding: 0.5rem 2%;
-  width: 97%;
 }
 
-header::before {
-  position: absolute;
-  z-index: -1;
-  width: 100%;
-  max-width: 100%;
-  height: 100%;
-  top: 0;
-  left: 0;
-  content: '';
-  background: var(--background);
-  opacity: 0.76;
-}
-
-#root:has(.homePage) header {
-  position: fixed;
-}
 
 .siteName {
   font-weight: 700;

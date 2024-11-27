@@ -1,5 +1,89 @@
-.movieInfos {
-    flex-direction: column;
-    align-items: center;
+.movieInfos .backdrop {
+    z-index: -2;
+    top: 0;
+    left: 0;
+    position: fixed;
+    opacity: 0.5;
+}
+
+.movieInfos .backdrop img {
+    object-position: center;
+    object-fit: cover;
+    height: 100vh;
+}
+
+.movieInfos .overview {
     justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    padding: 10px;
+}
+
+.movieInfos .details {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-self: self-start;
+}
+
+.movieInfos .section {
+    text-align: center;
+    overflow: hidden;
+    flex-direction: column;
+    padding: 10px;
+    border-radius: 10px;
+    width: fit-content;
+    margin: auto;
+}
+
+.section .text {
+    padding: 10px;
+}
+
+.movieInfos .title {
+    border-bottom: 1px var(--accent) solid;
+    white-space: wrap;
+}
+
+.title h4 {
+    margin: 0;
+    padding: 10px;
+}
+
+
+.movieInfos .section .rating {
+    width: fit-content;
+}
+
+.movieInfos .metaInfo {
+    justify-content: center;
+    gap: 10px;
+    width: fit-content;
+}
+
+.genres {
+    flex-wrap: wrap;
+    width: fit-content;
+    gap: 10px;
+}
+
+.genres .genre {
+    flex: 1;
+    white-space: nowrap;
+    border-radius: 5px;
+    padding: 0.5vmax 1vmax;
+    background: var(--primary);
+}
+
+.movieInfos .poster {
+    width: fit-content;
+}
+
+.movieInfos .poster .lazyImage {
+    overflow: hidden;
+    border-radius: 10px;
+    min-height: 60vmin;
+    max-height: 80vmin;
+    width: auto;
 }

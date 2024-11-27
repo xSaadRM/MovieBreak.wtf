@@ -6,17 +6,16 @@
   padding: 0.5em;
 }
 
+
 .movieSection:nth-child(2) {
-  margin-top: 60vh;
+  margin-top: 50vmin;
+}
+
+.movieSection:nth-child(2) {
+  margin-top: 50vmin;
 }
 
 .label {
+  width: fit-content;
   position: relative;
-
-}
-
-@media screen and (max-width: 650px) {
-  .movieSection:nth-child(2) {
-    margin-top: 50%;
-  }
 }
