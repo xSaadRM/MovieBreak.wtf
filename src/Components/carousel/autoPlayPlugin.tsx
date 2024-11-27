@@ -35,7 +35,7 @@ export const autoplay = (
       dispose = makeTimer(
         () =>
           slider.moveToIdx(
-            slider.track.details.position + 1,
+            slider.track?.details?.position + 1,
             true,
             options.animation
           ),
