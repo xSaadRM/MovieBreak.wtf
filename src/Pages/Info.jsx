@@ -4,7 +4,12 @@ import { createSignal, Show } from "solid-js";
 import { getFullAPIUrl } from "../modules/tmdb";
 import { selectedMovie } from "../modules/globalStore";
 import LazyImage from "../Components/LazyImage";
-import { LinkOffSharp, LinkRounded, Star } from "@suid/icons-material";
+import {
+  BookmarkAddOutlined,
+  LinkOffSharp,
+  LinkRounded,
+  Star,
+} from "@suid/icons-material";
 import Genres from "../Components/Info/Genres";
 
 const Info = () => {
@@ -30,6 +35,9 @@ const Info = () => {
 
       <div className="overview flex">
         <div className="poster">
+          <div className="badge save glow dark-bg">
+            <BookmarkAddOutlined />
+          </div>
           <LazyImage
             src={"https://image.tmdb.org/t/p/w500" + movieDetails().poster_path}
           />

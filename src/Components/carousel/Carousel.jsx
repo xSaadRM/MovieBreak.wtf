@@ -1,7 +1,7 @@
 import {
   ArrowBack,
   ArrowForward,
-  InfoTwoTone,
+  BookmarkAddOutlined,
   Star,
 } from "@suid/icons-material";
 import LazyImage from "../LazyImage";
@@ -87,15 +87,18 @@ const Carousel = (props) => {
                 }}
               >
                 <div className="poster">
-                  <div class="badge mediaType">
+                  <div class="badge autoHide mediaType">
                     {(movie.media_type || props.type).toUpperCase()}
                   </div>
-                  <div class="badge date">
+                  <div class="badge autoHide date">
                     {(movie.release_date || movie.first_air_date).slice(0, 4)}
                   </div>
-                  <div className="badge rating">
+                  <div className="badge autoHide rating">
                     <Star fontSize="x-small" />
                     {movie.vote_average?.toFixed(1)}
+                  </div>
+                  <div className="badge autoHide save glow">
+                    <BookmarkAddOutlined />
                   </div>
                   <LazyImage
                     alt={movie.title || movie.name || "untitled"}

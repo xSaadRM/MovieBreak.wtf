@@ -154,6 +154,7 @@ small {
 }
 
 .dark-bg {
+  overflow: hidden;
   position: relative;
 }
 

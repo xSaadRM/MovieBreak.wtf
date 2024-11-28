@@ -83,17 +83,24 @@
   border-radius: 8px;
   margin: 6px;
   background: hsla(0, 0%, 0%, 1);
-  opacity: 0;
   color: hsl(252, 87%, 91%);
 }
 
-.poster:hover .badge {
+.badge.badge.autoHide {
+  opacity: 0;
+}
+
+.poster:hover .badge.autoHide {
   opacity: 1;
 }
 
 .mediaType {
   top: 0;
   right: 0;
+}
+
+.badge.save {
+  bottom: 0;
 }
 
 .rating {
