@@ -11,6 +11,7 @@ import {
   Star,
 } from "@suid/icons-material";
 import Genres from "../Components/Info/Genres";
+import imdbIcon from "../assets/imdb.svg";
 
 const Info = () => {
   const { mediaType, id } = useParams();
@@ -42,7 +43,17 @@ const Info = () => {
             src={"https://image.tmdb.org/t/p/w500" + movieDetails().poster_path}
           />
         </div>
-        <div className="details">
+        <div className="details flex">
+          <Show when={movieDetails().imdb_id}>
+            <div className="imdb">
+              <a
+                target="_"
+                href={"https://www.imdb.com/title/" + movieDetails().imdb_id}
+              >
+                <img height="20vw" src={imdbIcon} alt="imdb" />
+              </a>
+            </div>
+          </Show>
           <div className="section dark-bg">
             <div className="title flex">
               <Show when={movieDetails().homepage} fallback={<LinkOffSharp />}>
