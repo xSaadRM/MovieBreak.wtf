@@ -1,20 +1,11 @@
-import {
-  ArrowBack,
-  ArrowForward,
-  BookmarkAddOutlined,
-  Star,
-} from "@suid/icons-material";
-import LazyImage from "../LazyImage";
+import { ArrowBack, ArrowForward } from "@suid/icons-material";
 import { createSignal, For, Show } from "solid-js";
 import "/src/styles/carousel.css";
 import "solid-slider/slider.css";
 import { Slider, SliderButton, SliderProvider } from "solid-slider";
-import { useNavigate } from "@solidjs/router";
-import { selectedMovie } from "../../modules/globalStore";
+import MovieCard from "../MovieCard";
 
 const Carousel = (props) => {
-  const navigate = useNavigate();
-
   const [slideIndex, setSlideIndex] = createSignal({ max: 99, current: 0 });
   const [slideStatus, setSlideStatus] = createSignal({
     dragStarted: false,
@@ -74,42 +65,11 @@ const Carousel = (props) => {
         >
           <For each={props.list}>
             {(movie) => (
-              <div
-                class="movie flex"
-                onclick={() => {
-                  if (!isSlideDraging) {
-                    selectedMovie.Set(movie);
-                    const path = `info/${movie.media_type || props.type}/${
-                      movie.id
-                    }`;
-                    navigate(path);
-                  }
-                }}
-              >
-                <div className="poster">
-                  <div class="badge autoHide mediaType">
-                    {(movie.media_type || props.type).toUpperCase()}
-                  </div>
-                  <div class="badge autoHide date">
-                    {(movie.release_date || movie.first_air_date).slice(0, 4)}
-                  </div>
-                  <div className="badge autoHide rating">
-                    <Star fontSize="x-small" />
-                    {movie.vote_average?.toFixed(1)}
-                  </div>
-                  <div className="badge autoHide save glow">
-                    <BookmarkAddOutlined />
-                  </div>
-                  <LazyImage
-                    alt={movie.title || movie.name || "untitled"}
-                    src={"https://image.tmdb.org/t/p/w500" + movie.poster_path}
-                  />
-                </div>
-
-                <div className="title">
-                  <p className="text">{movie.title || movie.name}</p>
-                </div>
-              </div>
+              <MovieCard
+                type={props.type}
+                movie={movie}
+                isSlideDraging={isSlideDraging}
+              />
             )}
           </For>
         </Slider>
